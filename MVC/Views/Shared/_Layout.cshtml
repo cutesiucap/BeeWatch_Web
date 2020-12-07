@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEEWATCH | SHOPPING</title>
+
+    <!--Font từ Google Font-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+
+    <!--Icon từ Font Awesome-->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+
+    <!--IonIcon-->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!--Theme Stype-->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    
+    <!-- /.navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (Session["user"] == null)
+                    {
+                        <li><a class="btn-link" data-toggle="modal" href="#dang_nhap">Đăng nhập</a></li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Helo", "Admins")</li>
+                        <li><a class="btn-link" data-toggle="modal" href="#dang_xuat">Đăng xuất</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My App is Bee Watch</p>
+        </footer>
+    </div>
+
+    <!-- ############################ Đăng nhập ############################## -->
+    <div class="modal fade" id="dang_nhap">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Đăng nhập</h4>
+                </div>
+                <form method="post" action="/Home/DangNhap" id="frm-login">
+                    <div class="modal-body">
+                        <div id="err_login"></div>
+                        <div id="login_here">
+                            <label>Username : </label>
+                            <input type="text" class="form-control" name="username" id="username" />
+                            <label>Password : </label>
+                            <input type="password" class="form-control" name="password" id="password" />
+                            <br />
+                            <a href="/Home/QuenMatKhau" class="text-danger">Quên mật khẩu</a>
+                        </div>
+                        <br />
+                        <div id="waiting" style="display: none;">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="login_btn">Đăng nhập</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- ===================================Ajax Login=========================-->
+    <script>
+        $(document).ready(function () {
+            $("#frm-login").submit(function (e) {
+                if ($("#username").val() == '') {
+                    $('#err_login').html('<div class="alert alert-danger">Username chưa nhập</div>');
+                    $("#username").focus();
+                    return false;
+                }
+                else if ($("#password").val() == '') {
+                    $('#err_login').html('<div class="alert alert-danger">Password chưa nhập</div>');
+                    $("#password").focus();
+                    return false;
+                }
+                else {
+                    var form_data_login = {
+                        username: $("#username").val(),
+                        password: $("#password").val()
+                    };
+                    $.ajax({
+                        url: '/Home/DangNhap',
+                        type: 'POST',
+                        async: true,
+                        data: form_data_login,
+                        success: function (msg_login) {
+                            //alert(msg);
+                            if (msg_login == 'false') {
+                                $('#err_login').html('<div class="alert alert-danger">Tên hoặc mật khẩu không chính xác</div>');
+                                $("#password").val("");
+                                $("#password").focus();
+                                return false;
+                            }
+                            else if (msg_login == 'er_block') {
+                                $('#err_login').html('<div class="alert alert-danger">Tài khoản đang bị khóa</div>');
+                            }
+                            else {
+                                $("#login_here").hide();
+                                $(".modal-footer").hide();
+
+                                $('#err_login').html('<div class="alert alert-success"><strong>Đăng nhập thành công</strong><span> Hệ thống tự chuyển sau vài giây ...</span></div>');
+                                setTimeout(
+                                    //chuyển đến địa chỉ msg_login của controler gửi qua
+                                    function () {
+                                        window.location.href = '' + msg_login + '';
+                                    }, 2000);
+                            }
+                        }
+                    });
+                    return false;
+                }
+            });
+        })
+        //Load wating bar
+        $(document).ajaxStart(function () {
+            $("#waiting").show();
+        }).ajaxStop(function () {
+            $("#waiting").hide();
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

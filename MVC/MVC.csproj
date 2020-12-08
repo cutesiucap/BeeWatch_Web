@@ -2125,6 +2125,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Source\Admin\Image\BeeWatchShopLogo.png" />
+    <Content Include="Source\Admin\Image\tinbee.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2143,12 +2145,12 @@
     <Content Include="Views\Accounts\Create.cshtml" />
     <Content Include="Views\Watches\Index.cshtml" />
     <Content Include="Views\Shared\_Navbar_Admin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\Clients\" />
     <Folder Include="Controllers\Users\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

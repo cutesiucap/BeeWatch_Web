@@ -30,7 +30,6 @@ namespace API.Models
         public virtual DbSet<Authoriza> Authoriza { get; set; }
         public virtual DbSet<Bills> Bills { get; set; }
         public virtual DbSet<Bought> Bought { get; set; }
-        public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<Commodities> Commodities { get; set; }
         public virtual DbSet<Discounts> Discounts { get; set; }
         public virtual DbSet<Firms> Firms { get; set; }
@@ -38,5 +37,7 @@ namespace API.Models
         public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<Sellers> Sellers { get; set; }
         public virtual DbSet<Watches> Watches { get; set; }
+        public virtual DbSet<Carts> Carts { get; set; }
+        public virtual DbSet<WatchesinCarts> WatchesinCarts { get; set; }
     }
 }

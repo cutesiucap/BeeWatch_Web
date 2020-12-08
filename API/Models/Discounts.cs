@@ -18,8 +18,8 @@ namespace API.Models
         public Discounts()
         {
             this.Bills = new HashSet<Bills>();
-            this.Cart = new HashSet<Cart>();
             this.Watches = new HashSet<Watches>();
+            this.Carts = new HashSet<Carts>();
         }
     
         public int id { get; set; }
@@ -34,8 +34,10 @@ namespace API.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bills> Bills { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Cart { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Watches> Watches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Carts> Carts { get; set; }
     }
 }

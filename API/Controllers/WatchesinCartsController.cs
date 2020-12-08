@@ -12,44 +12,44 @@ using API.Models;
 
 namespace API.Controllers
 {
-    public class CartsController : ApiController
+    public class WatchesinCartsController : ApiController
     {
         private BeeWatchDataBaseEntities db = new BeeWatchDataBaseEntities();
 
-        // GET: api/Carts
-        public IQueryable<Carts> GetCarts()
+        // GET: api/WatchesinCarts
+        public IQueryable<WatchesinCarts> GetWatchesinCarts()
         {
-            return db.Carts;
+            return db.WatchesinCarts;
         }
 
-        // GET: api/Carts/5
-        [ResponseType(typeof(Carts))]
-        public IHttpActionResult GetCarts(int id)
+        // GET: api/WatchesinCarts/5
+        [ResponseType(typeof(WatchesinCarts))]
+        public IHttpActionResult GetWatchesinCarts(int id)
         {
-            Carts carts = db.Carts.Find(id);
-            if (carts == null)
+            WatchesinCarts watchesinCarts = db.WatchesinCarts.Find(id);
+            if (watchesinCarts == null)
             {
                 return NotFound();
             }
 
-            return Ok(carts);
+            return Ok(watchesinCarts);
         }
 
-        // PUT: api/Carts/5
+        // PUT: api/WatchesinCarts/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCarts(int id, Carts carts)
+        public IHttpActionResult PutWatchesinCarts(int id, WatchesinCarts watchesinCarts)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != carts.id)
+            if (id != watchesinCarts.id_Carts)
             {
                 return BadRequest();
             }
 
-            db.Entry(carts).State = EntityState.Modified;
+            db.Entry(watchesinCarts).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CartsExists(id))
+                if (!WatchesinCartsExists(id))
                 {
                     return NotFound();
                 }
@@ -70,16 +70,16 @@ namespace API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Carts
-        [ResponseType(typeof(Carts))]
-        public IHttpActionResult PostCarts(Carts carts)
+        // POST: api/WatchesinCarts
+        [ResponseType(typeof(WatchesinCarts))]
+        public IHttpActionResult PostWatchesinCarts(WatchesinCarts watchesinCarts)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Carts.Add(carts);
+            db.WatchesinCarts.Add(watchesinCarts);
 
             try
             {
@@ -87,7 +87,7 @@ namespace API.Controllers
             }
             catch (DbUpdateException)
             {
-                if (CartsExists(carts.id))
+                if (WatchesinCartsExists(watchesinCarts.id_Carts))
                 {
                     return Conflict();
                 }
@@ -97,23 +97,23 @@ namespace API.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = carts.id }, carts);
+            return CreatedAtRoute("DefaultApi", new { id = watchesinCarts.id_Carts }, watchesinCarts);
         }
 
-        // DELETE: api/Carts/5
-        [ResponseType(typeof(Carts))]
-        public IHttpActionResult DeleteCarts(int id)
+        // DELETE: api/WatchesinCarts/5
+        [ResponseType(typeof(WatchesinCarts))]
+        public IHttpActionResult DeleteWatchesinCarts(int id)
         {
-            Carts carts = db.Carts.Find(id);
-            if (carts == null)
+            WatchesinCarts watchesinCarts = db.WatchesinCarts.Find(id);
+            if (watchesinCarts == null)
             {
                 return NotFound();
             }
 
-            db.Carts.Remove(carts);
+            db.WatchesinCarts.Remove(watchesinCarts);
             db.SaveChanges();
 
-            return Ok(carts);
+            return Ok(watchesinCarts);
         }
 
         protected override void Dispose(bool disposing)
@@ -125,9 +125,9 @@ namespace API.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CartsExists(int id)
+        private bool WatchesinCartsExists(int id)
         {
-            return db.Carts.Count(e => e.id == id) > 0;
+            return db.WatchesinCarts.Count(e => e.id_Carts == id) > 0;
         }
     }
 }

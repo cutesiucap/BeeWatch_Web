@@ -179,6 +179,7 @@
     <Compile Include="Controllers\SellersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WatchesController.cs" />
+    <Compile Include="Controllers\WatchesinCartsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,7 +213,7 @@
     <Compile Include="Models\Bought.cs">
       <DependentUpon>BeeWatchDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cart.cs">
+    <Compile Include="Models\Carts.cs">
       <DependentUpon>BeeWatchDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Commodities.cs">
@@ -234,6 +235,9 @@
       <DependentUpon>BeeWatchDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Watches.cs">
+      <DependentUpon>BeeWatchDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WatchesinCarts.cs">
       <DependentUpon>BeeWatchDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

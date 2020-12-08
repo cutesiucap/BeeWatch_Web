@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BeeWatchDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BeeWatchDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account_Type">
           <Key>
             <PropertyRef Name="id" />
@@ -63,18 +63,15 @@
           <Property Name="Datetime" Type="datetime" />
           <Property Name="id_Bills" Type="int" />
         </EntityType>
-        <EntityType Name="Cart">
+        <EntityType Name="Carts">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="Check" Type="bit" />
-          <Property Name="id_Watches" Type="int" />
-          <Property Name="Name_Watches" Type="nvarchar" MaxLength="50" />
-          <Property Name="Price" Type="float" />
-          <Property Name="Count" Type="int" />
           <Property Name="id_discounts" Type="int" />
-          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Count" Type="int" />
+          <Property Name="Sum" Type="float" />
         </EntityType>
         <EntityType Name="Commodities">
           <Key>
@@ -148,6 +145,15 @@
           <Property Name="Lock" Type="bit" />
           <Property Name="Rate" Type="float" />
         </EntityType>
+        <EntityType Name="WatchesinCarts">
+          <Key>
+            <PropertyRef Name="id_Carts" />
+            <PropertyRef Name="id_Watches" />
+          </Key>
+          <Property Name="id_Carts" Type="int" Nullable="false" />
+          <Property Name="id_Watches" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
         <Association Name="FK__Accounts__id_Acc__3F466844">
           <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="0..1" />
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
@@ -232,39 +238,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cart__id__5CD6CB2B">
+        <Association Name="FK__Carts__id__02FC7413">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
-          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="Carts" Type="Self.Carts" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Accounts">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Cart">
+            <Dependent Role="Carts">
               <PropertyRef Name="id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cart__id_discoun__5FB337D6">
+        <Association Name="FK__Carts__id_discou__03F0984C">
           <End Role="Discounts" Type="Self.Discounts" Multiplicity="0..1" />
-          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <End Role="Carts" Type="Self.Carts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Discounts">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Cart">
+            <Dependent Role="Carts">
               <PropertyRef Name="id_discounts" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cart__id_Watches__5EBF139D">
-          <End Role="Watches" Type="Self.Watches" Multiplicity="0..1" />
-          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Watches">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Cart">
-              <PropertyRef Name="id_Watches" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -364,13 +358,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Watchesin__id_Ca__06CD04F7">
+          <End Role="Carts" Type="Self.Carts" Multiplicity="1" />
+          <End Role="WatchesinCarts" Type="Self.WatchesinCarts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WatchesinCarts">
+              <PropertyRef Name="id_Carts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Watchesin__id_Wa__07C12930">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+          <End Role="WatchesinCarts" Type="Self.WatchesinCarts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WatchesinCarts">
+              <PropertyRef Name="id_Watches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BeeWatchDataBaseModelStoreContainer">
           <EntitySet Name="Account_Type" EntityType="Self.Account_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Authoriza" EntityType="Self.Authoriza" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bills" EntityType="Self.Bills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bought" EntityType="Self.Bought" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carts" EntityType="Self.Carts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Commodities" EntityType="Self.Commodities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Firms" EntityType="Self.Firms" Schema="dbo" store:Type="Tables" />
@@ -378,6 +396,7 @@
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sellers" EntityType="Self.Sellers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Watches" EntityType="Self.Watches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WatchesinCarts" EntityType="Self.WatchesinCarts" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Accounts__id_Acc__3F466844" Association="Self.FK__Accounts__id_Acc__3F466844">
             <End Role="Account_Type" EntitySet="Account_Type" />
             <End Role="Accounts" EntitySet="Accounts" />
@@ -406,17 +425,13 @@
             <End Role="Bills" EntitySet="Bills" />
             <End Role="Bought" EntitySet="Bought" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cart__id__5CD6CB2B" Association="Self.FK__Cart__id__5CD6CB2B">
+          <AssociationSet Name="FK__Carts__id__02FC7413" Association="Self.FK__Carts__id__02FC7413">
             <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Carts" EntitySet="Carts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cart__id_discoun__5FB337D6" Association="Self.FK__Cart__id_discoun__5FB337D6">
+          <AssociationSet Name="FK__Carts__id_discou__03F0984C" Association="Self.FK__Carts__id_discou__03F0984C">
             <End Role="Discounts" EntitySet="Discounts" />
-            <End Role="Cart" EntitySet="Cart" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cart__id_Watches__5EBF139D" Association="Self.FK__Cart__id_Watches__5EBF139D">
-            <End Role="Watches" EntitySet="Watches" />
-            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Carts" EntitySet="Carts" />
           </AssociationSet>
           <AssociationSet Name="FK__Hot_Trend__id__70DDC3D8" Association="Self.FK__Hot_Trend__id__70DDC3D8">
             <End Role="Watches" EntitySet="Watches" />
@@ -450,9 +465,16 @@
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Watches" EntitySet="Watches" />
           </AssociationSet>
+          <AssociationSet Name="FK__Watchesin__id_Ca__06CD04F7" Association="Self.FK__Watchesin__id_Ca__06CD04F7">
+            <End Role="Carts" EntitySet="Carts" />
+            <End Role="WatchesinCarts" EntitySet="WatchesinCarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Watchesin__id_Wa__07C12930" Association="Self.FK__Watchesin__id_Wa__07C12930">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="WatchesinCarts" EntitySet="WatchesinCarts" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BeeWatchDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -485,11 +507,11 @@
           <NavigationProperty Name="Account_Type" Relationship="Self.FK__Accounts__id_Acc__3F466844" FromRole="Accounts" ToRole="Account_Type" />
           <NavigationProperty Name="Bills" Relationship="Self.FK__Bills__id_Accoun__628FA481" FromRole="Accounts" ToRole="Bills" />
           <NavigationProperty Name="Bought" Relationship="Self.FK__Bought__id_Accou__6A30C649" FromRole="Accounts" ToRole="Bought" />
-          <NavigationProperty Name="Cart" Relationship="Self.FK__Cart__id__5CD6CB2B" FromRole="Accounts" ToRole="Cart" />
           <NavigationProperty Name="Hot_Trend" Relationship="Self.FK__Hot_Trend__id_Ac__71D1E811" FromRole="Accounts" ToRole="Hot_Trend" />
           <NavigationProperty Name="Image" Relationship="Self.FK__Image__id_Watche__6E01572D" FromRole="Accounts" ToRole="Image" />
           <NavigationProperty Name="Sellers" Relationship="Self.FK__Sellers__id__44FF419A" FromRole="Accounts" ToRole="Sellers" />
           <NavigationProperty Name="Watches" Relationship="Self.FK__Watches__id_Sell__5812160E" FromRole="Accounts" ToRole="Watches" />
+          <NavigationProperty Name="Carts" Relationship="BeeWatchDataBaseModel.FK__Carts__id__02FC7413" FromRole="Accounts" ToRole="Carts" />
         </EntityType>
         <EntityType Name="Authoriza">
           <Key>
@@ -531,22 +553,6 @@
           <NavigationProperty Name="Bills" Relationship="Self.FK__Bought__id_Bills__6B24EA82" FromRole="Bought" ToRole="Bills" />
           <NavigationProperty Name="Watches" Relationship="Self.FK__Bought__id__693CA210" FromRole="Bought" ToRole="Watches" />
         </EntityType>
-        <EntityType Name="Cart">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="Check" Type="Boolean" />
-          <Property Name="id_Watches" Type="Int32" />
-          <Property Name="Name_Watches" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Double" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="id_discounts" Type="Int32" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK__Cart__id__5CD6CB2B" FromRole="Cart" ToRole="Accounts" />
-          <NavigationProperty Name="Discounts" Relationship="Self.FK__Cart__id_discoun__5FB337D6" FromRole="Cart" ToRole="Discounts" />
-          <NavigationProperty Name="Watches" Relationship="Self.FK__Cart__id_Watches__5EBF139D" FromRole="Cart" ToRole="Watches" />
-        </EntityType>
         <EntityType Name="Commodities">
           <Key>
             <PropertyRef Name="id" />
@@ -568,8 +574,8 @@
           <Property Name="Payment_methods" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="Bills" Relationship="Self.FK__Bills__id_Discou__6477ECF3" FromRole="Discounts" ToRole="Bills" />
-          <NavigationProperty Name="Cart" Relationship="Self.FK__Cart__id_discoun__5FB337D6" FromRole="Discounts" ToRole="Cart" />
           <NavigationProperty Name="Watches" Relationship="Self.FK__Watches__id_disc__571DF1D5" FromRole="Discounts" ToRole="Watches" />
+          <NavigationProperty Name="Carts" Relationship="BeeWatchDataBaseModel.FK__Carts__id_discou__03F0984C" FromRole="Discounts" ToRole="Carts" />
         </EntityType>
         <EntityType Name="Firms">
           <Key>
@@ -629,11 +635,11 @@
           <Property Name="Rate" Type="Double" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK__Watches__id_Sell__5812160E" FromRole="Watches" ToRole="Accounts" />
           <NavigationProperty Name="Bought" Relationship="Self.FK__Bought__id__693CA210" FromRole="Watches" ToRole="Bought" />
-          <NavigationProperty Name="Cart" Relationship="Self.FK__Cart__id_Watches__5EBF139D" FromRole="Watches" ToRole="Cart" />
           <NavigationProperty Name="Commodities" Relationship="Self.FK__Watches__id_Comm__52593CB8" FromRole="Watches" ToRole="Commodities" />
           <NavigationProperty Name="Discounts" Relationship="Self.FK__Watches__id_disc__571DF1D5" FromRole="Watches" ToRole="Discounts" />
           <NavigationProperty Name="Firms" Relationship="Self.FK__Watches__id_Firm__534D60F1" FromRole="Watches" ToRole="Firms" />
           <NavigationProperty Name="Hot_Trend" Relationship="Self.FK__Hot_Trend__id__70DDC3D8" FromRole="Watches" ToRole="Hot_Trend" />
+          <NavigationProperty Name="WatchesinCarts" Relationship="BeeWatchDataBaseModel.FK__Watchesin__id_Wa__07C12930" FromRole="Watches" ToRole="WatchesinCarts" />
         </EntityType>
         <Association Name="FK__Accounts__id_Acc__3F466844">
           <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="0..1" />
@@ -680,18 +686,6 @@
             </Principal>
             <Dependent Role="Bought">
               <PropertyRef Name="id_Accounts" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cart__id__5CD6CB2B">
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
-          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Accounts">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Cart">
-              <PropertyRef Name="id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -779,30 +773,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cart__id_discoun__5FB337D6">
-          <End Role="Discounts" Type="Self.Discounts" Multiplicity="0..1" />
-          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Discounts">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Cart">
-              <PropertyRef Name="id_discounts" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cart__id_Watches__5EBF139D">
-          <End Role="Watches" Type="Self.Watches" Multiplicity="0..1" />
-          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Watches">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Cart">
-              <PropertyRef Name="id_Watches" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Watches__id_Comm__52593CB8">
           <End Role="Commodities" Type="Self.Commodities" Multiplicity="0..1" />
           <End Role="Watches" Type="Self.Watches" Multiplicity="*" />
@@ -857,7 +827,6 @@
           <EntitySet Name="Authoriza" EntityType="Self.Authoriza" />
           <EntitySet Name="Bills" EntityType="Self.Bills" />
           <EntitySet Name="Bought" EntityType="Self.Bought" />
-          <EntitySet Name="Cart" EntityType="Self.Cart" />
           <EntitySet Name="Commodities" EntityType="Self.Commodities" />
           <EntitySet Name="Discounts" EntityType="Self.Discounts" />
           <EntitySet Name="Firms" EntityType="Self.Firms" />
@@ -880,10 +849,6 @@
           <AssociationSet Name="FK__Bought__id_Accou__6A30C649" Association="Self.FK__Bought__id_Accou__6A30C649">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Bought" EntitySet="Bought" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cart__id__5CD6CB2B" Association="Self.FK__Cart__id__5CD6CB2B">
-            <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
           <AssociationSet Name="FK__Hot_Trend__id_Ac__71D1E811" Association="Self.FK__Hot_Trend__id_Ac__71D1E811">
             <End Role="Accounts" EntitySet="Accounts" />
@@ -913,14 +878,6 @@
             <End Role="Watches" EntitySet="Watches" />
             <End Role="Bought" EntitySet="Bought" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cart__id_discoun__5FB337D6" Association="Self.FK__Cart__id_discoun__5FB337D6">
-            <End Role="Discounts" EntitySet="Discounts" />
-            <End Role="Cart" EntitySet="Cart" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cart__id_Watches__5EBF139D" Association="Self.FK__Cart__id_Watches__5EBF139D">
-            <End Role="Watches" EntitySet="Watches" />
-            <End Role="Cart" EntitySet="Cart" />
-          </AssociationSet>
           <AssociationSet Name="FK__Watches__id_Comm__52593CB8" Association="Self.FK__Watches__id_Comm__52593CB8">
             <End Role="Commodities" EntitySet="Commodities" />
             <End Role="Watches" EntitySet="Watches" />
@@ -937,7 +894,97 @@
             <End Role="Watches" EntitySet="Watches" />
             <End Role="Hot_Trend" EntitySet="Hot_Trend" />
           </AssociationSet>
+          <EntitySet Name="Carts" EntityType="BeeWatchDataBaseModel.Carts" />
+          <EntitySet Name="WatchesinCarts" EntityType="BeeWatchDataBaseModel.WatchesinCarts" />
+          <AssociationSet Name="FK__Carts__id__02FC7413" Association="BeeWatchDataBaseModel.FK__Carts__id__02FC7413">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carts__id_discou__03F0984C" Association="BeeWatchDataBaseModel.FK__Carts__id_discou__03F0984C">
+            <End Role="Discounts" EntitySet="Discounts" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Watchesin__id_Ca__06CD04F7" Association="BeeWatchDataBaseModel.FK__Watchesin__id_Ca__06CD04F7">
+            <End Role="Carts" EntitySet="Carts" />
+            <End Role="WatchesinCarts" EntitySet="WatchesinCarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Watchesin__id_Wa__07C12930" Association="BeeWatchDataBaseModel.FK__Watchesin__id_Wa__07C12930">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="WatchesinCarts" EntitySet="WatchesinCarts" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Carts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_discounts" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
+          <NavigationProperty Name="Accounts" Relationship="BeeWatchDataBaseModel.FK__Carts__id__02FC7413" FromRole="Carts" ToRole="Accounts" />
+          <NavigationProperty Name="Discounts" Relationship="BeeWatchDataBaseModel.FK__Carts__id_discou__03F0984C" FromRole="Carts" ToRole="Discounts" />
+          <NavigationProperty Name="WatchesinCarts" Relationship="BeeWatchDataBaseModel.FK__Watchesin__id_Ca__06CD04F7" FromRole="Carts" ToRole="WatchesinCarts" />
+        </EntityType>
+        <EntityType Name="WatchesinCarts">
+          <Key>
+            <PropertyRef Name="id_Carts" />
+            <PropertyRef Name="id_Watches" />
+          </Key>
+          <Property Name="id_Carts" Type="Int32" Nullable="false" />
+          <Property Name="id_Watches" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="Carts" Relationship="BeeWatchDataBaseModel.FK__Watchesin__id_Ca__06CD04F7" FromRole="WatchesinCarts" ToRole="Carts" />
+          <NavigationProperty Name="Watches" Relationship="BeeWatchDataBaseModel.FK__Watchesin__id_Wa__07C12930" FromRole="WatchesinCarts" ToRole="Watches" />
+        </EntityType>
+        <Association Name="FK__Carts__id__02FC7413">
+          <End Type="BeeWatchDataBaseModel.Accounts" Role="Accounts" Multiplicity="1" />
+          <End Type="BeeWatchDataBaseModel.Carts" Role="Carts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carts__id_discou__03F0984C">
+          <End Type="BeeWatchDataBaseModel.Discounts" Role="Discounts" Multiplicity="0..1" />
+          <End Type="BeeWatchDataBaseModel.Carts" Role="Carts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="id_discounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Watchesin__id_Ca__06CD04F7">
+          <End Type="BeeWatchDataBaseModel.Carts" Role="Carts" Multiplicity="1" />
+          <End Type="BeeWatchDataBaseModel.WatchesinCarts" Role="WatchesinCarts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WatchesinCarts">
+              <PropertyRef Name="id_Carts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Watchesin__id_Wa__07C12930">
+          <End Type="BeeWatchDataBaseModel.Watches" Role="Watches" Multiplicity="1" />
+          <End Type="BeeWatchDataBaseModel.WatchesinCarts" Role="WatchesinCarts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WatchesinCarts">
+              <PropertyRef Name="id_Watches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1004,20 +1051,6 @@
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="Datetime" ColumnName="Datetime" />
                 <ScalarProperty Name="id_Bills" ColumnName="id_Bills" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cart">
-            <EntityTypeMapping TypeName="BeeWatchDataBaseModel.Cart">
-              <MappingFragment StoreEntitySet="Cart">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Check" ColumnName="Check" />
-                <ScalarProperty Name="id_Watches" ColumnName="id_Watches" />
-                <ScalarProperty Name="Name_Watches" ColumnName="Name_Watches" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="id_discounts" ColumnName="id_discounts" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1097,6 +1130,26 @@
                 <ScalarProperty Name="Information" ColumnName="Information" />
                 <ScalarProperty Name="Lock" ColumnName="Lock" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="BeeWatchDataBaseModel.Carts">
+              <MappingFragment StoreEntitySet="Carts">
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="id_discounts" ColumnName="id_discounts" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WatchesinCarts">
+            <EntityTypeMapping TypeName="BeeWatchDataBaseModel.WatchesinCarts">
+              <MappingFragment StoreEntitySet="WatchesinCarts">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="id_Watches" ColumnName="id_Watches" />
+                <ScalarProperty Name="id_Carts" ColumnName="id_Carts" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,19 +12,13 @@ namespace API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cart
+    public partial class WatchesinCarts
     {
-        public int id { get; set; }
-        public Nullable<bool> Check { get; set; }
-        public Nullable<int> id_Watches { get; set; }
-        public string Name_Watches { get; set; }
-        public Nullable<double> Price { get; set; }
+        public int id_Carts { get; set; }
+        public int id_Watches { get; set; }
         public Nullable<int> Count { get; set; }
-        public Nullable<int> id_discounts { get; set; }
-        public string Address { get; set; }
     
-        public virtual Accounts Accounts { get; set; }
-        public virtual Discounts Discounts { get; set; }
+        public virtual Carts Carts { get; set; }
         public virtual Watches Watches { get; set; }
     }
 }

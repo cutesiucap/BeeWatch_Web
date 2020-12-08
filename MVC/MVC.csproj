@@ -134,6 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Clients\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WatchesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -145,7 +146,7 @@
     <Compile Include="Models\Authoriza.cs" />
     <Compile Include="Models\Bills.cs" />
     <Compile Include="Models\Bought.cs" />
-    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Carts.cs" />
     <Compile Include="Models\Commodities.cs" />
     <Compile Include="Models\Discounts.cs" />
     <Compile Include="Models\Firms.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Sellers.cs" />
     <Compile Include="Models\Watches.cs" />
+    <Compile Include="Models\WatchesinCarts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2146,10 +2148,10 @@
     <Content Include="Views\Watches\Index.cshtml" />
     <Content Include="Views\Shared\_Navbar_Admin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Clients\" />
     <Folder Include="Controllers\Users\" />
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,7 @@ namespace MVC.Models
         public Nullable<bool> Status { get; set; }
 
         public virtual ICollection<Bills> Bills { get; set; }
-        public virtual ICollection<Cart> Cart { get; set; }
+        public virtual ICollection<Carts> Cart { get; set; }
         public virtual ICollection<Watches> Watches { get; set; }
     }
 }

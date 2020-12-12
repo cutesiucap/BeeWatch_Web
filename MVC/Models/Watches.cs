@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MVC.Models
 {
@@ -19,5 +20,11 @@ namespace MVC.Models
         public Nullable<double> Rate { get; set; }
 
         public virtual Accounts Accounts { get; set; }
+        public virtual Bought Bought { get; set; }
+        public virtual Commodities Commodities { get; set; }
+        public virtual Discounts Discounts { get; set; }
+        public virtual Firms Firms { get; set; }
+        public virtual Hot_Trend Hot_Trend { get; set; }
+        public virtual ICollection<WatchesinCarts> WatchesinCarts { get; set; }
     }
 }

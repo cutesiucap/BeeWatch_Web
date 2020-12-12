@@ -152,6 +152,7 @@
           </Key>
           <Property Name="id_Carts" Type="int" Nullable="false" />
           <Property Name="id_Watches" Type="int" Nullable="false" />
+          <Property Name="Check" Type="bit" />
           <Property Name="Count" Type="int" />
         </EntityType>
         <Association Name="FK__Accounts__id_Acc__3F466844">
@@ -358,7 +359,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Watchesin__id_Ca__06CD04F7">
+        <Association Name="FK__Watchesin__id_Ca__0A9D95DB">
           <End Role="Carts" Type="Self.Carts" Multiplicity="1" />
           <End Role="WatchesinCarts" Type="Self.WatchesinCarts" Multiplicity="*" />
           <ReferentialConstraint>
@@ -370,7 +371,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Watchesin__id_Wa__07C12930">
+        <Association Name="FK__Watchesin__id_Wa__0B91BA14">
           <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
           <End Role="WatchesinCarts" Type="Self.WatchesinCarts" Multiplicity="*" />
           <ReferentialConstraint>
@@ -465,11 +466,11 @@
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Watches" EntitySet="Watches" />
           </AssociationSet>
-          <AssociationSet Name="FK__Watchesin__id_Ca__06CD04F7" Association="Self.FK__Watchesin__id_Ca__06CD04F7">
+          <AssociationSet Name="FK__Watchesin__id_Ca__0A9D95DB" Association="Self.FK__Watchesin__id_Ca__0A9D95DB">
             <End Role="Carts" EntitySet="Carts" />
             <End Role="WatchesinCarts" EntitySet="WatchesinCarts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Watchesin__id_Wa__07C12930" Association="Self.FK__Watchesin__id_Wa__07C12930">
+          <AssociationSet Name="FK__Watchesin__id_Wa__0B91BA14" Association="Self.FK__Watchesin__id_Wa__0B91BA14">
             <End Role="Watches" EntitySet="Watches" />
             <End Role="WatchesinCarts" EntitySet="WatchesinCarts" />
           </AssociationSet>
@@ -936,6 +937,7 @@
           <Property Name="Count" Type="Int32" />
           <NavigationProperty Name="Carts" Relationship="BeeWatchDataBaseModel.FK__Watchesin__id_Ca__06CD04F7" FromRole="WatchesinCarts" ToRole="Carts" />
           <NavigationProperty Name="Watches" Relationship="BeeWatchDataBaseModel.FK__Watchesin__id_Wa__07C12930" FromRole="WatchesinCarts" ToRole="Watches" />
+          <Property Name="Check" Type="Boolean" />
         </EntityType>
         <Association Name="FK__Carts__id__02FC7413">
           <End Type="BeeWatchDataBaseModel.Accounts" Role="Accounts" Multiplicity="1" />
@@ -1147,6 +1149,7 @@
           <EntitySetMapping Name="WatchesinCarts">
             <EntityTypeMapping TypeName="BeeWatchDataBaseModel.WatchesinCarts">
               <MappingFragment StoreEntitySet="WatchesinCarts">
+                <ScalarProperty Name="Check" ColumnName="Check" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="id_Watches" ColumnName="id_Watches" />
                 <ScalarProperty Name="id_Carts" ColumnName="id_Carts" />

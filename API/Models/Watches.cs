@@ -36,7 +36,6 @@ namespace API.Models
     
         public virtual Accounts Accounts { get; set; }
         public virtual Bought Bought { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual Commodities Commodities { get; set; }
         public virtual Discounts Discounts { get; set; }
         public virtual Firms Firms { get; set; }

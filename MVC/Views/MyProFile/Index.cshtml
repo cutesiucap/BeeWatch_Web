@@ -1,0 +1,168 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Sallers.cshtml";
+}
+
+@section Css {
+    <!-- dropzonejs -->
+    <link rel="stylesheet" href="../../plugins/dropzone/min/dropzone.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Profile</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">User Profile</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- Profile Image -->
+                <div class="card card-warning card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="../../dist/img/user4-128x128.jpg"
+                                 alt="User profile picture">
+                        </div>
+
+                        <h3 class="profile-username text-center" style="color: #FFC107;"><b>Tina Shop</b></h3>
+
+                        <p class="text-muted text-center">Đồng hồ sang trọng</p>
+
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>Đồng Hồ</b> <a class="float-right">1,322</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Khách Hàng</b> <a class="float-right">543</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Đã Bán</b> <a class="float-right">13,287</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Rate Trung Bình <i class="fa fa-star"></i></b> <a class="float-right">13,287</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Rate Tốt Nhất <i class="fa fa-star" style="color: #FFC107;"></i></b> <a class="float-right">13,287</a>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-warning btn-block"><b>Liên Hệ</b></a>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- About Me Box -->
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title">Thông Tin Chi Tiết</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <strong><i class="fas fa-user-shield"></i> Chủ</strong>
+
+                        <p class="text-muted">
+                            Huỳnh Thị Thúy Vy <small><em>#VyHuynh2005</em></small>
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Địa Chỉ</strong>
+
+                        <p class="text-muted">Gò Vấp, Thành Phố Hồ Chí Minh</p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-phone"></i> Di động</strong>
+
+                        <p class="text-muted">
+                            <span class="tag tag-danger">0123974534</span>
+                            <span class="tag tag-success">-</span>
+                            <span class="tag tag-info">0458123456</span>
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-envelope"></i> Gmail</strong>
+
+                        <p class="text-muted Gmail">VyHuynh2005@gmail.com</p>
+
+                        <hr>
+
+                        <strong><i class="fab fa-paypal"></i> Paypal</strong>
+
+                        <p class="text-muted">12365.124.125</p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-info"></i> Giới Thiệu</strong>
+
+                        <p class="text-muted">
+
+                        </p>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#hot" data-toggle="tab">HOT <i class="fa fa-fire"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="#all" data-toggle="tab">Tất Cả</i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="#feedback" data-toggle="tab">Đánh Giá <i class="fas fa-comments"></i></a></li>
+                        </ul>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <!-- tab-hot -->
+                            <div class="active tab-pane" id="hot">
+                                <h3>Sản Phẩm HOT Sắp xếp theo lượt mua giảm dần (>= 30 lượt)</h3>
+                            </div>
+                            <!-- /.tab-hot -->
+                            <!-- tab-all -->
+                            <div class="tab-pane" id="all">
+                                <h3>Tất Cả Sản Phẩm Shop Kinh Doanh</h3>
+                            </div>
+                            <!-- /.tab-all -->
+                            <!-- tab-feedback -->
+                            <div class="tab-pane" id="feedback">
+                            </div>
+                            <!-- /.tab-feedback -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+<!-- /.content-wrapper -->

@@ -136,6 +136,9 @@
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Clients\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Home\HomeController.cs" />
+    <Compile Include="Controllers\Sallers\CreateController.cs" />
+    <Compile Include="Controllers\Sallers\MyProFileController.cs" />
     <Compile Include="Controllers\Sallers\SallersController.cs" />
     <Compile Include="Controllers\WatchesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,16 +164,7 @@
   <ItemGroup>
     <Content Include="dist\css\adminlte.css" />
     <Content Include="dist\css\adminlte.min.css" />
-    <Content Include="dist\css\alt\adminlte.components.css" />
-    <Content Include="dist\css\alt\adminlte.components.min.css" />
-    <Content Include="dist\css\alt\adminlte.core.css" />
-    <Content Include="dist\css\alt\adminlte.core.min.css" />
-    <Content Include="dist\css\alt\adminlte.extra-components.css" />
-    <Content Include="dist\css\alt\adminlte.extra-components.min.css" />
-    <Content Include="dist\css\alt\adminlte.pages.css" />
-    <Content Include="dist\css\alt\adminlte.pages.min.css" />
-    <Content Include="dist\css\alt\adminlte.plugins.css" />
-    <Content Include="dist\css\alt\adminlte.plugins.min.css" />
+    <Content Include="dist\css\Bee_Style.css" />
     <Content Include="dist\img\AdminLTELogo.png" />
     <Content Include="dist\img\avatar.png" />
     <Content Include="dist\img\avatar2.png" />
@@ -207,6 +201,7 @@
     <Content Include="dist\js\adminlte.js" />
     <Content Include="dist\js\adminlte.min.js" />
     <Content Include="dist\js\demo.js" />
+    <Content Include="dist\js\DetailWatches.js" />
     <Content Include="dist\js\pages\dashboard.js" />
     <Content Include="dist\js\pages\dashboard2.js" />
     <Content Include="dist\js\pages\dashboard3.js" />
@@ -2036,16 +2031,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="dist\css\adminlte.css.map" />
     <Content Include="dist\css\adminlte.min.css.map" />
-    <Content Include="dist\css\alt\adminlte.components.css.map" />
-    <Content Include="dist\css\alt\adminlte.components.min.css.map" />
-    <Content Include="dist\css\alt\adminlte.core.css.map" />
-    <Content Include="dist\css\alt\adminlte.core.min.css.map" />
-    <Content Include="dist\css\alt\adminlte.extra-components.css.map" />
-    <Content Include="dist\css\alt\adminlte.extra-components.min.css.map" />
-    <Content Include="dist\css\alt\adminlte.pages.css.map" />
-    <Content Include="dist\css\alt\adminlte.pages.min.css.map" />
-    <Content Include="dist\css\alt\adminlte.plugins.css.map" />
-    <Content Include="dist\css\alt\adminlte.plugins.min.css.map" />
     <Content Include="dist\js\.eslintrc.json" />
     <Content Include="dist\js\adminlte.js.map" />
     <Content Include="dist\js\adminlte.min.js.map" />
@@ -2158,9 +2143,13 @@
     <Content Include="Views\Sallers\Watches.cshtml" />
     <Content Include="Views\Sallers\CreateWatches.cshtml" />
     <Content Include="Views\Sallers\Test.cshtml" />
+    <Content Include="Views\MyProFile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="dist\css\alt\" />
+    <Folder Include="Views\Create\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

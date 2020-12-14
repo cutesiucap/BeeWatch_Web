@@ -24,6 +24,26 @@ namespace API.Controllers
             return db.Accounts;
         }
 
+        /*public IHttpActionResult PostLogin(string username, string password)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (username == null)
+            {
+                return BadRequest();
+            }
+            Accounts accounts = db.Login(username, password);
+
+            if (accounts == null)
+            {
+                return NotFound();
+            }
+            return CreatedAtRoute("DefaultApi", new { id = accounts.id }, accounts);
+        }*/
+
         // GET: api/Accounts/5
         [ResponseType(typeof(Accounts))]
         public IHttpActionResult GetAccounts(int id)
@@ -35,17 +55,6 @@ namespace API.Controllers
             }
 
             return Ok(accounts);
-        }
-        // GET: api/Accounts/cutesiucap
-        [ResponseType(typeof(int))]
-        public IHttpActionResult GetAccounts(string username, string password)
-        {
-            Accounts accounts = db.Accounts.Where(x=>x.Username==username&&x.Password==password).FirstOrDefault();
-            if (accounts == null)
-            {
-                return NotFound();
-            }
-            return Ok(accounts.id);
         }
 
         // PUT: api/Accounts/5

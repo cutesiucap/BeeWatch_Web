@@ -1,0 +1,52 @@
+﻿using System.Net.Mail;
+
+namespace MVC.Mail
+{
+    public class MailHelper
+    {
+
+        public static bool SendMail(string toEmail, string subject, string content)
+        {
+            try
+            {
+                var host = "smtp.gmail.com";
+                var port = 587;
+                var fromEmail = "trungtinbee@gmail.com";
+                var password = "demon27132412";
+                var fromName = "Bee Watch WEB (Dự án Thử nghiệm)";
+
+                var smtpClient = new SmtpClient(host, port)
+                {
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential(fromEmail, password),
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    EnableSsl = true,
+                    Timeout = 100000
+                };
+
+                var mail = new MailMessage
+                {
+                    Body = content,
+                    Subject = subject,
+                    From = new MailAddress(fromEmail, fromName)
+                };
+
+                mail.To.Add(new MailAddress(toEmail));
+                mail.BodyEncoding = System.Text.Encoding.UTF8;
+                mail.IsBodyHtml = false;
+                mail.Priority = MailPriority.High;
+
+                smtpClient.Send(mail);
+
+                return true;
+                
+            }
+            catch (SmtpException smex)
+            {
+                return false;
+            }
+
+        }
+
+    }
+}

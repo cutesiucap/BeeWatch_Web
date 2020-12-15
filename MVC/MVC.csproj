@@ -137,14 +137,14 @@
     <Compile Include="Controllers\Clients\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
-    <Compile Include="Controllers\Sallers\CreateController.cs" />
-    <Compile Include="Controllers\Sallers\MyProFileController.cs" />
-    <Compile Include="Controllers\Sallers\SallersController.cs" />
+    <Compile Include="Controllers\Sellers\MyProFileController.cs" />
+    <Compile Include="Controllers\Sellers\SellersController.cs" />
     <Compile Include="Controllers\WatchesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalVariables.cs" />
+    <Compile Include="Tool\MailHelper.cs" />
     <Compile Include="Models\Accounts.cs" />
     <Compile Include="Models\Account_Type.cs" />
     <Compile Include="Models\Authoriza.cs" />
@@ -160,8 +160,10 @@
     <Compile Include="Models\Watches.cs" />
     <Compile Include="Models\WatchesinCarts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tool\RandomTool.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="confighelper.readme.txt" />
     <Content Include="dist\css\adminlte.css" />
     <Content Include="dist\css\adminlte.min.css" />
     <Content Include="dist\css\Bee_Style.css" />
@@ -2138,17 +2140,20 @@
     <Content Include="Views\Shared\_Navbar_Admin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
-    <Content Include="Views\Sallers\Index.cshtml" />
+    <Content Include="Views\Sellers\Index.cshtml" />
     <Content Include="Views\Shared\_Layout_Sallers.cshtml" />
-    <Content Include="Views\Sallers\Watches.cshtml" />
-    <Content Include="Views\Sallers\CreateWatches.cshtml" />
-    <Content Include="Views\Sallers\Test.cshtml" />
+    <Content Include="Views\Sellers\Watches.cshtml" />
+    <Content Include="Views\Sellers\CreateWatches.cshtml" />
+    <Content Include="Views\Sellers\Test.cshtml" />
     <Content Include="Views\MyProFile\Index.cshtml" />
+    <Content Include="Views\Sellers\CreateAccount.cshtml" />
+    <Content Include="Views\Sellers\LoginSeller.cshtml" />
+    <Content Include="Views\Sellers\CreateSeller.cshtml" />
+    <Content Include="Views\Sellers\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="dist\css\alt\" />
-    <Folder Include="Views\Create\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>

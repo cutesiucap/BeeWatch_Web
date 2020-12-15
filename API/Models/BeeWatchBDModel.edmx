@@ -1,0 +1,1969 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BeeWatchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account_Type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_Account_Type" Type="int" Nullable="false" />
+          <Property Name="Url_Image_Avatar" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sex" Type="nchar" MaxLength="10" />
+          <Property Name="Point" Type="float" />
+          <Property Name="Date_Create" Type="date" />
+          <Property Name="Time_LastAccess" Type="datetime" />
+          <Property Name="IsLock" Type="bit" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Action">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Detail" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Account" Type="int" Nullable="false" />
+          <Property Name="id_Province" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_District" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="AddressDetail" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Address_District">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="id_Province" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Address_Province">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Authoriza">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Account_Type" Type="int" />
+          <Property Name="id_Action" Type="int" />
+        </EntityType>
+        <EntityType Name="CartDetails">
+          <Key>
+            <PropertyRef Name="id_Watch" />
+            <PropertyRef Name="id_Cart" />
+          </Key>
+          <Property Name="id_Watch" Type="int" Nullable="false" />
+          <Property Name="id_Cart" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="IsCheck" Type="bit" />
+        </EntityType>
+        <EntityType Name="Carts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" />
+          <Property Name="Sum" Type="float" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Detail" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Discounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_Type" Type="int" />
+          <Property Name="Value(%)" Type="float" />
+          <Property Name="Value(-)" Type="float" />
+          <Property Name="DateFrom" Type="date" />
+          <Property Name="DateTo" Type="date" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Firms">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Url" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Hot_Trend">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_Watch" Type="int" />
+          <Property Name="id_Shop" Type="int" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="IsCheck" Type="bit" />
+          <Property Name="IsLock" Type="bit" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Watches" Type="int" />
+          <Property Name="Url_Image" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LogInHistories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_Account" Type="int" />
+          <Property Name="DateLogin" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="id_Order" />
+            <PropertyRef Name="id_Watches" />
+          </Key>
+          <Property Name="id_Order" Type="int" Nullable="false" />
+          <Property Name="id_Watches" Type="int" Nullable="false" />
+          <Property Name="WatchName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Count" Type="int" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="Date_Bought" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Shop" Type="int" Nullable="false" />
+          <Property Name="id_Accounts" Type="int" />
+          <Property Name="Address_Province" Type="nchar" MaxLength="10" />
+          <Property Name="Address_District" Type="nchar" MaxLength="10" />
+          <Property Name="AddressDetail" Type="nvarchar(max)" />
+          <Property Name="Count" Type="int" />
+          <Property Name="Sum" Type="float" />
+          <Property Name="Ship_fee" Type="float" />
+          <Property Name="id_Discount" Type="int" />
+          <Property Name="Payment" Type="nvarchar" MaxLength="20" />
+          <Property Name="Date_Create" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_Account" Type="int" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sellers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Identitycard" Type="char" MaxLength="9" />
+          <Property Name="Bankcard" Type="char" MaxLength="20" />
+          <Property Name="Url_Image_Cover" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shop_Seller">
+          <Key>
+            <PropertyRef Name="id_Shop" />
+            <PropertyRef Name="id_Seller" />
+          </Key>
+          <Property Name="id_Shop" Type="int" Nullable="false" />
+          <Property Name="id_Seller" Type="int" Nullable="false" />
+          <Property Name="IsCheck" Type="bit" Nullable="false" />
+          <Property Name="IsLock" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shops">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="id_Master" Type="int" />
+          <Property Name="Point" Type="float" />
+        </EntityType>
+        <EntityType Name="TypeDiscounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Min_Bill" Type="float" />
+          <Property Name="Max_Discount" Type="float" />
+          <Property Name="Payment_Method" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Watches">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Url_Image" Type="nvarchar(max)" />
+          <Property Name="id_Sex" Type="int" />
+          <Property Name="id_Firms" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Information" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="id_Shop" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="Date_Create" Type="datetime" />
+          <Property Name="Create_By" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_LastEdit" Type="datetime" />
+          <Property Name="LastEdit_By" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsLock" Type="bit" />
+          <Property Name="IsCheck" Type="bit" />
+          <Property Name="IsExist" Type="bit" />
+        </EntityType>
+        <EntityType Name="Watches_Categories">
+          <Key>
+            <PropertyRef Name="id_Watch" />
+            <PropertyRef Name="id_Category" />
+          </Key>
+          <Property Name="id_Watch" Type="int" Nullable="false" />
+          <Property Name="id_Category" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="BoughtWatches">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="id_Watches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Accounts__id_Acc__3F466844">
+          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="id_Account_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Authoriza__id_Ac__398D8EEE">
+          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="0..1" />
+          <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Authoriza">
+              <PropertyRef Name="id_Account_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart__id__5CD6CB2B">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Carts" Type="Self.Carts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartDetai__id_Ca__00200768">
+          <End Role="Carts" Type="Self.Carts" Multiplicity="1" />
+          <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="id_Cart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sellers__id__44FF419A">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Sellers" Type="Self.Sellers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sellers">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Watches__id_Firm__534D60F1">
+          <End Role="Firms" Type="Self.Firms" Multiplicity="1" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firms">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches">
+              <PropertyRef Name="id_Firms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Watches__id_Sell__5812160E">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Watchesin__id_Wa__19DFD96B">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+          <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="id_Watch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="id_Account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_Address_District">
+          <End Role="Address_District" Type="Self.Address_District" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address_District">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="id_District" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_Address_Province">
+          <End Role="Address_Province" Type="Self.Address_Province" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address_Province">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="id_Province" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_District_Address_Province">
+          <End Role="Address_Province" Type="Self.Address_Province" Multiplicity="1" />
+          <End Role="Address_District" Type="Self.Address_District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address_Province">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address_District">
+              <PropertyRef Name="id_Province" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authoriza_Action">
+          <End Role="Action" Type="Self.Action" Multiplicity="0..1" />
+          <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Authoriza">
+              <PropertyRef Name="id_Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Discounts_TypeDiscounts">
+          <End Role="TypeDiscounts" Type="Self.TypeDiscounts" Multiplicity="0..1" />
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeDiscounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Discounts">
+              <PropertyRef Name="id_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hot_Trend_Shops">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="Hot_Trend" Type="Self.Hot_Trend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Hot_Trend">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hot_Trend_Watches">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="0..1" />
+          <End Role="Hot_Trend" Type="Self.Hot_Trend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Hot_Trend">
+              <PropertyRef Name="id_Watch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Image_Watches">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="id_Watches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LogInHistories_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="LogInHistories" Type="Self.LogInHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LogInHistories">
+              <PropertyRef Name="id_Account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="id_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Watches">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="id_Watches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_Accounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Address_District">
+          <End Role="Address_District" Type="Self.Address_District" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address_District">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Address_District" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Address_Province">
+          <End Role="Address_Province" Type="Self.Address_Province" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address_Province">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Address_Province" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Discounts1">
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_Discount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Shops">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Phone_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Phone">
+              <PropertyRef Name="id_Account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shop_Seller_Sellers">
+          <End Role="Sellers" Type="Self.Sellers" Multiplicity="1" />
+          <End Role="Shop_Seller" Type="Self.Shop_Seller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sellers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shop_Seller">
+              <PropertyRef Name="id_Seller" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shop_Seller_Shops">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="1" />
+          <End Role="Shop_Seller" Type="Self.Shop_Seller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shop_Seller">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shops_Sellers">
+          <End Role="Sellers" Type="Self.Sellers" Multiplicity="0..1" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sellers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shops">
+              <PropertyRef Name="id_Master" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Watches_Categories_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Watches_Categories" Type="Self.Watches_Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches_Categories">
+              <PropertyRef Name="id_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Watches_Categories_Watches">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+          <End Role="Watches_Categories" Type="Self.Watches_Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches_Categories">
+              <PropertyRef Name="id_Watch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Watches_Sex">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="0..1" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches">
+              <PropertyRef Name="id_Sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BeeWatchDBModelStoreContainer">
+          <EntitySet Name="Account_Type" EntityType="Self.Account_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Address_District" EntityType="Self.Address_District" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Address_Province" EntityType="Self.Address_Province" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Authoriza" EntityType="Self.Authoriza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartDetails" EntityType="Self.CartDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carts" EntityType="Self.Carts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Firms" EntityType="Self.Firms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hot_Trend" EntityType="Self.Hot_Trend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogInHistories" EntityType="Self.LogInHistories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phone" EntityType="Self.Phone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sellers" EntityType="Self.Sellers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shop_Seller" EntityType="Self.Shop_Seller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shops" EntityType="Self.Shops" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeDiscounts" EntityType="Self.TypeDiscounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Watches" EntityType="Self.Watches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Watches_Categories" EntityType="Self.Watches_Categories" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="BoughtWatches" Association="Self.BoughtWatches">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Accounts__id_Acc__3F466844" Association="Self.FK__Accounts__id_Acc__3F466844">
+            <End Role="Account_Type" EntitySet="Account_Type" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Authoriza__id_Ac__398D8EEE" Association="Self.FK__Authoriza__id_Ac__398D8EEE">
+            <End Role="Account_Type" EntitySet="Account_Type" />
+            <End Role="Authoriza" EntitySet="Authoriza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart__id__5CD6CB2B" Association="Self.FK__Cart__id__5CD6CB2B">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartDetai__id_Ca__00200768" Association="Self.FK__CartDetai__id_Ca__00200768">
+            <End Role="Carts" EntitySet="Carts" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sellers__id__44FF419A" Association="Self.FK__Sellers__id__44FF419A">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Sellers" EntitySet="Sellers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Watches__id_Firm__534D60F1" Association="Self.FK__Watches__id_Firm__534D60F1">
+            <End Role="Firms" EntitySet="Firms" />
+            <End Role="Watches" EntitySet="Watches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Watches__id_Sell__5812160E" Association="Self.FK__Watches__id_Sell__5812160E">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Watches" EntitySet="Watches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Watchesin__id_Wa__19DFD96B" Association="Self.FK__Watchesin__id_Wa__19DFD96B">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_Accounts" Association="Self.FK_Address_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_Address_District" Association="Self.FK_Address_Address_District">
+            <End Role="Address_District" EntitySet="Address_District" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_Address_Province" Association="Self.FK_Address_Address_Province">
+            <End Role="Address_Province" EntitySet="Address_Province" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_District_Address_Province" Association="Self.FK_Address_District_Address_Province">
+            <End Role="Address_Province" EntitySet="Address_Province" />
+            <End Role="Address_District" EntitySet="Address_District" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authoriza_Action" Association="Self.FK_Authoriza_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="Authoriza" EntitySet="Authoriza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Discounts_TypeDiscounts" Association="Self.FK_Discounts_TypeDiscounts">
+            <End Role="TypeDiscounts" EntitySet="TypeDiscounts" />
+            <End Role="Discounts" EntitySet="Discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hot_Trend_Shops" Association="Self.FK_Hot_Trend_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Hot_Trend" EntitySet="Hot_Trend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hot_Trend_Watches" Association="Self.FK_Hot_Trend_Watches">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="Hot_Trend" EntitySet="Hot_Trend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_Watches" Association="Self.FK_Image_Watches">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LogInHistories_Accounts" Association="Self.FK_LogInHistories_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="LogInHistories" EntitySet="LogInHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Watches" Association="Self.FK_OrderDetails_Watches">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Accounts" Association="Self.FK_Orders_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Address_District" Association="Self.FK_Orders_Address_District">
+            <End Role="Address_District" EntitySet="Address_District" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Address_Province" Association="Self.FK_Orders_Address_Province">
+            <End Role="Address_Province" EntitySet="Address_Province" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Discounts1" Association="Self.FK_Orders_Discounts1">
+            <End Role="Discounts" EntitySet="Discounts" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Shops" Association="Self.FK_Orders_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Phone_Accounts" Association="Self.FK_Phone_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Phone" EntitySet="Phone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shop_Seller_Sellers" Association="Self.FK_Shop_Seller_Sellers">
+            <End Role="Sellers" EntitySet="Sellers" />
+            <End Role="Shop_Seller" EntitySet="Shop_Seller" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shop_Seller_Shops" Association="Self.FK_Shop_Seller_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Shop_Seller" EntitySet="Shop_Seller" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shops_Sellers" Association="Self.FK_Shops_Sellers">
+            <End Role="Sellers" EntitySet="Sellers" />
+            <End Role="Shops" EntitySet="Shops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Watches_Categories_Categories" Association="Self.FK_Watches_Categories_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Watches_Categories" EntitySet="Watches_Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Watches_Categories_Watches" Association="Self.FK_Watches_Categories_Watches">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="Watches_Categories" EntitySet="Watches_Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Watches_Sex" Association="Self.FK_Watches_Sex">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Watches" EntitySet="Watches" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BeeWatchDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account_Type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Accounts__id_Acc__3F466844" FromRole="Account_Type" ToRole="Accounts" />
+          <NavigationProperty Name="Authoriza" Relationship="Self.FK__Authoriza__id_Ac__398D8EEE" FromRole="Account_Type" ToRole="Authoriza" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_Account_Type" Type="Int32" Nullable="false" />
+          <Property Name="Url_Image_Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Point" Type="Double" />
+          <Property Name="Date_Create" Type="DateTime" Precision="0" />
+          <Property Name="Time_LastAccess" Type="DateTime" Precision="3" />
+          <Property Name="IsLock" Type="Boolean" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Account_Type" Relationship="Self.FK__Accounts__id_Acc__3F466844" FromRole="Accounts" ToRole="Account_Type" />
+          <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__id__5CD6CB2B" FromRole="Accounts" ToRole="Carts" />
+          <NavigationProperty Name="Sellers" Relationship="Self.FK__Sellers__id__44FF419A" FromRole="Accounts" ToRole="Sellers" />
+          <NavigationProperty Name="Watches" Relationship="Self.FK__Watches__id_Sell__5812160E" FromRole="Accounts" ToRole="Watches" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Address_Accounts" FromRole="Accounts" ToRole="Address" />
+          <NavigationProperty Name="LogInHistories" Relationship="Self.FK_LogInHistories_Accounts" FromRole="Accounts" ToRole="LogInHistories" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Accounts" FromRole="Accounts" ToRole="Orders" />
+          <NavigationProperty Name="Phone" Relationship="Self.FK_Phone_Accounts" FromRole="Accounts" ToRole="Phone" />
+        </EntityType>
+        <EntityType Name="Action">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Authoriza" Relationship="Self.FK_Authoriza_Action" FromRole="Action" ToRole="Authoriza" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Account" Type="Int32" Nullable="false" />
+          <Property Name="id_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="id_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Address_Accounts" FromRole="Address" ToRole="Accounts" />
+          <NavigationProperty Name="Address_District" Relationship="Self.FK_Address_Address_District" FromRole="Address" ToRole="Address_District" />
+          <NavigationProperty Name="Address_Province" Relationship="Self.FK_Address_Address_Province" FromRole="Address" ToRole="Address_Province" />
+        </EntityType>
+        <EntityType Name="Address_District">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Address_Address_District" FromRole="Address_District" ToRole="Address" />
+          <NavigationProperty Name="Address_Province" Relationship="Self.FK_Address_District_Address_Province" FromRole="Address_District" ToRole="Address_Province" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Address_District" FromRole="Address_District" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Address_Province">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Address_Address_Province" FromRole="Address_Province" ToRole="Address" />
+          <NavigationProperty Name="Address_District" Relationship="Self.FK_Address_District_Address_Province" FromRole="Address_Province" ToRole="Address_District" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Address_Province" FromRole="Address_Province" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Authoriza">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Account_Type" Type="Int32" />
+          <Property Name="id_Action" Type="Int32" />
+          <NavigationProperty Name="Account_Type" Relationship="Self.FK__Authoriza__id_Ac__398D8EEE" FromRole="Authoriza" ToRole="Account_Type" />
+          <NavigationProperty Name="Action" Relationship="Self.FK_Authoriza_Action" FromRole="Authoriza" ToRole="Action" />
+        </EntityType>
+        <EntityType Name="CartDetails">
+          <Key>
+            <PropertyRef Name="id_Watch" />
+            <PropertyRef Name="id_Cart" />
+          </Key>
+          <Property Name="id_Watch" Type="Int32" Nullable="false" />
+          <Property Name="id_Cart" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="IsCheck" Type="Boolean" />
+          <NavigationProperty Name="Carts" Relationship="Self.FK__CartDetai__id_Ca__00200768" FromRole="CartDetails" ToRole="Carts" />
+          <NavigationProperty Name="Watches" Relationship="Self.FK__Watchesin__id_Wa__19DFD96B" FromRole="CartDetails" ToRole="Watches" />
+        </EntityType>
+        <EntityType Name="Carts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Cart__id__5CD6CB2B" FromRole="Carts" ToRole="Accounts" />
+          <NavigationProperty Name="CartDetails" Relationship="Self.FK__CartDetai__id_Ca__00200768" FromRole="Carts" ToRole="CartDetails" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Watches" Relationship="Self.Watches_Categories" FromRole="Categories" ToRole="Watches" />
+        </EntityType>
+        <EntityType Name="Discounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="id_Type" Type="Int32" />
+          <Property Name="Value___" Type="Double" />
+          <Property Name="Value___1" Type="Double" />
+          <Property Name="DateFrom" Type="DateTime" Precision="0" />
+          <Property Name="DateTo" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="TypeDiscounts" Relationship="Self.FK_Discounts_TypeDiscounts" FromRole="Discounts" ToRole="TypeDiscounts" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Discounts1" FromRole="Discounts" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Firms">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Watches" Relationship="Self.FK__Watches__id_Firm__534D60F1" FromRole="Firms" ToRole="Watches" />
+        </EntityType>
+        <EntityType Name="Hot_Trend">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_Watch" Type="Int32" />
+          <Property Name="id_Shop" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsCheck" Type="Boolean" />
+          <Property Name="IsLock" Type="Boolean" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_Hot_Trend_Shops" FromRole="Hot_Trend" ToRole="Shops" />
+          <NavigationProperty Name="Watches" Relationship="Self.FK_Hot_Trend_Watches" FromRole="Hot_Trend" ToRole="Watches" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Watches" Type="Int32" />
+          <Property Name="Url_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Watches" Relationship="Self.FK_Image_Watches" FromRole="Image" ToRole="Watches" />
+        </EntityType>
+        <EntityType Name="LogInHistories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_Account" Type="Int32" />
+          <Property Name="DateLogin" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_LogInHistories_Accounts" FromRole="LogInHistories" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="id_Order" />
+            <PropertyRef Name="id_Watches" />
+          </Key>
+          <Property Name="id_Order" Type="Int32" Nullable="false" />
+          <Property Name="id_Watches" Type="Int32" Nullable="false" />
+          <Property Name="WatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="Date_Bought" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Watches" Relationship="Self.BoughtWatches" FromRole="OrderDetails" ToRole="Watches" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
+          <NavigationProperty Name="Watches1" Relationship="Self.FK_OrderDetails_Watches" FromRole="OrderDetails" ToRole="Watches" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Shop" Type="Int32" Nullable="false" />
+          <Property Name="id_Accounts" Type="Int32" />
+          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
+          <Property Name="Ship_fee" Type="Double" />
+          <Property Name="id_Discount" Type="Int32" />
+          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Create" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Orders_Accounts" FromRole="Orders" ToRole="Accounts" />
+          <NavigationProperty Name="Address_District1" Relationship="Self.FK_Orders_Address_District" FromRole="Orders" ToRole="Address_District" />
+          <NavigationProperty Name="Address_Province1" Relationship="Self.FK_Orders_Address_Province" FromRole="Orders" ToRole="Address_Province" />
+          <NavigationProperty Name="Discounts" Relationship="Self.FK_Orders_Discounts1" FromRole="Orders" ToRole="Discounts" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_Orders_Shops" FromRole="Orders" ToRole="Shops" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_Account" Type="Int32" Nullable="false" />
+          <Property Name="Phone1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Phone_Accounts" FromRole="Phone" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="Sellers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Identitycard" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="Bankcard" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Url_Image_Cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Sellers__id__44FF419A" FromRole="Sellers" ToRole="Accounts" />
+          <NavigationProperty Name="Shop_Seller" Relationship="Self.FK_Shop_Seller_Sellers" FromRole="Sellers" ToRole="Shop_Seller" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_Shops_Sellers" FromRole="Sellers" ToRole="Shops" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Watches" Relationship="Self.FK_Watches_Sex" FromRole="Sex" ToRole="Watches" />
+        </EntityType>
+        <EntityType Name="Shop_Seller">
+          <Key>
+            <PropertyRef Name="id_Shop" />
+            <PropertyRef Name="id_Seller" />
+          </Key>
+          <Property Name="id_Shop" Type="Int32" Nullable="false" />
+          <Property Name="id_Seller" Type="Int32" Nullable="false" />
+          <Property Name="IsCheck" Type="Boolean" Nullable="false" />
+          <Property Name="IsLock" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Sellers" Relationship="Self.FK_Shop_Seller_Sellers" FromRole="Shop_Seller" ToRole="Sellers" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_Shop_Seller_Shops" FromRole="Shop_Seller" ToRole="Shops" />
+        </EntityType>
+        <EntityType Name="Shops">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_Master" Type="Int32" />
+          <Property Name="Point" Type="Double" />
+          <NavigationProperty Name="Hot_Trend" Relationship="Self.FK_Hot_Trend_Shops" FromRole="Shops" ToRole="Hot_Trend" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Shops" FromRole="Shops" ToRole="Orders" />
+          <NavigationProperty Name="Sellers" Relationship="Self.FK_Shops_Sellers" FromRole="Shops" ToRole="Sellers" />
+          <NavigationProperty Name="Shop_Seller" Relationship="Self.FK_Shop_Seller_Shops" FromRole="Shops" ToRole="Shop_Seller" />
+        </EntityType>
+        <EntityType Name="TypeDiscounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Min_Bill" Type="Double" />
+          <Property Name="Max_Discount" Type="Double" />
+          <Property Name="Payment_Method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Discounts" Relationship="Self.FK_Discounts_TypeDiscounts" FromRole="TypeDiscounts" ToRole="Discounts" />
+        </EntityType>
+        <EntityType Name="Watches">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Url_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_Sex" Type="Int32" />
+          <Property Name="id_Firms" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Information" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_Shop" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="Date_Create" Type="DateTime" Precision="3" />
+          <Property Name="Create_By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_LastEdit" Type="DateTime" Precision="3" />
+          <Property Name="LastEdit_By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsLock" Type="Boolean" />
+          <Property Name="IsCheck" Type="Boolean" />
+          <Property Name="IsExist" Type="Boolean" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Watches__id_Sell__5812160E" FromRole="Watches" ToRole="Accounts" />
+          <NavigationProperty Name="CartDetails" Relationship="Self.FK__Watchesin__id_Wa__19DFD96B" FromRole="Watches" ToRole="CartDetails" />
+          <NavigationProperty Name="Firms" Relationship="Self.FK__Watches__id_Firm__534D60F1" FromRole="Watches" ToRole="Firms" />
+          <NavigationProperty Name="Hot_Trend" Relationship="Self.FK_Hot_Trend_Watches" FromRole="Watches" ToRole="Hot_Trend" />
+          <NavigationProperty Name="Image" Relationship="Self.FK_Image_Watches" FromRole="Watches" ToRole="Image" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.BoughtWatches" FromRole="Watches" ToRole="OrderDetails" />
+          <NavigationProperty Name="OrderDetails1" Relationship="Self.FK_OrderDetails_Watches" FromRole="Watches" ToRole="OrderDetails" />
+          <NavigationProperty Name="Sex" Relationship="Self.FK_Watches_Sex" FromRole="Watches" ToRole="Sex" />
+          <NavigationProperty Name="Categories" Relationship="Self.Watches_Categories" FromRole="Watches" ToRole="Categories" />
+        </EntityType>
+        <Association Name="FK__Accounts__id_Acc__3F466844">
+          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="id_Account_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Authoriza__id_Ac__398D8EEE">
+          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="0..1" />
+          <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Authoriza">
+              <PropertyRef Name="id_Account_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart__id__5CD6CB2B">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Carts" Type="Self.Carts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sellers__id__44FF419A">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Sellers" Type="Self.Sellers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sellers">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Watches__id_Sell__5812160E">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="id_Account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LogInHistories_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="LogInHistories" Type="Self.LogInHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LogInHistories">
+              <PropertyRef Name="id_Account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_Accounts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Phone_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Phone">
+              <PropertyRef Name="id_Account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authoriza_Action">
+          <End Role="Action" Type="Self.Action" Multiplicity="0..1" />
+          <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Authoriza">
+              <PropertyRef Name="id_Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_Address_District">
+          <End Role="Address_District" Type="Self.Address_District" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address_District">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="id_District" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_Address_Province">
+          <End Role="Address_Province" Type="Self.Address_Province" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address_Province">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="id_Province" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Address_District_Address_Province">
+          <End Role="Address_Province" Type="Self.Address_Province" Multiplicity="1" />
+          <End Role="Address_District" Type="Self.Address_District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address_Province">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Address_District">
+              <PropertyRef Name="id_Province" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Address_District">
+          <End Role="Address_District" Type="Self.Address_District" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address_District">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Address_District" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Address_Province">
+          <End Role="Address_Province" Type="Self.Address_Province" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address_Province">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Address_Province" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartDetai__id_Ca__00200768">
+          <End Role="Carts" Type="Self.Carts" Multiplicity="1" />
+          <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="id_Cart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Watchesin__id_Wa__19DFD96B">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+          <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="id_Watch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Discounts_TypeDiscounts">
+          <End Role="TypeDiscounts" Type="Self.TypeDiscounts" Multiplicity="0..1" />
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeDiscounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Discounts">
+              <PropertyRef Name="id_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Discounts1">
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_Discount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Watches__id_Firm__534D60F1">
+          <End Role="Firms" Type="Self.Firms" Multiplicity="1" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firms">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches">
+              <PropertyRef Name="id_Firms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hot_Trend_Shops">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="0..1" />
+          <End Role="Hot_Trend" Type="Self.Hot_Trend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Hot_Trend">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hot_Trend_Watches">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="0..1" />
+          <End Role="Hot_Trend" Type="Self.Hot_Trend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Hot_Trend">
+              <PropertyRef Name="id_Watch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Image_Watches">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="id_Watches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BoughtWatches">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="id_Watches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="id_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Watches">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="id_Watches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Shops">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shop_Seller_Sellers">
+          <End Role="Sellers" Type="Self.Sellers" Multiplicity="1" />
+          <End Role="Shop_Seller" Type="Self.Shop_Seller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sellers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shop_Seller">
+              <PropertyRef Name="id_Seller" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shops_Sellers">
+          <End Role="Sellers" Type="Self.Sellers" Multiplicity="0..1" />
+          <End Role="Shops" Type="Self.Shops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sellers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shops">
+              <PropertyRef Name="id_Master" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Watches_Sex">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="0..1" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches">
+              <PropertyRef Name="id_Sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shop_Seller_Shops">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="1" />
+          <End Role="Shop_Seller" Type="Self.Shop_Seller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shop_Seller">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Watches_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="BeeWatchDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account_Type" EntityType="Self.Account_Type" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+          <EntitySet Name="Action" EntityType="Self.Action" />
+          <EntitySet Name="Address" EntityType="Self.Address" />
+          <EntitySet Name="Address_District" EntityType="Self.Address_District" />
+          <EntitySet Name="Address_Province" EntityType="Self.Address_Province" />
+          <EntitySet Name="Authoriza" EntityType="Self.Authoriza" />
+          <EntitySet Name="CartDetails" EntityType="Self.CartDetails" />
+          <EntitySet Name="Carts" EntityType="Self.Carts" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="Discounts" EntityType="Self.Discounts" />
+          <EntitySet Name="Firms" EntityType="Self.Firms" />
+          <EntitySet Name="Hot_Trend" EntityType="Self.Hot_Trend" />
+          <EntitySet Name="Image" EntityType="Self.Image" />
+          <EntitySet Name="LogInHistories" EntityType="Self.LogInHistories" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Phone" EntityType="Self.Phone" />
+          <EntitySet Name="Sellers" EntityType="Self.Sellers" />
+          <EntitySet Name="Sex" EntityType="Self.Sex" />
+          <EntitySet Name="Shop_Seller" EntityType="Self.Shop_Seller" />
+          <EntitySet Name="Shops" EntityType="Self.Shops" />
+          <EntitySet Name="TypeDiscounts" EntityType="Self.TypeDiscounts" />
+          <EntitySet Name="Watches" EntityType="Self.Watches" />
+          <AssociationSet Name="FK__Accounts__id_Acc__3F466844" Association="Self.FK__Accounts__id_Acc__3F466844">
+            <End Role="Account_Type" EntitySet="Account_Type" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Authoriza__id_Ac__398D8EEE" Association="Self.FK__Authoriza__id_Ac__398D8EEE">
+            <End Role="Account_Type" EntitySet="Account_Type" />
+            <End Role="Authoriza" EntitySet="Authoriza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart__id__5CD6CB2B" Association="Self.FK__Cart__id__5CD6CB2B">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sellers__id__44FF419A" Association="Self.FK__Sellers__id__44FF419A">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Sellers" EntitySet="Sellers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Watches__id_Sell__5812160E" Association="Self.FK__Watches__id_Sell__5812160E">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Watches" EntitySet="Watches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_Accounts" Association="Self.FK_Address_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LogInHistories_Accounts" Association="Self.FK_LogInHistories_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="LogInHistories" EntitySet="LogInHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Accounts" Association="Self.FK_Orders_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Phone_Accounts" Association="Self.FK_Phone_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Phone" EntitySet="Phone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authoriza_Action" Association="Self.FK_Authoriza_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="Authoriza" EntitySet="Authoriza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_Address_District" Association="Self.FK_Address_Address_District">
+            <End Role="Address_District" EntitySet="Address_District" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_Address_Province" Association="Self.FK_Address_Address_Province">
+            <End Role="Address_Province" EntitySet="Address_Province" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_District_Address_Province" Association="Self.FK_Address_District_Address_Province">
+            <End Role="Address_Province" EntitySet="Address_Province" />
+            <End Role="Address_District" EntitySet="Address_District" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Address_District" Association="Self.FK_Orders_Address_District">
+            <End Role="Address_District" EntitySet="Address_District" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Address_Province" Association="Self.FK_Orders_Address_Province">
+            <End Role="Address_Province" EntitySet="Address_Province" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartDetai__id_Ca__00200768" Association="Self.FK__CartDetai__id_Ca__00200768">
+            <End Role="Carts" EntitySet="Carts" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Watchesin__id_Wa__19DFD96B" Association="Self.FK__Watchesin__id_Wa__19DFD96B">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Discounts_TypeDiscounts" Association="Self.FK_Discounts_TypeDiscounts">
+            <End Role="TypeDiscounts" EntitySet="TypeDiscounts" />
+            <End Role="Discounts" EntitySet="Discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Discounts1" Association="Self.FK_Orders_Discounts1">
+            <End Role="Discounts" EntitySet="Discounts" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Watches__id_Firm__534D60F1" Association="Self.FK__Watches__id_Firm__534D60F1">
+            <End Role="Firms" EntitySet="Firms" />
+            <End Role="Watches" EntitySet="Watches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hot_Trend_Shops" Association="Self.FK_Hot_Trend_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Hot_Trend" EntitySet="Hot_Trend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hot_Trend_Watches" Association="Self.FK_Hot_Trend_Watches">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="Hot_Trend" EntitySet="Hot_Trend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_Watches" Association="Self.FK_Image_Watches">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="BoughtWatches" Association="Self.BoughtWatches">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Watches" Association="Self.FK_OrderDetails_Watches">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Shops" Association="Self.FK_Orders_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shop_Seller_Sellers" Association="Self.FK_Shop_Seller_Sellers">
+            <End Role="Sellers" EntitySet="Sellers" />
+            <End Role="Shop_Seller" EntitySet="Shop_Seller" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shops_Sellers" Association="Self.FK_Shops_Sellers">
+            <End Role="Sellers" EntitySet="Sellers" />
+            <End Role="Shops" EntitySet="Shops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Watches_Sex" Association="Self.FK_Watches_Sex">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Watches" EntitySet="Watches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shop_Seller_Shops" Association="Self.FK_Shop_Seller_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Shop_Seller" EntitySet="Shop_Seller" />
+          </AssociationSet>
+          <AssociationSet Name="Watches_Categories" Association="Self.Watches_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Watches" EntitySet="Watches" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BeeWatchDBModelStoreContainer" CdmEntityContainer="BeeWatchDBEntities">
+          <EntitySetMapping Name="Account_Type">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Account_Type">
+              <MappingFragment StoreEntitySet="Account_Type">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Accounts">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="id_Account_Type" ColumnName="id_Account_Type" />
+                <ScalarProperty Name="Url_Image_Avatar" ColumnName="Url_Image_Avatar" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="Time_LastAccess" ColumnName="Time_LastAccess" />
+                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Action">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Action">
+              <MappingFragment StoreEntitySet="Action">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Account" ColumnName="id_Account" />
+                <ScalarProperty Name="id_Province" ColumnName="id_Province" />
+                <ScalarProperty Name="id_District" ColumnName="id_District" />
+                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Address_District">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Address_District">
+              <MappingFragment StoreEntitySet="Address_District">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id_Province" ColumnName="id_Province" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Address_Province">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Address_Province">
+              <MappingFragment StoreEntitySet="Address_Province">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authoriza">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Authoriza">
+              <MappingFragment StoreEntitySet="Authoriza">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Account_Type" ColumnName="id_Account_Type" />
+                <ScalarProperty Name="id_Action" ColumnName="id_Action" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartDetails">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.CartDetails">
+              <MappingFragment StoreEntitySet="CartDetails">
+                <ScalarProperty Name="id_Watch" ColumnName="id_Watch" />
+                <ScalarProperty Name="id_Cart" ColumnName="id_Cart" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Carts">
+              <MappingFragment StoreEntitySet="Carts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discounts">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Discounts">
+              <MappingFragment StoreEntitySet="Discounts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="id_Type" ColumnName="id_Type" />
+                <ScalarProperty Name="Value___" ColumnName="Value(%)" />
+                <ScalarProperty Name="Value___1" ColumnName="Value(-)" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Firms">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Firms">
+              <MappingFragment StoreEntitySet="Firms">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hot_Trend">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Hot_Trend">
+              <MappingFragment StoreEntitySet="Hot_Trend">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Watch" ColumnName="id_Watch" />
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
+                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Image">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Image">
+              <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Watches" ColumnName="id_Watches" />
+                <ScalarProperty Name="Url_Image" ColumnName="Url_Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogInHistories">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.LogInHistories">
+              <MappingFragment StoreEntitySet="LogInHistories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Account" ColumnName="id_Account" />
+                <ScalarProperty Name="DateLogin" ColumnName="DateLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.OrderDetails">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="id_Order" ColumnName="id_Order" />
+                <ScalarProperty Name="id_Watches" ColumnName="id_Watches" />
+                <ScalarProperty Name="WatchName" ColumnName="WatchName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Date_Bought" ColumnName="Date_Bought" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
+                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
+                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
+                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
+                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phone">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Phone">
+              <MappingFragment StoreEntitySet="Phone">
+                <ScalarProperty Name="id_Account" ColumnName="id_Account" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sellers">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Sellers">
+              <MappingFragment StoreEntitySet="Sellers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Identitycard" ColumnName="Identitycard" />
+                <ScalarProperty Name="Bankcard" ColumnName="Bankcard" />
+                <ScalarProperty Name="Url_Image_Cover" ColumnName="Url_Image_Cover" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sex">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Sex">
+              <MappingFragment StoreEntitySet="Sex">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shop_Seller">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Shop_Seller">
+              <MappingFragment StoreEntitySet="Shop_Seller">
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="id_Seller" ColumnName="id_Seller" />
+                <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
+                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shops">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Shops">
+              <MappingFragment StoreEntitySet="Shops">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id_Master" ColumnName="id_Master" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeDiscounts">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.TypeDiscounts">
+              <MappingFragment StoreEntitySet="TypeDiscounts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Min_Bill" ColumnName="Min_Bill" />
+                <ScalarProperty Name="Max_Discount" ColumnName="Max_Discount" />
+                <ScalarProperty Name="Payment_Method" ColumnName="Payment_Method" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Watches">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.Watches">
+              <MappingFragment StoreEntitySet="Watches">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Url_Image" ColumnName="Url_Image" />
+                <ScalarProperty Name="id_Sex" ColumnName="id_Sex" />
+                <ScalarProperty Name="id_Firms" ColumnName="id_Firms" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Information" ColumnName="Information" />
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Date_LastEdit" ColumnName="Date_LastEdit" />
+                <ScalarProperty Name="LastEdit_By" ColumnName="LastEdit_By" />
+                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+                <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
+                <ScalarProperty Name="IsExist" ColumnName="IsExist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Watches_Categories" TypeName="BeeWatchDBModel.Watches_Categories" StoreEntitySet="Watches_Categories">
+            <EndProperty Name="Categories">
+              <ScalarProperty Name="id" ColumnName="id_Category" />
+            </EndProperty>
+            <EndProperty Name="Watches">
+              <ScalarProperty Name="id" ColumnName="id_Watch" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

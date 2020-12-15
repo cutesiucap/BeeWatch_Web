@@ -12,13 +12,12 @@ namespace API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Account_Type
+    public partial class Categories
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Account_Type()
+        public Categories()
         {
-            this.Accounts = new HashSet<Accounts>();
-            this.Authoriza = new HashSet<Authoriza>();
+            this.Watches = new HashSet<Watches>();
         }
     
         public int id { get; set; }
@@ -26,8 +25,6 @@ namespace API.Models
         public string Detail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Accounts> Accounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Authoriza> Authoriza { get; set; }
+        public virtual ICollection<Watches> Watches { get; set; }
     }
 }

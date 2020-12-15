@@ -13,10 +13,10 @@ namespace API.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BeeWatchDataBaseEntities : DbContext
+    public partial class BeeWatchDBEntities : DbContext
     {
-        public BeeWatchDataBaseEntities()
-            : base("name=BeeWatchDataBaseEntities")
+        public BeeWatchDBEntities()
+            : base("name=BeeWatchDBEntities")
         {
         }
     
@@ -27,17 +27,27 @@ namespace API.Models
     
         public virtual DbSet<Account_Type> Account_Type { get; set; }
         public virtual DbSet<Accounts> Accounts { get; set; }
+        public virtual DbSet<Action> Action { get; set; }
+        public virtual DbSet<Address> Address { get; set; }
+        public virtual DbSet<Address_District> Address_District { get; set; }
+        public virtual DbSet<Address_Province> Address_Province { get; set; }
         public virtual DbSet<Authoriza> Authoriza { get; set; }
-        public virtual DbSet<Bills> Bills { get; set; }
-        public virtual DbSet<Bought> Bought { get; set; }
-        public virtual DbSet<Commodities> Commodities { get; set; }
+        public virtual DbSet<CartDetails> CartDetails { get; set; }
+        public virtual DbSet<Carts> Carts { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Discounts> Discounts { get; set; }
         public virtual DbSet<Firms> Firms { get; set; }
         public virtual DbSet<Hot_Trend> Hot_Trend { get; set; }
         public virtual DbSet<Image> Image { get; set; }
+        public virtual DbSet<LogInHistories> LogInHistories { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Phone> Phone { get; set; }
         public virtual DbSet<Sellers> Sellers { get; set; }
+        public virtual DbSet<Sex> Sex { get; set; }
+        public virtual DbSet<Shop_Seller> Shop_Seller { get; set; }
+        public virtual DbSet<Shops> Shops { get; set; }
+        public virtual DbSet<TypeDiscounts> TypeDiscounts { get; set; }
         public virtual DbSet<Watches> Watches { get; set; }
-        public virtual DbSet<Carts> Carts { get; set; }
-        public virtual DbSet<WatchesinCarts> WatchesinCarts { get; set; }
     }
 }

@@ -8,41 +8,19 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Results;
-using System.Web.Mvc;
 using API.Models;
 
 namespace API.Controllers
 {
     public class AccountsController : ApiController
     {
-        private BeeWatchDataBaseEntities db = new BeeWatchDataBaseEntities();
+        private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
         // GET: api/Accounts
         public IQueryable<Accounts> GetAccounts()
         {
             return db.Accounts;
         }
-
-        /*public IHttpActionResult PostLogin(string username, string password)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (username == null)
-            {
-                return BadRequest();
-            }
-            Accounts accounts = db.Login(username, password);
-
-            if (accounts == null)
-            {
-                return NotFound();
-            }
-            return CreatedAtRoute("DefaultApi", new { id = accounts.id }, accounts);
-        }*/
 
         // GET: api/Accounts/5
         [ResponseType(typeof(Accounts))]

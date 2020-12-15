@@ -8,6 +8,6 @@ namespace MVC.Models
         public Nullable<int> id_Watches { get; set; }
         public string Url_Image { get; set; }
 
-        public virtual Accounts Accounts { get; set; }
+        public virtual Watches Watches { get; set; }
     }
 }

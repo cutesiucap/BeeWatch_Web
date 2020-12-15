@@ -17,25 +17,20 @@ namespace API.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Discounts()
         {
-            this.Bills = new HashSet<Bills>();
-            this.Watches = new HashSet<Watches>();
-            this.Carts = new HashSet<Carts>();
+            this.Orders = new HashSet<Orders>();
         }
     
         public int id { get; set; }
-        public string Name { get; set; }
         public string Code { get; set; }
-        public string Info { get; set; }
-        public Nullable<int> Type { get; set; }
-        public Nullable<double> Limit_bill { get; set; }
-        public string Payment_methods { get; set; }
+        public Nullable<int> id_Type { get; set; }
+        public Nullable<double> Value___ { get; set; }
+        public Nullable<double> Value___1 { get; set; }
+        public Nullable<System.DateTime> DateFrom { get; set; }
+        public Nullable<System.DateTime> DateTo { get; set; }
         public Nullable<bool> Status { get; set; }
     
+        public virtual TypeDiscounts TypeDiscounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bills> Bills { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Watches> Watches { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Carts> Carts { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

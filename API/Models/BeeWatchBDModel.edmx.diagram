@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b7e3de6ae58842779301632eb34c4456" Name="Diagram1">
+        <EntityTypeShape EntityType="BeeWatchDBModel.Account_Type" Width="1.5" PointX="0.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Accounts" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Action" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Address" Width="1.5" PointX="8.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Address_District" Width="1.5" PointX="6" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Address_Province" Width="1.5" PointX="3.75" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Authoriza" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.CartDetails" Width="1.5" PointX="7.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Carts" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Categories" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Discounts" Width="1.5" PointX="7.5" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Firms" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Hot_Trend" Width="1.5" PointX="9.75" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Image" Width="1.5" PointX="7.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.LogInHistories" Width="1.5" PointX="5.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.OrderDetails" Width="1.5" PointX="12" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Orders" Width="1.5" PointX="9.75" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Phone" Width="1.5" PointX="5.25" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Sellers" Width="1.5" PointX="5.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Sex" Width="1.5" PointX="3" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Shop_Seller" Width="1.5" PointX="9.75" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Shops" Width="1.5" PointX="7.5" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.TypeDiscounts" Width="1.5" PointX="5.25" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Watches" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="BeeWatchDBModel.FK__Accounts__id_Acc__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK__Authoriza__id_Ac__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK__Cart__id__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK__Sellers__id__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK__Watches__id_Sell__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Address_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_LogInHistories_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Orders_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Phone_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Authoriza_Action" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Address_Address_District" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Address_Address_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Address_District_Address_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Orders_Address_District" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Orders_Address_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK__CartDetai__id_Ca__00200768" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK__Watchesin__id_Wa__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Discounts_TypeDiscounts" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Orders_Discounts1" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK__Watches__id_Firm__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Hot_Trend_Shops" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Hot_Trend_Watches" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Image_Watches" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.BoughtWatches" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_OrderDetails_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_OrderDetails_Watches" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Orders_Shops" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Shop_Seller_Sellers" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Shops_Sellers" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Watches_Sex" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_Shop_Seller_Shops" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.Watches_Categories" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

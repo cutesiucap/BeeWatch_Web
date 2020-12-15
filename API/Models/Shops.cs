@@ -12,22 +12,27 @@ namespace API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Account_Type
+    public partial class Shops
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Account_Type()
+        public Shops()
         {
-            this.Accounts = new HashSet<Accounts>();
-            this.Authoriza = new HashSet<Authoriza>();
+            this.Hot_Trend = new HashSet<Hot_Trend>();
+            this.Orders = new HashSet<Orders>();
+            this.Shop_Seller = new HashSet<Shop_Seller>();
         }
     
         public int id { get; set; }
         public string Name { get; set; }
-        public string Detail { get; set; }
+        public Nullable<int> id_Master { get; set; }
+        public Nullable<double> Point { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Accounts> Accounts { get; set; }
+        public virtual ICollection<Hot_Trend> Hot_Trend { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Authoriza> Authoriza { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual Sellers Sellers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Shop_Seller> Shop_Seller { get; set; }
     }
 }

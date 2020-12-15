@@ -17,38 +17,39 @@ namespace API.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Accounts()
         {
-            this.Bills = new HashSet<Bills>();
-            this.Bought = new HashSet<Bought>();
-            this.Hot_Trend = new HashSet<Hot_Trend>();
-            this.Image = new HashSet<Image>();
             this.Watches = new HashSet<Watches>();
+            this.Address = new HashSet<Address>();
+            this.LogInHistories = new HashSet<LogInHistories>();
+            this.Orders = new HashSet<Orders>();
+            this.Phone = new HashSet<Phone>();
         }
     
         public int id { get; set; }
+        public string Username { get; set; }
+        public string Fullname { get; set; }
+        public string Password { get; set; }
+        public int id_Account_Type { get; set; }
         public string Url_Image_Avatar { get; set; }
         public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> id_Account_Type { get; set; }
-        public Nullable<bool> Lock { get; set; }
-        public Nullable<bool> Status { get; set; }
-        public string Address { get; set; }
+        public string Sex { get; set; }
         public Nullable<double> Point { get; set; }
-        public string Fullname { get; set; }
+        public Nullable<System.DateTime> Date_Create { get; set; }
+        public Nullable<System.DateTime> Time_LastAccess { get; set; }
+        public Nullable<bool> IsLock { get; set; }
+        public Nullable<bool> Status { get; set; }
     
         public virtual Account_Type Account_Type { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bills> Bills { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bought> Bought { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Hot_Trend> Hot_Trend { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Image { get; set; }
+        public virtual Carts Carts { get; set; }
         public virtual Sellers Sellers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Watches> Watches { get; set; }
-        public virtual Carts Carts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Address> Address { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LogInHistories> LogInHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Phone> Phone { get; set; }
     }
 }

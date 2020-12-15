@@ -12,19 +12,11 @@ namespace API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Bought
+    public partial class Phone
     {
-        public int id { get; set; }
-        public Nullable<int> id_Accounts { get; set; }
-        public Nullable<double> Price { get; set; }
-        public Nullable<int> Count { get; set; }
-        public Nullable<int> Status { get; set; }
-        public Nullable<int> Rate { get; set; }
-        public Nullable<System.DateTime> Datetime { get; set; }
-        public Nullable<int> id_Bills { get; set; }
-    
+        public int id_Account { get; set; }
+        public string Phone1 { get; set; }
+        public int id { get; set; }    
         public virtual Accounts Accounts { get; set; }
-        public virtual Bills Bills { get; set; }
-        public virtual Watches Watches { get; set; }
     }
 }

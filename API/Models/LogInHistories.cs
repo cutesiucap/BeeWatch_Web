@@ -12,20 +12,12 @@ namespace API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Carts
+    public partial class LogInHistories
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Carts()
-        {
-            this.CartDetails = new HashSet<CartDetails>();
-        }
-    
         public int id { get; set; }
-        public Nullable<int> Count { get; set; }
-        public Nullable<double> Sum { get; set; }
+        public Nullable<int> id_Account { get; set; }
+        public Nullable<System.DateTime> DateLogin { get; set; }
     
         public virtual Accounts Accounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CartDetails> CartDetails { get; set; }
     }
 }

@@ -12,14 +12,18 @@ namespace API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class WatchesinCarts
+    public partial class Sex
     {
-        public int id_Carts { get; set; }
-        public int id_Watches { get; set; }
-        public Nullable<int> Count { get; set; }
-        public Nullable<bool> Check { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Sex()
+        {
+            this.Watches = new HashSet<Watches>();
+        }
     
-        public virtual Carts Carts { get; set; }
-        public virtual Watches Watches { get; set; }
+        public int id { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Watches> Watches { get; set; }
     }
 }

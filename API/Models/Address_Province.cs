@@ -12,22 +12,24 @@ namespace API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Account_Type
+    public partial class Address_Province
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Account_Type()
+        public Address_Province()
         {
-            this.Accounts = new HashSet<Accounts>();
-            this.Authoriza = new HashSet<Authoriza>();
+            this.Address = new HashSet<Address>();
+            this.Address_District = new HashSet<Address_District>();
+            this.Orders = new HashSet<Orders>();
         }
     
-        public int id { get; set; }
+        public string id { get; set; }
         public string Name { get; set; }
-        public string Detail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Accounts> Accounts { get; set; }
+        public virtual ICollection<Address> Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Authoriza> Authoriza { get; set; }
+        public virtual ICollection<Address_District> Address_District { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

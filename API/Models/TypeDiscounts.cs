@@ -12,25 +12,20 @@ namespace API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Bills
+    public partial class TypeDiscounts
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Bills()
+        public TypeDiscounts()
         {
-            this.Bought = new HashSet<Bought>();
+            this.Discounts = new HashSet<Discounts>();
         }
     
         public int id { get; set; }
-        public Nullable<int> id_Accounts { get; set; }
-        public Nullable<System.DateTime> Datetime { get; set; }
-        public Nullable<int> id_Discounts { get; set; }
-        public Nullable<double> Sum { get; set; }
-        public Nullable<double> Ship_fee { get; set; }
-        public string Payment { get; set; }
+        public Nullable<double> Min_Bill { get; set; }
+        public Nullable<double> Max_Discount { get; set; }
+        public string Payment_Method { get; set; }
     
-        public virtual Accounts Accounts { get; set; }
-        public virtual Discounts Discounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bought> Bought { get; set; }
+        public virtual ICollection<Discounts> Discounts { get; set; }
     }
 }

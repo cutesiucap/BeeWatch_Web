@@ -12,13 +12,14 @@ namespace API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Authoriza
+    public partial class Shop_Seller
     {
-        public int id { get; set; }
-        public Nullable<int> id_Account_Type { get; set; }
-        public Nullable<int> id_Action { get; set; }
+        public int id_Shop { get; set; }
+        public int id_Seller { get; set; }
+        public bool IsCheck { get; set; }
+        public bool IsLock { get; set; }
     
-        public virtual Account_Type Account_Type { get; set; }
-        public virtual Action Action { get; set; }
+        public virtual Sellers Sellers { get; set; }
+        public virtual Shops Shops { get; set; }
     }
 }

@@ -5,12 +5,12 @@ using System.Web;
 
 namespace MVC.Models
 {
-    public class WatchesinCarts
+    public class CartDetails
     {
-        public int id_Carts { get; set; }
-        public int id_Watches { get; set; }
-        public Nullable<int> Count { get; set; }
-        public Nullable<bool> Check { get; set; }
+        public int id_Watch { get; set; }
+        public int id_Cart { get; set; }
+        public int Count { get; set; }
+        public Nullable<bool> IsCheck { get; set; }
 
         public virtual Carts Carts { get; set; }
         public virtual Watches Watches { get; set; }

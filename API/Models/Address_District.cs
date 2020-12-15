@@ -12,18 +12,23 @@ namespace API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Commodities
+    public partial class Address_District
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Commodities()
+        public Address_District()
         {
-            this.Watches = new HashSet<Watches>();
+            this.Address = new HashSet<Address>();
+            this.Orders = new HashSet<Orders>();
         }
     
-        public int id { get; set; }
+        public string id { get; set; }
         public string Name { get; set; }
+        public string id_Province { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Watches> Watches { get; set; }
+        public virtual ICollection<Address> Address { get; set; }
+        public virtual Address_Province Address_Province { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

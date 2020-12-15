@@ -14,11 +14,22 @@ namespace API.Models
     
     public partial class Sellers
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Sellers()
+        {
+            this.Shop_Seller = new HashSet<Shop_Seller>();
+            this.Shops = new HashSet<Shops>();
+        }
+    
         public int id { get; set; }
         public string Identitycard { get; set; }
         public string Bankcard { get; set; }
         public string Url_Image_Cover { get; set; }
     
         public virtual Accounts Accounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Shop_Seller> Shop_Seller { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Shops> Shops { get; set; }
     }
 }

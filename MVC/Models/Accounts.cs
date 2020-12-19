@@ -26,7 +26,6 @@ namespace MVC.Models
         public virtual Account_Type Account_Type { get; set; }
         public virtual Carts Carts { get; set; }
         public virtual Sellers Sellers { get; set; }
-        public virtual ICollection<Watches> Watches { get; set; }
         public virtual ICollection<Address> Address { get; set; }
         public virtual ICollection<LogInHistories> LogInHistories { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }

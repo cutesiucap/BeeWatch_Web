@@ -8,5 +8,9 @@ namespace MVC.Models
         public string Name { get; set; }
         public string Url { get; set; }
         public virtual ICollection<Watches> Watches { get; set; }
+        public override string ToString()
+        {
+            return Name.ToString();
+        }
     }
 }

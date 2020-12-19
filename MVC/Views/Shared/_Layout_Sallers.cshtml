@@ -15,11 +15,10 @@
     <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    @RenderSection("Css", required: false)
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <link href="~/dist/css/Bee_Style.css" rel="stylesheet" />
-
-    @RenderSection("Css", required: false)
 
 </head>
 <body class="sidebar-mini control-sidebar-slide-open accent-warning dark-mode" style="width: auto;">
@@ -36,7 +35,7 @@
                     <a href="../../Sellers/" class="nav-link">Trang Chính</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="../../Sellers/LoginSeller" class="nav-link">Đăng xuất</a>
+                    <a href="../../Sellers/Logout" id="logout" class="nav-link">Đăng xuất</a>
                 </li>
             </ul>
 

@@ -1,14 +1,22 @@
-﻿@{
+﻿@model MVC.Controllers.Sellers.SellersController.CreateWatchModel
+
+@{
     Layout = "~/Views/Shared/_Layout_Sallers.cshtml";
 }
 
 @section Css {
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- dropzonejs -->
     <link rel="stylesheet" href="../../plugins/dropzone/min/dropzone.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <link href="~/dist/css/Bee_Style.css" rel="stylesheet" />
 }
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -44,34 +52,30 @@
                     <!-- /.card-header -->
                     <div class="card-body inline">
                         <!-- form start -->
-                        <form>
+                        <form action="../../Sellers/UpLoadFile" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Hãng Sản Xuất <small><em>*</em></small></label>
-                                        <select required class="form-control select2 select2-yellow" style="width: 100%;">
-                                            <option selected="selected">Alabama</option>
-                                            <option>Alaska</option>
-                                            <option>California</option>
-                                            <option>Delaware</option>
-                                            <option>Tennessee</option>
-                                            <option>Texas</option>
-                                            <option>Washington</option>
+                                        <select name="id_Firms" class="select2" style="width: 100%;">
+                                            @foreach (var item in Model.listfirms)
+                                            {
+                                                <option value="@item.id">@item</option>
+                                            }
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Chủng Loại <small><em>*</em></small></label>
-                                        <select required class="form-control select2 select2-yellow" style="width: 100%;">
-                                            <option selected="selected">Alabama</option>
-                                            <option>Alaska</option>
-                                            <option>California</option>
-                                            <option>Delaware</option>
-                                            <option>Tennessee</option>
-                                            <option>Texas</option>
-                                            <option>Washington</option>
+                                        <select class="select2 accent-warning" name="list_Categories" multiple="multiple" data-placeholder="Chọn ít nhất một" style="width: 100%;">
+                                            @*<option selected="selected">Alabama</option>*@
+                                            @foreach (var item in Model.listcategories)
+                                            {
+                                                <option value="@item.id">@item</option>
+                                            }
                                         </select>
+
                                     </div>
                                 </div>
                             </div>
@@ -79,25 +83,20 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tên Sản Phẩm <small><em>*</em></small></label>
-                                        <input required type="text" class="form-control" placeholder="Enter ...">
+                                        <input name="Name" type="text" class="form-control" placeholder="Enter ...">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Phái <small><em>*</em></small></label>
                                         <div style="max-width: 400px; display: flex;flex-direction: row;">
-                                            <span class="icheck-bootstrap" style="margin:0 auto;">
-                                                <input type="radio" id="radioPrimary1" name="r1" checked>
-                                                <label for="radioPrimary1">Nam</label>
-                                            </span>
-                                            <span class="icheck-bootstrap" style="margin:0 auto;">
-                                                <input type="radio" id="radioPrimary2" name="r1">
-                                                <label for="radioPrimary2">Nữ</label>
-                                            </span>
-                                            <span class="icheck-bootstrap" style="margin:0 auto;">
-                                                <input type="radio" id="radioPrimary3" name="r1">
-                                                <label for="radioPrimary3">UniSex</label>
-                                            </span>
+                                            @foreach (var item in Model.listsex)
+                                            {
+                                                <span class="icheck-bootstrap" style="margin:0 auto;">
+                                                    <input type="radio" value="@item.id" id="@item.id" name="id_Sex" />
+                                                    <label for="@item.id">@item</label>
+                                                </span>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +106,7 @@
                                     <div class="form-group">
                                         <label>Đơn giá <small><em>*</em></small></label>
                                         <div class="input-group">
-                                            <input required type="number" class="form-control">
+                                            <input type="number" name="Price" class="form-control">
                                             <div class="input-group-append">
                                                 <div class="input-group-text"><b>VNĐ</b></div>
                                             </div>
@@ -117,7 +116,7 @@
                                 <div class="col-md-6">
                                     <label>Số lượng <small><em>*</em></small></label>
                                     <div class="input-group">
-                                        <input required type="number" class="form-control" min="1" max="1000">
+                                        <input type="number" name="Count" class="form-control" min="1" max="1000">
                                         <div class="input-group-append">
                                             <div class="input-group-text"><b>Chiếc</b></div>
                                         </div>
@@ -129,7 +128,7 @@
                                     <div class="form-group">
                                         <label>Thêm Mã Giảm Giá Cho Sản phẩm<small><em> (Nếu có)</em></small></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="CODE">
+                                            <input type="text" name="Code" class="form-control" placeholder="CODE">
                                             <div class="input-group-append">
                                                 <div class="input-group-text"><i class="fas fa-percent"></i></div>
                                             </div>
@@ -140,7 +139,84 @@
                             <div>
                                 <div class="form-group">
                                     <label>Thông Tin Chi Tiết Sản Phẩm</label>
-                                    <textarea class="form-control" rows="3" placeholder="Enter ..." style="margin-top: 0px; margin-bottom: 0px; height: 178px;"></textarea>
+                                    <textarea class="form-control" name="Information" rows="3" placeholder="Enter ..." style="margin-top: 0px; margin-bottom: 0px; height: 178px;"></textarea>
+                                </div>
+                            </div>
+                            <!--Dropzone.js-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-default">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Thêm Ảnh Hiển Thị Cho Sản Phẩm <small><em>(Vui lòng chọn ảnh thực tế Sản phẩm và đúng tên trước khi UpLoad)</em></small></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="actions" class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="btn-group w-100">
+                                                        <span class="btn btn-warning col fileinput-button">
+                                                            <i class="fas fa-plus"></i>
+                                                            <span>Thêm Ảnh</span>
+                                                        </span>
+                                                        <button id="UpLoad_Image" type="button" class="btn btn-success col start" style="background-color: ">
+                                                            <i class="fas fa-upload"></i>
+                                                            <span>Tải Ảnh Đã Chọn lên</span>
+                                                        </button>
+                                                        <button type="reset" class="btn btn-danger col cancel">
+                                                            <i class="fas fa-times-circle"></i>
+                                                            <span>Hủy</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 d-flex align-items-center">
+                                                    <div class="fileupload-process w-100">
+                                                        <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                                            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table table-striped files" id="previews">
+                                                <div id="template" class="row mt-2">
+                                                    <div class="col-auto">
+                                                        <span class="preview"><img id="file_img_upload" src="data:," alt="" data-dz-thumbnail /></span>
+                                                    </div>
+                                                    <div class="col d-flex align-items-center">
+                                                        <p class="mb-0">
+                                                            <span class="lead" data-dz-name></span>
+                                                            (<span data-dz-size></span>)
+                                                        </p>
+                                                        <strong class="error text-danger" data-dz-errormessage></strong>
+                                                    </div>
+                                                    <div class="col-4 d-flex align-items-center">
+                                                        <div class="progress progress-striped active w-100" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                                            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto d-flex align-items-center">
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-primary start" hidden>
+                                                                <i class="fas fa-upload"></i>
+                                                                <span>Start</span>
+                                                            </button>
+                                                            <button data-dz-remove class="btn btn-warning cancel" hidden>
+                                                                <i class="fas fa-times-circle"></i>
+                                                                <span>Cancel</span>
+                                                            </button>
+                                                            <button data-dz-remove class="btn btn-danger delete">
+                                                                <i class="fas fa-trash"></i>
+                                                                <span>Xóa</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            Visit <a href="https://www.dropzonejs.com">dropzone.js documentation</a> for more examples and information about the plugin.
+                                        </div>
+                                    </div>
+                                    <!-- /.card -->
                                 </div>
                             </div>
 
@@ -215,7 +291,7 @@
                                         <label><small><em>Sản phẩm sẽ được thêm vào danh sách yếu cầu duyệt. Vui lòng chờ Sản phẩm được duyệt bởi chúng tôi trước khi nó sản sàng để mua sắm ^^</em></small></label>
                                     </div>
                                     <div class="col" style="text-align: right;">
-                                        <button type="submit" class="btn btn-warning"><b style="font-size: large;">Thêm Vào Danh Sách Chờ Duyệt</b></button>
+                                        <button type="submit" name="fileinput-button" class="btn btn-warning"><b style="font-size: large;">Thêm Vào Danh Sách Chờ Duyệt</b></button>
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +312,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="tableWatches" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Tên Đồng Hồ</th>
@@ -670,6 +746,7 @@
         </div>
         <!-- /.card -->
     </div>
+
 </section>
 @section Scripts {
     <!-- DataTables  & Plugins -->
@@ -688,10 +765,12 @@
 }
 <!-- dropzonejs -->
 <script src="../../plugins/dropzone/min/dropzone.min.js"></script>
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
 
 <script>
     $(function () {
-        $("#tableWatches").DataTable({
+        $("#example1").DataTable({
             initComplete: function () {
                 this.api().columns().every(function () {
                     var column = this;
@@ -716,21 +795,7 @@
             lengthChange: false,
             autoWidth: true,
             iDisplayLength: 20,
-            buttons: [
-                {
-                    extend: 'pdf',
-                    text: 'Lưu Trang',
-                    exportOptions: {
-                        modifier: {
-                            page: 'current'
-                        }
-                    }
-                },
-                {
-                    extend: 'excel',
-                    text: 'Lưu Trang',
-                }
-            ],
+            buttons: ['excel', 'pdf', 'print', 'colvis'],
             language: {
                 "processing": "Dữ liệu đang được tải...",
                 "search": "Tìm Kiếm",
@@ -752,8 +817,14 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 </script>
-<script>
 
+<script>
+    $(".select2").select2()
+
+</script>
+<!-- /.content -->
+
+<script>
     // DropzoneJS Demo Code Start
     Dropzone.autoDiscover = false;
 
@@ -764,21 +835,128 @@
     previewNode.parentNode.removeChild(previewNode);
 
     var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-        url: "/target-url", // Set the url
-        thumbnailWidth: 80,
-        thumbnailHeight: 80,
+        url: "../../Sellers/UpLoadFile", // Set the url
+        thumbnailWidth: 150,
+        thumbnailHeight: 150,
         parallelUploads: 20,
         acceptedFiles: ".jpg, .png",
         previewTemplate: previewTemplate,
+        uploadMultiple: true,
         autoQueue: false, // Make sure the files aren't queued until manually added
         previewsContainer: "#previews", // Define the container to display the previews
-        clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        clickable: ".fileinput-button", // Define the element that should be used as click trigger to select files.
+        transformFile: function (file, done) {
+
+            var myDropZone = this;
+
+            // Create the image editor overlay
+            var editor = document.createElement('div');
+            editor.style.position = 'fixed';
+            editor.style.left = 0;
+            editor.style.right = 0;
+            editor.style.top = 0;
+            editor.style.bottom = 0;
+            editor.style.zIndex = 9999;
+            editor.style.backgroundColor = '#000';
+
+            // Create the confirm button
+            var confirm = document.createElement('button');
+            confirm.style.position = 'absolute';
+            confirm.style.left = '10px';
+            confirm.style.top = '10px';
+            confirm.style.zIndex = 9999;
+            confirm.textContent = 'Confirm';
+            confirm.addEventListener('click', function () {
+
+                // Get the canvas with image data from Cropper.js
+                var canvas = cropper.getCroppedCanvas({
+                    width: 256,
+                    height: 256
+                });
+
+                // Turn the canvas into a Blob (file object without a name)
+                canvas.toBlob(function (blob) {
+
+                    // Update the image thumbnail with the new image data
+                    myDropZone.createThumbnail(
+                        blob,
+                        myDropZone.options.thumbnailWidth,
+                        myDropZone.options.thumbnailHeight,
+                        myDropZone.options.thumbnailMethod,
+                        false,
+                        function (dataURL) {
+
+                            // Update the Dropzone file thumbnail
+                            myDropZone.emit('thumbnail', file, dataURL);
+
+                            // Return modified file to dropzone
+                            done(blob);
+                        }
+                    );
+
+                });
+
+                // Remove the editor from view
+                editor.parentNode.removeChild(editor);
+
+            });
+            editor.appendChild(confirm);
+
+            // Load the image
+            var image = new Image();
+            image.src = URL.createObjectURL(file);
+            editor.appendChild(image);
+
+            // Append the editor to the page
+            document.body.appendChild(editor);
+
+            // Create Cropper.js and pass image
+            var cropper = new Cropper(image, {
+                aspectRatio: 1
+            });
+
+        }
     });
 
     myDropzone.on("addedfile", function (file) {
         // Hookup the start button
         file.previewElement.querySelector(".start").onclick = function () { myDropzone.enqueueFile(file); };
     });
+
+    // Update the total progress bar
+    myDropzone.on("totaluploadprogress", function (progress) {
+        document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
+    });
+
+    myDropzone.on("sending", function (file) {
+        // Show the total progress bar when upload starts
+        document.querySelector("#total-progress").style.opacity = "1";
+        // And disable the start button
+        file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
+    });
+
+    // Hide the total progress bar when nothing's uploading anymore
+    myDropzone.on("queuecomplete", function (progress) {
+        document.querySelector("#total-progress").style.opacity = "0";
+    });
+
+    myDropzone.on("removedfile", function (file) {
+
+        var file_data = {
+            file_name: file.name
+        };
+        $.ajax({
+            url: '../../Sellers/DeleteFile',
+            type: 'POST',
+            async: true,
+            data: file_data,
+            success: function (msg_login) {
+                alert(msg_login, class= "a");
+            }
+
+        });
+
+    })
 
     // Setup the buttons for all transfers
     // The "add files" button doesn't need to be setup because the config
@@ -789,6 +967,5 @@
     document.querySelector("#actions .cancel").onclick = function () {
         myDropzone.removeAllFiles(true);
     };
-                                // DropzoneJS Demo Code End
+  // DropzoneJS Demo Code End
 </script>
-<!-- /.content -->

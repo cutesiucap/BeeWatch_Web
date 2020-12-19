@@ -16,7 +16,8 @@ namespace API.Models
     {
         public int id_Account { get; set; }
         public string Phone1 { get; set; }
-        public int id { get; set; }    
+        public int id { get; set; }
+    
         public virtual Accounts Accounts { get; set; }
     }
 }

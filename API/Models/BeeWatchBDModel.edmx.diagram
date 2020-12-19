@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="BeeWatchDBModel.Authoriza" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.CartDetails" Width="1.5" PointX="7.5" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Carts" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.Categories" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Categories" Width="1.5" PointX="0.5" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Discounts" Width="1.5" PointX="7.5" PointY="34.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Firms" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Hot_Trend" Width="1.5" PointX="9.75" PointY="29.125" IsExpanded="true" />

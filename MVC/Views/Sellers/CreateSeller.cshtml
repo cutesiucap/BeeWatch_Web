@@ -1,4 +1,5 @@
-﻿
+﻿@model MVC.Controllers.Sellers.SellersController.CreateSellersModel
+
 @{
     Layout = null;
 }
@@ -20,6 +21,9 @@
             max-width: 600px; /* New width for default modal */
         }
     </style>
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Google Font: Source Sans Pro -->
@@ -40,11 +44,10 @@
             <div class="card-body">
                 <p class="login-box-msg">Tạo mới tài khoảng thương gia cùng với một Gian Hàng</p>
                 <div id="err_login"></div>
-                <form action="../../Sellers/CreateSeller" id="form-Register" method="post">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group mb-3">
-                                <input type="text" required id="Name" class="form-control" placeholder="Họ và Tên">
+                                <input type="text" id="Name" name="Name" class="form-control" placeholder="Họ và Tên">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-font"></span>
@@ -52,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" required id="Phone" class="form-control" placeholder="Số Điện Thoại">
+                                <input type="text" required name="Phone" id="Phone" class="form-control" placeholder="Số Điện Thoại">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-phone"></span>
@@ -60,16 +63,15 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="email" required id="Email" class="form-control" placeholder="Địa chỉ Mail">
+                                <input type="email" required id="Email" name="Email" class="form-control" placeholder="Địa chỉ Mail">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="input-group mb-3">
-                                <input type="text" required id="UserName" class="form-control" placeholder="Tài Khoản">
+                                <input type="text" required name="UserName" id="UserName" class="form-control" placeholder="Tài Khoản">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-user"></span>
@@ -77,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="password" required id="Password" class="form-control" placeholder="Mật Khẩu">
+                                <input type="password" required name="Password" id="Password" class="form-control" placeholder="Mật Khẩu">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-lock"></span>
@@ -85,7 +87,7 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="password" required id="Confirm_PassWord" class="form-control" placeholder="Nhập Lại Mật Khẩu">
+                                <input type="password" required name="Confirm_PassWord" id="Confirm_PassWord" class="form-control" placeholder="Nhập Lại Mật Khẩu">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-key"></span>
@@ -101,13 +103,38 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>Địa chỉ Thương gia <small><em>*</em></small></label>
+                                <div class="row" style="width:auto">
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3">
+                                            <select name="id_Province" onchange="myfunction()" id="id_Province" class="select2" style="width: 100%;">
+                                                @foreach (var item in Model.address_Provinces)
+                                                {
+                                                    <option value="@item.id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3">
+                                            <select name="id_District" id="id_District" class="select2" style="width: 100%;">
+                                                @foreach (var item in Model.address_Districts)
+                                                {
+                                                    <option value="@item.id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
                         </div>
 
 
                         <div class="col-md-6">
                             <div class="input-group mb-3">
-                                <input type="text" required id="ICard" class="form-control" placeholder="Chứng Minh Nhân Dân">
+                                <input type="text" required name="ICard" id="ICard" class="form-control" placeholder="Chứng Minh Nhân Dân">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-user"></span>
@@ -115,14 +142,13 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" required id="BankCard" class="form-control" placeholder="Tài Khoảng Ngân Hàng">
+                                <input type="text" required name="BankCard" id="BankCard" class="form-control" placeholder="Tài Khoảng Ngân Hàng">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-user"></span>
                                     </div>
                                 </div>
                             </div>
-
                             <h6 style="margin-top: 25px; margin-bottom: 10px;"><b style="color: #E0A800;">Thông Tin Gian Hàng </b><small><em>(Tạo mới gian hàng cho mình hoặc hùng hạp làm ăn với một gian hàng đã có)</em></small></h6>
                             <div class="form-group mb-3">
                                 <div style="max-width: 400px; display: flex;flex-direction: row;">
@@ -137,10 +163,35 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3" id="nameShop">
-                                <input type="text" required class="form-control " placeholder="Tên Shop">
+                                <input type="text" name="name_Shop" id="name_Shop" required class="form-control " placeholder="Tên Shop">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-store"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ Gian Hàng <small><em>*</em></small></label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3">
+                                            <select name="id_Provinces_Shop" id="id_Provinces_Shop" class="select2" style="width: 100%;">
+                                                @foreach (var item in Model.address_Provinces)
+                                                {
+                                                    <option value="@item.id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3">
+                                            <select name="id_District_Shop" id="id_District_Shop" class="select2" style="width: 100%;">
+                                                @foreach (var item in Model.address_Districts)
+                                                {
+                                                    <option value="@item.id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -148,16 +199,15 @@
                     </div>
 
                     <div class="social-auth-links text-center mt-2 mb-3">
-                        <button href="#" id="register" type="submit" class="btn btn-block btn-warning">
+                        <button id="register" onclick="register_function()" class="btn btn-block btn-warning">
                             Đăng Kí
                         </button>
                     </div>
-                </form>
                 <p class="mb-1">
                     <a href="../../Sellers/LoginSeller" class="text-center text-muted">Ấy quên ! Tại hạ có rồi :)</a>
                 </p>
                 <p class="mb-0">
-                    <a href="login-v2.html" class="text-center text-muted">UpLevel tài khoảng thường dân đang có</a>
+                    <a href="login-v2.html" class="text-center text-muted">UpLevel tài khoản thường dân đang có</a>
                 </p>
             </div>
             <!-- /.form-box -->
@@ -172,6 +222,56 @@
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- Select2 -->
+    <script src="../../plugins/select2/js/select2.full.min.js"></script>
+
+    <script>
+        $(".select2").select2()
+    </script>
+
+@*    <script>
+        function myfunction() {
+            if ($('#id_Province').val() != null) {
+                $.ajax({
+                    url: '/Sellers/GetByid_Province',
+                    method: 'GET',
+                    async: false,
+                    data: {
+                        id: $('#id_Province').val(),
+                    },
+                    success: function (result) {
+                        if (result == 'false') {
+                            Toast.fire
+                                ({
+                                    icon: 'danger',
+                                    title: 'Yêu cầu Không thành công, Tỉnh vừa chọn không còn tồn tại, mời Cát Hạ Load lại trang',
+                                });
+                        }
+                        else {
+                            var str = "";
+                            $.each(result, function (index, item)){
+                                str = str + '<select name="id_District" id="id_District" class="select2" style="width: 100%;"><option value="' + item.id + '">' + item.Name + '</option>}</select>'
+                            }
+                            $('#id_District').html(str);
+                        }
+                    }
+                })
+                var olddata = $('#id_Province').val();
+                $.get('/Sellers/GetByid_Province/' + olddata, function (data) {
+                    //create a empty string to append data
+                    var str = "";
+
+                    //loop through data
+                    $.each(result, function (index, item)){
+                        str = str + '<select name="id_District" id="id_District" class="select2" style="width: 100%;"><option value="' + item.id + '">' + item.Name + '</option>}</select>'
+                    }
+                    $('#id_District').html(str);
+
+                });
+            }
+        }
+    </script>*@
+
     <script>
         var CODE;
         var Toast = Swal.mixin({
@@ -181,63 +281,168 @@
             timer: 3000
         });
 
-        $(document).ready(function () {
-            $('.swalDefaultSuccess').click(function (){
+        
+        function register_function() {            
+            if ($('#Name').val() == '') {
+                $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Họ và Tên </div>');
+                $('#Name').focus();
+                return false;
+            } else
+                if ($('#Phone').val() == '') {
+                    $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Số điện thoại </div>');
+                    $('#Phone').focus();
+                    return false;
+                } else
+                    if ($('#Email').val() == '') {
+                        $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Email </div>');
+                        $('#Email').focus();
+                        return false;
+                    } else
+                        if ($('#UserName').val() == '') {
+                            $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Tên tài Khoảng </div>');
+                            $('#UserName').focus();
+                            return false;
+                        } else
+                            if ($('#Password').val() == '') {
+                                $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Mật khẩu </div>');
+                                $('#Password').focus();
+                                return false;
+                            } else
+                                if ($('#Password').val() != $('#Confirm_PassWord').val()) {
+                                    $('#err_login').html('<div class="alert alert-danger">Cát hạ nhập Xác nhận Mật khẩu chưa chính xác. Có vẻ Cát hạ đã say rồii :~ </div>');
+                                    $('#Confirm_PassWord').focus();
+                                    $('#Confirm_PassWord').val('');
+                                    return false;
+                                } else
+                                    if ($("#Email").val() == '') {
+                                        $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa điền thông tin địa chỉ GMail</div>');
+                                        $("#Email").focus();
+                                        return false;
+                                    } else
+                                        if ($("#ICard").val() == '') {
+                                            $('#err_login').html('<div class="alert alert-danger">Số chứng minh nhân dân không được phép trống </div>');
+                                            $("#ICard").focus();
+                                            return false;
+                                        } else
+                                            if ($("#Code_Value").val() == CODE && false) {
+                                                $('#err_login').html('<div class="alert alert-danger">Cát hạ nhập Xác nhận Mã Xác thực Mail chưa đúng!</div>');
+                                                $("#Code_Value").val('');
+                                                $("#Code_Value").focus();
+                                                return false;
+                                            } else
+                                                if (document.getElementById('radioPrimary1').checked) {
+                                                    if ($("#name_Shop").val() == '') {
+                                                        $('#err_login').html('<div class="alert alert-danger">Cát hạ hãy chọn một tên thật hay cho Gian Hàng của mình!</div>');
+                                                        $("#name_Shop").focus();
+                                                        return false;
+                                                    }
+                                                } else
+                                                    if (document.getElementById('radioPrimary2').checked) {
+                                                        if ($("#id_Shop").val() == '') {
+                                                            $('#err_login').html('<div class="alert alert-danger">Cát hạ hãy nhập mã Gian Hàng muốn hùng hạp!</div>');
+                                                            $("#id_Shop").focus();
+                                                            return false;
+                                                        }
+                                                    } 
+            var data_form = {
+                Fullname: $('#Name').val(),
+                Phone: $('#Phone').val(),
+                Email: $('#Email').val(),
+                Username: $('#UserName').val(),
+                Password: $('#Password').val(),
+                id_Province: $('#id_Province').val(),
+                id_District: $('#id_District').val(),
+                Identitycard: $('#ICard').val(),
+                Bankcard: $('#BankCard').val(),
+                id_Province_Shop: $('#id_Province_Shop').val(),
+                id_District_Shop: $('#id_District_Shop').val(),
+                name_Shop: $('#name_Shop').val(),
+                id_Shop: $('#id_Shop').val(),
+                IsnewShop: document.getElementById('radioPrimary1').checked
+            }
+            $.ajax({
+                url: '../../Sellers/CreateSeller',
+                method: 'Post',
+                async: false,
+                data: data_form,
+                success: function (content) {
+                    if (content == "email") {
+                        $('#err_login').html('<div id="err_login"  class="alert alert-warning">Địa chỉ Email đã được Sử dụng!</div>');
+                        $('#Email').focus();
+                    } else if (content == "username") {
+                        $('#err_login').html('<div id="err_login"  class="alert alert-warning">Tên Tài Khoảng đã tồn tại. Cát hạ hãy chọn Một tài khoảng khác!</div>');
+                        $('#UserName').focus();
+                        $('#UserName').val('');
+                    } else if (content == "shop_id") {
+                        $('#err_login').html('<div id="err_login"  class="alert alert-warning">Gian Hàng bạn chọn không tồn tại hoặc đã bị Khóa!</div>');
+                        $('#id_Shop').focus();
+                        $('#id_Shop').val('');
+                    } else if (content == "shop_name") {
+                        $('#err_login').html('<div id="err_login"  class="alert alert-warning">Tên Gian Hàng Cát hạ chọn đã có người chọn mất roòi!</div>');
+                        $('#name_Shop').focus();
+                        $('#name_Shop').val('');
+                    } else if (content == "false") {
+                        $('#err_login').html('<div id="err_login"  class="alert alert-warning">Thất bại!</div>');
+                    } else {
+                        $('#err_login').html('<div id="err_login" class="alert alert-success"><strong>Tạo mới thành công. </strong><span> Thương gia sẽ được chuyển đến Gian hàng trong vài giây nữa...</span></div>');
+                        setTimeout(
+                            //chuyển đến địa chỉ msg_login của controler gửi qua
+                            function () {
+                                window.location.href = '' + msg_login + '';
+                            }, 2000);
+                    }
+                }
+
+            })
+        }
+
+       @* $(document).ready(function () {
+
+            $('.swalDefaultSuccess').click(function () {
                 if ($('#Email').val() == '') {
                     $('#err_login').html('<div class="alert alert-danger">Cát hạ vui nhập Địa chỉ mail và kiểm tra trước khi Tại hạ có thể gửi mã xác nhận</div>');
                     return false;
                 }
                 else {
-                  var data = { toGmail: $('#Email').val(), };
-                  $.ajax({
-                      url: '/Sellers/SendMail',
-                      type: 'Post',
-                      async: true,
-                      data: data,
-                      success: function (msg_login)
-                      {
-                          if (msg_login == 'false')
-                          {
-                              $('#err_login').html('<div class="alert alert-danger">Đã có lỗi xảy ra trong quá trình gửi xác nhận. Vui lòng kiểm tra đúng địa chỉ mail</div>');
-                              $("#Email").focus();
-                              return false;
-                          }
-                          else
-                          {
-                              CODE = msg_login;
-                          }
-                      }
-                  });
-                  Toast.fire
-                  ({
-                      icon: 'warning',
-                      title: 'Yêu cầu gửi mã thành công. Mã sẽ được gửi đến mail của Cát hạ trong một vài giây nữa',
-                  });
-                  return true;
-              }
-              return true;
-          });
-        });
+
+                    $('#Email').attr('disabled', 'disabled');
+                    var data = { toGmail: $('#Email').val(), };
+                    $.ajax({
+                        url: '../../Sellers/SendMail',
+                        type: 'Post',
+                        async: true,
+                        data: data,
+                        success: function (msg_login) {
+                            if (msg_login == 'false') {
+                                $('#err_login').html('<div class="alert alert-danger">Đã có lỗi xảy ra trong quá trình gửi xác nhận. Vui lòng kiểm tra đúng địa chỉ mail</div>');
+                                $("#Email").focus();
+                                return false;
+                            }
+                            else {
+                                Session["CODE"] = msg_login;
+                            }
+                        }
+                    });
+                    Toast.fire
+                        ({
+                            icon: 'warning',
+                            title: 'Yêu cầu gửi mã thành công. Mã sẽ được gửi đến mail của Cát hạ trong một vài giây nữa',
+                        });
+                    return true;
+                }
+                return true;
+            });
+        });  *@          
+
     </script>
 
-
     <script>
-    $('#radioPrimary2').click(function () {
-        $('#nameShop').html("<div id='idShop' class='input-group mb-3'><input type='text' required class='form-control ' placeholder='ID Shop'><div class='input-group-append'><div class='input-group-text'><span class='fas fa-store'></span></div></div></div>");
-    })
-    $('#radioPrimary1').click(function () {
-        $('#idShop').html("<div id='nameShop' class='input-group mb-3'><input type='text' required class='form-control ' placeholder='Tên Shop'><div class='input-group-append'><div class='input-group-text'><span class='fas fa-store'></span></div></div></div>");
-    })
-    $('#form-Register').submit(function (e) {
-        if ($("#Password").val() != ('#Confirm_Password').val()) {
-            $('#err_login').html('<div class="alert alert-danger">Cát hạ nhập Xác nhận Mật khẩu chưa chính xác. Có vẻ Cát hạ đã say rồii :~ </div>');
-            $("#Confirm_Password").focus();
-            return false;
-        }
-    })
-    $('#Confirm_Password').change(function () {
-        $('err_login').html("<div id='err_login'></div>")
-    })
+        $('#radioPrimary2').click(function () {
+            $('#nameShop').html("<div id='idShop' class='input-group mb-3'><input type='text' name='id_Shop'  id='id_Shop' required class='form-control ' placeholder='ID Shop'><div class='input-group-append'><div class='input-group-text'><span class='fas fa-store'></span></div></div></div>");
+        })
+        $('#radioPrimary1').click(function () {
+            $('#idShop').html("<div id='nameShop' class='input-group mb-3'><input type='text' name='name_Shop' id='name_Shop' required class='form-control ' placeholder='Tên Shop'><div class='input-group-append'><div class='input-group-text'><span class='fas fa-store'></span></div></div></div>");
+        })
     </script>
 </body>
 </html>

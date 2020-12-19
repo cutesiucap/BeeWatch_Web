@@ -134,9 +134,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\TestController.cs" />
+    <Compile Include="Controllers\AuthorizeCustom.cs" />
     <Compile Include="Controllers\Clients\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
+    <Compile Include="Controllers\Orther\Address_DistrictController.cs" />
+    <Compile Include="Controllers\Orther\Address_ProvinceController.cs" />
     <Compile Include="Controllers\Sellers\MyProFileController.cs" />
     <Compile Include="Controllers\Sellers\SellersController.cs" />
     <Compile Include="Controllers\WatchesController.cs" />
@@ -144,6 +148,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalVariables.cs" />
+    <Compile Include="Models\AccountsViewModel.cs" />
     <Compile Include="Models\Action.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Address_District.cs" />
@@ -158,6 +163,7 @@
     <Compile Include="Models\Shops.cs" />
     <Compile Include="Models\Shop_Seller.cs" />
     <Compile Include="Models\TypeDiscounts.cs" />
+    <Compile Include="Models\Watches_Categories.cs" />
     <Compile Include="Tool\MailHelper.cs" />
     <Compile Include="Models\Accounts.cs" />
     <Compile Include="Models\Account_Type.cs" />
@@ -2130,6 +2136,13 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Source\Admin\Image\BeeWatchShopLogo.png" />
     <Content Include="Source\Admin\Image\tinbee.jpg" />
+    <Content Include="Source\Watch\Image\46b721879d4d6c13355c.jpg" />
+    <Content Include="Source\Watch\Image\rhn6d2mxd96z.png" />
+    <Content Include="Source\Watch\Image\Tincute1.jpg" />
+    <Content Include="Source\Watch\Image\đại như 1.jpg" />
+    <Content Include="Source\Watch\Image\đại như 1_1.jpg" />
+    <Content Include="Source\Watch\Image\đại như 2.jpg" />
+    <Content Include="Source\Watch\Image\đại như 3.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2156,14 +2169,17 @@
     <Content Include="Views\Sellers\CreateWatches.cshtml" />
     <Content Include="Views\Sellers\Test.cshtml" />
     <Content Include="Views\MyProFile\Index.cshtml" />
-    <Content Include="Views\Sellers\CreateAccount.cshtml" />
     <Content Include="Views\Sellers\LoginSeller.cshtml" />
     <Content Include="Views\Sellers\CreateSeller.cshtml" />
     <Content Include="Views\Sellers\ForgotPassword.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="dist\css\alt\" />
+    <Folder Include="Views\Address_District\" />
+    <Folder Include="Views\Address_Province\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>

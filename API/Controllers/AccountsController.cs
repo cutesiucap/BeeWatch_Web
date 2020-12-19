@@ -79,6 +79,11 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (db.Accounts.Where(x=>x.Username == accounts.Username).FirstOrDefault() != null)
+            {
+                return BadRequest("Username đã có");
+            }
+
             db.Accounts.Add(accounts);
             db.SaveChanges();
 
@@ -113,6 +118,43 @@ namespace API.Controllers
         private bool AccountsExists(int id)
         {
             return db.Accounts.Count(e => e.id == id) > 0;
+        }
+        [Route("api/Accounts/Login")]
+        [HttpPost]
+        [ResponseType(typeof(Accounts))]        
+        public IHttpActionResult Login(Accounts accounts)
+        {
+            Accounts result = db.Accounts.Where(x => x.Username == accounts.Username && x.Password == accounts.Password).FirstOrDefault();
+            if (result == null)
+            {
+                return NotFound();
+            }
+            else if (result.IsLock==true)
+            {
+                return BadRequest();
+            }
+            else return Ok(result);
+        }
+        [Route("api/Accounts/Register")]
+        [HttpPost]
+        [ResponseType(typeof(Accounts))]
+        public IHttpActionResult Register(Accounts accounts)
+        {
+            Accounts result = db.Accounts.Where(x => x.Username == accounts.Username && x.Password == accounts.Password).FirstOrDefault();
+            if (result == null)
+            {
+                return NotFound();
+            }
+            else if (result.IsLock == true)
+            {
+                return BadRequest();
+            }
+            else return Ok(result);
+        }
+        [HttpPost]
+        public IHttpActionResult Logout(int id)
+        {
+            return BadRequest("sdfghjkl");
         }
     }
 }

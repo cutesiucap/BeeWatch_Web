@@ -20,12 +20,13 @@ namespace MVC.Models
         public string Payment { get; set; }
         public Nullable<System.DateTime> Date_Create { get; set; }
         public Nullable<int> Status { get; set; }
+        public Nullable<System.DateTime> Date_Check { get; set; }
+        public string User_Check { get; set; }
 
         public virtual Accounts Accounts { get; set; }
         public virtual Address_District Address_District1 { get; set; }
         public virtual Address_Province Address_Province1 { get; set; }
         public virtual Discounts Discounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
         public virtual Shops Shops { get; set; }
     }

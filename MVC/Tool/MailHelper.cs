@@ -12,7 +12,7 @@ namespace MVC.Mail
                 var host = "smtp.gmail.com";
                 var port = 587;
                 var fromEmail = "trungtinbee@gmail.com";
-                var password = "demon27132412";
+                var password = "Demon27132412";
                 var fromName = "Bee Watch WEB (Dự án Thử nghiệm)";
 
                 var smtpClient = new SmtpClient(host, port)

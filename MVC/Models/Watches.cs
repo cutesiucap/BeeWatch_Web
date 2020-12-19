@@ -23,7 +23,6 @@ namespace MVC.Models
         public Nullable<bool> IsCheck { get; set; }
         public Nullable<bool> IsExist { get; set; }
 
-        public virtual Accounts Accounts { get; set; }
         public virtual ICollection<CartDetails> CartDetails { get; set; }
         public virtual Firms Firms { get; set; }
         public virtual ICollection<Hot_Trend> Hot_Trend { get; set; }
@@ -31,6 +30,6 @@ namespace MVC.Models
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
         public virtual ICollection<OrderDetails> OrderDetails1 { get; set; }
         public virtual Sex Sex { get; set; }
-        public virtual ICollection<Categories> Categories { get; set; }
+        public virtual ICollection<Watches_Categories> Watches_Categories { get; set; }
     }
 }

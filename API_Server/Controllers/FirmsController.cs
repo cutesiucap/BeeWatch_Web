@@ -17,9 +17,9 @@ namespace API_Server.Controllers
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
         // GET: api/Firms
-        public IQueryable<Firms> GetFirms()
+        public IQueryable<view_Firm> GetFirms()
         {
-            return db.Firms;
+            return db.view_Firm;
         }
 
         // GET: api/Firms/5

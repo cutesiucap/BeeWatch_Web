@@ -233,6 +233,8 @@ namespace MVC.Controllers.Sellers
         public class CreateWatchModel
         {
             public IEnumerable<Firms> listfirms { get; set; }
+            public IEnumerable<Sex> listsex { get; set; }
+            public IEnumerable<view_Watch> listwatches { get; set; }
             public IEnumerable<Categories> listcategories { get; set; }
             public CreateWatchModel()
             {
@@ -254,13 +256,33 @@ namespace MVC.Controllers.Sellers
                 {
                     listfirms = null;
                 }
-               
+
+                try
+                {
+                    listsex = GlobalVariables.HttpClient.GetAsync("Sex").Result.Content.ReadAsAsync<IEnumerable<Sex>>().Result;
+                    var x = 0;
+                }
+                catch
+                {
+                    listsex = null;
+                }
+
+                try
+                {
+                    listwatches = GlobalVariables.HttpClient.GetAsync("Watches").Result.Content.ReadAsAsync<IEnumerable<view_Watch>>().Result;
+                }
+                catch
+                {
+                    listwatches = null;
+                }
+
             }
         }
         public class CreateSellersModel
         {
             public IEnumerable<Address_Province> address_Provinces { get; set; }
             public IEnumerable<Address_District> address_Districts { get; set; }
+
             public CreateSellersModel()
             {
                 address_Provinces = GlobalVariables.HttpClient.GetAsync("Address_Province").Result.Content.ReadAsAsync<IEnumerable<Address_Province>>().Result;

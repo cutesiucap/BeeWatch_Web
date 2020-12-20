@@ -12,44 +12,44 @@ using API_Server.Models;
 
 namespace API_Server.Controllers
 {
-    public class CategoriesController : ApiController
+    public class SexController : ApiController
     {
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
-        // GET: api/Categories
-        public IQueryable<view_Categories> GetCategories()
+        // GET: api/Sex
+        public IQueryable<view_Sex> GetSex()
         {
-            return db.view_Categories;
+            return db.view_Sex;
         }
 
-        // GET: api/Categories/5
-        [ResponseType(typeof(Categories))]
-        public IHttpActionResult GetCategories(int id)
+        // GET: api/Sex/5
+        [ResponseType(typeof(Sex))]
+        public IHttpActionResult GetSex(int id)
         {
-            Categories categories = db.Categories.Find(id);
-            if (categories == null)
+            Sex sex = db.Sex.Find(id);
+            if (sex == null)
             {
                 return NotFound();
             }
 
-            return Ok(categories);
+            return Ok(sex);
         }
 
-        // PUT: api/Categories/5
+        // PUT: api/Sex/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCategories(int id, Categories categories)
+        public IHttpActionResult PutSex(int id, Sex sex)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != categories.id)
+            if (id != sex.id)
             {
                 return BadRequest();
             }
 
-            db.Entry(categories).State = EntityState.Modified;
+            db.Entry(sex).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace API_Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoriesExists(id))
+                if (!SexExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,50 @@ namespace API_Server.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Categories
-        [ResponseType(typeof(Categories))]
-        public IHttpActionResult PostCategories(Categories categories)
+        // POST: api/Sex
+        [ResponseType(typeof(Sex))]
+        public IHttpActionResult PostSex(Sex sex)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Categories.Add(categories);
-            db.SaveChanges();
+            db.Sex.Add(sex);
 
-            return CreatedAtRoute("DefaultApi", new { id = categories.id }, categories);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (SexExists(sex.id))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = sex.id }, sex);
         }
 
-        // DELETE: api/Categories/5
-        [ResponseType(typeof(Categories))]
-        public IHttpActionResult DeleteCategories(int id)
+        // DELETE: api/Sex/5
+        [ResponseType(typeof(Sex))]
+        public IHttpActionResult DeleteSex(int id)
         {
-            Categories categories = db.Categories.Find(id);
-            if (categories == null)
+            Sex sex = db.Sex.Find(id);
+            if (sex == null)
             {
                 return NotFound();
             }
 
-            db.Categories.Remove(categories);
+            db.Sex.Remove(sex);
             db.SaveChanges();
 
-            return Ok(categories);
+            return Ok(sex);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +125,9 @@ namespace API_Server.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CategoriesExists(int id)
+        private bool SexExists(int id)
         {
-            return db.Categories.Count(e => e.id == id) > 0;
+            return db.Sex.Count(e => e.id == id) > 0;
         }
     }
 }

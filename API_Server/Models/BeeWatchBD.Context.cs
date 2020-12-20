@@ -70,6 +70,7 @@ namespace API_Server.Models
         public virtual DbSet<view_AccountType> view_AccountType { get; set; }
         public virtual DbSet<view_Action> view_Action { get; set; }
         public virtual DbSet<view_Authoriza> view_Authoriza { get; set; }
+        public virtual DbSet<view_Firm> view_Firm { get; set; }
     
         [DbFunction("BeeWatchDBEntities", "fn_CheckLockUser")]
         public virtual IQueryable<fn_CheckLockUser_Result> fn_CheckLockUser(Nullable<bool> @lock)
@@ -425,7 +426,7 @@ namespace API_Server.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InserFirm", newNameParameter, urlParameter);
         }
     
-        public virtual int sp_InsertAccount(string username, string password, string avt, string email, string fullname, string sex, string address_province, string address_district, string address_detail)
+        public virtual int sp_InsertAccount(string username, string password, string avt, string email, string fullname, string sex, string address_province, string address_district, string address_detail, ObjectParameter id)
         {
             var usernameParameter = username != null ?
                 new ObjectParameter("username", username) :
@@ -463,7 +464,7 @@ namespace API_Server.Models
                 new ObjectParameter("address_detail", address_detail) :
                 new ObjectParameter("address_detail", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertAccount", usernameParameter, passwordParameter, avtParameter, emailParameter, fullnameParameter, sexParameter, address_provinceParameter, address_districtParameter, address_detailParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertAccount", usernameParameter, passwordParameter, avtParameter, emailParameter, fullnameParameter, sexParameter, address_provinceParameter, address_districtParameter, address_detailParameter, id);
         }
     
         public virtual int sp_InsertDiscount(string code, Nullable<int> id_Type, Nullable<double> value_percent, Nullable<double> value_sub, Nullable<System.DateTime> datefrom, Nullable<System.DateTime> dateto)
@@ -540,7 +541,7 @@ namespace API_Server.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertNewOrder", id_shopParameter, id_accountParameter, address_provinceParameter, address_districtParameter, address_detailParameter, countParameter, sumParameter, ship_feeParameter, id_discountParameter, paymentParameter);
         }
     
-        public virtual int sp_InsertOrderDetails(Nullable<int> idCart, Nullable<int> idWatch, Nullable<int> count)
+        public virtual int sp_InsertOrderDetails(Nullable<int> idCart, Nullable<int> idWatch)
         {
             var idCartParameter = idCart.HasValue ?
                 new ObjectParameter("idCart", idCart) :
@@ -550,11 +551,7 @@ namespace API_Server.Models
                 new ObjectParameter("idWatch", idWatch) :
                 new ObjectParameter("idWatch", typeof(int));
     
-            var countParameter = count.HasValue ?
-                new ObjectParameter("count", count) :
-                new ObjectParameter("count", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertOrderDetails", idCartParameter, idWatchParameter, countParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertOrderDetails", idCartParameter, idWatchParameter);
         }
     
         public virtual int sp_InsertSex(string @new)
@@ -844,6 +841,20 @@ namespace API_Server.Models
                 new ObjectParameter("userupdate", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateWatch", idParameter, nameParameter, id_SexParameter, id_FirmsParameter, imageParameter, priceParameter, countParameter, informationParameter, userupdateParameter);
+        }
+    
+        [DbFunction("BeeWatchDBEntities", "fn_PhanTrang")]
+        public virtual IQueryable<fn_PhanTrang_Result> fn_PhanTrang(Nullable<int> num_offset, Nullable<int> num_next)
+        {
+            var num_offsetParameter = num_offset.HasValue ?
+                new ObjectParameter("num_offset", num_offset) :
+                new ObjectParameter("num_offset", typeof(int));
+    
+            var num_nextParameter = num_next.HasValue ?
+                new ObjectParameter("num_next", num_next) :
+                new ObjectParameter("num_next", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_PhanTrang_Result>("[BeeWatchDBEntities].[fn_PhanTrang](@num_offset, @num_next)", num_offsetParameter, num_nextParameter);
         }
     }
 }

@@ -171,7 +171,9 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\FirmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderDetailsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\SexController.cs" />
     <Compile Include="Controllers\ShopsController.cs" />
     <Compile Include="Controllers\Shop_SellerController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -255,6 +257,9 @@
     <Compile Include="Models\fn_LoadWatchBill_Result.cs">
       <DependentUpon>BeeWatchBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\fn_PhanTrang_Result.cs">
+      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\fn_SearchWatch_Result.cs">
       <DependentUpon>BeeWatchBD.tt</DependentUpon>
     </Compile>
@@ -331,6 +336,9 @@
       <DependentUpon>BeeWatchBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_District.cs">
+      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_Firm.cs">
       <DependentUpon>BeeWatchBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_OrderCancel.cs">

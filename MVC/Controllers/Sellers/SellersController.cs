@@ -14,7 +14,7 @@ namespace MVC.Controllers.Sellers
     public class SellersController : Controller
     {
         // GET: Sellers 
-        [AuthorizeCustom]
+       
         public ActionResult Index()
         {
             IEnumerable<Accounts> accounts;
@@ -101,6 +101,8 @@ namespace MVC.Controllers.Sellers
                 return Content("IsLock");
             }
             Accounts result = httpResponseMessage.Content.ReadAsAsync<Accounts>().Result;
+            result.Account_Type = GlobalVariables.HttpClient.GetAsync("Account_Type/Account_Type_By_id_Account/" + result.id_Account_Type).Result.Content.ReadAsAsync<Account_Type>().Result;
+            result.Account_Type.Authoriza = GlobalVariables.HttpClient.GetAsync("Authorizas/Account_Type_By_id_Account/{id}" + result.Account_Type.id).Result.Content.ReadAsAsync<List<Authoriza>>().Result;
             Session["Account"] = result;
             return Content("../../Sellers");
             //var a = Session["BackAction"];
@@ -238,10 +240,26 @@ namespace MVC.Controllers.Sellers
             public IEnumerable<Categories> listcategories { get; set; }
             public CreateWatchModel()
             {
-                HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsync("Firms").Result;
-                listfirms = httpResponseMessage.Content.ReadAsAsync<IEnumerable<Firms>>().Result;
-                listcategories = GlobalVariables.HttpClient.GetAsync("Categories").Result.Content.ReadAsAsync<IEnumerable<Categories>>().Result;
-                listsex = GlobalVariables.HttpClient.GetAsync("Sex").Result.Content.ReadAsAsync<IEnumerable<Sex>>().Result;
+                try
+                {
+                    HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsync("Firms").Result;
+                    listfirms = httpResponseMessage.Content.ReadAsAsync<IEnumerable<Firms>>().Result;
+                }
+                catch
+                {
+                    listfirms = null;
+                }
+
+                try
+                {
+                    listcategories = GlobalVariables.HttpClient.GetAsync("Categories").Result.Content.ReadAsAsync<IEnumerable<Categories>>().Result;
+                    listsex = GlobalVariables.HttpClient.GetAsync("Sex").Result.Content.ReadAsAsync<IEnumerable<Sex>>().Result;
+                }
+                catch
+                {
+                    listfirms = null;
+                }
+               
             }
         }
         public class CreateSellersModel

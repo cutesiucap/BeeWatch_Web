@@ -42,7 +42,6 @@ namespace API_Server.Models
         public virtual DbSet<Hot_Trend> Hot_Trend { get; set; }
         public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<LogInHistories> LogInHistories { get; set; }
-        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Phone> Phone { get; set; }
         public virtual DbSet<Sellers> Sellers { get; set; }
@@ -67,6 +66,10 @@ namespace API_Server.Models
         public virtual DbSet<view_Account> view_Account { get; set; }
         public virtual DbSet<view_District> view_District { get; set; }
         public virtual DbSet<view_Province> view_Province { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<view_AccountType> view_AccountType { get; set; }
+        public virtual DbSet<view_Action> view_Action { get; set; }
+        public virtual DbSet<view_Authoriza> view_Authoriza { get; set; }
     
         [DbFunction("BeeWatchDBEntities", "fn_CheckLockUser")]
         public virtual IQueryable<fn_CheckLockUser_Result> fn_CheckLockUser(Nullable<bool> @lock)
@@ -77,12 +80,7 @@ namespace API_Server.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_CheckLockUser_Result>("[BeeWatchDBEntities].[fn_CheckLockUser](@lock)", lockParameter);
         }
-
-        internal int sp_InsertAccount(string username, string password, string v, string email, string sex, string id_Province, string id_District, string addressDetail)
-        {
-            throw new NotImplementedException();
-        }
-
+    
         [DbFunction("BeeWatchDBEntities", "fn_LoadBill")]
         public virtual IQueryable<fn_LoadBill_Result> fn_LoadBill(Nullable<int> idAccount, string username)
         {

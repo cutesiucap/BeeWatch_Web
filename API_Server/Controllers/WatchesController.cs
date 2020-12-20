@@ -17,9 +17,9 @@ namespace API_Server.Controllers
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
         // GET: api/Watches
-        public IQueryable<Watches> GetWatches()
+        public IQueryable<view_Watches> GetWatches()
         {
-            return db.Watches;
+            return db.view_Watches;
         }
 
         // GET: api/Watches/5

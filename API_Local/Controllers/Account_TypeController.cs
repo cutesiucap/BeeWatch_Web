@@ -1,0 +1,147 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Description;
+using API_Local.Models;
+
+namespace API_Local.Controllers
+{
+    public class Account_TypeController : ApiController
+    {
+        private BeeWatchDBEntities db = new BeeWatchDBEntities();
+
+        // GET: api/Account_Type
+        public IQueryable<Account_Type> GetAccount_Type()
+        {
+            return db.Account_Type;
+        }
+
+        [Route("api/Account_Type/Account_Type_By_id_Account/{id}")]
+        [HttpGet]
+        [ResponseType(typeof(Account_Type))]
+        public IHttpActionResult Account_Type_By_id_Account(int id)
+        {
+            view_AccountType view_AccountType = db.view_AccountType.Where(x => x.id == id).FirstOrDefault();
+
+            if (view_AccountType == null)
+            {
+                return NotFound();
+            }
+            return Ok(view_AccountType);
+        }
+
+        // GET: api/Account_Type/5
+        [ResponseType(typeof(Account_Type))]
+        public IHttpActionResult GetAccount_Type(int id)
+        {
+            Account_Type account_Type = db.Account_Type.Find(id);
+            if (account_Type == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(account_Type);
+        }
+
+        // PUT: api/Account_Type/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutAccount_Type(int id, Account_Type account_Type)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != account_Type.id)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(account_Type).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!Account_TypeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // POST: api/Account_Type
+        [ResponseType(typeof(Account_Type))]
+        public IHttpActionResult PostAccount_Type(Account_Type account_Type)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Account_Type.Add(account_Type);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (Account_TypeExists(account_Type.id))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = account_Type.id }, account_Type);
+        }
+
+        // DELETE: api/Account_Type/5
+        [ResponseType(typeof(Account_Type))]
+        public IHttpActionResult DeleteAccount_Type(int id)
+        {
+            Account_Type account_Type = db.Account_Type.Find(id);
+            if (account_Type == null)
+            {
+                return NotFound();
+            }
+
+            db.Account_Type.Remove(account_Type);
+            db.SaveChanges();
+
+            return Ok(account_Type);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool Account_TypeExists(int id)
+        {
+            return db.Account_Type.Count(e => e.id == id) > 0;
+        }
+    }
+}

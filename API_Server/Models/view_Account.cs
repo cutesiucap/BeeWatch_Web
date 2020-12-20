@@ -31,5 +31,6 @@ namespace API_Server.Models
         public string DistrictName { get; set; }
         public string id_District { get; set; }
         public string AddressDetail { get; set; }
+        public int id { get; set; }
     }
 }

@@ -308,6 +308,15 @@
     <Compile Include="Models\view_Account.cs">
       <DependentUpon>BeeWatchBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\view_AccountType.cs">
+      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_Action.cs">
+      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_Authoriza.cs">
+      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\view_Cart.cs">
       <DependentUpon>BeeWatchBD.tt</DependentUpon>
     </Compile>

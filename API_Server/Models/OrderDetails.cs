@@ -21,10 +21,9 @@ namespace API_Server.Models
         public Nullable<int> Count { get; set; }
         public Nullable<int> Rate { get; set; }
         public Nullable<System.DateTime> Date_Bought { get; set; }
-        public Nullable<bool> Status { get; set; }
+        public Nullable<int> Status { get; set; }
     
         public virtual Watches Watches { get; set; }
         public virtual Orders Orders { get; set; }
-        public virtual Watches Watches1 { get; set; }
     }
 }

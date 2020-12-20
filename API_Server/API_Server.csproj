@@ -172,6 +172,7 @@
     <Compile Include="Controllers\ShopsController.cs" />
     <Compile Include="Controllers\Shop_SellerController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\view_WatchesController.cs" />
     <Compile Include="Controllers\WatchesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

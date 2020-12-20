@@ -166,9 +166,7 @@ namespace API_Server.Controllers
             int id = 0;
             try
             {
-                /* var 
-
-                 id = db.Database.ExecuteSqlCommand('EXEC [dbo].[sp_InsertAccount]', {  })*/
+               //Using PROCEDURE in DB
 
                 var usernameParam = new SqlParameter("username", SqlDbType.NVarChar, 50);
                 usernameParam.Value = accounts.Username;
@@ -199,10 +197,6 @@ namespace API_Server.Controllers
 
                 id = db.Database.ExecuteSqlCommand("EXEC [dbo].[sp_InsertAccount] @username, @password, @avt, @email, @fullname, @sex, @address_province, @address_district, @address_detail",
                                                                       usernameParam, passwordParam, avtParam, emailParam, fullnameParam, sexParam, address_provinceParam, address_districtParam, address_detailParam);
-
-               /* id = db.sp_InsertAccount(accounts.Username, accounts.Password, "", accounts.Email,
-                    accounts.Sex, accounts.Address.FirstOrDefault().id_Province, accounts.Address.FirstOrDefault().id_District,
-                    accounts.Address.FirstOrDefault().AddressDetail);*/
             }
             catch(Exception e)
             {                

@@ -17,7 +17,7 @@ namespace API_Local.Controllers
     {
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
-        // GET: api/Watches
+        // GET: api/view_Watches
         public IQueryable<view_Watches> GetWatches()
         {
             return db.view_Watches;
@@ -25,9 +25,9 @@ namespace API_Local.Controllers
 
 
 
-        // GET: api/Watches/5
+        // GET: api/view_Watches/5
         [ResponseType(typeof(view_Watches))]
-        public async Task<IHttpActionResult> GetWatches(int id)
+        public async Task<IHttpActionResult> Getview_Watches(int id)
         {
             view_Watches viewWatches = db.view_Watches.Where(x => x.id == id).FirstOrDefault();
             if (viewWatches == null)

@@ -58,7 +58,7 @@
     <div class="clearfix"></div>
 </div>
 
-@if (1==1)
+@if (Model!=null)
 {
     <!-- section page -->
     <section class="contact py-lg-4 py-md-3 py-sm-3 py-3" style="padding-right: 15px;">
@@ -106,7 +106,7 @@
                             <option value="price">Thứ tự theo: Giá thấp đến cao</option>
                             <option value="price-desc">Thứ tự theo: Giá cao đến thấp</option>
                         </select>
-
+                    </div>
 
 
                         @foreach (var item in Model)
@@ -162,10 +162,6 @@
                             </div>
                         }
 
-
-
-
-                    </div>
                     <div class="toolbar toolbar-bottom">
                         <ul class="pagination pagination-lg justify-content-center">
                             <li class="page-item disabled">
@@ -207,8 +203,7 @@
                 </script>
             </div>
 
-    
-            </section>
+    </section>
 }
 else
 {

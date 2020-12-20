@@ -22,20 +22,6 @@ namespace API_Local.Controllers
             return db.Account_Type;
         }
 
-        [Route("api/Account_Type/Account_Type_By_id_Account/{id}")]
-        [HttpGet]
-        [ResponseType(typeof(Account_Type))]
-        public IHttpActionResult Account_Type_By_id_Account(int id)
-        {
-            view_AccountType view_AccountType = db.view_AccountType.Where(x => x.id == id).FirstOrDefault();
-
-            if (view_AccountType == null)
-            {
-                return NotFound();
-            }
-            return Ok(view_AccountType);
-        }
-
         // GET: api/Account_Type/5
         [ResponseType(typeof(Account_Type))]
         public IHttpActionResult GetAccount_Type(int id)

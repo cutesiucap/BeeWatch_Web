@@ -10,10 +10,10 @@ namespace MVC.Controllers
         // GET: HomePage
         public ActionResult Index(int id)
         {
-            IEnumerable<Watches> watches;
+            IEnumerable<view_Watch> view_watch;
             HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsync("view_Watches/listwatches/" + id).Result;
-            watches = httpResponseMessage.Content.ReadAsAsync<IEnumerable<Watches>>().Result;
-            return View(watches);
+            view_watch = httpResponseMessage.Content.ReadAsAsync<IEnumerable<view_Watch>>().Result;
+            return View(view_watch);
         }
 
         

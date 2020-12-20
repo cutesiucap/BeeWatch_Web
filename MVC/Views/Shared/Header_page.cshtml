@@ -55,10 +55,11 @@
 
 </head>
 
-<body>
-    <div class="container-fluid" style="padding: 0;">
+<body class="sidebar-mini control-sidebar-slide-open accent-warning dark-mode" style="width: auto;">
+    <!-- Site wrapper -->
+    <div class="wrapper d">
         <!-- header page -->
-        <div class="header-outs row" id="home">
+        <div class="main-header header-outs row" id="home">
             <div class="header-bar  ">
                 <!-- Header bar top -->
                 <div class="container-fluid">
@@ -158,10 +159,11 @@
             </div>
 
         </div>
+
+        <div class="content-wrapper content-wrapper">
+            @RenderBody()
+        </div>
     </div>
-
-
-    @RenderBody()
 
     <!-- modal login/signin -->
     <div class="cd-signin-modal js-signin-modal">
@@ -284,8 +286,6 @@
         });
     </script>
     <!-- //cart-js -->
-
-
     <!--responsiveslides banner-->
     <script src="~/assets/js/responsiveslides.min.js"></script>
     <script>
@@ -411,7 +411,7 @@
         else {
             console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
         }
-                                // ]]>
+                                    // ]]>
     </script>
     <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
 </body>

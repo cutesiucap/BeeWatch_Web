@@ -168,6 +168,8 @@
     <Compile Include="Controllers\Address_DistrictController.cs" />
     <Compile Include="Controllers\Address_ProvinceController.cs" />
     <Compile Include="Controllers\AuthorizasController.cs" />
+    <Compile Include="Controllers\CartDetailsController.cs" />
+    <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SellersController.cs" />

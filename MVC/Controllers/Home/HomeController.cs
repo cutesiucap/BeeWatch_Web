@@ -15,10 +15,10 @@ namespace MVC.Controllers.Home
         // GET: Home
         public ActionResult Index(int id)
         {
-            IEnumerable<Watches> watches;
+            IEnumerable<view_Watch> view_watches;
             HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsync("view_Watches/listwatches/" + id).Result;
-            watches = httpResponseMessage.Content.ReadAsAsync<IEnumerable<Watches>>().Result;
-            return View(watches);
+            view_watches = httpResponseMessage.Content.ReadAsAsync<IEnumerable<view_Watch>>().Result;
+            return View(view_watches);
         }
 
         // GET: Login

@@ -137,7 +137,6 @@
     <Compile Include="Controllers\Admin\TestController.cs" />
     <Compile Include="Controllers\AuthorizeCustom.cs" />
     <Compile Include="Controllers\Clients\CartController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Home\HomePageController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Orther\Address_DistrictController.cs" />
@@ -2263,6 +2262,7 @@
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\Header_page.cshtml" />
+    <Content Include="Views\HomePage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

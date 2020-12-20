@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -21,6 +22,32 @@ namespace API_Local.Controllers
         {
             return db.Action;
         }
+
+        //lấy các quyền Action theo id Account Type
+        // Input:       id                       [FromUri]
+        // Output:      IEnumberable<action>    
+        [ResponseType(typeof(Models.view_Action))]
+        public IHttpActionResult GeybyAccountTypeid(int id)
+        {
+            if (id < 0)
+            {
+                return BadRequest();
+            }
+
+            var idAccountTypeParam = new SqlParameter("idAcountType", SqlDbType.Int);
+            idAccountTypeParam.Value = id;
+
+            try
+            {
+            }
+            catch (Exception e)
+            {
+                return BadRequest(message: e.Message);
+            }
+            return Ok();
+        }
+
+
 
         // GET: api/Actions/5
         [ResponseType(typeof(Models.Action))]

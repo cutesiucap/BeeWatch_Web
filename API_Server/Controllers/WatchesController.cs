@@ -114,5 +114,14 @@ namespace API_Server.Controllers
         {
             return db.Watches.Count(e => e.id == id) > 0;
         }
+
+        [Route("api/Watches/SearchName")]
+        [HttpGet]
+        // GET: api/Watches
+        public IQueryable<view_Watches> Search([FromUri] string name)
+        {
+            fn_SearchWatch_Result watches = db.fn_SearchWatch(name).FirstOrDefault();
+            return db.view_Watches;
+        }
     }
 }

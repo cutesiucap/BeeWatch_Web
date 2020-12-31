@@ -126,6 +126,14 @@ namespace API_Server.Controllers
         public IHttpActionResult Login(Accounts accounts)
         {
             view_Account result = db.view_Account.Where(x => x.Username == accounts.Username && x.Password == accounts.Password).FirstOrDefault();
+            if (result == null)
+            {
+                return NotFound();
+            }
+            else if (result.IsLock == true)
+            {
+                return BadRequest();
+            }
             Accounts new_accounts = new Accounts()
             {
                 id = result.id,
@@ -147,15 +155,6 @@ namespace API_Server.Controllers
                     id_Action = item.id_Action
                 });
             };
-
-            if (result == null)
-            {
-                return NotFound();
-            }
-            else if (result.IsLock == true)
-            {
-                return BadRequest();
-            }
             return Ok(result);
         }
         [Route("api/Accounts/Register")]

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BeeWatchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BeeWatchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account_Type">
           <Key>
             <PropertyRef Name="id" />
@@ -69,8 +69,8 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_Account_Type" Type="int" />
-          <Property Name="id_Action" Type="int" />
+          <Property Name="id_Account_Type" Type="int" Nullable="false" />
+          <Property Name="id_Action" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CartDetails">
           <Key>
@@ -610,7 +610,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Authoriza__id_Ac__398D8EEE">
-          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="0..1" />
+          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="1" />
           <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account_Type">
@@ -730,7 +730,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Authoriza_Action">
-          <End Role="Action" Type="Self.Action" Multiplicity="0..1" />
+          <End Role="Action" Type="Self.Action" Multiplicity="1" />
           <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Action">
@@ -1319,7 +1319,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Parameter Name="payment" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_InsertOrderDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idCart" Type="int" Mode="In" />
+          <Parameter Name="idOrder" Type="int" Mode="In" />
           <Parameter Name="idWatch" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_InsertSex" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1786,7 +1786,8 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <End Role="Watches" EntitySet="Watches" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BeeWatchDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1893,6 +1894,25 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="fn_PhanTrang_Result">
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Url_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_Sex" Type="Int32" />
+          <Property Name="id_Firms" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Information" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_Shop" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="Date_Create" Type="DateTime" />
+          <Property Name="Create_By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_LastEdit" Type="DateTime" />
+          <Property Name="LastEdit_By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsLock" Type="Boolean" />
+          <Property Name="IsCheck" Type="Boolean" />
+          <Property Name="IsExist" Type="Boolean" />
         </ComplexType>
         <ComplexType Name="fn_SearchWatch_Result">
           <Property Name="id" Type="Int32" Nullable="false" />
@@ -2011,8 +2031,8 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Account_Type" Type="Int32" />
-          <Property Name="id_Action" Type="Int32" />
+          <Property Name="id_Account_Type" Type="Int32" Nullable="false" />
+          <Property Name="id_Action" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account_Type" Relationship="Self.FK__Authoriza__id_Ac__398D8EEE" FromRole="Authoriza" ToRole="Account_Type" />
           <NavigationProperty Name="Action" Relationship="Self.FK_Authoriza_Action" FromRole="Authoriza" ToRole="Action" />
         </EntityType>
@@ -2032,7 +2052,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Int32" />
           <Property Name="Sum" Type="Double" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK__Cart__id__5CD6CB2B" FromRole="Carts" ToRole="Accounts" />
@@ -2104,6 +2124,22 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="DateLogin" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_LogInHistories_Accounts" FromRole="LogInHistories" ToRole="Accounts" />
         </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="id_Order" />
+            <PropertyRef Name="id_Watches" />
+          </Key>
+          <Property Name="id_Order" Type="Int32" Nullable="false" />
+          <Property Name="id_Watches" Type="Int32" Nullable="false" />
+          <Property Name="WatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="Date_Bought" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Watches" Relationship="Self.BoughtWatches" FromRole="OrderDetails" ToRole="Watches" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
+        </EntityType>
         <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="id" />
@@ -2127,8 +2163,8 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <NavigationProperty Name="Address_District1" Relationship="Self.FK_Orders_Address_District" FromRole="Orders" ToRole="Address_District" />
           <NavigationProperty Name="Address_Province1" Relationship="Self.FK_Orders_Address_Province" FromRole="Orders" ToRole="Address_Province" />
           <NavigationProperty Name="Discounts" Relationship="Self.FK_Orders_Discounts1" FromRole="Orders" ToRole="Discounts" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
           <NavigationProperty Name="Shops" Relationship="Self.FK_Orders_Shops" FromRole="Orders" ToRole="Shops" />
-          <NavigationProperty Name="OrderDetails" Relationship="BeeWatchDBModel.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
         </EntityType>
         <EntityType Name="Phone">
           <Key>
@@ -2222,9 +2258,9 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <NavigationProperty Name="Firms" Relationship="Self.FK__Watches__id_Firm__534D60F1" FromRole="Watches" ToRole="Firms" />
           <NavigationProperty Name="Hot_Trend" Relationship="Self.FK_Hot_Trend_Watches" FromRole="Watches" ToRole="Hot_Trend" />
           <NavigationProperty Name="Image" Relationship="Self.FK_Image_Watches" FromRole="Watches" ToRole="Image" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.BoughtWatches" FromRole="Watches" ToRole="OrderDetails" />
           <NavigationProperty Name="Sex" Relationship="Self.FK_Watches_Sex" FromRole="Watches" ToRole="Sex" />
           <NavigationProperty Name="Watches_Categories" Relationship="Self.FK_Watches_Categories_Watches" FromRole="Watches" ToRole="Watches_Categories" />
-          <NavigationProperty Name="OrderDetails" Relationship="BeeWatchDBModel.BoughtWatches" FromRole="Watches" ToRole="OrderDetails" />
         </EntityType>
         <EntityType Name="Watches_Categories">
           <Key>
@@ -2237,6 +2273,86 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <NavigationProperty Name="Categories" Relationship="Self.FK_Watches_Categories_Categories" FromRole="Watches_Categories" ToRole="Categories" />
           <NavigationProperty Name="Watches" Relationship="Self.FK_Watches_Categories_Watches" FromRole="Watches_Categories" ToRole="Watches" />
         </EntityType>
+        <EntityType Name="view_Account">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="id_Account_Type" />
+            <PropertyRef Name="AccountTypeName" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Fullname" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="ProvinceName" />
+            <PropertyRef Name="id_Province" />
+            <PropertyRef Name="DistrictName" />
+            <PropertyRef Name="id_District" />
+            <PropertyRef Name="AddressDetail" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_Account_Type" Type="Int32" Nullable="false" />
+          <Property Name="AccountTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_Create" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Url_Image_Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsLock" Type="Boolean" />
+          <Property Name="Point" Type="Double" />
+          <Property Name="Time_LastAccess" Type="DateTime" Precision="3" />
+          <Property Name="ProvinceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DistrictName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="view_AccountType">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="view_Action">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Detail" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="view_Authoriza">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Account_Type" Type="Int32" />
+          <Property Name="id_Action" Type="Int32" />
+        </EntityType>
+        <EntityType Name="view_Cart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
+        </EntityType>
+        <EntityType Name="view_CartDetails">
+          <Key>
+            <PropertyRef Name="id_Watch" />
+            <PropertyRef Name="id_Cart" />
+            <PropertyRef Name="Count" />
+          </Key>
+          <Property Name="id_Watch" Type="Int32" Nullable="false" />
+          <Property Name="id_Cart" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="IsCheck" Type="Boolean" />
+        </EntityType>
         <EntityType Name="view_Categories">
           <Key>
             <PropertyRef Name="id" />
@@ -2244,6 +2360,46 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="view_District">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="id_Province" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="view_Firm">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="view_OrderCancel">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="id_Shop" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Shop" Type="Int32" Nullable="false" />
+          <Property Name="id_Accounts" Type="Int32" />
+          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
+          <Property Name="Ship_fee" Type="Double" />
+          <Property Name="id_Discount" Type="Int32" />
+          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Create" Type="DateTime" Precision="3" />
+          <Property Name="Date_Check" Type="DateTime" Precision="3" />
+          <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
         <EntityType Name="view_OrderDetail">
           <Key>
@@ -2266,6 +2422,98 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Status" Type="Boolean" />
           <Property Name="Rate" Type="Int32" />
         </EntityType>
+        <EntityType Name="view_Orders">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="id_Shop" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Shop" Type="Int32" Nullable="false" />
+          <Property Name="id_Accounts" Type="Int32" />
+          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
+          <Property Name="Ship_fee" Type="Double" />
+          <Property Name="id_Discount" Type="Int32" />
+          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Create" Type="DateTime" Precision="3" />
+          <Property Name="Date_Check" Type="DateTime" Precision="3" />
+          <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="view_OrdertoComplete">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="id_Shop" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Shop" Type="Int32" Nullable="false" />
+          <Property Name="id_Accounts" Type="Int32" />
+          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
+          <Property Name="Ship_fee" Type="Double" />
+          <Property Name="id_Discount" Type="Int32" />
+          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Create" Type="DateTime" Precision="3" />
+          <Property Name="Date_Check" Type="DateTime" Precision="3" />
+          <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="view_OrdertoConfirm">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="id_Shop" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Shop" Type="Int32" Nullable="false" />
+          <Property Name="id_Accounts" Type="Int32" />
+          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
+          <Property Name="Ship_fee" Type="Double" />
+          <Property Name="id_Discount" Type="Int32" />
+          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Create" Type="DateTime" Precision="3" />
+          <Property Name="Date_Check" Type="DateTime" Precision="3" />
+          <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="view_OrdertoShip">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="id_Shop" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Shop" Type="Int32" Nullable="false" />
+          <Property Name="id_Accounts" Type="Int32" />
+          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
+          <Property Name="Ship_fee" Type="Double" />
+          <Property Name="id_Discount" Type="Int32" />
+          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Create" Type="DateTime" Precision="3" />
+          <Property Name="Date_Check" Type="DateTime" Precision="3" />
+          <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="view_Province">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="view_Sex">
           <Key>
             <PropertyRef Name="id" />
@@ -2287,6 +2535,23 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Identitycard" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
           <Property Name="Bankcard" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
         </EntityType>
+        <EntityType Name="view_Watches">
+          <Key>
+            <PropertyRef Name="NameofSex" />
+          </Key>
+          <Property Name="id" Type="Int32" />
+          <Property Name="WatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Url_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="Information" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_Shop" Type="Int32" />
+          <Property Name="Date_Create" Type="DateTime" Precision="3" />
+          <Property Name="NameofSex" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameofFirm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LuotMua" Type="Int32" />
+        </EntityType>
         <Association Name="FK__Accounts__id_Acc__3F466844">
           <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="1" />
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
@@ -2300,7 +2565,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Authoriza__id_Ac__398D8EEE">
-          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="0..1" />
+          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="1" />
           <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account_Type">
@@ -2384,7 +2649,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Authoriza_Action">
-          <End Role="Action" Type="Self.Action" Multiplicity="0..1" />
+          <End Role="Action" Type="Self.Action" Multiplicity="1" />
           <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Action">
@@ -2563,6 +2828,30 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="BoughtWatches">
+          <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Watches">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="id_Watches" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="id_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Orders_Shops">
           <End Role="Shops" Type="Self.Shops" Multiplicity="1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
@@ -2651,6 +2940,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <EntitySet Name="Hot_Trend" EntityType="Self.Hot_Trend" />
           <EntitySet Name="Image" EntityType="Self.Image" />
           <EntitySet Name="LogInHistories" EntityType="Self.LogInHistories" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" />
           <EntitySet Name="Orders" EntityType="Self.Orders" />
           <EntitySet Name="Phone" EntityType="Self.Phone" />
           <EntitySet Name="Sellers" EntityType="Self.Sellers" />
@@ -2660,10 +2950,25 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <EntitySet Name="TypeDiscounts" EntityType="Self.TypeDiscounts" />
           <EntitySet Name="Watches" EntityType="Self.Watches" />
           <EntitySet Name="Watches_Categories" EntityType="Self.Watches_Categories" />
+          <EntitySet Name="view_Account" EntityType="Self.view_Account" />
+          <EntitySet Name="view_AccountType" EntityType="Self.view_AccountType" />
+          <EntitySet Name="view_Action" EntityType="Self.view_Action" />
+          <EntitySet Name="view_Authoriza" EntityType="Self.view_Authoriza" />
+          <EntitySet Name="view_Cart" EntityType="Self.view_Cart" />
+          <EntitySet Name="view_CartDetails" EntityType="Self.view_CartDetails" />
           <EntitySet Name="view_Categories" EntityType="Self.view_Categories" />
+          <EntitySet Name="view_District" EntityType="Self.view_District" />
+          <EntitySet Name="view_Firm" EntityType="Self.view_Firm" />
+          <EntitySet Name="view_OrderCancel" EntityType="Self.view_OrderCancel" />
           <EntitySet Name="view_OrderDetail" EntityType="Self.view_OrderDetail" />
+          <EntitySet Name="view_Orders" EntityType="Self.view_Orders" />
+          <EntitySet Name="view_OrdertoComplete" EntityType="Self.view_OrdertoComplete" />
+          <EntitySet Name="view_OrdertoConfirm" EntityType="Self.view_OrdertoConfirm" />
+          <EntitySet Name="view_OrdertoShip" EntityType="Self.view_OrdertoShip" />
+          <EntitySet Name="view_Province" EntityType="Self.view_Province" />
           <EntitySet Name="view_Sex" EntityType="Self.view_Sex" />
           <EntitySet Name="view_UserSeller" EntityType="Self.view_UserSeller" />
+          <EntitySet Name="view_Watches" EntityType="Self.view_Watches" />
           <AssociationSet Name="FK__Accounts__id_Acc__3F466844" Association="Self.FK__Accounts__id_Acc__3F466844">
             <End Role="Account_Type" EntitySet="Account_Type" />
             <End Role="Accounts" EntitySet="Accounts" />
@@ -2756,6 +3061,14 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <End Role="Watches" EntitySet="Watches" />
             <End Role="Image" EntitySet="Image" />
           </AssociationSet>
+          <AssociationSet Name="BoughtWatches" Association="Self.BoughtWatches">
+            <End Role="Watches" EntitySet="Watches" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_Orders_Shops" Association="Self.FK_Orders_Shops">
             <End Role="Shops" EntitySet="Shops" />
             <End Role="Orders" EntitySet="Orders" />
@@ -2781,7 +3094,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <End Role="Watches_Categories" EntitySet="Watches_Categories" />
           </AssociationSet>
           <FunctionImport Name="fn_CheckLockUser" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_CheckLockUser_Result)">
-          <Parameter Name="lock" Mode="In" Type="Boolean" />
+            <Parameter Name="lock" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="fn_LoadBill" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_LoadBill_Result)">
             <Parameter Name="idAccount" Mode="In" Type="Int32" />
@@ -2799,8 +3112,12 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_LoadWatchBill" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_LoadWatchBill_Result)" />
+          <FunctionImport Name="fn_PhanTrang" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_PhanTrang_Result)">
+            <Parameter Name="num_offset" Mode="In" Type="Int32" />
+            <Parameter Name="num_next" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="fn_SearchWatch" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_SearchWatch_Result)">
-          <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_UserSeller" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_UserSeller_Result)" />
           <FunctionImport Name="fn_WatchMaxDeal" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_WatchMaxDeal_Result)" />
@@ -2914,11 +3231,11 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="payment" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertOrderDetails">
-            <Parameter Name="idCart" Mode="In" Type="Int32" />
+            <Parameter Name="idOrder" Mode="In" Type="Int32" />
             <Parameter Name="idWatch" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertSex">
-          <Parameter Name="new" Mode="In" Type="String" />
+            <Parameter Name="new" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertTypeDiscount">
             <Parameter Name="min_bill" Mode="In" Type="Double" />
@@ -2952,7 +3269,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_RateWatch">
-          <Parameter Name="idWatch" Mode="In" Type="Int32" />
+            <Parameter Name="idWatch" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_renamediagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -2960,10 +3277,10 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_SearchWatch" ReturnType="Collection(BeeWatchDBModel.sp_SearchWatch_Result)">
-          <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Send">
-          <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_ThongKeDoanhThu" ReturnType="Collection(BeeWatchDBModel.sp_ThongKeDoanhThu_Result)">
             <Parameter Name="idShop" Mode="In" Type="Int32" />
@@ -3002,34 +3319,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="information" Mode="In" Type="String" />
             <Parameter Name="userupdate" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="view_Cart" EntityType="BeeWatchDBModel.view_Cart" />
-          <EntitySet Name="view_CartDetails" EntityType="BeeWatchDBModel.view_CartDetails" />
-          <EntitySet Name="view_OrderCancel" EntityType="BeeWatchDBModel.view_OrderCancel" />
-          <EntitySet Name="view_Orders" EntityType="BeeWatchDBModel.view_Orders" />
-          <EntitySet Name="view_OrdertoComplete" EntityType="BeeWatchDBModel.view_OrdertoComplete" />
-          <EntitySet Name="view_OrdertoConfirm" EntityType="BeeWatchDBModel.view_OrdertoConfirm" />
-          <EntitySet Name="view_OrdertoShip" EntityType="BeeWatchDBModel.view_OrdertoShip" />
-          <EntitySet Name="view_Watches" EntityType="BeeWatchDBModel.view_Watches" />
-          <EntitySet Name="view_Account" EntityType="BeeWatchDBModel.view_Account" />
-          <EntitySet Name="view_District" EntityType="BeeWatchDBModel.view_District" />
-          <EntitySet Name="view_Province" EntityType="BeeWatchDBModel.view_Province" />
-          <EntitySet Name="OrderDetails" EntityType="BeeWatchDBModel.OrderDetails" />
-          <AssociationSet Name="BoughtWatches" Association="BeeWatchDBModel.BoughtWatches">
-            <End Role="Watches" EntitySet="Watches" />
-            <End Role="OrderDetails" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetails_Orders" Association="BeeWatchDBModel.FK_OrderDetails_Orders">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrderDetails" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <EntitySet Name="view_AccountType" EntityType="BeeWatchDBModel.view_AccountType" />
-          <EntitySet Name="view_Action" EntityType="BeeWatchDBModel.view_Action" />
-          <EntitySet Name="view_Authoriza" EntityType="BeeWatchDBModel.view_Authoriza" />
-          <EntitySet Name="view_Firm" EntityType="BeeWatchDBModel.view_Firm" />
-          <FunctionImport Name="fn_PhanTrang" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_PhanTrang_Result)">
-            <Parameter Name="num_offset" Mode="In" Type="Int32" />
-            <Parameter Name="num_next" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -3060,294 +3349,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Type="DateTime" Name="Date_Create" Nullable="true" Precision="23" />
           <Property Type="Double" Name="Sum" Nullable="true" />
           <Property Type="String" Name="Payment" Nullable="true" MaxLength="20" />
-        </ComplexType>
-        <EntityType Name="view_Cart">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
-        </EntityType>
-        <EntityType Name="view_CartDetails">
-          <Key>
-            <PropertyRef Name="id_Watch" />
-            <PropertyRef Name="id_Cart" />
-            <PropertyRef Name="Count" />
-          </Key>
-          <Property Name="id_Watch" Type="Int32" Nullable="false" />
-          <Property Name="id_Cart" Type="Int32" Nullable="false" />
-          <Property Name="Count" Type="Int32" Nullable="false" />
-          <Property Name="IsCheck" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="view_OrderCancel">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="id_Shop" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Shop" Type="Int32" Nullable="false" />
-          <Property Name="id_Accounts" Type="Int32" />
-          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
-          <Property Name="Ship_fee" Type="Double" />
-          <Property Name="id_Discount" Type="Int32" />
-          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Create" Type="DateTime" Precision="3" />
-          <Property Name="Date_Check" Type="DateTime" Precision="3" />
-          <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
-        <EntityType Name="view_Orders">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="id_Shop" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Shop" Type="Int32" Nullable="false" />
-          <Property Name="id_Accounts" Type="Int32" />
-          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
-          <Property Name="Ship_fee" Type="Double" />
-          <Property Name="id_Discount" Type="Int32" />
-          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Create" Type="DateTime" Precision="3" />
-          <Property Name="Date_Check" Type="DateTime" Precision="3" />
-          <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
-        <EntityType Name="view_OrdertoComplete">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="id_Shop" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Shop" Type="Int32" Nullable="false" />
-          <Property Name="id_Accounts" Type="Int32" />
-          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
-          <Property Name="Ship_fee" Type="Double" />
-          <Property Name="id_Discount" Type="Int32" />
-          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Create" Type="DateTime" Precision="3" />
-          <Property Name="Date_Check" Type="DateTime" Precision="3" />
-          <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
-        <EntityType Name="view_OrdertoConfirm">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="id_Shop" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Shop" Type="Int32" Nullable="false" />
-          <Property Name="id_Accounts" Type="Int32" />
-          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
-          <Property Name="Ship_fee" Type="Double" />
-          <Property Name="id_Discount" Type="Int32" />
-          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Create" Type="DateTime" Precision="3" />
-          <Property Name="Date_Check" Type="DateTime" Precision="3" />
-          <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
-        <EntityType Name="view_OrdertoShip">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="id_Shop" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Shop" Type="Int32" Nullable="false" />
-          <Property Name="id_Accounts" Type="Int32" />
-          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
-          <Property Name="Ship_fee" Type="Double" />
-          <Property Name="id_Discount" Type="Int32" />
-          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Create" Type="DateTime" Precision="3" />
-          <Property Name="Date_Check" Type="DateTime" Precision="3" />
-          <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
-        <EntityType Name="view_Watches">
-          <Key>
-            <PropertyRef Name="NameofSex" />
-          </Key>
-          <Property Name="id" Type="Int32" />
-          <Property Name="WatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Url_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Double" />
-          <Property Name="Rate" Type="Double" />
-          <Property Name="Information" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id_Shop" Type="Int32" />
-          <Property Name="Date_Create" Type="DateTime" Precision="3" />
-          <Property Name="NameofSex" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NameofFirm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LuotMua" Type="Int32" />
-        </EntityType>
-        <EntityType Name="view_Account">
-          <Key>
-            <PropertyRef Name="id_Account_Type" />
-            <PropertyRef Name="AccountTypeName" />
-            <PropertyRef Name="Username" />
-            <PropertyRef Name="Fullname" />
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="Password" />
-            <PropertyRef Name="ProvinceName" />
-            <PropertyRef Name="id_Province" />
-            <PropertyRef Name="DistrictName" />
-            <PropertyRef Name="id_District" />
-            <PropertyRef Name="AddressDetail" />
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id_Account_Type" Type="Int32" Nullable="false" />
-          <Property Name="AccountTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Create" Type="DateTime" Precision="0" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Url_Image_Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsLock" Type="Boolean" />
-          <Property Name="Point" Type="Double" />
-          <Property Name="Time_LastAccess" Type="DateTime" Precision="3" />
-          <Property Name="ProvinceName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id_Province" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="DistrictName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id_District" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="AddressDetail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_District">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="id_Province" />
-          </Key>
-          <Property Name="id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id_Province" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <EntityType Name="view_Province">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="OrderDetails">
-          <Key>
-            <PropertyRef Name="id_Order" />
-            <PropertyRef Name="id_Watches" />
-          </Key>
-          <Property Name="id_Order" Type="Int32" Nullable="false" />
-          <Property Name="id_Watches" Type="Int32" Nullable="false" />
-          <Property Name="WatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Double" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Rate" Type="Int32" />
-          <Property Name="Date_Bought" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Int32" />
-          <NavigationProperty Name="Watches" Relationship="BeeWatchDBModel.BoughtWatches" FromRole="OrderDetails" ToRole="Watches" />
-          <NavigationProperty Name="Orders" Relationship="BeeWatchDBModel.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
-        </EntityType>
-        <Association Name="BoughtWatches">
-          <End Type="BeeWatchDBModel.Watches" Role="Watches" Multiplicity="1" />
-          <End Type="BeeWatchDBModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Watches">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrderDetails">
-              <PropertyRef Name="id_Watches" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderDetails_Orders">
-          <End Type="BeeWatchDBModel.Orders" Role="Orders" Multiplicity="1" />
-          <End Type="BeeWatchDBModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Orders">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrderDetails">
-              <PropertyRef Name="id_Order" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="view_AccountType">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="view_Action">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Detail" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Detail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="view_Authoriza">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Account_Type" Type="Int32" />
-          <Property Name="id_Action" Type="Int32" />
-        </EntityType>
-        <EntityType Name="view_Firm">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Boolean" />
-        </EntityType>
-        <ComplexType Name="fn_PhanTrang_Result">
-          <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="String" Name="Url_Image" Nullable="true" />
-          <Property Type="Int32" Name="id_Sex" Nullable="true" />
-          <Property Type="Int32" Name="id_Firms" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="Double" Name="Price" Nullable="false" />
-          <Property Type="Int32" Name="Count" Nullable="false" />
-          <Property Type="String" Name="Information" Nullable="false" />
-          <Property Type="Int32" Name="id_Shop" Nullable="false" />
-          <Property Type="Double" Name="Rate" Nullable="true" />
-          <Property Type="DateTime" Name="Date_Create" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Create_By" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="Date_LastEdit" Nullable="true" Precision="23" />
-          <Property Type="String" Name="LastEdit_By" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="IsLock" Nullable="true" />
-          <Property Type="Boolean" Name="IsCheck" Nullable="true" />
-          <Property Type="Boolean" Name="IsExist" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3512,6 +3513,20 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.OrderDetails">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="id_Order" ColumnName="id_Order" />
+                <ScalarProperty Name="id_Watches" ColumnName="id_Watches" />
+                <ScalarProperty Name="WatchName" ColumnName="WatchName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Date_Bought" ColumnName="Date_Bought" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="BeeWatchDBModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
@@ -3625,11 +3640,121 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="view_Account">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Account">
+              <MappingFragment StoreEntitySet="view_Account">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Account_Type" ColumnName="id_Account_Type" />
+                <ScalarProperty Name="AccountTypeName" ColumnName="AccountTypeName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Url_Image_Avatar" ColumnName="Url_Image_Avatar" />
+                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Time_LastAccess" ColumnName="Time_LastAccess" />
+                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+                <ScalarProperty Name="id_Province" ColumnName="id_Province" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+                <ScalarProperty Name="id_District" ColumnName="id_District" />
+                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_AccountType">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_AccountType">
+              <MappingFragment StoreEntitySet="view_AccountType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_Action">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Action">
+              <MappingFragment StoreEntitySet="view_Action">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_Authoriza">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Authoriza">
+              <MappingFragment StoreEntitySet="view_Authoriza">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Account_Type" ColumnName="id_Account_Type" />
+                <ScalarProperty Name="id_Action" ColumnName="id_Action" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_Cart">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Cart">
+              <MappingFragment StoreEntitySet="view_Cart">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_CartDetails">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_CartDetails">
+              <MappingFragment StoreEntitySet="view_CartDetails">
+                <ScalarProperty Name="id_Watch" ColumnName="id_Watch" />
+                <ScalarProperty Name="id_Cart" ColumnName="id_Cart" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="view_Categories">
             <EntityTypeMapping TypeName="BeeWatchDBModel.view_Categories">
               <MappingFragment StoreEntitySet="view_Categories">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_District">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_District">
+              <MappingFragment StoreEntitySet="view_District">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id_Province" ColumnName="id_Province" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_Firm">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Firm">
+              <MappingFragment StoreEntitySet="view_Firm">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_OrderCancel">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_OrderCancel">
+              <MappingFragment StoreEntitySet="view_OrderCancel">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
+                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
+                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
+                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
+                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
+                <ScalarProperty Name="User_Check" ColumnName="User_Check" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3651,6 +3776,98 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="view_Orders">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Orders">
+              <MappingFragment StoreEntitySet="view_Orders">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
+                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
+                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
+                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
+                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
+                <ScalarProperty Name="User_Check" ColumnName="User_Check" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_OrdertoComplete">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_OrdertoComplete">
+              <MappingFragment StoreEntitySet="view_OrdertoComplete">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
+                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
+                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
+                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
+                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
+                <ScalarProperty Name="User_Check" ColumnName="User_Check" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_OrdertoConfirm">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_OrdertoConfirm">
+              <MappingFragment StoreEntitySet="view_OrdertoConfirm">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
+                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
+                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
+                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
+                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
+                <ScalarProperty Name="User_Check" ColumnName="User_Check" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_OrdertoShip">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_OrdertoShip">
+              <MappingFragment StoreEntitySet="view_OrdertoShip">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
+                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
+                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
+                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
+                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
+                <ScalarProperty Name="User_Check" ColumnName="User_Check" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_Province">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Province">
+              <MappingFragment StoreEntitySet="view_Province">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="view_Sex">
             <EntityTypeMapping TypeName="BeeWatchDBModel.view_Sex">
               <MappingFragment StoreEntitySet="view_Sex">
@@ -3668,6 +3885,24 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Url_Image_Avatar" ColumnName="Url_Image_Avatar" />
                 <ScalarProperty Name="Identitycard" ColumnName="Identitycard" />
                 <ScalarProperty Name="Bankcard" ColumnName="Bankcard" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_Watches">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Watches">
+              <MappingFragment StoreEntitySet="view_Watches">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="WatchName" ColumnName="WatchName" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Url_Image" ColumnName="Url_Image" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Information" ColumnName="Information" />
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="NameofSex" ColumnName="NameofSex" />
+                <ScalarProperty Name="NameofFirm" ColumnName="NameofFirm" />
+                <ScalarProperty Name="LuotMua" ColumnName="LuotMua" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3807,6 +4042,29 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="BeeWatchDBModel.Store.fn_PhanTrang" FunctionImportName="fn_PhanTrang">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BeeWatchDBModel.fn_PhanTrang_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Url_Image" ColumnName="Url_Image" />
+                <ScalarProperty Name="id_Sex" ColumnName="id_Sex" />
+                <ScalarProperty Name="id_Firms" ColumnName="id_Firms" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Information" ColumnName="Information" />
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Date_LastEdit" ColumnName="Date_LastEdit" />
+                <ScalarProperty Name="LastEdit_By" ColumnName="LastEdit_By" />
+                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+                <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
+                <ScalarProperty Name="IsExist" ColumnName="IsExist" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionName="BeeWatchDBModel.Store.fn_SearchWatch" FunctionImportName="fn_SearchWatch">
             <ResultMapping>
               <ComplexTypeMapping TypeName="BeeWatchDBModel.fn_SearchWatch_Result">
@@ -3932,263 +4190,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <FunctionImportMapping FunctionImportName="sp_UpdatePhone" FunctionName="BeeWatchDBModel.Store.sp_UpdatePhone" />
           <FunctionImportMapping FunctionImportName="sp_UpdateSex" FunctionName="BeeWatchDBModel.Store.sp_UpdateSex" />
           <FunctionImportMapping FunctionImportName="sp_UpdateWatch" FunctionName="BeeWatchDBModel.Store.sp_UpdateWatch" />
-          <EntitySetMapping Name="view_Cart">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Cart">
-              <MappingFragment StoreEntitySet="view_Cart">
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_CartDetails">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_CartDetails">
-              <MappingFragment StoreEntitySet="view_CartDetails">
-                <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="id_Cart" ColumnName="id_Cart" />
-                <ScalarProperty Name="id_Watch" ColumnName="id_Watch" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_OrderCancel">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_OrderCancel">
-              <MappingFragment StoreEntitySet="view_OrderCancel">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="User_Check" ColumnName="User_Check" />
-                <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
-                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
-                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
-                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
-                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
-                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
-                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_Orders">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Orders">
-              <MappingFragment StoreEntitySet="view_Orders">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="User_Check" ColumnName="User_Check" />
-                <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
-                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
-                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
-                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
-                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
-                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
-                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_OrdertoComplete">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_OrdertoComplete">
-              <MappingFragment StoreEntitySet="view_OrdertoComplete">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="User_Check" ColumnName="User_Check" />
-                <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
-                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
-                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
-                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
-                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
-                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
-                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_OrdertoConfirm">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_OrdertoConfirm">
-              <MappingFragment StoreEntitySet="view_OrdertoConfirm">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="User_Check" ColumnName="User_Check" />
-                <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
-                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
-                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
-                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
-                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
-                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
-                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_OrdertoShip">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_OrdertoShip">
-              <MappingFragment StoreEntitySet="view_OrdertoShip">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="User_Check" ColumnName="User_Check" />
-                <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
-                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
-                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
-                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
-                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
-                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
-                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_Watches">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Watches">
-              <MappingFragment StoreEntitySet="view_Watches">
-                <ScalarProperty Name="LuotMua" ColumnName="LuotMua" />
-                <ScalarProperty Name="NameofFirm" ColumnName="NameofFirm" />
-                <ScalarProperty Name="NameofSex" ColumnName="NameofSex" />
-                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
-                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
-                <ScalarProperty Name="Information" ColumnName="Information" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Url_Image" ColumnName="Url_Image" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="WatchName" ColumnName="WatchName" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_Account">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Account">
-              <MappingFragment StoreEntitySet="view_Account">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
-                <ScalarProperty Name="id_District" ColumnName="id_District" />
-                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-                <ScalarProperty Name="id_Province" ColumnName="id_Province" />
-                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
-                <ScalarProperty Name="Time_LastAccess" ColumnName="Time_LastAccess" />
-                <ScalarProperty Name="Point" ColumnName="Point" />
-                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
-                <ScalarProperty Name="Url_Image_Avatar" ColumnName="Url_Image_Avatar" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
-                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="AccountTypeName" ColumnName="AccountTypeName" />
-                <ScalarProperty Name="id_Account_Type" ColumnName="id_Account_Type" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_District">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_District">
-              <MappingFragment StoreEntitySet="view_District">
-                <ScalarProperty Name="id_Province" ColumnName="id_Province" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_Province">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Province">
-              <MappingFragment StoreEntitySet="view_Province">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.OrderDetails">
-              <MappingFragment StoreEntitySet="OrderDetails">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Date_Bought" ColumnName="Date_Bought" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="WatchName" ColumnName="WatchName" />
-                <ScalarProperty Name="id_Watches" ColumnName="id_Watches" />
-                <ScalarProperty Name="id_Order" ColumnName="id_Order" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_AccountType">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_AccountType">
-              <MappingFragment StoreEntitySet="view_AccountType">
-                <ScalarProperty Name="Detail" ColumnName="Detail" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_Action">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Action">
-              <MappingFragment StoreEntitySet="view_Action">
-                <ScalarProperty Name="Detail" ColumnName="Detail" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_Authoriza">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Authoriza">
-              <MappingFragment StoreEntitySet="view_Authoriza">
-                <ScalarProperty Name="id_Action" ColumnName="id_Action" />
-                <ScalarProperty Name="id_Account_Type" ColumnName="id_Account_Type" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_Firm">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Firm">
-              <MappingFragment StoreEntitySet="view_Firm">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="fn_PhanTrang" FunctionName="BeeWatchDBModel.Store.fn_PhanTrang">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BeeWatchDBModel.fn_PhanTrang_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Url_Image" ColumnName="Url_Image" />
-                <ScalarProperty Name="id_Sex" ColumnName="id_Sex" />
-                <ScalarProperty Name="id_Firms" ColumnName="id_Firms" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Information" ColumnName="Information" />
-                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
-                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
-                <ScalarProperty Name="Date_LastEdit" ColumnName="Date_LastEdit" />
-                <ScalarProperty Name="LastEdit_By" ColumnName="LastEdit_By" />
-                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
-                <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
-                <ScalarProperty Name="IsExist" ColumnName="IsExist" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

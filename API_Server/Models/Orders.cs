@@ -40,8 +40,8 @@ namespace API_Server.Models
         public virtual Address_District Address_District1 { get; set; }
         public virtual Address_Province Address_Province1 { get; set; }
         public virtual Discounts Discounts { get; set; }
-        public virtual Shops Shops { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+        public virtual Shops Shops { get; set; }
     }
 }

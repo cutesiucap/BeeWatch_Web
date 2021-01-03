@@ -82,7 +82,7 @@ namespace API_Server.Controllers
             db.Watches.Add(watches);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = watches.id }, watches);
+            return Ok();
         }
 
         // DELETE: api/Watches/5

@@ -146,16 +146,35 @@ namespace API_Server.Controllers
                 }
             };
 
-            foreach (var item in db.view_Authoriza.Where(x => x.id_Account_Type == result.id_Account_Type))
+            foreach (var item in db.Authoriza.Where(x => x.id_Account_Type == result.id_Account_Type))
             {
                 new_accounts.Account_Type.Authoriza.Add(new Authoriza()
                 {
                     id = item.id,
-                    id_Account_Type = item.id,
-                    id_Action = item.id_Action
+                    id_Account_Type = item.id_Account_Type,
+                    id_Action = item.id_Action,
+                    Action = { id = item.id_Action, Name = db.view_Action.Where(x => x.id == item.id_Action).FirstOrDefault().Name }
                 });
             };
-            return Ok(result);
+
+            if (new_accounts.id_Account_Type == 2)
+            {
+                new_accounts.Sellers = new Sellers()
+                {
+                    Shop_Seller = new List<Shop_Seller>(),
+                };
+                foreach ( var item in db.Shop_Seller.Where(x => x.id_Seller == new_accounts.id))
+                {
+                    new_accounts.Sellers.Shop_Seller.Add(new Shop_Seller()
+                    {
+                        id_Shop = item.id_Shop,
+                        id_Seller = item.id_Seller,
+                        IsCheck = item.IsCheck,
+                        IsLock = item.IsLock,
+                    });
+                }
+            }
+            return Ok(new_accounts);
         }
         [Route("api/Accounts/Register")]
         [HttpPost]

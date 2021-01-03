@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5bc8caff63344425ab7c228602eb7a0e" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="0044308f69b84b1587ee803dd7cc2bb4" Name="Diagram1">
         <EntityTypeShape EntityType="BeeWatchDBModel.Account_Type" Width="1.5" PointX="1.5" PointY="24.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Accounts" Width="1.5" PointX="0.75" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Action" Width="1.5" PointX="1.5" PointY="47" IsExpanded="true" />
@@ -19,7 +19,8 @@
         <EntityTypeShape EntityType="BeeWatchDBModel.Firms" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Hot_Trend" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Image" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.LogInHistories" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.LogInHistories" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.OrderDetails" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Orders" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Phone" Width="1.5" PointX="3" PointY="31.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Sellers" Width="1.5" PointX="1.5" PointY="43" IsExpanded="true" />
@@ -27,12 +28,27 @@
         <EntityTypeShape EntityType="BeeWatchDBModel.Shop_Seller" Width="1.5" PointX="3.75" PointY="41" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Shops" Width="1.5" PointX="0.75" PointY="38.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.TypeDiscounts" Width="1.5" PointX="1.5" PointY="35.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.Watches" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.Watches" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BeeWatchDBModel.Watches_Categories" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_Categories" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_OrderDetail" Width="1.5" PointX="7.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_Sex" Width="1.5" PointX="9.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_UserSeller" Width="1.5" PointX="11.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_Account" Width="1.5" PointX="7.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_AccountType" Width="1.5" PointX="9.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_Action" Width="1.5" PointX="9.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_Authoriza" Width="1.5" PointX="10.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_Cart" Width="1.5" PointX="10.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_CartDetails" Width="1.5" PointX="11.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_Categories" Width="1.5" PointX="11.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_District" Width="1.5" PointX="7.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_Firm" Width="1.5" PointX="12.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_OrderCancel" Width="1.5" PointX="12.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_OrderDetail" Width="1.5" PointX="9.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_Orders" Width="1.5" PointX="13.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_OrdertoComplete" Width="1.5" PointX="14.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_OrdertoConfirm" Width="1.5" PointX="14.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_OrdertoShip" Width="1.5" PointX="11.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_Province" Width="1.5" PointX="15.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_Sex" Width="1.5" PointX="13.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_UserSeller" Width="1.5" PointX="15.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeeWatchDBModel.view_Watches" Width="1.5" PointX="16.75" PointY="4.625" IsExpanded="true" />
         <AssociationConnector Association="BeeWatchDBModel.FK__Accounts__id_Acc__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="BeeWatchDBModel.FK__Authoriza__id_Ac__398D8EEE" ManuallyRouted="false" />
         <AssociationConnector Association="BeeWatchDBModel.FK__Cart__id__5CD6CB2B" ManuallyRouted="false" />
@@ -56,30 +72,14 @@
         <AssociationConnector Association="BeeWatchDBModel.FK_Hot_Trend_Shops" ManuallyRouted="false" />
         <AssociationConnector Association="BeeWatchDBModel.FK_Hot_Trend_Watches" ManuallyRouted="false" />
         <AssociationConnector Association="BeeWatchDBModel.FK_Image_Watches" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.BoughtWatches" ManuallyRouted="false" />
+        <AssociationConnector Association="BeeWatchDBModel.FK_OrderDetails_Orders" ManuallyRouted="false" />
         <AssociationConnector Association="BeeWatchDBModel.FK_Orders_Shops" ManuallyRouted="false" />
         <AssociationConnector Association="BeeWatchDBModel.FK_Shop_Seller_Sellers" ManuallyRouted="false" />
         <AssociationConnector Association="BeeWatchDBModel.FK_Shops_Sellers" ManuallyRouted="false" />
         <AssociationConnector Association="BeeWatchDBModel.FK_Watches_Sex" ManuallyRouted="false" />
         <AssociationConnector Association="BeeWatchDBModel.FK_Shop_Seller_Shops" ManuallyRouted="false" />
         <AssociationConnector Association="BeeWatchDBModel.FK_Watches_Categories_Watches" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_Cart" Width="1.5" PointX="13.125" PointY="3.5" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_CartDetails" Width="1.5" PointX="17.125" PointY="1.5" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_OrderCancel" Width="1.5" PointX="15.25" PointY="5.875" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_Orders" Width="1.5" PointX="7.375" PointY="11.75" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_OrdertoComplete" Width="1.5" PointX="15.125" PointY="1.5" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_OrdertoConfirm" Width="2.25" PointX="9.375" PointY="12.75" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_OrdertoShip" Width="1.5" PointX="11.75" PointY="12.75" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_Watches" Width="1.5" PointX="13.375" PointY="12.75" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_Account" Width="1.5" PointX="13.125" PointY="5.625" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_District" Width="1.5" PointX="13.125" PointY="1.5" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_Province" Width="1.5" PointX="17.125" PointY="3.75" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.OrderDetails" Width="1.5" PointX="8.25" PointY="17.625" />
-        <AssociationConnector Association="BeeWatchDBModel.BoughtWatches" />
-        <AssociationConnector Association="BeeWatchDBModel.FK_OrderDetails_Orders" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_AccountType" Width="1.5" PointX="11.25" PointY="4.125" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_Action" Width="1.5" PointX="9.25" PointY="3.25" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_Authoriza" Width="1.5" PointX="11.25" PointY="6.125" />
-        <EntityTypeShape EntityType="BeeWatchDBModel.view_Firm" Width="1.5" PointX="17.125" PointY="5.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -42,6 +42,7 @@ namespace API_Server.Models
         public virtual DbSet<Hot_Trend> Hot_Trend { get; set; }
         public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<LogInHistories> LogInHistories { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Phone> Phone { get; set; }
         public virtual DbSet<Sellers> Sellers { get; set; }
@@ -51,26 +52,25 @@ namespace API_Server.Models
         public virtual DbSet<TypeDiscounts> TypeDiscounts { get; set; }
         public virtual DbSet<Watches> Watches { get; set; }
         public virtual DbSet<Watches_Categories> Watches_Categories { get; set; }
-        public virtual DbSet<view_Categories> view_Categories { get; set; }
-        public virtual DbSet<view_OrderDetail> view_OrderDetail { get; set; }
-        public virtual DbSet<view_Sex> view_Sex { get; set; }
-        public virtual DbSet<view_UserSeller> view_UserSeller { get; set; }
+        public virtual DbSet<view_Account> view_Account { get; set; }
+        public virtual DbSet<view_AccountType> view_AccountType { get; set; }
+        public virtual DbSet<view_Action> view_Action { get; set; }
+        public virtual DbSet<view_Authoriza> view_Authoriza { get; set; }
         public virtual DbSet<view_Cart> view_Cart { get; set; }
         public virtual DbSet<view_CartDetails> view_CartDetails { get; set; }
+        public virtual DbSet<view_Categories> view_Categories { get; set; }
+        public virtual DbSet<view_District> view_District { get; set; }
+        public virtual DbSet<view_Firm> view_Firm { get; set; }
         public virtual DbSet<view_OrderCancel> view_OrderCancel { get; set; }
+        public virtual DbSet<view_OrderDetail> view_OrderDetail { get; set; }
         public virtual DbSet<view_Orders> view_Orders { get; set; }
         public virtual DbSet<view_OrdertoComplete> view_OrdertoComplete { get; set; }
         public virtual DbSet<view_OrdertoConfirm> view_OrdertoConfirm { get; set; }
         public virtual DbSet<view_OrdertoShip> view_OrdertoShip { get; set; }
-        public virtual DbSet<view_Watches> view_Watches { get; set; }
-        public virtual DbSet<view_Account> view_Account { get; set; }
-        public virtual DbSet<view_District> view_District { get; set; }
         public virtual DbSet<view_Province> view_Province { get; set; }
-        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
-        public virtual DbSet<view_AccountType> view_AccountType { get; set; }
-        public virtual DbSet<view_Action> view_Action { get; set; }
-        public virtual DbSet<view_Authoriza> view_Authoriza { get; set; }
-        public virtual DbSet<view_Firm> view_Firm { get; set; }
+        public virtual DbSet<view_Sex> view_Sex { get; set; }
+        public virtual DbSet<view_UserSeller> view_UserSeller { get; set; }
+        public virtual DbSet<view_Watches> view_Watches { get; set; }
     
         [DbFunction("BeeWatchDBEntities", "fn_CheckLockUser")]
         public virtual IQueryable<fn_CheckLockUser_Result> fn_CheckLockUser(Nullable<bool> @lock)
@@ -146,6 +146,20 @@ namespace API_Server.Models
         public virtual IQueryable<fn_LoadWatchBill_Result> fn_LoadWatchBill()
         {
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_LoadWatchBill_Result>("[BeeWatchDBEntities].[fn_LoadWatchBill]()");
+        }
+    
+        [DbFunction("BeeWatchDBEntities", "fn_PhanTrang")]
+        public virtual IQueryable<fn_PhanTrang_Result> fn_PhanTrang(Nullable<int> num_offset, Nullable<int> num_next)
+        {
+            var num_offsetParameter = num_offset.HasValue ?
+                new ObjectParameter("num_offset", num_offset) :
+                new ObjectParameter("num_offset", typeof(int));
+    
+            var num_nextParameter = num_next.HasValue ?
+                new ObjectParameter("num_next", num_next) :
+                new ObjectParameter("num_next", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_PhanTrang_Result>("[BeeWatchDBEntities].[fn_PhanTrang](@num_offset, @num_next)", num_offsetParameter, num_nextParameter);
         }
     
         [DbFunction("BeeWatchDBEntities", "fn_SearchWatch")]
@@ -541,17 +555,17 @@ namespace API_Server.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertNewOrder", id_shopParameter, id_accountParameter, address_provinceParameter, address_districtParameter, address_detailParameter, countParameter, sumParameter, ship_feeParameter, id_discountParameter, paymentParameter);
         }
     
-        public virtual int sp_InsertOrderDetails(Nullable<int> idCart, Nullable<int> idWatch)
+        public virtual int sp_InsertOrderDetails(Nullable<int> idOrder, Nullable<int> idWatch)
         {
-            var idCartParameter = idCart.HasValue ?
-                new ObjectParameter("idCart", idCart) :
-                new ObjectParameter("idCart", typeof(int));
+            var idOrderParameter = idOrder.HasValue ?
+                new ObjectParameter("idOrder", idOrder) :
+                new ObjectParameter("idOrder", typeof(int));
     
             var idWatchParameter = idWatch.HasValue ?
                 new ObjectParameter("idWatch", idWatch) :
                 new ObjectParameter("idWatch", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertOrderDetails", idCartParameter, idWatchParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertOrderDetails", idOrderParameter, idWatchParameter);
         }
     
         public virtual int sp_InsertSex(string @new)
@@ -841,20 +855,6 @@ namespace API_Server.Models
                 new ObjectParameter("userupdate", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateWatch", idParameter, nameParameter, id_SexParameter, id_FirmsParameter, imageParameter, priceParameter, countParameter, informationParameter, userupdateParameter);
-        }
-    
-        [DbFunction("BeeWatchDBEntities", "fn_PhanTrang")]
-        public virtual IQueryable<fn_PhanTrang_Result> fn_PhanTrang(Nullable<int> num_offset, Nullable<int> num_next)
-        {
-            var num_offsetParameter = num_offset.HasValue ?
-                new ObjectParameter("num_offset", num_offset) :
-                new ObjectParameter("num_offset", typeof(int));
-    
-            var num_nextParameter = num_next.HasValue ?
-                new ObjectParameter("num_next", num_next) :
-                new ObjectParameter("num_next", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_PhanTrang_Result>("[BeeWatchDBEntities].[fn_PhanTrang](@num_offset, @num_next)", num_offsetParameter, num_nextParameter);
         }
     }
 }

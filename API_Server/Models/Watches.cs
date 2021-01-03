@@ -20,8 +20,8 @@ namespace API_Server.Models
             this.CartDetails = new HashSet<CartDetails>();
             this.Hot_Trend = new HashSet<Hot_Trend>();
             this.Image = new HashSet<Image>();
-            this.Watches_Categories = new HashSet<Watches_Categories>();
             this.OrderDetails = new HashSet<OrderDetails>();
+            this.Watches_Categories = new HashSet<Watches_Categories>();
         }
     
         public int id { get; set; }
@@ -49,10 +49,10 @@ namespace API_Server.Models
         public virtual ICollection<Hot_Trend> Hot_Trend { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Image { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
         public virtual Sex Sex { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Watches_Categories> Watches_Categories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }

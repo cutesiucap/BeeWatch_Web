@@ -183,199 +183,199 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Accounts.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Account_Type.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Action.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Address.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Address_District.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Address_Province.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Authoriza.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BeeWatchBD.Context.cs">
+    <Compile Include="Models\BeeWatchWebDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BeeWatchBD.Context.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BeeWatchBD.cs">
+    <Compile Include="Models\BeeWatchWebDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BeeWatchBD.Designer.cs">
+    <Compile Include="Models\BeeWatchWebDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BeeWatchBD.edmx</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\CartDetails.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Carts.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Categories.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Discounts.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Firms.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_CheckLockUser_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_LoadBillforAccept_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_LoadBillforCancel_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_LoadBillforShipper_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_LoadBill_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_LoadFirm_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_LoadSex_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_LoadWatchBill_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_PhanTrang_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_SearchWatch_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_UserSeller_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fn_WatchMaxDeal_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hot_Trend.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Image.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogInHistories.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDetails.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Orders.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Phone.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sellers.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sex.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Shops.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Shop_Seller.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_SearchWatch_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_ThongKeDoanhThu_Result.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeDiscounts.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_Account.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_AccountType.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_Action.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_Authoriza.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_Cart.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_CartDetails.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_Categories.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_District.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_Firm.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_OrderCancel.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_OrderDetail.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_Orders.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_OrdertoComplete.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_OrdertoConfirm.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_OrdertoShip.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_Province.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_Sex.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_UserSeller.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_Watches.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Watches.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Watches_Categories.cs">
-      <DependentUpon>BeeWatchBD.tt</DependentUpon>
+      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -388,15 +388,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\BeeWatchBD.Context.tt">
+    <Content Include="Models\BeeWatchWebDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BeeWatchBD.edmx</DependentUpon>
-      <LastGenOutput>BeeWatchBD.Context.cs</LastGenOutput>
+      <DependentUpon>BeeWatchWebDB.edmx</DependentUpon>
+      <LastGenOutput>BeeWatchWebDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\BeeWatchBD.tt">
+    <Content Include="Models\BeeWatchWebDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BeeWatchBD.edmx</DependentUpon>
-      <LastGenOutput>BeeWatchBD.cs</LastGenOutput>
+      <DependentUpon>BeeWatchWebDB.edmx</DependentUpon>
+      <LastGenOutput>BeeWatchWebDB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -419,12 +419,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\BeeWatchBD.edmx">
+    <EntityDeploy Include="Models\BeeWatchWebDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BeeWatchBD.Designer.cs</LastGenOutput>
+      <LastGenOutput>BeeWatchWebDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\BeeWatchBD.edmx.diagram">
-      <DependentUpon>BeeWatchBD.edmx</DependentUpon>
+    <Content Include="Models\BeeWatchWebDB.edmx.diagram">
+      <DependentUpon>BeeWatchWebDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

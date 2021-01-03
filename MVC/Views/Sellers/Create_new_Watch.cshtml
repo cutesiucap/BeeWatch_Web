@@ -5,22 +5,23 @@
 }
 
 @section Css {
-    <!-- BS Stepper -->
-    <link rel="stylesheet" href="../../plugins/bs-stepper/css/bs-stepper.min.css">
-    <!-- dropzonejs -->
-    <link rel="stylesheet" href="../../plugins/dropzone/min/dropzone.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-    <link href="~/dist/css/Bee_Style.css" rel="stylesheet" />
     <!-- DataTables -->
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <link href="~/dist/css/Bee_Style.css" rel="stylesheet" />
 
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- BS Stepper -->
+    <link rel="stylesheet" href="../../plugins/bs-stepper/css/bs-stepper.min.css">
+    <!-- dropzonejs -->
+    <link rel="stylesheet" href="../../plugins/dropzone/min/dropzone.min.css">
 }
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -38,11 +39,12 @@
     </div><!-- /.container-fluid -->
 </section>
 
+
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-md-12">
                 <div class="card card-warning">
                     <div class="card-header">
                         <h3 class="card-title" style="color: #FFC107;"><b>THÊM ĐỒNG HỒ</b></h3>
@@ -53,7 +55,7 @@
                                 <!-- your steps here -->
                                 <div class="step" data-target="#logins-part">
                                     <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
-                                        <span class="bs-stepper-circle bootstrap-switch-yellow">1</span>
+                                        <span class="bs-stepper-circle">1</span>
                                         <span class="bs-stepper-label">Thông tin chi tiết</span>
                                     </button>
                                 </div>
@@ -68,23 +70,23 @@
                             <div class="bs-stepper-content">
                                 <!-- your steps content here -->
                                 <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
-                                    <form action="~/Sellers/CreateWatches" method="post">
+                                    <form action="../../Sellers/UpLoadFile" method="post">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Hãng Sản Xuất <small><em>*</em></small></label>
                                                     <select name="id_Firms" class="select2" style="width: 100%;">
-                                                        @if (Model.listfirms != null)
-                                                        {
-                                                            foreach (var item in Model.listfirms)
+                                                        @* @if (Model.listfirms != null)
                                                             {
-                                                                <option value="@item.id">@item</option>
+                                                                foreach (var item in Model.listfirms)
+                                                                {
+                                                                    <option value="@item.id">@item</option>
+                                                                }
                                                             }
-                                                        }
-                                                        else
-                                                        {
-                                                            <option value="" disabled="true">Không có gì ở đây cả</option>
-                                                        }
+                                                            else
+                                                            {
+                                                                <option value="" disabled="true">Không có gì ở đây cả</option>
+                                                            }*@
                                                     </select>
                                                 </div>
                                             </div>
@@ -92,10 +94,11 @@
                                                 <div class="form-group">
                                                     <label>Chủng Loại <small><em>*</em></small></label>
                                                     <select class="select2 accent-warning" name="list_Categories" multiple="multiple" data-placeholder="Chọn ít nhất một" style="width: 100%;">
-                                                        @foreach (var item in Model.listcategories)
-                                                        {
-                                                            <option value="@item.id">@item</option>
-                                                        }
+                                                        @*<option selected="selected">Alabama</option>*@
+                                                        @*@foreach (var item in Model.listcategories)
+                                                            {
+                                                                <option value="@item.id">@item</option>
+                                                            }*@
                                                     </select>
 
                                                 </div>
@@ -113,20 +116,20 @@
                                                 <div class="form-group">
                                                     <label>Phái <small><em>*</em></small></label>
                                                     <div style="max-width: 400px; display: flex;flex-direction: row;">
-                                                        @if (Model.listsex != null)
-                                                        {
-                                                            foreach (var item in Model.listsex)
+                                                        @*@if (Model.listsex != null)
                                                             {
-                                                                <span class="icheck-bootstrap" style="margin:0 auto;">
-                                                                    <input type="radio" value="@item.id" id="@item.id" name="id_Sex" />
-                                                                    <label for="@item.id">@item.Name</label>
-                                                                </span>
+                                                                foreach (var item in Model.listsex)
+                                                                {
+                                                                    <span class="icheck-bootstrap" style="margin:0 auto;">
+                                                                        <input type="radio" value="@item.id" id="@item.id" name="id_Sex" />
+                                                                        <label for="@item.id">@item.Name</label>
+                                                                    </span>
+                                                                }
                                                             }
-                                                        }
-                                                        else
-                                                        {
+                                                            else
+                                                            {
 
-                                                        }
+                                                            }*@
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,7 +149,7 @@
                                             <div class="col-md-6">
                                                 <label>Số lượng <small><em>*</em></small></label>
                                                 <div class="input-group">
-                                                    <input type="number" name="Count" class="form-control" min="1" max="100">
+                                                    <input type="number" name="Count" class="form-control" min="1" max="10">
                                                     <div class="input-group-append">
                                                         <div class="input-group-text"><b>Chiếc</b></div>
                                                     </div>
@@ -173,7 +176,8 @@
                                             </div>
                                         </div>
                                         <!-- /.row -->
-                                        <input type="submit" class="btn btn-warning" onclick="stepper.next()" value="Tiếp theo" />
+
+                                        <button type="submit" class="btn btn-warning" onclick="stepper.next()">Tiếp theo</button>
                                     </form>
                                 </div>
                                 <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
@@ -250,116 +254,42 @@
                         <em>Sản phẩm sẽ được thêm vào danh sách yếu cầu duyệt. Vui lòng chờ Sản phẩm được duyệt bởi chúng tôi trước khi nó sản sàng để mua sắm ^^</em>
                     </div>
                 </div>
+                <!-- /.card -->
             </div>
         </div>
-
-
-        <div class="card card-warning">
-
-            <div class="card card-warning">
-                <div class="card-header">
-                    <h3 class="card-title"><b>Danh Sách Đồng Hồ</b></h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Tên Đồng Hồ</th>
-                                <th>Hãng Sản Xuất</th>
-                                <th>Chủng Loại</th>
-                                <th>Số lượng</th>
-                                <th>Đơn Giá</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href='#'>2</a></td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                            </tr>
-                            @if (Model.listwatches != null)
-                            {
-                                foreach (var item in Model.listwatches)
-                                {
-                                    <tr>
-                                        <td>@item.WatchName</td>
-                                        <td>@item.NameofFirm</td>
-                                        <td>Win 95+</td>
-                                        <td>@item.Count</td>
-                                        <td>@item.Price</td>
-                                    </tr>
-                                }
-                            }
-                            else
-                            {
-                            }
-
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Tên Đồng Hồ</th>
-                                <th>Hãng Sản Xuất</th>
-                                <th>Chủng Loại</th>
-                                <th>Số lượng</th>
-                                <th>Đơn Giá</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
+        <!-- /.row -->
     </div>
+    <!-- /.container-fluid -->
 </section>
 
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../../plugins/jszip/jszip.min.js"></script>
-<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- Select2 -->
-<script src="../../plugins/select2/js/select2.full.min.js"></script>
-<!-- BS-Stepper -->
-<script src="../../plugins/bs-stepper/js/bs-stepper.min.js"></script>
+@section Scripts {
+    <!-- DataTables  & Plugins -->
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/jszip/jszip.min.js"></script>
+    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+}
 <!-- dropzonejs -->
 <script src="../../plugins/dropzone/min/dropzone.min.js"></script>
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<script src="../../plugins/bs-stepper/js/bs-stepper.min.js"></script>
 
 
+<!-- Page specific script -->
 <script>
-    document.getElementById('_dongho').className += ' active';
-
-    $()
-</script>
-<!-- /.content -->
-
-<script>
-    $(".select2").select2();
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+    });
     // BS-Stepper Init
     document.addEventListener('DOMContentLoaded', function () {
         window.stepper = new Stepper(document.querySelector('.bs-stepper'), {
@@ -367,6 +297,7 @@
         })
     });
 
+    // DropzoneJS Demo Code Start
     // DropzoneJS Demo Code Start
     Dropzone.autoDiscover = false;
 
@@ -439,51 +370,5 @@
     };
 </script>
 
-<script>
-    $("#example1").DataTable({
-        initComplete: function () {
-            this.api().columns().every(function () {
-                var column = this;
-                var select = $('<select class="form-control select2" style="width: 100%;"><option value=""></option></select>')
-                    .appendTo($(column.footer()).empty())
-                    .on('change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
 
-                        column
-                            .search(val ? '^' + val + '$' : '', true, false)
-                            .draw();
-                    });
 
-                column.data().unique().sort().each(function (d, j) {
-                    select.append('<option value="' + d + '">' + d + '</option>');
-                });
-            });
-        },
-        responsive: true,
-        lengthChange: false,
-        autoWidth: true,
-        iDisplayLength: 20,
-        buttons: ['excel', 'pdf', 'print', 'colvis'],
-        language: {
-            "processing": "Dữ liệu đang được tải...",
-            "search": "Tìm Kiếm",
-            "info": "Danh sách từ _START_ đến _END_ trên Tổng cộng _TOTAL_",
-            "infoEmpty": "0 Bảng ghi trong 0 tổng cộng 0",
-            "zeroRecords": "Trống trơn ^^",
-            "emptyTable": "Hiện tại bạn chưa có Sản Phẩm nào :<",
-            "paginate": {
-                "first": "Trang đầu",
-                "previous": "Trang trước",
-                "next": "Trang sau",
-                "last": "Trang cuối",
-            },
-            aria: {
-                "sortAscending": "Sắp xếp theo chiều tăng dần giá trị...",
-                "sortDescending": "Sắp xếp theo chiều giảm dần giá trị...",
-            },
-        }
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-</script>

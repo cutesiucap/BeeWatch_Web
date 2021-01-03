@@ -21,7 +21,7 @@
     <link href="~/dist/css/Bee_Style.css" rel="stylesheet" />
 
 </head>
-<body class="sidebar-mini control-sidebar-slide-open accent-warning dark-mode" style="width: auto;">
+<body class="sidebar-mini sidebar-collapse control-sidebar-slide-open accent-warning dark-mode" style="width: auto;">
     <!-- Site wrapper -->
     <div class="wrapper d">
         <!-- Navbar -->
@@ -182,9 +182,9 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library -->
+                        with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="../../MyProFile/Index" class="nav-link active">
+                            <a href="../../MyProFile/Index" id="_gianhang" class="nav-link">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
                                     Gian Hàng
@@ -193,7 +193,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../widgets.html" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-cart-arrow-down"></i>
                                 <p>
                                     Đơn Hàng
@@ -202,7 +202,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../../Sellers/CreateWatches" class="nav-link">
+                            <a href="../../Sellers/CreateWatches" id="_dongho" class="nav-link">
                                 <i class="nav-icon fas fa-plus-circle"></i>
                                 <p>
                                     Đồng Hồ
@@ -211,7 +211,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../widgets.html" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Nhân Viên
@@ -220,7 +220,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../widgets.html" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-percentage"></i>
                                 <p>
                                     Mã Giảm Giá
@@ -229,7 +229,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../widgets.html" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-shipping-fast"></i>
                                 <p>
                                     Người Vận Chuyển
@@ -247,19 +247,19 @@
                             </a>
                             <ul class="nav nav-treeview" style="margin-left: 20px;">
                                 <li class="nav-item">
-                                    <a href="../../index.html" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         <i class="fa fa-donate nav-icon"></i>
                                         <p>Doanh Thu</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../../index2.html" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         <i class="fa fa-user-astronaut nav-icon"></i>
                                         <p>Khách Hàng</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../../index3.html" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         <i class="fab fa-forumbee nav-icon"></i>
                                         <p>Sản Phẩm</p>
                                     </a>
@@ -267,7 +267,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="../../Sellers/CreateWatches" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
                                     Tài Khoảng
@@ -298,6 +298,7 @@
         <div id="sidebar-overlay"></div>
     </div>
     <!-- ./wrapper -->
+
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -308,5 +309,25 @@
     <script src="../../dist/js/demo.js"></script>
 
     @RenderSection("Scripts", required: false)
+
+    <script>
+        // Get all buttons with class="btn" inside the container
+        var btns = document.getElementsByClassName('nav-link');
+
+        // Loop through the buttons and add the active class to the current/clicked button
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+
+                // If there's no active class
+                if (current.length > 0) {
+                    current[0].className = current[0].className.replace(" active", "");
+                }
+
+                // Add the active class to the current/clicked button
+                this.className += " active";
+            });
+        }
+    </script>
 </body>
 </html>

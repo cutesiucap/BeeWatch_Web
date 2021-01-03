@@ -14,6 +14,7 @@ namespace API_Server.Models
     
     public partial class view_Account
     {
+        public int id { get; set; }
         public int id_Account_Type { get; set; }
         public string AccountTypeName { get; set; }
         public string Username { get; set; }
@@ -31,6 +32,5 @@ namespace API_Server.Models
         public string DistrictName { get; set; }
         public string id_District { get; set; }
         public string AddressDetail { get; set; }
-        public int id { get; set; }
     }
 }

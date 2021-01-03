@@ -130,12 +130,37 @@ namespace MVC.Controllers.Sellers
             }
             else return Content("false");
         }
+        public ActionResult Create_new_Watch()
+        {
+            return View();
+        }
+
         public ActionResult CreateWatches()
         {
 
             CreateWatchModel watchModel = new CreateWatchModel();
             return View(watchModel);
         }
+
+        [HttpPost]
+        public ActionResult CreateWatches(Watches request, FormCollection formCollection)
+        {
+            var list_categories = formCollection["list_Categories"].Replace(',', ' ').ToList();
+            request.Watches_Categories = new List<Watches_Categories>();
+            foreach (var item in list_categories)
+            {
+                if (item.ToString() != " ")
+                {
+                    request.Watches_Categories.Add(new Watches_Categories() { id_Category = int.Parse(item.ToString()) });
+                }
+            }
+            request.id_Shop = (Session["Account"] as Accounts).Sellers.Shop_Seller.FirstOrDefault().id_Shop;
+            var result = GlobalVariables.HttpClient.PostAsJsonAsync<Watches>("Watches", request);
+            result.Wait();
+            return RedirectToAction("Index");
+        }
+
+
         [HttpPost]
         public ActionResult DeleteFile(FormCollection formCollection)
         {
@@ -206,23 +231,6 @@ namespace MVC.Controllers.Sellers
             }
         }
 
-        [HttpPost]
-        public ActionResult CreateWatches(Watches request, FormCollection formCollection, IEnumerable<HttpPostedFileBase> fileBase)
-        {
-            var listfile = Request.Files;
-            var list_categories = formCollection["list_Categories"].Replace(',', ' ').ToList();
-            foreach (var item in list_categories)
-            {
-                if (item.ToString()!=" ")
-                {
-                    
-                }
-            }
-            request.id_Shop = (Session["Account"] as Accounts).id;
-            var result = GlobalVariables.HttpClient.PostAsJsonAsync<Watches>("Watches", request);
-            result.Wait();
-            return RedirectToAction("Index");
-        }
         [AllowAnonymous]
         public ActionResult Logout()
         {
@@ -260,7 +268,6 @@ namespace MVC.Controllers.Sellers
                 try
                 {
                     listsex = GlobalVariables.HttpClient.GetAsync("Sex").Result.Content.ReadAsAsync<IEnumerable<Sex>>().Result;
-                    var x = 0;
                 }
                 catch
                 {

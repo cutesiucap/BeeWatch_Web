@@ -2263,6 +2263,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\Header_page.cshtml" />
     <Content Include="Views\HomePage\Index.cshtml" />
+    <Content Include="Views\Sellers\Create_new_Watch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

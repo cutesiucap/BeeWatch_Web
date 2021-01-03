@@ -171,6 +171,7 @@
     <Compile Include="Controllers\CartDetailsController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\FirmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SellersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

@@ -323,9 +323,6 @@
     <Compile Include="Models\view_Action.cs">
       <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\view_Authoriza.cs">
-      <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\view_Cart.cs">
       <DependentUpon>BeeWatchWebDB.tt</DependentUpon>
     </Compile>

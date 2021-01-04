@@ -20,6 +20,7 @@ namespace API_Server.Models
             this.Hot_Trend = new HashSet<Hot_Trend>();
             this.Orders = new HashSet<Orders>();
             this.Shop_Seller = new HashSet<Shop_Seller>();
+            this.Watches = new HashSet<Watches>();
         }
     
         public int id { get; set; }
@@ -36,5 +37,7 @@ namespace API_Server.Models
         public virtual Sellers Sellers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Shop_Seller> Shop_Seller { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Watches> Watches { get; set; }
     }
 }

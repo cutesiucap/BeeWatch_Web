@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BeeWatchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BeeWatchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account_Type">
           <Key>
             <PropertyRef Name="id" />
@@ -326,16 +326,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Action' does not have a primar
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Detail" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BeeWatchDB.dbo.view_Authoriza' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_Authoriza">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_Account_Type" Type="int" />
-          <Property Name="id_Action" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BeeWatchDB.dbo.view_Cart' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -957,6 +947,18 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Watches_Shops">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="1" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="ChangePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="username" Type="nvarchar" Mode="In" />
@@ -1354,7 +1356,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
         </Function>
         <Function Name="sp_Logout" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
-          <Parameter Name="password" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_RateWatch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idWatch" Type="int" Mode="In" />
@@ -1468,13 +1469,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
     [view_Action].[Name] AS [Name], 
     [view_Action].[Detail] AS [Detail]
     FROM [dbo].[view_Action] AS [view_Action]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="view_Authoriza" EntityType="Self.view_Authoriza" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [view_Authoriza].[id] AS [id], 
-    [view_Authoriza].[id_Account_Type] AS [id_Account_Type], 
-    [view_Authoriza].[id_Action] AS [id_Action]
-    FROM [dbo].[view_Authoriza] AS [view_Authoriza]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_Cart" EntityType="Self.view_Cart" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1785,9 +1779,12 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <End Role="Sex" EntitySet="Sex" />
             <End Role="Watches" EntitySet="Watches" />
           </AssociationSet>
+          <AssociationSet Name="FK_Watches_Shops" Association="Self.FK_Watches_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Watches" EntitySet="Watches" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BeeWatchDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2222,6 +2219,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Shops" FromRole="Shops" ToRole="Orders" />
           <NavigationProperty Name="Sellers" Relationship="Self.FK_Shops_Sellers" FromRole="Shops" ToRole="Sellers" />
           <NavigationProperty Name="Shop_Seller" Relationship="Self.FK_Shop_Seller_Shops" FromRole="Shops" ToRole="Shop_Seller" />
+          <NavigationProperty Name="Watches" Relationship="BeeWatchDBModel.FK_Watches_Shops" FromRole="Shops" ToRole="Watches" />
         </EntityType>
         <EntityType Name="TypeDiscounts">
           <Key>
@@ -2261,6 +2259,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <NavigationProperty Name="OrderDetails" Relationship="Self.BoughtWatches" FromRole="Watches" ToRole="OrderDetails" />
           <NavigationProperty Name="Sex" Relationship="Self.FK_Watches_Sex" FromRole="Watches" ToRole="Sex" />
           <NavigationProperty Name="Watches_Categories" Relationship="Self.FK_Watches_Categories_Watches" FromRole="Watches" ToRole="Watches_Categories" />
+          <NavigationProperty Name="Shops" Relationship="BeeWatchDBModel.FK_Watches_Shops" FromRole="Watches" ToRole="Shops" />
         </EntityType>
         <EntityType Name="Watches_Categories">
           <Key>
@@ -2325,14 +2324,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_Authoriza">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Account_Type" Type="Int32" />
-          <Property Name="id_Action" Type="Int32" />
         </EntityType>
         <EntityType Name="view_Cart">
           <Key>
@@ -2953,7 +2944,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <EntitySet Name="view_Account" EntityType="Self.view_Account" />
           <EntitySet Name="view_AccountType" EntityType="Self.view_AccountType" />
           <EntitySet Name="view_Action" EntityType="Self.view_Action" />
-          <EntitySet Name="view_Authoriza" EntityType="Self.view_Authoriza" />
           <EntitySet Name="view_Cart" EntityType="Self.view_Cart" />
           <EntitySet Name="view_CartDetails" EntityType="Self.view_CartDetails" />
           <EntitySet Name="view_Categories" EntityType="Self.view_Categories" />
@@ -3094,7 +3084,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <End Role="Watches_Categories" EntitySet="Watches_Categories" />
           </AssociationSet>
           <FunctionImport Name="fn_CheckLockUser" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_CheckLockUser_Result)">
-            <Parameter Name="lock" Mode="In" Type="Boolean" />
+          <Parameter Name="lock" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="fn_LoadBill" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_LoadBill_Result)">
             <Parameter Name="idAccount" Mode="In" Type="Int32" />
@@ -3117,7 +3107,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="num_next" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="fn_SearchWatch" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_SearchWatch_Result)">
-            <Parameter Name="Name" Mode="In" Type="String" />
+          <Parameter Name="Name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_UserSeller" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_UserSeller_Result)" />
           <FunctionImport Name="fn_WatchMaxDeal" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_WatchMaxDeal_Result)" />
@@ -3235,7 +3225,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="idWatch" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertSex">
-            <Parameter Name="new" Mode="In" Type="String" />
+          <Parameter Name="new" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertTypeDiscount">
             <Parameter Name="min_bill" Mode="In" Type="Double" />
@@ -3265,11 +3255,10 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Logout">
-            <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="String" />
+          <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_RateWatch">
-            <Parameter Name="idWatch" Mode="In" Type="Int32" />
+          <Parameter Name="idWatch" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_renamediagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -3277,10 +3266,10 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_SearchWatch" ReturnType="Collection(BeeWatchDBModel.sp_SearchWatch_Result)">
-            <Parameter Name="name" Mode="In" Type="String" />
+          <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Send">
-            <Parameter Name="Email" Mode="In" Type="String" />
+          <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_ThongKeDoanhThu" ReturnType="Collection(BeeWatchDBModel.sp_ThongKeDoanhThu_Result)">
             <Parameter Name="idShop" Mode="In" Type="Int32" />
@@ -3319,6 +3308,10 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="information" Mode="In" Type="String" />
             <Parameter Name="userupdate" Mode="In" Type="String" />
           </FunctionImport>
+          <AssociationSet Name="FK_Watches_Shops" Association="BeeWatchDBModel.FK_Watches_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Watches" EntitySet="Watches" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -3350,6 +3343,18 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Type="Double" Name="Sum" Nullable="true" />
           <Property Type="String" Name="Payment" Nullable="true" MaxLength="20" />
         </ComplexType>
+        <Association Name="FK_Watches_Shops">
+          <End Type="BeeWatchDBModel.Shops" Role="Shops" Multiplicity="1" />
+          <End Type="BeeWatchDBModel.Watches" Role="Watches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3679,15 +3684,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Detail" ColumnName="Detail" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_Authoriza">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Authoriza">
-              <MappingFragment StoreEntitySet="view_Authoriza">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="id_Account_Type" ColumnName="id_Account_Type" />
-                <ScalarProperty Name="id_Action" ColumnName="id_Action" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

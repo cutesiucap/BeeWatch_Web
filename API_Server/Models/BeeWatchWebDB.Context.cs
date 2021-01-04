@@ -55,7 +55,6 @@ namespace API_Server.Models
         public virtual DbSet<view_Account> view_Account { get; set; }
         public virtual DbSet<view_AccountType> view_AccountType { get; set; }
         public virtual DbSet<view_Action> view_Action { get; set; }
-        public virtual DbSet<view_Authoriza> view_Authoriza { get; set; }
         public virtual DbSet<view_Cart> view_Cart { get; set; }
         public virtual DbSet<view_CartDetails> view_CartDetails { get; set; }
         public virtual DbSet<view_Categories> view_Categories { get; set; }
@@ -670,17 +669,13 @@ namespace API_Server.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_LockWatch", idParameter, nameParameter);
         }
     
-        public virtual int sp_Logout(string username, string password)
+        public virtual int sp_Logout(string username)
         {
             var usernameParameter = username != null ?
                 new ObjectParameter("username", username) :
                 new ObjectParameter("username", typeof(string));
     
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Logout", usernameParameter, passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Logout", usernameParameter);
         }
     
         public virtual int sp_RateWatch(Nullable<int> idWatch)

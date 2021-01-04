@@ -54,5 +54,6 @@ namespace API_Server.Models
         public virtual Sex Sex { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Watches_Categories> Watches_Categories { get; set; }
+        public virtual Shops Shops { get; set; }
     }
 }

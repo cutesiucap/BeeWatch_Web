@@ -12,14 +12,13 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <link href="~/dist/css/Bee_Style.css" rel="stylesheet" />
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
-
-    <!-- Select2 -->
-    <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 }
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -68,12 +67,12 @@
                             <div class="bs-stepper-content">
                                 <!-- your steps content here -->
                                 <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
-                                    <form action="~/Sellers/CreateWatches" method="post">
+                                    <form>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Hãng Sản Xuất <small><em>*</em></small></label>
-                                                    <select name="id_Firms" class="select2" style="width: 100%;">
+                                                    <select name="id_Firms" id="id_Firms" class="select2" style="width: 100%;">
                                                         @if (Model.listfirms != null)
                                                         {
                                                             foreach (var item in Model.listfirms)
@@ -91,7 +90,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Chủng Loại <small><em>*</em></small></label>
-                                                    <select class="select2 accent-warning" name="list_Categories" multiple="multiple" data-placeholder="Chọn ít nhất một" style="width: 100%;">
+                                                    <select class="select2 accent-warning" name="list_Categories" id="list_Categories" multiple="multiple" data-placeholder="Chọn ít nhất một" style="width: 100%;">
                                                         @foreach (var item in Model.listcategories)
                                                         {
                                                             <option value="@item.id">@item</option>
@@ -105,8 +104,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Tên Sản Phẩm <small><em>*</em></small></label>
-                                                    <input name="Name" required type="text" class="form-control" placeholder="Enter ...">
-                                                    <div class="invalid-feedback">Please fill the email field</div>
+                                                    <input name="Name" id="Name" required type="text" class="form-control" placeholder="Nhập tên ...">
+                                                    <div class="invalid-feedback">Quên nhập tên Đồng hồ nè thương gia ơii</div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -136,7 +135,7 @@
                                                 <div class="form-group">
                                                     <label>Đơn giá <small><em>*</em></small></label>
                                                     <div class="input-group">
-                                                        <input type="number" name="Price" class="form-control">
+                                                        <input type="number" name="Price" id="Price" class="form-control">
                                                         <div class="input-group-append">
                                                             <div class="input-group-text"><b>VNĐ</b></div>
                                                         </div>
@@ -146,7 +145,7 @@
                                             <div class="col-md-6">
                                                 <label>Số lượng <small><em>*</em></small></label>
                                                 <div class="input-group">
-                                                    <input type="number" name="Count" class="form-control" min="1" max="100">
+                                                    <input type="number" name="Count" id="Count" class="form-control" min="1" max="100">
                                                     <div class="input-group-append">
                                                         <div class="input-group-text"><b>Chiếc</b></div>
                                                     </div>
@@ -158,7 +157,7 @@
                                                 <div class="form-group">
                                                     <label>Thêm Mã Giảm Giá Cho Sản phẩm<small><em> (Nếu có)</em></small></label>
                                                     <div class="input-group">
-                                                        <input type="text" name="Code" class="form-control" placeholder="CODE">
+                                                        <input type="text" name="Code" id="Code" class="form-control" placeholder="CODE">
                                                         <div class="input-group-append">
                                                             <div class="input-group-text"><i class="fas fa-percent"></i></div>
                                                         </div>
@@ -169,11 +168,11 @@
                                         <div>
                                             <div class="form-group">
                                                 <label>Thông Tin Chi Tiết Sản Phẩm</label>
-                                                <textarea class="form-control" name="Information" rows="3" placeholder="Enter ..." style="margin-top: 0px; margin-bottom: 0px; height: 178px;"></textarea>
+                                                <textarea class="form-control" name="Information" id="Information" rows="3" placeholder="Enter ..." style="margin-top: 0px; margin-bottom: 0px; height: 178px;"></textarea>
                                             </div>
                                         </div>
                                         <!-- /.row -->
-                                        <input type="submit" class="btn btn-warning" onclick="stepper.next()" value="Tiếp theo" />
+                                        <button type="button" class="btn btn-warning" onclick="create(this)">Tiếp theo</button>
                                     </form>
                                 </div>
                                 <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
@@ -278,20 +277,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a href='#'>2</a></td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                            </tr>
                             @if (Model.listwatches != null)
                             {
                                 foreach (var item in Model.listwatches)
                                 {
                                     <tr>
-                                        <td>@item.WatchName</td>
-                                        <td>@item.NameofFirm</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.id_Firms</td>
                                         <td>Win 95+</td>
                                         <td>@item.Count</td>
                                         <td>@item.Price</td>
@@ -305,11 +297,11 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Tên Đồng Hồ</th>
-                                <th>Hãng Sản Xuất</th>
-                                <th>Chủng Loại</th>
-                                <th>Số lượng</th>
-                                <th>Đơn Giá</th>
+                                <th style="text-align:center">Tên Đồng Hồ</th>
+                                <th style="text-align:center">Hãng Sản Xuất</th>
+                                <th style="text-align:center">Chủng Loại</th>
+                                <th style="text-align:center">Số lượng</th>
+                                <th style="text-align:center">Đơn Giá</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -325,11 +317,12 @@
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
 <!-- DataTables  & Plugins -->
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -343,23 +336,47 @@
 <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- Select2 -->
-<script src="../../plugins/select2/js/select2.full.min.js"></script>
 <!-- BS-Stepper -->
 <script src="../../plugins/bs-stepper/js/bs-stepper.min.js"></script>
 <!-- dropzonejs -->
 <script src="../../plugins/dropzone/min/dropzone.min.js"></script>
 
-
 <script>
     document.getElementById('_dongho').className += ' active';
 
-    $()
+    function create(sefl) {
+        var data = {
+            id_Firms: $('#id_Firms option:selected').val(),
+            list_Categories: $('#list_Categories').val().toString(),
+            Name: $('#Name').val(),
+            id_Sex: $('input[type="radio"]:checked').val(),
+            Price: $('#Price').val(),
+            Count: $('#Count').val(),
+            Cod: $('#Code').val(),
+            Information: $('#Information').val()
+        };
+        $.ajax({
+            url: '../../Sellers/CreateWatches',
+            type: 'POST',
+            async: false,
+            data: data,
+            beforeSend: function () {
+                (sefl).disabled = true;
+            },
+            success: function (reques) {
+                (sefl).disabled = false;
+                stepper.next();
+            },
+            fail: function (reques) {
+
+            }
+        });
+    }
+
 </script>
 <!-- /.content -->
 
 <script>
-    $(".select2").select2();
     // BS-Stepper Init
     document.addEventListener('DOMContentLoaded', function () {
         window.stepper = new Stepper(document.querySelector('.bs-stepper'), {
@@ -444,8 +461,8 @@
         initComplete: function () {
             this.api().columns().every(function () {
                 var column = this;
-                var select = $('<select class="form-control select2" style="width: 100%;"><option value=""></option></select>')
-                    .appendTo($(column.footer()).empty())
+                var select = $('<select class="select2" name="select_search" style="width: 100%;"><option value=""></option></select>')
+                    .appendTo($(column.footer()))
                     .on('change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
                             $(this).val()
@@ -457,7 +474,7 @@
                     });
 
                 column.data().unique().sort().each(function (d, j) {
-                    select.append('<option value="' + d + '">' + d + '</option>');
+                    select.append($('<option value="' + d + '">' + d + '</option>'))
                 });
             });
         },
@@ -486,4 +503,5 @@
         }
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
+    $('.select2').select2();
 </script>

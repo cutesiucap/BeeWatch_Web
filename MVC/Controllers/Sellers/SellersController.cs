@@ -19,6 +19,7 @@ namespace MVC.Controllers.Sellers
         {
             return View();
         }
+
         [AllowAnonymous]
         public ActionResult CreateSeller()
         {
@@ -138,12 +139,12 @@ namespace MVC.Controllers.Sellers
         public ActionResult CreateWatches()
         {
 
-            CreateWatchModel watchModel = new CreateWatchModel();
+            CreateWatchModel watchModel = new CreateWatchModel((Session["Account"] as Accounts).Sellers.Shop_Seller.FirstOrDefault().id_Shop);
             return View(watchModel);
         }
 
         [HttpPost]
-        public ActionResult CreateWatches(Watches request, FormCollection formCollection)
+        public ActionResult CreateWatches(Models.Watches request, FormCollection formCollection)
         {
             var list_categories = formCollection["list_Categories"].Replace(',', ' ').ToList();
             request.Watches_Categories = new List<Watches_Categories>();
@@ -155,9 +156,11 @@ namespace MVC.Controllers.Sellers
                 }
             }
             request.id_Shop = (Session["Account"] as Accounts).Sellers.Shop_Seller.FirstOrDefault().id_Shop;
-            var result = GlobalVariables.HttpClient.PostAsJsonAsync<Watches>("Watches", request);
+            request.Create_By = (Session["Account"] as Accounts).Fullname;
+            var result = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Watches>("Watches", request);
             result.Wait();
-            return RedirectToAction("Index");
+            Session["id_newWatch"] = result.Result.Content.ReadAsAsync<int>().Result;
+            return Content("success");
         }
 
 
@@ -211,16 +214,22 @@ namespace MVC.Controllers.Sellers
 
                         string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "Image");
 
-                        var fileName1 = Path.GetFileName(file.FileName);
+                        var fileName1 = Path.GetFileName(Session["id_newWatch"] + "_" + file.FileName);
 
                         bool isExists = System.IO.Directory.Exists(pathString);
 
                         if (!isExists)
                             System.IO.Directory.CreateDirectory(pathString);
 
-                        var path = string.Format("{0}\\{1}", pathString, file.FileName);
+                        var path = string.Format("{0}\\{1}", pathString, fileName1);
                         file.SaveAs(path);
 
+                        Image image = new Image
+                        {
+                            id_Watches = int.Parse(Session["id_newWatch"].ToString()),
+                            Url_Image = path,
+                        };
+                        var result = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Image>("Images", image);
                     }
 
                 }
@@ -242,9 +251,9 @@ namespace MVC.Controllers.Sellers
         {
             public IEnumerable<Firms> listfirms { get; set; }
             public IEnumerable<Sex> listsex { get; set; }
-            public IEnumerable<view_Watch> listwatches { get; set; }
+            public IEnumerable<view_WatchDetails> listwatches { get; set; }
             public IEnumerable<Categories> listcategories { get; set; }
-            public CreateWatchModel()
+            public CreateWatchModel(int id)
             {
                 try
                 {
@@ -276,7 +285,7 @@ namespace MVC.Controllers.Sellers
 
                 try
                 {
-                    listwatches = GlobalVariables.HttpClient.GetAsync("Watches").Result.Content.ReadAsAsync<IEnumerable<view_Watch>>().Result;
+                    listwatches = GlobalVariables.HttpClient.GetAsync("GetListWatch/"  + id).Result.Content.ReadAsAsync<IEnumerable<view_WatchDetails>>().Result;
                 }
                 catch
                 {

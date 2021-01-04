@@ -18,6 +18,6 @@ namespace MVC.Models
         public Nullable<System.DateTime> Date_Create { get; set; }
         public string NameofSex { get; set; }
         public string NameofFirm { get; set; }
-        public Nullable<int> LuotMua { get; set; }
+        /*public Nullable<int> LuotMua { get; set; }*/
     }
 }

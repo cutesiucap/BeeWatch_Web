@@ -139,11 +139,13 @@
     <Compile Include="Controllers\Clients\CartController.cs" />
     <Compile Include="Controllers\Home\HomePageController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
+    <Compile Include="Controllers\Order\OrderController.cs" />
     <Compile Include="Controllers\Orther\Address_DistrictController.cs" />
     <Compile Include="Controllers\Orther\Address_ProvinceController.cs" />
     <Compile Include="Controllers\Sellers\MyProFileController.cs" />
     <Compile Include="Controllers\Sellers\SellersController.cs" />
     <Compile Include="Controllers\WatchesController.cs" />
+    <Compile Include="Controllers\Watches\WatchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,7 +165,9 @@
     <Compile Include="Models\Shops.cs" />
     <Compile Include="Models\Shop_Seller.cs" />
     <Compile Include="Models\TypeDiscounts.cs" />
+    <Compile Include="Models\view_AllOrder.cs" />
     <Compile Include="Models\view_Watch.cs" />
+    <Compile Include="Models\view_WatchDetails.cs" />
     <Compile Include="Models\Watches_Categories.cs" />
     <Compile Include="Tool\MailHelper.cs" />
     <Compile Include="Models\Accounts.cs" />
@@ -2264,6 +2268,8 @@
     <Content Include="Views\Shared\Header_page.cshtml" />
     <Content Include="Views\HomePage\Index.cshtml" />
     <Content Include="Views\Sellers\Create_new_Watch.cshtml" />
+    <Content Include="Views\Order\AllOrder.cshtml" />
+    <Content Include="Views\Watch\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

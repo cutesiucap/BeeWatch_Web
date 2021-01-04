@@ -49,6 +49,7 @@ namespace API_Server.Models
         public virtual DbSet<Sex> Sex { get; set; }
         public virtual DbSet<Shop_Seller> Shop_Seller { get; set; }
         public virtual DbSet<Shops> Shops { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeDiscounts> TypeDiscounts { get; set; }
         public virtual DbSet<Watches> Watches { get; set; }
         public virtual DbSet<Watches_Categories> Watches_Categories { get; set; }
@@ -71,6 +72,8 @@ namespace API_Server.Models
         public virtual DbSet<view_Sex> view_Sex { get; set; }
         public virtual DbSet<view_UserSeller> view_UserSeller { get; set; }
         public virtual DbSet<view_Watches> view_Watches { get; set; }
+        public virtual DbSet<view_WatchDetails> view_WatchDetails { get; set; }
+        public virtual DbSet<view_AllOrder> view_AllOrder { get; set; }
     
         [DbFunction("BeeWatchDBEntities", "fn_CheckLockUser")]
         public virtual IQueryable<fn_CheckLockUser_Result> fn_CheckLockUser(Nullable<bool> @lock)
@@ -276,6 +279,15 @@ namespace API_Server.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ChangeInfo", usernameParameter, passwordParameter, newpassParameter, avtParameter, emailParameter, fullnameParameter);
         }
     
+        public virtual int sp_ChangeStatusDiscount(Nullable<System.DateTime> ngay)
+        {
+            var ngayParameter = ngay.HasValue ?
+                new ObjectParameter("Ngay", ngay) :
+                new ObjectParameter("Ngay", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ChangeStatusDiscount", ngayParameter);
+        }
+    
         public virtual int sp_CheckLogin(Nullable<int> id, string username, string password)
         {
             var idParameter = id.HasValue ?
@@ -304,6 +316,51 @@ namespace API_Server.Models
                 new ObjectParameter("name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_CheckWatch", idParameter, nameParameter);
+        }
+    
+        public virtual int sp_ConfirmBill(Nullable<int> idorder)
+        {
+            var idorderParameter = idorder.HasValue ?
+                new ObjectParameter("idorder", idorder) :
+                new ObjectParameter("idorder", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ConfirmBill", idorderParameter);
+        }
+    
+        public virtual int sp_ConfirmForCancel(Nullable<int> idorder)
+        {
+            var idorderParameter = idorder.HasValue ?
+                new ObjectParameter("idorder", idorder) :
+                new ObjectParameter("idorder", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ConfirmForCancel", idorderParameter);
+        }
+    
+        public virtual int sp_ConfirmForComplete(Nullable<int> idorder)
+        {
+            var idorderParameter = idorder.HasValue ?
+                new ObjectParameter("idorder", idorder) :
+                new ObjectParameter("idorder", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ConfirmForComplete", idorderParameter);
+        }
+    
+        public virtual int sp_ConfirmForShip(Nullable<int> idorder)
+        {
+            var idorderParameter = idorder.HasValue ?
+                new ObjectParameter("idorder", idorder) :
+                new ObjectParameter("idorder", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ConfirmForShip", idorderParameter);
+        }
+    
+        public virtual int sp_ConfirmOrder(Nullable<int> idBill)
+        {
+            var idBillParameter = idBill.HasValue ?
+                new ObjectParameter("idBill", idBill) :
+                new ObjectParameter("idBill", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ConfirmOrder", idBillParameter);
         }
     
         public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -364,6 +421,19 @@ namespace API_Server.Models
                 new ObjectParameter("name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteSex", idParameter, nameParameter);
+        }
+    
+        public virtual int sp_DropCartDetails(Nullable<int> idCart, Nullable<int> idWatch)
+        {
+            var idCartParameter = idCart.HasValue ?
+                new ObjectParameter("idCart", idCart) :
+                new ObjectParameter("idCart", typeof(int));
+    
+            var idWatchParameter = idWatch.HasValue ?
+                new ObjectParameter("idWatch", idWatch) :
+                new ObjectParameter("idWatch", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DropCartDetails", idCartParameter, idWatchParameter);
         }
     
         public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
@@ -479,6 +549,19 @@ namespace API_Server.Models
                 new ObjectParameter("address_detail", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertAccount", usernameParameter, passwordParameter, avtParameter, emailParameter, fullnameParameter, sexParameter, address_provinceParameter, address_districtParameter, address_detailParameter, id);
+        }
+    
+        public virtual int sp_InsertCartDetails(Nullable<int> idCart, Nullable<int> idWatch)
+        {
+            var idCartParameter = idCart.HasValue ?
+                new ObjectParameter("idCart", idCart) :
+                new ObjectParameter("idCart", typeof(int));
+    
+            var idWatchParameter = idWatch.HasValue ?
+                new ObjectParameter("idWatch", idWatch) :
+                new ObjectParameter("idWatch", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertCartDetails", idCartParameter, idWatchParameter);
         }
     
         public virtual int sp_InsertDiscount(string code, Nullable<int> id_Type, Nullable<double> value_percent, Nullable<double> value_sub, Nullable<System.DateTime> datefrom, Nullable<System.DateTime> dateto)
@@ -670,17 +753,13 @@ namespace API_Server.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_LockWatch", idParameter, nameParameter);
         }
     
-        public virtual int sp_Logout(string username, string password)
+        public virtual int sp_Logout(string username)
         {
             var usernameParameter = username != null ?
                 new ObjectParameter("username", username) :
                 new ObjectParameter("username", typeof(string));
     
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Logout", usernameParameter, passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Logout", usernameParameter);
         }
     
         public virtual int sp_RateWatch(Nullable<int> idWatch)
@@ -855,6 +934,37 @@ namespace API_Server.Models
                 new ObjectParameter("userupdate", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateWatch", idParameter, nameParameter, id_SexParameter, id_FirmsParameter, imageParameter, priceParameter, countParameter, informationParameter, userupdateParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int SQLAccount_Create(string username, string password, string namerole)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var nameroleParameter = namerole != null ?
+                new ObjectParameter("namerole", namerole) :
+                new ObjectParameter("namerole", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SQLAccount_Create", usernameParameter, passwordParameter, nameroleParameter);
+        }
+    
+        public virtual int SQLAccount_KillConnection(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SQLAccount_KillConnection", usernameParameter);
         }
     }
 }

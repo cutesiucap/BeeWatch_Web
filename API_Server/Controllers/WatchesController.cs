@@ -17,9 +17,9 @@ namespace API_Server.Controllers
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
         // GET: api/Watches
-        public IQueryable<view_Watches> GetWatches()
+        public IQueryable<view_WatchDetails> GetWatches()
         {
-            return db.view_Watches;
+            return db.view_WatchDetails;
         }
 
         // GET: api/Watches/5
@@ -33,6 +33,12 @@ namespace API_Server.Controllers
             }
 
             return Ok(watches);
+        }
+
+        [Route("api/GetListWatch/{id}")]
+        public IQueryable<view_WatchDetails> GetListWatch(int id)
+        {
+            return db.view_WatchDetails.Where(x => x.id_Shop == id);
         }
 
         // PUT: api/Watches/5
@@ -82,7 +88,7 @@ namespace API_Server.Controllers
             db.Watches.Add(watches);
             db.SaveChanges();
 
-            return Ok();
+            return Ok(watches.id);
         }
 
         // DELETE: api/Watches/5

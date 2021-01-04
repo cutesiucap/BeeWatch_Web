@@ -193,7 +193,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="../../Order/AllOrder" class="nav-link" id="_donhang">
                                 <i class="nav-icon fas fa-cart-arrow-down"></i>
                                 <p>
                                     Đơn Hàng
@@ -309,25 +309,5 @@
     <script src="../../dist/js/demo.js"></script>
 
     @RenderSection("Scripts", required: false)
-
-    <script>
-        // Get all buttons with class="btn" inside the container
-        var btns = document.getElementsByClassName('nav-link');
-
-        // Loop through the buttons and add the active class to the current/clicked button
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function () {
-                var current = document.getElementsByClassName("active");
-
-                // If there's no active class
-                if (current.length > 0) {
-                    current[0].className = current[0].className.replace(" active", "");
-                }
-
-                // Add the active class to the current/clicked button
-                this.className += " active";
-            });
-        }
-    </script>
 </body>
 </html>

@@ -1,0 +1,950 @@
+﻿@model MVC.Controllers.Order.ViewModel_Order
+
+@{
+    ViewBag.Title = "AllOrder";
+    Layout = "~/Views/Shared/_Layout_Sallers.cshtml";
+}
+
+@section Css {
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+}
+
+<h2>AllOrder</h2>
+<div class="row">
+    <div class="col-8">
+        <div class="card card-warning card-outline card-outline-tabs" style="margin-right: 10px; margin-left: 10px">
+            <div class="card-header p-0 border-bottom-0">
+                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#tabs-tatca" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Tất cả</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#tabs-choxacnhan" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Chờ xác nhận</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill" href="#tabs-cholayhang" role="tab" aria-controls="custom-tabs-four-messages" aria-selected="false">Chờ lấy hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#tabs-danggiao" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="false">Đang giao</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#tabs-dagiao" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="false">Đã giao</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                    <!--Tất cả-->
+                    <div class="tab-pane fade active show" id="tabs-tatca" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="width: 200px;" placeholder="Tìm kiếm">
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group float-right" style="width: 360px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control float-right" id="reservationtime_tatca">
+                                        </div>
+                                        <h6 style="margin-top: 10px;">Ngày đặt đơn:</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-outline-warning float-right" onclick="loadAllOrder()" style="width: fit-content; margin-top: 10px;">Chuyển tất cả</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <b class="text-muted">Mã</b>
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        <b class="text-muted">Khách hàng | Mã</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Giá trị</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Ngày đặt</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Tình trạng</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Thao tác</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+                        <div class="card">
+                            <div class="card-body" id="_tatcaOrder">
+                                @*@if (Model.view_AllOrders != null)
+                                {
+                                    foreach (var item in Model.view_AllOrders)
+                                    {
+                                        <div class="row" style="margin-bottom: 5px;">
+                                            <div class="col-1">
+                                                #@item.id
+                                            </div>
+                                            <div class="col-3" style="text-align: center;">
+                                                @item.Fullname | #@item.id_Accounts
+                                            </div>
+                                            <div class="col" style="text-align: center;">
+                                                @item.Sum
+                                            </div>
+                                            <div class="col" style="text-align: center;">
+                                                @item.Date_Create
+                                            </div>
+                                            <div class="col" style="text-align: center;">
+                                                @item.Status
+                                            </div>
+                                            <div class="col" style="text-align: center;">
+                                                Chuyển | Hủy
+                                            </div>
+                                        </div>
+                                    }
+                                }*@
+                            </div>
+                        </div>
+                            
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-1">
+                                    #245
+                                </div>
+                                <div class="col-3" style="text-align: center;">
+                                    Nguyễn Trung Tín | #01
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    8.000.000
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    24/12/2020
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    Chờ xác nhận
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    Chuyển | Hủy
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-1">
+                                    #245
+                                </div>
+                                <div class="col-3" style="text-align: center;">
+                                    Nguyễn Trung Tín | #01
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    8.000.000
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    24/12/2020
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    Chờ xác nhận
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    Chuyển | Hủy
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-1">
+                                    #245
+                                </div>
+                                <div class="col-3" style="text-align: center;">
+                                    Nguyễn Trung Tín | #01
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    8.000.000
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    24/12/2020
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    Chờ xác nhận
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    Chuyển | Hủy
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!--Tất cả-->
+                    <!--Chờ xác nhận-->
+                    <div class="tab-pane fade" id="tabs-choxacnhan" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="width: 200px;" placeholder="Tìm kiếm">
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group float-right" style="width: 360px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control float-right" id="reservationtime_choxacnhan">
+                                        </div>
+                                        <h6 style="margin-top: 10px;">Ngày đặt đơn:</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-outline-warning float-right" style="width: fit-content; margin-top: 10px;">Chuyển tất cả</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" onclick="allclick_choxacnhan(this)" id="checkbox4">
+                                            <label for="checkbox4">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <b class="text-muted">Mã</b>
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        <b class="text-muted">Khách hàng | Mã</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Giá trị</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Ngày đặt</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Thao tác</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row" style="margin-bottom: 5px;">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" class="checkchoxacnhan" id="checkbox1">
+                                            <label for="checkbox1">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Chuyển | Hủy
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px;">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" class="checkchoxacnhan" id="checkbox2">
+                                            <label for="checkbox2">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Chuyển | Hủy
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px;">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" class="checkchoxacnhan" id="checkbox3">
+                                            <label for="checkbox3">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Chuyển | Hủy
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Chờ xác nhận-->
+                    <!--Chờ lấy hàng-->
+                    <div class="tab-pane fade" id="tabs-cholayhang" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="width: 200px;" placeholder="Tìm kiếm">
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group float-right" style="width: 360px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control float-right" id="reservationtime_cholayhang">
+                                        </div>
+                                        <h6 style="margin-top: 10px;">Ngày đặt đơn:</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-outline-warning float-right" style="width: fit-content; margin-top: 10px;">Chuyển tất cả</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" onclick="allclick_cholayhang(this)" id="checkboxcholayhang">
+                                            <label for="checkboxcholayhang">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <b class="text-muted">Mã</b>
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        <b class="text-muted">Khách hàng | Mã</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Giá trị</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Ngày đặt</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Thao tác</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row" style="margin-bottom: 5px;">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" class="checkcholayhang" id="checkbox1">
+                                            <label for="checkbox1">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Chuyển | Hủy
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px;">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" class="checkcholayhang" id="checkbox2">
+                                            <label for="checkbox2">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Chuyển | Hủy
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px;">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" class="checkcholayhang" id="checkbox3">
+                                            <label for="checkbox3">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Chuyển | Hủy
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Chờ lấy hàng-->
+                    <!--Đang giao-->
+                    <div class="tab-pane fade" id="tabs-danggiao" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="width: 200px;" placeholder="Tìm kiếm">
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group float-right" style="width: 360px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control float-right" id="reservationtime_danggiao">
+                                        </div>
+                                        <h6 style="margin-top: 10px;">Ngày đặt đơn:</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-outline-warning float-right" style="width: fit-content; margin-top: 10px;">Chuyển tất cả</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" onclick="allclick_cholayhang(this)" id="checkboxcholayhang">
+                                            <label for="checkboxcholayhang">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <b class="text-muted">Mã</b>
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        <b class="text-muted">Khách hàng | Mã</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Giá trị</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Ngày đặt</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Thao tác</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row" style="margin-bottom: 5px;">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" class="checkdanggiao" id="checkbox1">
+                                            <label for="checkbox1">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Chuyển | Hủy
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px;">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" class="checkcholayhang" id="checkbox2">
+                                            <label for="checkbox2">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Chuyển | Hủy
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px;">
+                                    <div class="col-1">
+                                        <div class="icheck-warning d-inline">
+                                            <input type="checkbox" class="checkcholayhang" id="checkbox3">
+                                            <label for="checkbox3">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Chuyển | Hủy
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Đã giao-->
+                    <!--Đã giao-->
+                    <div class="tab-pane fade" id="tabs-dagiao" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" style="width: 200px;" placeholder="Tìm kiếm">
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group float-right" style="width: 360px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control float-right" id="reservationtime_dagiao">
+                                        </div>
+                                        <h6 style="margin-top: 10px;">Ngày đặt đơn:</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <b class="text-muted">Mã</b>
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        <b class="text-muted">Khách hàng | Mã</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Giá trị</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Ngày giao</b>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <b class="text-muted">Người giao</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row" style="margin-bottom: 5px;">
+
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Trung Tín
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px;">
+
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Trung Tín
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 5px;">
+
+                                    <div class="col-1">
+                                        #245
+                                    </div>
+                                    <div class="col-3" style="text-align: center;">
+                                        Nguyễn Trung Tín | #01
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        8.000.000
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        22/12/2020
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        Trung Tín
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Đã giao-->
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card card-outline card-warning" style="align-items: flex-start;">
+            <div class="card-header" style="height: 42px;">
+                <h5>Chi tiết đơn hàng: #15485</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h6 class="text-muted"><b>Khách hàng: </b></h6>
+                        <span>
+                            <h6 style="margin-left: 10px;">Nguyễn Trung Tín</h6>
+                        </span>
+                        <span>
+                            <h6 style="margin-left: 10px;">0945 918 317</h6>
+                        </span>
+                        <h6 style="margin-left: 10px;">trungtinbee@gmail.com</h6>
+                        <h6 style="margin-left: 10px;">Quận 9 - Tp.HCM</h6>
+                    </div>
+                    <div class="col">
+                        <h6 class="text-muted"><b>Đơn hàng: </b></h6>
+                        <span style="display: inline-flex;">
+                            <h6 class="text-muted">Số lượng: </h6>
+                            <h6 style="margin-left: 10px;">5 cái</h6>
+                        </span>
+                        <span style="display: inline-flex;">
+                            <h6 class="text-muted">CODE giảm giá: </h6>
+                            <h6 style="margin-left: 10px;">Không</h6>
+                        </span>
+                        <span style="display: inline-flex;">
+                            <h6 class="text-muted">Thành tiền: </h6>
+                            <h6 style="margin-left: 10px;">9.000.000 vnđ</h6>
+                        </span>
+                        <span style="display: inline-flex;">
+                            <h6 class="text-muted">Thanh toán: </h6>
+                            <h6 style="margin-left: 10px;">Khi nhận hàng</h6>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <b class="text-muted">Mã Sản phẩm</b>
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        <b class="text-muted">Đơn giá</b>
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        <b class="text-muted">Số lượng</b>
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        <b class="text-muted">Tồn kho</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-bottom: 5px;">
+                    <div class="col">
+                        #1547
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        500.000
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        2
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        20
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 5px;">
+                    <div class="col">
+                        #1547
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        500.000
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        2
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        20
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 5px;">
+                    <div class="col">
+                        #1547
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        500.000
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        2
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        20
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('_donhang').className += ' active';
+</script>
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- InputMask -->
+<script src="../../plugins/moment/moment.min.js"></script>
+<script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+
+<script>
+    $('#reservationtime_tatca').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY hh:mm A'
+        }
+    })
+    $('#reservationtime_choxacnhan').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY hh:mm A'
+        }
+    })
+    $('#reservationtime_cholayhang').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY hh:mm A'
+        }
+    })
+    $('#reservationtime_danggiao').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY hh:mm A'
+        }
+    })
+    $('#reservationtime_dagiao').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY hh:mm A'
+        }
+    })
+    $('#reservationtime_dahuy').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY hh:mm A'
+        }
+    })
+</script>
+<script>
+    $.ajax({
+        url: "../../Order/GetAllOrder",
+        type: "GET",
+        data: {},
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+            $('#_tatcaOrder').empty();
+            $.each(data, function (index, item) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(item.Date_Create);
+                var dt = new Date(parseFloat(results[1]));
+                $('#_tatcaOrder').append('<div class="row" style="margin-bottom: 5px;"><div class="col-1">#' + item.id + '</div><div class="col-3" style="text-align: center;">' + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">' + item.Sum + '</div><div class="col" style="text-align: center;">' + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;">' + item.Status + '</div><div class="col" style="text-align: center;">Chuyển | Hủy</div></div>');
+            });
+        }
+    })
+</script>
+
+<script>
+    function loadAllOrder() {
+        $.ajax({
+            url: "../../Order/GetAllOrder",
+            type: "GET",
+            data: {},
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                $('#_tatcaOrder').empty();
+                $.each(data, function (index, item) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(item.Date_Create);
+                    var dt = new Date(parseFloat(results[1]));
+                    $('#_tatcaOrder').append('<div class="row" style="margin-bottom: 5px;"><div class="col-1">#' + item.id + '</div><div class="col-3" style="text-align: center;">' + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">' + item.Sum + '</div><div class="col" style="text-align: center;">' + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;">' + item.Status + '</div><div class="col" style="text-align: center;">Chuyển | Hủy</div></div>');
+                });
+            }
+        })
+    }
+</script>
+
+<script>
+    function allclick_choxacnhan(element) {
+        var listcheckchoxacnhan = document.getElementsByClassName('checkchoxacnhan');
+        if (listcheckchoxacnhan.length > 0) {
+            for (var i = 0; i < listcheckchoxacnhan.length; i++) {
+                listcheckchoxacnhan[i].checked = element.checked;
+            }
+        }
+    }
+    function allclick_cholayhang(element) {
+        var listcheckchoxacnhan = document.getElementsByClassName('checkcholayhang');
+        if (listcheckchoxacnhan.length > 0) {
+            for (var i = 0; i < listcheckchoxacnhan.length; i++) {
+                listcheckchoxacnhan[i].checked = element.checked;
+            }
+        }
+    }
+</script>

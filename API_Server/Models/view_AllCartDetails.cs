@@ -12,7 +12,7 @@ namespace API_Server.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class view_CartDetails
+    public partial class view_AllCartDetails
     {
         public int id_Cart { get; set; }
         public int id_Watch { get; set; }

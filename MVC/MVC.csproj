@@ -139,6 +139,7 @@
     <Compile Include="Controllers\Clients\CartController.cs" />
     <Compile Include="Controllers\Home\HomePageController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
+    <Compile Include="Controllers\OrderDetail\OrderDetailController.cs" />
     <Compile Include="Controllers\Order\OrderController.cs" />
     <Compile Include="Controllers\Orther\Address_DistrictController.cs" />
     <Compile Include="Controllers\Orther\Address_ProvinceController.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Models\Shop_Seller.cs" />
     <Compile Include="Models\TypeDiscounts.cs" />
     <Compile Include="Models\view_AllOrder.cs" />
+    <Compile Include="Models\view_AllOrderDetail.cs" />
     <Compile Include="Models\view_Watch.cs" />
     <Compile Include="Models\view_WatchDetails.cs" />
     <Compile Include="Models\Watches_Categories.cs" />
@@ -2277,6 +2279,7 @@
     <Folder Include="Views\Address_District\" />
     <Folder Include="Views\Address_Province\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="Views\OrderDetail\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -20,6 +20,13 @@ namespace MVC.Controllers.Order
             return View();
         }
 
+        [HttpPost]
+        public ActionResult UpStatus(int id)
+        {
+            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsync("UpStatus/" + id, null).Result;
+            return Content("success");
+        }
+
         public ActionResult AllOrder()
         {
             return View();

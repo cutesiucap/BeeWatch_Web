@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -20,6 +21,17 @@ namespace API_Server.Controllers
         public IQueryable<view_Orders> GetOrders()
         {
             return db.view_Orders;
+        }
+
+        [Route("api/UpStatus/{id}")]
+        [HttpPost]
+        public IHttpActionResult UpStatus(int id)
+        {
+            var idParam = new SqlParameter("id", SqlDbType.Int);
+            idParam.Value = id;
+            db.Database.ExecuteSqlCommand("EXEC [dbo].[sp_UpStatus] @id", idParam); 
+            return Ok();
+            
         }
 
         // GET: api/Orders/5

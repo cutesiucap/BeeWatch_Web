@@ -56,6 +56,9 @@ namespace API_Server.Models
         public virtual DbSet<view_Account> view_Account { get; set; }
         public virtual DbSet<view_AccountType> view_AccountType { get; set; }
         public virtual DbSet<view_Action> view_Action { get; set; }
+        public virtual DbSet<view_AllCartDetails> view_AllCartDetails { get; set; }
+        public virtual DbSet<view_AllOrder> view_AllOrder { get; set; }
+        public virtual DbSet<view_AllOrderDetail> view_AllOrderDetail { get; set; }
         public virtual DbSet<view_Authoriza> view_Authoriza { get; set; }
         public virtual DbSet<view_Cart> view_Cart { get; set; }
         public virtual DbSet<view_CartDetails> view_CartDetails { get; set; }
@@ -71,9 +74,8 @@ namespace API_Server.Models
         public virtual DbSet<view_Province> view_Province { get; set; }
         public virtual DbSet<view_Sex> view_Sex { get; set; }
         public virtual DbSet<view_UserSeller> view_UserSeller { get; set; }
-        public virtual DbSet<view_Watches> view_Watches { get; set; }
         public virtual DbSet<view_WatchDetails> view_WatchDetails { get; set; }
-        public virtual DbSet<view_AllOrder> view_AllOrder { get; set; }
+        public virtual DbSet<view_Watches> view_Watches { get; set; }
     
         [DbFunction("BeeWatchDBEntities", "fn_CheckLockUser")]
         public virtual IQueryable<fn_CheckLockUser_Result> fn_CheckLockUser(Nullable<bool> @lock)
@@ -939,6 +941,15 @@ namespace API_Server.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int sp_UpStatus(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpStatus", idParameter);
         }
     
         public virtual int SQLAccount_Create(string username, string password, string namerole)

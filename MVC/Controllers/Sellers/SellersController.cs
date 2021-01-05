@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -34,6 +36,7 @@ namespace MVC.Controllers.Sellers
             accounts.id_Account_Type = 2;
             accounts.Address = new List<Address>();
             accounts.Address.Add(address);
+            accounts.Password = GetMD5(accounts.Password);
             var result = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Accounts>("Accounts/Register", accounts).Result;
 
             if (result.StatusCode == System.Net.HttpStatusCode.BadRequest)
@@ -43,7 +46,7 @@ namespace MVC.Controllers.Sellers
             }
             else
             {
-                Accounts newaccount = result.Content.ReadAsAsync<Models.Accounts>().Result;
+                Models.Accounts newaccount = result.Content.ReadAsAsync<Models.Accounts>().Result;
                 sellers.id = newaccount.id;
 
                 var resultseller = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Sellers>("Sellers", sellers);
@@ -79,6 +82,7 @@ namespace MVC.Controllers.Sellers
 
 
         }
+        
         [AllowAnonymous]
         public ActionResult LoginSeller()
         {
@@ -86,9 +90,9 @@ namespace MVC.Controllers.Sellers
         }
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult LoginSeller(Accounts accounts)
+        public ActionResult LoginSeller(Models.Accounts accounts)
         {
-            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsJsonAsync<Accounts>("Accounts/Login", accounts).Result;
+            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Accounts>("Accounts/Login", accounts).Result;
 
             if (httpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
@@ -98,7 +102,7 @@ namespace MVC.Controllers.Sellers
             {
                 return Content("IsLock");
             }
-            Accounts result = httpResponseMessage.Content.ReadAsAsync<Accounts>().Result;
+            Models.Accounts result = httpResponseMessage.Content.ReadAsAsync<Models.Accounts>().Result;
             //result.Account_Type = GlobalVariables.HttpClient.GetAsync("Account_Type/Account_Type_By_id_Account/" + result.id_Account_Type).Result.Content.ReadAsAsync<Account_Type>().Result;
             //result.Account_Type.Authoriza = GlobalVariables.HttpClient.GetAsync("Authorizas/Account_Type_By_id_Account/{id}" + result.Account_Type.id).Result.Content.ReadAsAsync<List<Authoriza>>().Result;
             Session["Account"] = result;
@@ -139,7 +143,7 @@ namespace MVC.Controllers.Sellers
         public ActionResult CreateWatches()
         {
 
-            CreateWatchModel watchModel = new CreateWatchModel((Session["Account"] as Accounts).Sellers.Shop_Seller.FirstOrDefault().id_Shop);
+            CreateWatchModel watchModel = new CreateWatchModel((Session["Account"] as Models.Accounts).Sellers.Shop_Seller.FirstOrDefault().id_Shop);
             return View(watchModel);
         }
 
@@ -155,8 +159,8 @@ namespace MVC.Controllers.Sellers
                     request.Watches_Categories.Add(new Watches_Categories() { id_Category = int.Parse(item.ToString()) });
                 }
             }
-            request.id_Shop = (Session["Account"] as Accounts).Sellers.Shop_Seller.FirstOrDefault().id_Shop;
-            request.Create_By = (Session["Account"] as Accounts).Fullname;
+            request.id_Shop = (Session["Account"] as Models.Accounts).Sellers.Shop_Seller.FirstOrDefault().id_Shop;
+            request.Create_By = (Session["Account"] as Models.Accounts).Fullname;
             var result = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Watches>("Watches", request);
             result.Wait();
             Session["id_newWatch"] = result.Result.Content.ReadAsAsync<int>().Result;
@@ -298,13 +302,27 @@ namespace MVC.Controllers.Sellers
         {
             public IEnumerable<Address_Province> address_Provinces { get; set; }
             public IEnumerable<Address_District> address_Districts { get; set; }
-
             public CreateSellersModel()
             {
                 address_Provinces = GlobalVariables.HttpClient.GetAsync("Address_Province").Result.Content.ReadAsAsync<IEnumerable<Address_Province>>().Result;
 
                 address_Districts = GlobalVariables.HttpClient.GetAsync("Address_District").Result.Content.ReadAsAsync<IEnumerable<Address_District>>().Result;
             }
+        }
+        //Mã hóa MD5
+        public static string GetMD5(string str)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] fromData = Encoding.UTF8.GetBytes(str);
+            byte[] targetData = md5.ComputeHash(fromData);
+            string byte2String = null;
+
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                byte2String += targetData[i].ToString("x2");
+
+            }
+            return byte2String;
         }
     }
 }

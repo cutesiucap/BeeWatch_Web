@@ -132,10 +132,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\Accounts\AccountsController.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\TestController.cs" />
     <Compile Include="Controllers\AuthorizeCustom.cs" />
+    <Compile Include="Controllers\Cart\CartController.cs" />
     <Compile Include="Controllers\Clients\CartController.cs" />
     <Compile Include="Controllers\Home\HomePageController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
@@ -2272,6 +2273,11 @@
     <Content Include="Views\Sellers\Create_new_Watch.cshtml" />
     <Content Include="Views\Order\AllOrder.cshtml" />
     <Content Include="Views\Watch\Detail.cshtml" />
+    <Content Include="Views\HomePage\PageSortByDate.cshtml" />
+    <Content Include="Views\HomePage\PageSortByLuotMua.cshtml" />
+    <Content Include="Views\HomePage\PageSortByPriceDown.cshtml" />
+    <Content Include="Views\HomePage\PageSortByPriceUp.cshtml" />
+    <Content Include="Views\HomePage\PageSortByRate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

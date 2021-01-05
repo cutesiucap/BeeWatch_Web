@@ -35,7 +35,7 @@ namespace MVC.Controllers.Order
         [HttpGet]
         public ActionResult GetAllOrder()
         {
-            int id_Shop = (Session["Account"] as Accounts).Sellers.Shop_Seller.FirstOrDefault().id_Shop;
+            int id_Shop = (Session["Account"] as Models.Accounts).Sellers.Shop_Seller.FirstOrDefault().id_Shop;
             ViewModel_Order viewModel_Order = new ViewModel_Order(id_Shop);
             return Json(viewModel_Order.view_AllOrders, JsonRequestBehavior.AllowGet);
         }

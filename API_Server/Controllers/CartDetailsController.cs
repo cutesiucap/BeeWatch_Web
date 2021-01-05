@@ -37,6 +37,21 @@ namespace API_Server.Controllers
             return Ok(cartDetails);
         }
 
+        [HttpPost]
+        public IHttpActionResult AddCartDetail(CartDetails cartDetails)
+        {
+            if (db.CartDetails.Where(x => x.id_Cart == cartDetails.id_Cart && x.id_Watch == cartDetails.id_Watch).FirstOrDefault() != null)
+            {
+                db.Entry(cartDetails).State = EntityState.Modified;
+            }
+            else
+            {
+                db.CartDetails.Add(cartDetails);
+            }
+            db.SaveChanges();
+            return Ok();
+        }
+
         // PUT: api/CartDetails/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCartDetails(int id, CartDetails cartDetails)

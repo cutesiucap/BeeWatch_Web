@@ -1,0 +1,217 @@
+﻿@model IEnumerable<MVC.Models.view_Watch>
+@{ Layout = "~/Views/Shared/Header_page.cshtml"; }
+<!-- Slideshow 4 -->
+<div class="slider text-center" style="margin-top: 0px;">
+    <div class="callbacks_container">
+        <ul class="rslides" id="slider4">
+            <li>
+                <div class="slider-img one-img">
+                    <div class="container">
+                        <div class="slider-info ">
+                            <div class="bottom-info">
+                                <p></p>
+                            </div>
+                            @* <div class="outs_more-buttn">
+                                    <a href="about.html">Read More</a>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="slider-img two-img">
+                    <div class="container">
+                        <div class="slider-info ">
+                            <div class="bottom-info">
+                                <p></p>
+                            </div>
+                            @*                            <div class="outs_more-buttn">
+                                    <a href="about.html">Read More</a>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="slider-img three-img">
+                    <div class="container">
+                        <div class="slider-info ">
+                            <div class="bottom-info">
+                                <p></p>
+                            </div>
+                            @*                            <div class="outs_more-buttn">
+                                    <a href="about.html">Read More</a>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <!-- This is here just to demonstrate the callbacks -->
+    <!-- <ul class="events">
+                      <li>Example 4 callback events</li>
+                      </ul>-->
+    <div class="clearfix"></div>
+</div>
+
+@if (Model != null)
+{<!-- section page -->
+                    <section class="contact py-lg-4 py-md-3 py-sm-3 py-3" style="padding-right: 15px;">
+                        <div class="row" style="margin-top: 20px;">
+                            <!--  left filter product -->
+                            <div class="side-bar col-lg-2 collapse" id="btn-filter" style="margin-left: 25px; max-width: 14.666667%; margin-top: 55px;">
+                                <div class="left-side">
+                                    <h3 class="agileits-sear-head">Giới tính</h3>
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" class="checked">
+                                            <span class="span">Nam</span>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="checked">
+                                            <span class="span">Nữ</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="left-side">
+                                    <h3 class="agileits-sear-head">Hãng</h3>
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" class="checked">
+                                            <span class="span">G-sock</span>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="checked">
+                                            <span class="span">Rolex</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- list product -->
+                            <div class="left-ads-display col-md-10 container ">
+                                <div class="row">
+                                    <div class="  toolbar-listproduct container-fluid">
+                                        <!-- button show filter -->
+                                        <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#btn-filter" style="font-size: 16px;">Lọc</button>
+                                        <select class="select-sort" name="oderby" id="sort-product" style="margin-bottom: 20px;" onchange="location.href=this.value">
+                                            <option value="date">Mới nhất</option>
+                                            <option value="https://localhost:44372/HomePage/PageSortByLuotMua/1" href="">
+                                                <a >
+                                                    Thứ tự theo mức độ phổ biến
+                                                </a>
+                                            </option>
+
+                                            <option value="https://localhost:44372/HomePage/PageSortByRate/1">
+                                                <a href="">
+                                                    Thứ tự theo điểm đánh giá
+                                                </a>
+                                            </option>
+                                            
+
+                                            <option value="https://localhost:44372/HomePage/PageSortByPriceDown/1">
+                                                <a href="">
+                                                    Thứ tự theo: Giá cao đến thấp
+                                                </a>
+                                            </option>
+                                            <option value="https://localhost:44372/HomePage/PageSortByPriceUp/1">
+                                                <a href="">
+                                                    Thứ tự theo: Giá thấp đến cao
+                                                </a>
+                                            </option>
+                                        </select>
+                                    </div>
+
+
+                                    @foreach (var item in Model)
+                                    {
+                    <div class="col-lg-3 col-md-6 col-sm-4 product-men women_two">
+                        <div class="product-toys-info" onmouseover="style.border='1px solid #4c4c4c'" onmouseout="style.border='0px solid #4c4c4c'">
+                            <div class="men-pro-item">
+                                <div class="men-thumb-item">
+                                    <img src="~/assets/images/a1.jpg" class="img-thumbnail img-fluid rounded" alt="Cinque Terre">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <div class="info-product-price">
+                                        <div class="grid_meta">
+                                            <div class="product_price">
+                                                <span class="stars" style="color: yellow;" data-rating=@item.Rate.ToString().Replace(",", ".") data-num-stars="5"></span>
+                                                <h4>
+                                                    <a href="#">
+                                                        @item.WatchName
+                                                    </a>
+                                                </h4>
+
+                                                <div class="grid-price grid-price mt-2">
+                                                    <h4 class="money">@item.Price  Đ</h4>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="toys single-item hvr-outline-out">
+                                        <form action="#" method="post">
+                                            <input type="hidden" name="cmd" value="_cart">
+                                            <input type="hidden" name="add" value="1">
+                                            <input type="hidden" name="toys_item" value=@item.WatchName>
+                                            <input type="hidden" name="amount" value=@item.Price>
+                                            <button type="submit" class="toys- ptoys-cart" style="border:none;">
+                                                <i class="fas fa-cart-plus" style="background-color: #212121; color:#E0A800;"></i>
+
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>}
+
+                                </div>
+                                <ul class="pagination pagination-lg justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#">&laquo;</a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="https://localhost:44372/HomePage/PageSortByDate/1">1</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="https://localhost:44372/HomePage/PageSortByDate/2">2</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="https://localhost:44372/HomePage/PageSortByDate/3">3</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="https://localhost:44372/HomePage/PageSortByDate/4">4</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="https://localhost:44372/HomePage/PageSortByDate/5">5</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="https://localhost:44372/HomePage/PageSortByDate/6">6</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="https://localhost:44372/HomePage/PageSortByDate/7">7</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="https://localhost:44372/HomePage/PageSortByDate/8">8</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">&raquo;</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </section> }
+                else
+                {
+    <h1> Không có sản phẩm</h1>}

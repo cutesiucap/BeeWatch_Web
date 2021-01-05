@@ -25,13 +25,13 @@ namespace MVC.Controllers.Home
         public ActionResult Login()
         {
             ViewBag.Message = "Đăng nhập";
-
             return View();
         }
-        public ActionResult Login(Accounts accounts)
+        public ActionResult Login(Models.Accounts accounts)
         {
-            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsJsonAsync<Accounts>("Accounts/Login", accounts).Result;
-            Accounts result = httpResponseMessage.Content.ReadAsAsync<Accounts>().Result;
+            accounts.Password = GetMD5(accounts.Password);
+            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Accounts>("Accounts/Login", accounts).Result;
+            Models.Accounts result = httpResponseMessage.Content.ReadAsAsync<Models.Accounts>().Result;
             if (!httpResponseMessage.IsSuccessStatusCode)
             {
                 return Content("false");
@@ -58,6 +58,6 @@ namespace MVC.Controllers.Home
 
             }
             return byte2String;
-        }       
+        } 
     }
 }

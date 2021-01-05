@@ -11,7 +11,7 @@ namespace MVC.Controllers
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            Accounts accounts = HttpContext.Current.Session["Account"] as Accounts;
+            Models.Accounts accounts = HttpContext.Current.Session["Account"] as Models.Accounts;
             //nếu session=null thì trả về trang đăng nhập
             if (accounts!=null && accounts.Username != null)
             {

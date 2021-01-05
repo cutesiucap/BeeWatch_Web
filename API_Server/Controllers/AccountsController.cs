@@ -232,7 +232,10 @@ namespace API_Server.Controllers
         [HttpPost]
         public IHttpActionResult Logout(int id)
         {
-            return BadRequest("sdfghjkl");
+            var idParam = new SqlParameter("id", SqlDbType.Int);
+            idParam.Value = id;
+            db.Database.ExecuteSqlCommand("EXEC [dbo].[sp_LogOutAcc] @id", idParam);
+            return Ok();
         }
     }
 }

@@ -273,8 +273,8 @@
                         </div>
 
                         <div class="card">
-                            <div class="card-body">
-                                <div class="row" style="margin-bottom: 5px;">
+                            <div class="card-body" id="_cholayhangOrder">
+                               @* <div class="row" style="margin-bottom: 5px;">
                                     <div class="col-1">
                                         <div class="icheck-warning d-inline">
                                             <input type="checkbox" class="checkcholayhang" id="checkbox1">
@@ -297,7 +297,7 @@
                                     <div class="col" style="text-align: center;">
                                         Chuyển | Hủy
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
                     </div>
@@ -361,8 +361,8 @@
                         </div>
 
                         <div class="card">
-                            <div class="card-body">
-                                <div class="row" style="margin-bottom: 5px;">
+                            <div class="card-body" id="_danggiaoOrder">
+                                @*<div class="row" style="margin-bottom: 5px;">
                                     <div class="col-1">
                                         <div class="icheck-warning d-inline">
                                             <input type="checkbox" class="checkdanggiao" id="checkbox1">
@@ -385,61 +385,11 @@
                                     <div class="col" style="text-align: center;">
                                         Chuyển | Hủy
                                     </div>
-                                </div>
-
-                                <div class="row" style="margin-bottom: 5px;">
-                                    <div class="col-1">
-                                        <div class="icheck-warning d-inline">
-                                            <input type="checkbox" class="checkcholayhang" id="checkbox2">
-                                            <label for="checkbox2">
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-1">
-                                        #245
-                                    </div>
-                                    <div class="col-3" style="text-align: center;">
-                                        Nguyễn Trung Tín | #01
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        8.000.000
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        22/12/2020
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        Chuyển | Hủy
-                                    </div>
-                                </div>
-
-                                <div class="row" style="margin-bottom: 5px;">
-                                    <div class="col-1">
-                                        <div class="icheck-warning d-inline">
-                                            <input type="checkbox" class="checkcholayhang" id="checkbox3">
-                                            <label for="checkbox3">
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-1">
-                                        #245
-                                    </div>
-                                    <div class="col-3" style="text-align: center;">
-                                        Nguyễn Trung Tín | #01
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        8.000.000
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        22/12/2020
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        Chuyển | Hủy
-                                    </div>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
                     </div>
-                    <!--Đã giao-->
+                    <!--Đang giao-->
                     <!--Đã giao-->
                     <div class="tab-pane fade" id="tabs-dagiao" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">
                         <div class="card">
@@ -484,47 +434,8 @@
                         </div>
 
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body" id="_dagiaoOrder">
                                 <div class="row" style="margin-bottom: 5px;">
-
-                                    <div class="col-1">
-                                        #245
-                                    </div>
-                                    <div class="col-3" style="text-align: center;">
-                                        Nguyễn Trung Tín | #01
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        8.000.000
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        22/12/2020
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        Trung Tín
-                                    </div>
-                                </div>
-
-                                <div class="row" style="margin-bottom: 5px;">
-
-                                    <div class="col-1">
-                                        #245
-                                    </div>
-                                    <div class="col-3" style="text-align: center;">
-                                        Nguyễn Trung Tín | #01
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        8.000.000
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        22/12/2020
-                                    </div>
-                                    <div class="col" style="text-align: center;">
-                                        Trung Tín
-                                    </div>
-                                </div>
-
-                                <div class="row" style="margin-bottom: 5px;">
-
                                     <div class="col-1">
                                         #245
                                     </div>
@@ -729,6 +640,9 @@
         contentType: "application/json",
         success: function (data) {
             $('#_tatcaOrder').empty();
+            $('#_choxacnhanOrder').empty();
+            $('#_cholayhangOrder').empty();
+            $('#_danggiaoOrder').empty();
             first_Order_id = data[0].id;
             $.each(data, function (index, item) {
                 var pattern = /Date\(([^)]+)\)/;
@@ -767,7 +681,16 @@
                             + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="'
                             + item.id + '" onclick="huyfunction(this)">Hủy</span>');
 
-                        //$('#_cholayhangOrder').append('<div class="row 2_' + item.id + '" style="margin-bottom: 5px;">< div class= "col-1" ><div class="icheck-warning d-inline"><input type="checkbox" class="checkchoxacnhan" id="_' + item.id + '"><label for="' + item.id + '"></label></div></div><div class="col-1">#' + item.id + '</div><div class="col-3" style="text-align: center;"> ' + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">' + item.Sum + '</div><div class="col" style="text-align: center;">' + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="' + item.id + '" onclick="chuyenfunction(this)" value="Đã lấy">Đã lấy</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="' + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="' + item.id + '" onclick="huyfunction(this)">Hủy</span>');
+                        $('#_cholayhangOrder').append('<div class="row" style="margin-bottom: 5px;"><div class= "col-1"><div class="icheck-warning d-inline"><input type="checkbox" class="checkcholayhang" id="checkbox'
+                            + item.id + '"><label for="checkbox' + item.id + '"></label></div></div><div class="col-1">#'
+                            + item.id + '</div><div class="col-3" style="text-align: center;">'
+                            + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">'
+                            + item.Sum + '</div><div class="col" style="text-align: center;">'
+                            + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="'
+                            + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                            + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="'
+                            + item.id + '" onclick="huyfunction(this)">Hủy</span></div >');
+
                         break;
                     case 2:
                         $('#_tatcaOrder').append('<div class="row 0_' + item.id + '" style="margin-bottom: 5px;"><div class="col-1" style="margin: auto;">#'
@@ -779,7 +702,16 @@
                             + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
                             + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span>');
 
-                        //$('#_danggiaoOrder').append('<div class="row 3_' + item.id + '" style="margin-bottom: 5px;">< div class= "col-1" ><div class="icheck-warning d-inline"><input type="checkbox" class="checkchoxacnhan" id="_' + item.id + '"><label for="' + item.id + '"></label></div></div><div class="col-1">#' + item.id + '</div><div class="col-3" style="text-align: center;"> ' + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">' + item.Sum + '</div><div class="col" style="text-align: center;">' + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="' + item.id + '" onclick="chuyenfunction(this)" value="Đã giao">Đã giao</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="' + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span>');
+                        $('#_danggiaoOrder').append('<div class="row" style="margin-bottom: 5px;"><div class= "col-1"><div class="icheck-warning d-inline"><input type="checkbox" class="checkdanggiao" id="checkbox'
+                            + item.id + '"><label for="checkbox' + item.id + '"></label></div></div><div class="col-1">#'
+                            + item.id + '</div><div class="col-3" style="text-align: center;">'
+                            + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">'
+                            + item.Sum + '</div><div class="col" style="text-align: center;">'
+                            + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="'
+                            + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                            + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="'
+                            + item.id + '" onclick="huyfunction(this)">Hủy</span></div >');
+
                         break;
                     case 3:
                         $('#_tatcaOrder').append('<div class="row 0_' + item.id + '" style="margin-bottom: 5px;"><div class="col-1" style="margin: auto;">#'
@@ -787,8 +719,7 @@
                             + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center; margin: auto;">'
                             + item.Sum + '</div><div class="col" style="text-align: center; margin: auto;">'
                             + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center; margin: auto;">'
-                            + item.Status + '</div><div class="col" style="text-align: center; margin: auto;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="'
-                            + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                            + item.Status + '</div><div class="col" style="text-align: center; margin: auto;"><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
                             + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span>');
 
                         //$('#_dagiaoOrder').append('<div class="row 4_' + item.id + '" style="margin-bottom: 5px;">< div class= "col-1" ><div class="icheck-warning d-inline"><input type="checkbox" class="checkchoxacnhan" id="_' + item.id + '"><label for="' + item.id + '"></label></div></div><div class="col-1">#' + item.id + '</div><div class="col-3" style="text-align: center;"> ' + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">' + item.Sum + '</div><div class="col" style="text-align: center;">' + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;"><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="' + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span>');
@@ -799,8 +730,7 @@
                             + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center; margin: auto;">'
                             + item.Sum + '</div><div class="col" style="text-align: center; margin: auto;">'
                             + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center; margin: auto;">'
-                            + item.Status + '</div><div class="col" style="text-align: center; margin: auto;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="'
-                            + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                            + item.Status + '</div><div class="col" style="text-align: center; margin: auto;"><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
                             + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span>');
 
                         //$('#_dahuyOrder').append('<div class="row 5_' + item.id + '" style="margin-bottom: 5px;">< div class= "col-1" ><div class="col-1">#' + item.id + '</div><div class="col-3" style="text-align: center;"> ' + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">' + item.Sum + '</div><div class="col" style="text-align: center;">' + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;"><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="' + item.id + '" onclick="chitietfunction(this)">Chi tiết</span>');
@@ -814,6 +744,118 @@
 </script>
 
 <script>
+    function loadOrder() {
+        $.ajax({
+            url: "../../Order/GetAllOrder",
+            type: "GET",
+            data: {},
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                $('#_tatcaOrder').empty();
+                $('#_choxacnhanOrder').empty();
+                $('#_cholayhangOrder').empty();
+                $('#_danggiaoOrder').empty();
+                first_Order_id = data[0].id;
+                $.each(data, function (index, item) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(item.Date_Create);
+                    var dt = new Date(parseFloat(results[1]));
+                    switch (item.Status) {
+                        case 0:
+                            $('#_tatcaOrder').append('<div class="row 0_' + item.id + '" style="margin-bottom: 5px;"><div class="col-1" style="margin: auto;">#'
+                                + item.id + '</div><div class="col-3" style="text-align: center; margin: auto;">'
+                                + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + item.Sum + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + item.Status + '</div><div class="col" style="text-align: center; margin: auto;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="huyfunction(this)">Hủy</span>');
+
+                            $('#_choxacnhanOrder').append('<div class="row" style="margin-bottom: 5px;"><div class= "col-1"><div class="icheck-warning d-inline"><input type="checkbox" class="checkchoxacnhan" id="checkbox'
+                                + item.id + '"><label for="checkbox' + item.id + '"></label></div></div><div class="col-1">#'
+                                + item.id + '</div><div class="col-3" style="text-align: center;">'
+                                + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">'
+                                + item.Sum + '</div><div class="col" style="text-align: center;">'
+                                + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="huyfunction(this)">Hủy</span></div >');
+                            break;
+                        case 1:
+                            $('#_tatcaOrder').append('<div class="row 0_' + item.id + '" style="margin-bottom: 5px;"><div class="col-1" style="margin: auto;">#'
+                                + item.id + '</div><div class="col-3" style="text-align: center; margin: auto;">'
+                                + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + item.Sum + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + item.Status + '</div><div class="col" style="text-align: center; margin: auto;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="huyfunction(this)">Hủy</span>');
+
+                            $('#_cholayhangOrder').append('<div class="row" style="margin-bottom: 5px;"><div class= "col-1"><div class="icheck-warning d-inline"><input type="checkbox" class="checkcholayhang" id="checkbox'
+                                + item.id + '"><label for="checkbox' + item.id + '"></label></div></div><div class="col-1">#'
+                                + item.id + '</div><div class="col-3" style="text-align: center;">'
+                                + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">'
+                                + item.Sum + '</div><div class="col" style="text-align: center;">'
+                                + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="huyfunction(this)">Hủy</span></div >');
+
+                            break;
+                        case 2:
+                            $('#_tatcaOrder').append('<div class="row 0_' + item.id + '" style="margin-bottom: 5px;"><div class="col-1" style="margin: auto;">#'
+                                + item.id + '</div><div class="col-3" style="text-align: center; margin: auto;">'
+                                + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + item.Sum + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + item.Status + '</div><div class="col" style="text-align: center; margin: auto;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span>');
+
+                            $('#_danggiaoOrder').append('<div class="row" style="margin-bottom: 5px;"><div class= "col-1"><div class="icheck-warning d-inline"><input type="checkbox" class="checkdanggiao" id="checkbox'
+                                + item.id + '"><label for="checkbox' + item.id + '"></label></div></div><div class="col-1">#'
+                                + item.id + '</div><div class="col-3" style="text-align: center;">'
+                                + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">'
+                                + item.Sum + '</div><div class="col" style="text-align: center;">'
+                                + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="huyfunction(this)">Hủy</span></div >');
+
+                            break;
+                        case 3:
+                            $('#_tatcaOrder').append('<div class="row 0_' + item.id + '" style="margin-bottom: 5px;"><div class="col-1" style="margin: auto;">#'
+                                + item.id + '</div><div class="col-3" style="text-align: center; margin: auto;">'
+                                + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + item.Sum + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + item.Status + '</div><div class="col" style="text-align: center; margin: auto;"><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span>');
+
+                            //$('#_dagiaoOrder').append('<div class="row 4_' + item.id + '" style="margin-bottom: 5px;">< div class= "col-1" ><div class="icheck-warning d-inline"><input type="checkbox" class="checkchoxacnhan" id="_' + item.id + '"><label for="' + item.id + '"></label></div></div><div class="col-1">#' + item.id + '</div><div class="col-3" style="text-align: center;"> ' + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">' + item.Sum + '</div><div class="col" style="text-align: center;">' + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;"><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="' + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span>');
+                            break;
+                        case 4:
+                            $('#_tatcaOrder').append('<div class="row 0_' + item.id + '" style="margin-bottom: 5px;"><div class="col-1" style="margin: auto;">#'
+                                + item.id + '</div><div class="col-3" style="text-align: center; margin: auto;">'
+                                + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + item.Sum + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center; margin: auto;">'
+                                + item.Status + '</div><div class="col" style="text-align: center; margin: auto;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chuyenfunction(this)">Chuyển</span><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="'
+                                + item.id + '" onclick="chitietfunction(this.id)">Chi tiết</span>');
+
+                            //$('#_dahuyOrder').append('<div class="row 5_' + item.id + '" style="margin-bottom: 5px;">< div class= "col-1" ><div class="col-1">#' + item.id + '</div><div class="col-3" style="text-align: center;"> ' + item.Fullname + ' | #' + item.id_Accounts + '</div><div class="col" style="text-align: center;">' + item.Sum + '</div><div class="col" style="text-align: center;">' + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds() + '</div><div class="col" style="text-align: center;"><span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="' + item.id + '" onclick="chitietfunction(this)">Chi tiết</span>');
+                            break;
+                    };
+                });
+                chitietfunction(data[0].id);
+            }
+        });
+    };
+
     function loadAllOrder() {
         $.ajax({
             url: "../../Order/GetAllOrder",
@@ -847,7 +889,7 @@
                 type: "POST",
                 data: data,
                 success: function (data) {
-                    $('div').remove('.' + (data.Status - 1) + '_' + sefl.id);
+                    loadOrder();
                 },
             });
         }

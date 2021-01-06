@@ -12,44 +12,46 @@ using API_Local.Models;
 
 namespace API_Local.Controllers
 {
-    public class SellersController : ApiController
+    public class view_AllOrderController : ApiController
     {
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
-        // GET: api/Sellers
-        public IQueryable<Sellers> GetSellers()
+        // GET: api/view_AllOrder
+        [Route("api/view_AllOrder/{id}")]
+        [HttpGet]
+        public IQueryable<view_AllOrder> Getview_AllOrder(int id)
         {
-            return db.Sellers;
+            return db.view_AllOrder.Where(x => x.id_Shop == id).OrderBy(x => x.Date_Create);
         }
 
-        // GET: api/Sellers/5
-        [ResponseType(typeof(Sellers))]
-        public IHttpActionResult GetSellers(int id)
+        // GET: api/view_AllOrder/5
+        [ResponseType(typeof(view_AllOrder))]
+        public IHttpActionResult Getview_AllOrder(string id)
         {
-            Sellers sellers = db.Sellers.Find(id);
-            if (sellers == null)
+            view_AllOrder view_AllOrder = db.view_AllOrder.Find(id);
+            if (view_AllOrder == null)
             {
                 return NotFound();
             }
 
-            return Ok(sellers);
+            return Ok(view_AllOrder);
         }
 
-        // PUT: api/Sellers/5
+        // PUT: api/view_AllOrder/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSellers(int id, Sellers sellers)
+        public IHttpActionResult Putview_AllOrder(string id, view_AllOrder view_AllOrder)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != sellers.id)
+            if (id != view_AllOrder.Fullname)
             {
                 return BadRequest();
             }
 
-            db.Entry(sellers).State = EntityState.Modified;
+            db.Entry(view_AllOrder).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +59,7 @@ namespace API_Local.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SellersExists(id))
+                if (!view_AllOrderExists(id))
                 {
                     return NotFound();
                 }
@@ -70,16 +72,16 @@ namespace API_Local.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Sellers
-        [ResponseType(typeof(Sellers))]
-        public IHttpActionResult PostSellers(Sellers sellers)
+        // POST: api/view_AllOrder
+        [ResponseType(typeof(view_AllOrder))]
+        public IHttpActionResult Postview_AllOrder(view_AllOrder view_AllOrder)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Sellers.Add(sellers);
+            db.view_AllOrder.Add(view_AllOrder);
 
             try
             {
@@ -87,7 +89,7 @@ namespace API_Local.Controllers
             }
             catch (DbUpdateException)
             {
-                if (SellersExists(sellers.id))
+                if (view_AllOrderExists(view_AllOrder.Fullname))
                 {
                     return Conflict();
                 }
@@ -97,23 +99,23 @@ namespace API_Local.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = sellers.id }, sellers);
+            return CreatedAtRoute("DefaultApi", new { id = view_AllOrder.Fullname }, view_AllOrder);
         }
 
-        // DELETE: api/Sellers/5
-        [ResponseType(typeof(Sellers))]
-        public IHttpActionResult DeleteSellers(int id)
+        // DELETE: api/view_AllOrder/5
+        [ResponseType(typeof(view_AllOrder))]
+        public IHttpActionResult Deleteview_AllOrder(string id)
         {
-            Sellers sellers = db.Sellers.Find(id);
-            if (sellers == null)
+            view_AllOrder view_AllOrder = db.view_AllOrder.Find(id);
+            if (view_AllOrder == null)
             {
                 return NotFound();
             }
 
-            db.Sellers.Remove(sellers);
+            db.view_AllOrder.Remove(view_AllOrder);
             db.SaveChanges();
 
-            return Ok(sellers);
+            return Ok(view_AllOrder);
         }
 
         protected override void Dispose(bool disposing)
@@ -125,9 +127,9 @@ namespace API_Local.Controllers
             base.Dispose(disposing);
         }
 
-        private bool SellersExists(int id)
+        private bool view_AllOrderExists(string id)
         {
-            return db.Sellers.Count(e => e.id == id) > 0;
+            return db.view_AllOrder.Count(e => e.Fullname == id) > 0;
         }
     }
 }

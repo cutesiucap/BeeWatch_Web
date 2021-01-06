@@ -164,21 +164,23 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\Account_TypeController.cs" />
-    <Compile Include="Controllers\ActionsController.cs" />
     <Compile Include="Controllers\Address_DistrictController.cs" />
     <Compile Include="Controllers\Address_ProvinceController.cs" />
-    <Compile Include="Controllers\AuthorizasController.cs" />
     <Compile Include="Controllers\CartDetailsController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\FirmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SellersController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\SexController.cs" />
+    <Compile Include="Controllers\ShopsController.cs" />
+    <Compile Include="Controllers\Shop_SellerController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Controllers\view_OrdersController.cs" />
+    <Compile Include="Controllers\view_AllOrderController.cs" />
+    <Compile Include="Controllers\view_AllOrderDetailController.cs" />
     <Compile Include="Controllers\view_WatchesController.cs" />
     <Compile Include="Controllers\WatchesController.cs" />
-    <Compile Include="Controllers\Watches_CategoriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

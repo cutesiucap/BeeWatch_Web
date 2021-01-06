@@ -12,44 +12,44 @@ using API_Local.Models;
 
 namespace API_Local.Controllers
 {
-    public class Watches_CategoriesController : ApiController
+    public class SexController : ApiController
     {
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
-        // GET: api/Watches_Categories
-        public IQueryable<Watches_Categories> GetWatches_Categories()
+        // GET: api/Sex
+        public IQueryable<view_Sex> GetSex()
         {
-            return db.Watches_Categories;
+            return db.view_Sex;
         }
 
-        // GET: api/Watches_Categories/5
-        [ResponseType(typeof(Watches_Categories))]
-        public IHttpActionResult GetWatches_Categories(int id)
+        // GET: api/Sex/5
+        [ResponseType(typeof(Sex))]
+        public IHttpActionResult GetSex(int id)
         {
-            Watches_Categories watches_Categories = db.Watches_Categories.Find(id);
-            if (watches_Categories == null)
+            Sex sex = db.Sex.Find(id);
+            if (sex == null)
             {
                 return NotFound();
             }
 
-            return Ok(watches_Categories);
+            return Ok(sex);
         }
 
-        // PUT: api/Watches_Categories/5
+        // PUT: api/Sex/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutWatches_Categories(int id, Watches_Categories watches_Categories)
+        public IHttpActionResult PutSex(int id, Sex sex)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != watches_Categories.id_Watch)
+            if (id != sex.id)
             {
                 return BadRequest();
             }
 
-            db.Entry(watches_Categories).State = EntityState.Modified;
+            db.Entry(sex).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace API_Local.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!Watches_CategoriesExists(id))
+                if (!SexExists(id))
                 {
                     return NotFound();
                 }
@@ -70,16 +70,16 @@ namespace API_Local.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Watches_Categories
-        [ResponseType(typeof(Watches_Categories))]
-        public IHttpActionResult PostWatches_Categories(Watches_Categories watches_Categories)
+        // POST: api/Sex
+        [ResponseType(typeof(Sex))]
+        public IHttpActionResult PostSex(Sex sex)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Watches_Categories.Add(watches_Categories);
+            db.Sex.Add(sex);
 
             try
             {
@@ -87,7 +87,7 @@ namespace API_Local.Controllers
             }
             catch (DbUpdateException)
             {
-                if (Watches_CategoriesExists(watches_Categories.id_Watch))
+                if (SexExists(sex.id))
                 {
                     return Conflict();
                 }
@@ -97,23 +97,23 @@ namespace API_Local.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = watches_Categories.id_Watch }, watches_Categories);
+            return CreatedAtRoute("DefaultApi", new { id = sex.id }, sex);
         }
 
-        // DELETE: api/Watches_Categories/5
-        [ResponseType(typeof(Watches_Categories))]
-        public IHttpActionResult DeleteWatches_Categories(int id)
+        // DELETE: api/Sex/5
+        [ResponseType(typeof(Sex))]
+        public IHttpActionResult DeleteSex(int id)
         {
-            Watches_Categories watches_Categories = db.Watches_Categories.Find(id);
-            if (watches_Categories == null)
+            Sex sex = db.Sex.Find(id);
+            if (sex == null)
             {
                 return NotFound();
             }
 
-            db.Watches_Categories.Remove(watches_Categories);
+            db.Sex.Remove(sex);
             db.SaveChanges();
 
-            return Ok(watches_Categories);
+            return Ok(sex);
         }
 
         protected override void Dispose(bool disposing)
@@ -125,9 +125,9 @@ namespace API_Local.Controllers
             base.Dispose(disposing);
         }
 
-        private bool Watches_CategoriesExists(int id)
+        private bool SexExists(int id)
         {
-            return db.Watches_Categories.Count(e => e.id_Watch == id) > 0;
+            return db.Sex.Count(e => e.id == id) > 0;
         }
     }
 }

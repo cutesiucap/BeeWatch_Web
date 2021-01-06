@@ -12,51 +12,44 @@ using API_Local.Models;
 
 namespace API_Local.Controllers
 {
-    public class AuthorizasController : ApiController
+    public class ShopsController : ApiController
     {
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
-        // GET: api/Authorizas
-        public IQueryable<Authoriza> GetAuthoriza()
+        // GET: api/Shops
+        public IQueryable<Shops> GetShops()
         {
-            return db.Authoriza;
+            return db.Shops;
         }
 
-        [Route("api/Authorizas/Account_Type_By_id_Account/{id}")]
-        [HttpGet]
-        public IQueryable<Authoriza> Authoriza_By_id_AccountType(int id)
+        // GET: api/Shops/5
+        [ResponseType(typeof(Shops))]
+        public IHttpActionResult GetShops(int id)
         {
-            return db.Authoriza.Where(x => x.id_Account_Type == id);
-        }
-
-        // GET: api/Authorizas/5
-        [ResponseType(typeof(Authoriza))]
-        public IHttpActionResult GetAuthoriza(int id)
-        {
-            Authoriza authoriza = db.Authoriza.Find(id);
-            if (authoriza == null)
+            Shops shops = db.Shops.Find(id);
+            if (shops == null)
             {
                 return NotFound();
             }
 
-            return Ok(authoriza);
+            return Ok(shops);
         }
 
-        // PUT: api/Authorizas/5
+        // PUT: api/Shops/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAuthoriza(int id, Authoriza authoriza)
+        public IHttpActionResult PutShops(int id, Shops shops)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != authoriza.id)
+            if (id != shops.id)
             {
                 return BadRequest();
             }
 
-            db.Entry(authoriza).State = EntityState.Modified;
+            db.Entry(shops).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +57,7 @@ namespace API_Local.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AuthorizaExists(id))
+                if (!ShopsExists(id))
                 {
                     return NotFound();
                 }
@@ -77,35 +70,35 @@ namespace API_Local.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Authorizas
-        [ResponseType(typeof(Authoriza))]
-        public IHttpActionResult PostAuthoriza(Authoriza authoriza)
+        // POST: api/Shops
+        [ResponseType(typeof(Shops))]
+        public IHttpActionResult PostShops(Shops shops)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Authoriza.Add(authoriza);
+            db.Shops.Add(shops);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = authoriza.id }, authoriza);
+            return CreatedAtRoute("DefaultApi", new { id = shops.id }, shops);
         }
 
-        // DELETE: api/Authorizas/5
-        [ResponseType(typeof(Authoriza))]
-        public IHttpActionResult DeleteAuthoriza(int id)
+        // DELETE: api/Shops/5
+        [ResponseType(typeof(Shops))]
+        public IHttpActionResult DeleteShops(int id)
         {
-            Authoriza authoriza = db.Authoriza.Find(id);
-            if (authoriza == null)
+            Shops shops = db.Shops.Find(id);
+            if (shops == null)
             {
                 return NotFound();
             }
 
-            db.Authoriza.Remove(authoriza);
+            db.Shops.Remove(shops);
             db.SaveChanges();
 
-            return Ok(authoriza);
+            return Ok(shops);
         }
 
         protected override void Dispose(bool disposing)
@@ -117,9 +110,9 @@ namespace API_Local.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AuthorizaExists(int id)
+        private bool ShopsExists(int id)
         {
-            return db.Authoriza.Count(e => e.id == id) > 0;
+            return db.Shops.Count(e => e.id == id) > 0;
         }
     }
 }

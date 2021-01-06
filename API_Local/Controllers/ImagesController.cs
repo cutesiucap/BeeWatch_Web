@@ -12,44 +12,49 @@ using API_Local.Models;
 
 namespace API_Local.Controllers
 {
-    public class FirmsController : ApiController
+    public class ImagesController : ApiController
     {
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
-        // GET: api/Firms
-        public IQueryable<view_Firm> GetFirms()
+        // GET: api/Images
+        public IQueryable<Image> GetImage()
         {
-            return db.view_Firm;
+            var lImage = db.Image;
+            foreach(var item in lImage)
+            {
+                item.Watches = null;
+            }
+            return lImage;
         }
 
-        // GET: api/Firms/5
-        [ResponseType(typeof(Firms))]
-        public IHttpActionResult GetFirms(int id)
+        // GET: api/Images/5
+        [ResponseType(typeof(Image))]
+        public IHttpActionResult GetImage(int id)
         {
-            Firms firms = db.Firms.Find(id);
-            if (firms == null)
+            Image image = db.Image.Find(id);
+            if (image == null)
             {
                 return NotFound();
             }
-
-            return Ok(firms);
+            image.Watches = null;
+            return Ok(image);
         }
 
-        // PUT: api/Firms/5
+        // PUT: api/Images/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutFirms(int id, Firms firms)
+        public IHttpActionResult PutImage(int id, Image image)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != firms.id)
+            if (id != image.id)
             {
                 return BadRequest();
             }
 
-            db.Entry(firms).State = EntityState.Modified;
+            db.Entry(image).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +62,7 @@ namespace API_Local.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FirmsExists(id))
+                if (!ImageExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +75,35 @@ namespace API_Local.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Firms
-        [ResponseType(typeof(Firms))]
-        public IHttpActionResult PostFirms(Firms firms)
+        // POST: api/Images
+        [ResponseType(typeof(Image))]
+        public IHttpActionResult PostImage(Image image)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Firms.Add(firms);
+            db.Image.Add(image);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = firms.id }, firms);
+            return CreatedAtRoute("DefaultApi", new { id = image.id }, image);
         }
 
-        // DELETE: api/Firms/5
-        [ResponseType(typeof(Firms))]
-        public IHttpActionResult DeleteFirms(int id)
+        // DELETE: api/Images/5
+        [ResponseType(typeof(Image))]
+        public IHttpActionResult DeleteImage(int id)
         {
-            Firms firms = db.Firms.Find(id);
-            if (firms == null)
+            Image image = db.Image.Find(id);
+            if (image == null)
             {
                 return NotFound();
             }
 
-            db.Firms.Remove(firms);
+            db.Image.Remove(image);
             db.SaveChanges();
 
-            return Ok(firms);
+            return Ok(image);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +115,9 @@ namespace API_Local.Controllers
             base.Dispose(disposing);
         }
 
-        private bool FirmsExists(int id)
+        private bool ImageExists(int id)
         {
-            return db.Firms.Count(e => e.id == id) > 0;
+            return db.Image.Count(e => e.id == id) > 0;
         }
     }
 }

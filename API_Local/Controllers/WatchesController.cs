@@ -17,9 +17,9 @@ namespace API_Local.Controllers
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
         // GET: api/Watches
-        public IQueryable<Watches> GetWatches()
+        public IQueryable<view_WatchDetails> GetWatches()
         {
-            return db.Watches;
+            return db.view_WatchDetails;
         }
 
         // GET: api/Watches/5
@@ -33,6 +33,12 @@ namespace API_Local.Controllers
             }
 
             return Ok(watches);
+        }
+
+        [Route("api/GetListWatch/{id}")]
+        public IQueryable<view_WatchDetails> GetListWatch(int id)
+        {
+            return db.view_WatchDetails.Where(x => x.id_Shop == id);
         }
 
         // PUT: api/Watches/5
@@ -82,7 +88,7 @@ namespace API_Local.Controllers
             db.Watches.Add(watches);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = watches.id }, watches);
+            return Ok(watches.id);
         }
 
         // DELETE: api/Watches/5
@@ -113,6 +119,15 @@ namespace API_Local.Controllers
         private bool WatchesExists(int id)
         {
             return db.Watches.Count(e => e.id == id) > 0;
+        }
+
+        [Route("api/Watches/SearchName")]
+        [HttpGet]
+        // GET: api/Watches
+        public IQueryable<view_WatchDetails> Search([FromUri] string name)
+        {
+            fn_SearchWatch_Result watches = db.fn_SearchWatch(name).FirstOrDefault();
+            return db.view_WatchDetails;
         }
     }
 }

@@ -134,7 +134,47 @@ namespace API_Local.Controllers
             {
                 return BadRequest();
             }
-            return Ok(result);
+            Accounts new_accounts = new Accounts()
+            {
+                id = result.id,
+                Fullname = result.Fullname,
+                id_Account_Type = result.id_Account_Type,
+                Account_Type = new Account_Type()
+                {
+                    id = result.id_Account_Type,
+                    Authoriza = new List<Authoriza>(),
+                }
+            };
+
+            foreach (var item in db.Authoriza.Where(x => x.id_Account_Type == result.id_Account_Type))
+            {
+                new_accounts.Account_Type.Authoriza.Add(new Authoriza()
+                {
+                    id = item.id,
+                    id_Account_Type = item.id_Account_Type,
+                    id_Action = item.id_Action,
+                    Action = { id = item.id_Action, Name = db.view_Action.Where(x => x.id == item.id_Action).FirstOrDefault().Name }
+                });
+            };
+
+            if (new_accounts.id_Account_Type == 2)
+            {
+                new_accounts.Sellers = new Sellers()
+                {
+                    Shop_Seller = new List<Shop_Seller>(),
+                };
+                foreach ( var item in db.Shop_Seller.Where(x => x.id_Seller == new_accounts.id))
+                {
+                    new_accounts.Sellers.Shop_Seller.Add(new Shop_Seller()
+                    {
+                        id_Shop = item.id_Shop,
+                        id_Seller = item.id_Seller,
+                        IsCheck = item.IsCheck,
+                        IsLock = item.IsLock,
+                    });
+                }
+            }
+            return Ok(new_accounts);
         }
         [Route("api/Accounts/Register")]
         [HttpPost]
@@ -144,9 +184,7 @@ namespace API_Local.Controllers
             int id = 0;
             try
             {
-                /* var 
-
-                 id = db.Database.ExecuteSqlCommand('EXEC [dbo].[sp_InsertAccount]', {  })*/
+               //Using PROCEDURE in DB
 
                 var usernameParam = new SqlParameter("username", SqlDbType.NVarChar, 50);
                 usernameParam.Value = accounts.Username;
@@ -177,28 +215,27 @@ namespace API_Local.Controllers
 
                 id = db.Database.ExecuteSqlCommand("EXEC [dbo].[sp_InsertAccount] @username, @password, @avt, @email, @fullname, @sex, @address_province, @address_district, @address_detail",
                                                                       usernameParam, passwordParam, avtParam, emailParam, fullnameParam, sexParam, address_provinceParam, address_districtParam, address_detailParam);
-
-                /* id = db.sp_InsertAccount(accounts.Username, accounts.Password, "", accounts.Email,
-                     accounts.Sex, accounts.Address.FirstOrDefault().id_Province, accounts.Address.FirstOrDefault().id_District,
-                     accounts.Address.FirstOrDefault().AddressDetail);*/
             }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+            catch(Exception e)
+            {                
+                return Request.CreateResponse(HttpStatusCode.BadRequest,e.Message);
             }
 
             view_Account result = db.view_Account.Where(x => x.id == id).FirstOrDefault();
-
+           
             if (result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-            return Request.CreateResponse(HttpStatusCode.OK, result);
+            return Request.CreateResponse(HttpStatusCode.OK,result);
         }
         [HttpPost]
         public IHttpActionResult Logout(int id)
         {
-            return BadRequest("sdfghjkl");
+            var idParam = new SqlParameter("id", SqlDbType.Int);
+            idParam.Value = id;
+            db.Database.ExecuteSqlCommand("EXEC [dbo].[sp_LogOutAcc] @id", idParam);
+            return Ok();
         }
     }
 }

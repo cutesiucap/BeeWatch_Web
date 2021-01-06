@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using API_Local.Models;
@@ -34,6 +35,21 @@ namespace API_Local.Controllers
             }
 
             return Ok(cartDetails);
+        }
+
+        [HttpPost]
+        public IHttpActionResult AddCartDetail(CartDetails cartDetails)
+        {
+            if (db.CartDetails.Where(x => x.id_Cart == cartDetails.id_Cart && x.id_Watch == cartDetails.id_Watch).FirstOrDefault() != null)
+            {
+                db.Entry(cartDetails).State = EntityState.Modified;
+            }
+            else
+            {
+                db.CartDetails.Add(cartDetails);
+            }
+            db.SaveChanges();
+            return Ok();
         }
 
         // PUT: api/CartDetails/5

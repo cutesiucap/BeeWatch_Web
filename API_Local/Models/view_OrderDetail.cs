@@ -20,7 +20,7 @@ namespace API_Local.Models
         public Nullable<System.DateTime> Date_Create { get; set; }
         public string ShopName { get; set; }
         public string UserName { get; set; }
-        public int id_Watches { get; set; }
+        public Nullable<int> id_Watches { get; set; }
         public string WatchName { get; set; }
         public Nullable<int> Count { get; set; }
         public Nullable<double> Price { get; set; }

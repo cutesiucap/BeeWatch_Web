@@ -14,7 +14,7 @@ namespace API_Local.Models
     public partial class fn_LoadWatchBill_Result
     {
         public int ID_Bill { get; set; }
-        public int id_Watches { get; set; }
+        public Nullable<int> id_Watches { get; set; }
         public string WatchName { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<int> Count { get; set; }

@@ -12,22 +12,23 @@ namespace API_Local.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class view_OrdertoConfirm
+    public partial class view_AllOrder
     {
-        public int id { get; set; }
-        public int id_Shop { get; set; }
+        public Nullable<int> id { get; set; }
         public Nullable<int> id_Accounts { get; set; }
-        public string Address_Province { get; set; }
+        public string Fullname { get; set; }
+        public Nullable<double> Sum { get; set; }
+        public Nullable<System.DateTime> Date_Create { get; set; }
+        public Nullable<int> Status { get; set; }
         public string Address_District { get; set; }
+        public string Address_Province { get; set; }
         public string AddressDetail { get; set; }
         public Nullable<int> Count { get; set; }
-        public Nullable<double> Ship_fee { get; set; }
-        public Nullable<int> id_Discount { get; set; }
         public string Payment { get; set; }
-        public Nullable<System.DateTime> Date_Create { get; set; }
-        public Nullable<System.DateTime> Date_Check { get; set; }
-        public string User_Check { get; set; }
-        public Nullable<int> Status { get; set; }
-        public Nullable<double> Sum { get; set; }
+        public Nullable<double> Ship_fee { get; set; }
+        public Nullable<int> id_Shop { get; set; }
+        public Nullable<double> Value___ { get; set; }
+        public Nullable<double> Value___1 { get; set; }
+        public string Code_Discounts { get; set; }
     }
 }

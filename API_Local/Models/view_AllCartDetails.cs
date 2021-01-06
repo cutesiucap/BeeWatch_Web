@@ -12,10 +12,13 @@ namespace API_Local.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class view_Authoriza
+    public partial class view_AllCartDetails
     {
-        public int id { get; set; }
-        public int id_Account_Type { get; set; }
-        public int id_Action { get; set; }
+        public int id_Cart { get; set; }
+        public int id_Watch { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public int SoLuong { get; set; }
+        public Nullable<double> ThanhTien { get; set; }
     }
 }

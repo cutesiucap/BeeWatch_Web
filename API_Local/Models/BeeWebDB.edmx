@@ -69,8 +69,8 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_Account_Type" Type="int" />
-          <Property Name="id_Action" Type="int" />
+          <Property Name="id_Account_Type" Type="int" Nullable="false" />
+          <Property Name="id_Action" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CartDetails">
           <Key>
@@ -86,7 +86,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="Count" Type="int" />
           <Property Name="Sum" Type="float" />
         </EntityType>
@@ -150,11 +150,11 @@
         </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
-            <PropertyRef Name="id_Order" />
-            <PropertyRef Name="id_Watches" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="id_Order" Type="int" Nullable="false" />
-          <Property Name="id_Watches" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Order" Type="int" />
+          <Property Name="id_Watches" Type="int" />
           <Property Name="WatchName" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="float" />
           <Property Name="Count" Type="int" />
@@ -173,7 +173,6 @@
           <Property Name="Address_District" Type="nchar" MaxLength="10" />
           <Property Name="AddressDetail" Type="nvarchar(max)" />
           <Property Name="Count" Type="int" />
-          <Property Name="Sum" Type="float" />
           <Property Name="Ship_fee" Type="float" />
           <Property Name="id_Discount" Type="int" />
           <Property Name="Payment" Type="nvarchar" MaxLength="20" />
@@ -181,6 +180,7 @@
           <Property Name="Date_Check" Type="datetime" />
           <Property Name="User_Check" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
+          <Property Name="Sum" Type="float" />
         </EntityType>
         <EntityType Name="Phone">
           <Key>
@@ -328,14 +328,87 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Action' does not have a primar
           <Property Name="Detail" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'BeeWatchDB.dbo.view_AllCartDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_AllCartDetails">
+          <Key>
+            <PropertyRef Name="id_Cart" />
+            <PropertyRef Name="id_Watch" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="SoLuong" />
+          </Key>
+          <Property Name="id_Cart" Type="int" Nullable="false" />
+          <Property Name="id_Watch" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+          <Property Name="ThanhTien" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BeeWatchDB.dbo.view_AllOrder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_AllOrder">
+          <Key>
+            <PropertyRef Name="Fullname" />
+          </Key>
+          <Property Name="id" Type="int" />
+          <Property Name="id_Accounts" Type="int" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sum" Type="float" />
+          <Property Name="Date_Create" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Address_District" Type="nchar" MaxLength="10" />
+          <Property Name="Address_Province" Type="nchar" MaxLength="10" />
+          <Property Name="AddressDetail" Type="nvarchar(max)" />
+          <Property Name="Count" Type="int" />
+          <Property Name="Payment" Type="nvarchar" MaxLength="20" />
+          <Property Name="Ship_fee" Type="float" />
+          <Property Name="id_Shop" Type="int" />
+          <Property Name="Value(%)" Type="float" />
+          <Property Name="Value(-)" Type="float" />
+          <Property Name="Code_Discounts" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BeeWatchDB.dbo.view_AllOrderDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_AllOrderDetail">
+          <Key>
+            <PropertyRef Name="Fullname" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="id_OrderDetail" />
+            <PropertyRef Name="TonKho" />
+          </Key>
+          <Property Name="id_Order" Type="int" />
+          <Property Name="id_Accounts" Type="int" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address_District" Type="nchar" MaxLength="10" />
+          <Property Name="Address_Province" Type="nchar" MaxLength="10" />
+          <Property Name="AddressDetail" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nchar" MaxLength="10" />
+          <Property Name="Sum" Type="float" />
+          <Property Name="SoLuongTong" Type="int" />
+          <Property Name="Payment" Type="nvarchar" MaxLength="20" />
+          <Property Name="id_OrderDetail" Type="int" Nullable="false" />
+          <Property Name="id_Watches" Type="int" />
+          <Property Name="SoLuongSP" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="TonKho" Type="int" Nullable="false" />
+          <Property Name="id_Discount" Type="int" />
+          <Property Name="Value(%)" Type="float" />
+          <Property Name="Value(-)" Type="float" />
+          <Property Name="Code_Discounts" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'BeeWatchDB.dbo.view_Authoriza' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_Authoriza">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="id_Account_Type" />
+            <PropertyRef Name="id_Action" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_Account_Type" Type="int" />
-          <Property Name="id_Action" Type="int" />
+          <Property Name="id_Account_Type" Type="int" Nullable="false" />
+          <Property Name="id_Action" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BeeWatchDB.dbo.view_Cart' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -343,7 +416,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Cart' does not have a primary 
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="Count" Type="int" />
           <Property Name="Sum" Type="float" />
         </EntityType>
@@ -351,14 +424,18 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Cart' does not have a primary 
 warning 6002: The table/view 'BeeWatchDB.dbo.view_CartDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_CartDetails">
           <Key>
-            <PropertyRef Name="id_Watch" />
             <PropertyRef Name="id_Cart" />
-            <PropertyRef Name="Count" />
+            <PropertyRef Name="id_Watch" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="SoLuong" />
           </Key>
-          <Property Name="id_Watch" Type="int" Nullable="false" />
           <Property Name="id_Cart" Type="int" Nullable="false" />
-          <Property Name="Count" Type="int" Nullable="false" />
-          <Property Name="IsCheck" Type="bit" />
+          <Property Name="id_Watch" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+          <Property Name="ThanhTien" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BeeWatchDB.dbo.view_Categories' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -383,6 +460,17 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_District' does not have a prim
           <Property Name="id_Province" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'BeeWatchDB.dbo.view_Firm' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_Firm">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'BeeWatchDB.dbo.view_OrderCancel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_OrderCancel">
           <Key>
@@ -396,7 +484,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_OrderCancel' does not have a p
           <Property Name="Address_District" Type="nchar" MaxLength="10" />
           <Property Name="AddressDetail" Type="nvarchar(max)" />
           <Property Name="Count" Type="int" />
-          <Property Name="Sum" Type="float" />
           <Property Name="Ship_fee" Type="float" />
           <Property Name="id_Discount" Type="int" />
           <Property Name="Payment" Type="nvarchar" MaxLength="20" />
@@ -404,6 +491,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_OrderCancel' does not have a p
           <Property Name="Date_Check" Type="datetime" />
           <Property Name="User_Check" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
+          <Property Name="Sum" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BeeWatchDB.dbo.view_OrderDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -412,7 +500,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_OrderDetail' does not have a p
             <PropertyRef Name="idOrder" />
             <PropertyRef Name="idShop" />
             <PropertyRef Name="UserName" />
-            <PropertyRef Name="id_Watches" />
             <PropertyRef Name="WatchName" />
           </Key>
           <Property Name="idOrder" Type="int" Nullable="false" />
@@ -421,7 +508,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_OrderDetail' does not have a p
           <Property Name="Date_Create" Type="datetime" />
           <Property Name="ShopName" Type="nvarchar(max)" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="id_Watches" Type="int" Nullable="false" />
+          <Property Name="id_Watches" Type="int" />
           <Property Name="WatchName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Count" Type="int" />
           <Property Name="Price" Type="float" />
@@ -442,7 +529,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Orders' does not have a primar
           <Property Name="Address_District" Type="nchar" MaxLength="10" />
           <Property Name="AddressDetail" Type="nvarchar(max)" />
           <Property Name="Count" Type="int" />
-          <Property Name="Sum" Type="float" />
           <Property Name="Ship_fee" Type="float" />
           <Property Name="id_Discount" Type="int" />
           <Property Name="Payment" Type="nvarchar" MaxLength="20" />
@@ -450,6 +536,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Orders' does not have a primar
           <Property Name="Date_Check" Type="datetime" />
           <Property Name="User_Check" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
+          <Property Name="Sum" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BeeWatchDB.dbo.view_OrdertoComplete' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -465,7 +552,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_OrdertoComplete' does not have
           <Property Name="Address_District" Type="nchar" MaxLength="10" />
           <Property Name="AddressDetail" Type="nvarchar(max)" />
           <Property Name="Count" Type="int" />
-          <Property Name="Sum" Type="float" />
           <Property Name="Ship_fee" Type="float" />
           <Property Name="id_Discount" Type="int" />
           <Property Name="Payment" Type="nvarchar" MaxLength="20" />
@@ -473,6 +559,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_OrdertoComplete' does not have
           <Property Name="Date_Check" Type="datetime" />
           <Property Name="User_Check" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
+          <Property Name="Sum" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BeeWatchDB.dbo.view_OrdertoConfirm' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -488,7 +575,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_OrdertoConfirm' does not have 
           <Property Name="Address_District" Type="nchar" MaxLength="10" />
           <Property Name="AddressDetail" Type="nvarchar(max)" />
           <Property Name="Count" Type="int" />
-          <Property Name="Sum" Type="float" />
           <Property Name="Ship_fee" Type="float" />
           <Property Name="id_Discount" Type="int" />
           <Property Name="Payment" Type="nvarchar" MaxLength="20" />
@@ -496,6 +582,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_OrdertoConfirm' does not have 
           <Property Name="Date_Check" Type="datetime" />
           <Property Name="User_Check" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
+          <Property Name="Sum" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BeeWatchDB.dbo.view_OrdertoShip' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -511,7 +598,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_OrdertoShip' does not have a p
           <Property Name="Address_District" Type="nchar" MaxLength="10" />
           <Property Name="AddressDetail" Type="nvarchar(max)" />
           <Property Name="Count" Type="int" />
-          <Property Name="Sum" Type="float" />
           <Property Name="Ship_fee" Type="float" />
           <Property Name="id_Discount" Type="int" />
           <Property Name="Payment" Type="nvarchar" MaxLength="20" />
@@ -519,6 +605,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_OrdertoShip' does not have a p
           <Property Name="Date_Check" Type="datetime" />
           <Property Name="User_Check" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
+          <Property Name="Sum" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BeeWatchDB.dbo.view_Province' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -556,26 +643,37 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_UserSeller' does not have a pr
           <Property Name="Bankcard" Type="char" MaxLength="20" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_Watches">
+warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_WatchDetails">
           <Key>
-            <PropertyRef Name="NameofSex" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="id_Firms" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="Information" />
+            <PropertyRef Name="id_Shop" />
           </Key>
-          <Property Name="id" Type="int" />
-          <Property Name="WatchName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Count" Type="int" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Url_Image" Type="nvarchar(max)" />
-          <Property Name="Price" Type="float" />
+          <Property Name="id_Sex" Type="int" />
+          <Property Name="id_Firms" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Information" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="id_Shop" Type="int" Nullable="false" />
           <Property Name="Rate" Type="float" />
-          <Property Name="Information" Type="nvarchar(max)" />
-          <Property Name="id_Shop" Type="int" />
           <Property Name="Date_Create" Type="datetime" />
-          <Property Name="NameofSex" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="NameofFirm" Type="nvarchar" MaxLength="50" />
-          <Property Name="LuotMua" Type="int" />
+          <Property Name="Create_By" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_LastEdit" Type="datetime" />
+          <Property Name="LastEdit_By" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsLock" Type="bit" />
+          <Property Name="IsCheck" Type="bit" />
+          <Property Name="IsExist" Type="bit" />
         </EntityType>
         <Association Name="BoughtWatches">
-          <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="0..1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Watches">
@@ -599,7 +697,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Authoriza__id_Ac__398D8EEE">
-          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="0..1" />
+          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="1" />
           <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account_Type">
@@ -719,7 +817,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Authoriza_Action">
-          <End Role="Action" Type="Self.Action" Multiplicity="0..1" />
+          <End Role="Action" Type="Self.Action" Multiplicity="1" />
           <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Action">
@@ -791,7 +889,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetails_Orders">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
@@ -946,6 +1044,18 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Watches_Shops">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="1" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="ChangePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="username" Type="nvarchar" Mode="In" />
@@ -1019,7 +1129,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <Property Name="Address_District" Type="nchar" MaxLength="10" />
                 <Property Name="AddressDetail" Type="nvarchar(max)" />
                 <Property Name="Count" Type="int" />
-                <Property Name="Sum" Type="float" />
                 <Property Name="Ship_fee" Type="float" />
                 <Property Name="id_Discount" Type="int" />
                 <Property Name="Payment" Type="nvarchar" MaxLength="20" />
@@ -1027,6 +1136,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <Property Name="Date_Check" Type="datetime" />
                 <Property Name="User_Check" Type="nvarchar" MaxLength="50" />
                 <Property Name="Status" Type="int" />
+                <Property Name="Sum" Type="float" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -1042,7 +1152,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <Property Name="Address_District" Type="nchar" MaxLength="10" />
                 <Property Name="AddressDetail" Type="nvarchar(max)" />
                 <Property Name="Count" Type="int" />
-                <Property Name="Sum" Type="float" />
                 <Property Name="Ship_fee" Type="float" />
                 <Property Name="id_Discount" Type="int" />
                 <Property Name="Payment" Type="nvarchar" MaxLength="20" />
@@ -1050,6 +1159,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <Property Name="Date_Check" Type="datetime" />
                 <Property Name="User_Check" Type="nvarchar" MaxLength="50" />
                 <Property Name="Status" Type="int" />
+                <Property Name="Sum" Type="float" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -1065,7 +1175,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <Property Name="Address_District" Type="nchar" MaxLength="10" />
                 <Property Name="AddressDetail" Type="nvarchar(max)" />
                 <Property Name="Count" Type="int" />
-                <Property Name="Sum" Type="float" />
                 <Property Name="Ship_fee" Type="float" />
                 <Property Name="id_Discount" Type="int" />
                 <Property Name="Payment" Type="nvarchar" MaxLength="20" />
@@ -1073,6 +1182,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <Property Name="Date_Check" Type="datetime" />
                 <Property Name="User_Check" Type="nvarchar" MaxLength="50" />
                 <Property Name="Status" Type="int" />
+                <Property Name="Sum" Type="float" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -1116,7 +1226,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <CollectionType>
               <RowType>
                 <Property Name="ID_Bill" Type="int" Nullable="false" />
-                <Property Name="id_Watches" Type="int" Nullable="false" />
+                <Property Name="id_Watches" Type="int" />
                 <Property Name="WatchName" Type="nvarchar" MaxLength="50" Nullable="false" />
                 <Property Name="Price" Type="float" />
                 <Property Name="Count" Type="int" />
@@ -1221,6 +1331,9 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Parameter Name="email" Type="nvarchar" Mode="In" />
           <Parameter Name="fullname" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_ChangeStatusDiscount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Ngay" Type="date" Mode="In" />
+        </Function>
         <Function Name="sp_CheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="username" Type="nvarchar" Mode="In" />
@@ -1234,7 +1347,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Parameter Name="idorder" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_ConfirmForCancel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idorder" Type="int" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_ConfirmForComplete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idorder" Type="int" Mode="In" />
@@ -1256,6 +1369,10 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
         <Function Name="sp_DeleteSex" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_DropCartDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCart" Type="int" Mode="In" />
+          <Parameter Name="idWatch" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_GuiMaXacNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="email" Type="varchar" Mode="In" />
@@ -1279,6 +1396,11 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Parameter Name="address_province" Type="nchar" Mode="In" />
           <Parameter Name="address_district" Type="nchar" Mode="In" />
           <Parameter Name="address_detail" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_InsertCartDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCart" Type="int" Mode="In" />
+          <Parameter Name="idWatch" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_InsertDiscount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="code" Type="nvarchar" Mode="In" />
@@ -1301,9 +1423,8 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Parameter Name="payment" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_InsertOrderDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idCart" Type="int" Mode="In" />
+          <Parameter Name="idOrder" Type="int" Mode="In" />
           <Parameter Name="idWatch" Type="int" Mode="In" />
-          <Parameter Name="count" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_InsertSex" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="new" Type="nvarchar" Mode="In" />
@@ -1337,7 +1458,9 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
         </Function>
         <Function Name="sp_Logout" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
-          <Parameter Name="password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_LogOutAcc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_RateWatch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idWatch" Type="int" Mode="In" />
@@ -1384,6 +1507,17 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Parameter Name="count" Type="int" Mode="In" />
           <Parameter Name="information" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="userupdate" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SQLAccount_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="namerole" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SQLAccount_KillConnection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="BeeWatchDBModelStoreContainer">
           <EntitySet Name="Account_Type" EntityType="Self.Account_Type" Schema="dbo" store:Type="Tables" />
@@ -1447,6 +1581,61 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
     [view_Action].[Detail] AS [Detail]
     FROM [dbo].[view_Action] AS [view_Action]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="view_AllCartDetails" EntityType="Self.view_AllCartDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_AllCartDetails].[id_Cart] AS [id_Cart], 
+    [view_AllCartDetails].[id_Watch] AS [id_Watch], 
+    [view_AllCartDetails].[Name] AS [Name], 
+    [view_AllCartDetails].[Price] AS [Price], 
+    [view_AllCartDetails].[SoLuong] AS [SoLuong], 
+    [view_AllCartDetails].[ThanhTien] AS [ThanhTien]
+    FROM [dbo].[view_AllCartDetails] AS [view_AllCartDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_AllOrder" EntityType="Self.view_AllOrder" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_AllOrder].[id] AS [id], 
+    [view_AllOrder].[id_Accounts] AS [id_Accounts], 
+    [view_AllOrder].[Fullname] AS [Fullname], 
+    [view_AllOrder].[Sum] AS [Sum], 
+    [view_AllOrder].[Date_Create] AS [Date_Create], 
+    [view_AllOrder].[Status] AS [Status], 
+    [view_AllOrder].[Address_District] AS [Address_District], 
+    [view_AllOrder].[Address_Province] AS [Address_Province], 
+    [view_AllOrder].[AddressDetail] AS [AddressDetail], 
+    [view_AllOrder].[Count] AS [Count], 
+    [view_AllOrder].[Payment] AS [Payment], 
+    [view_AllOrder].[Ship_fee] AS [Ship_fee], 
+    [view_AllOrder].[id_Shop] AS [id_Shop], 
+    [view_AllOrder].[Value(%)] AS [Value(%)], 
+    [view_AllOrder].[Value(-)] AS [Value(-)], 
+    [view_AllOrder].[Code_Discounts] AS [Code_Discounts]
+    FROM [dbo].[view_AllOrder] AS [view_AllOrder]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_AllOrderDetail" EntityType="Self.view_AllOrderDetail" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_AllOrderDetail].[id_Order] AS [id_Order], 
+    [view_AllOrderDetail].[id_Accounts] AS [id_Accounts], 
+    [view_AllOrderDetail].[Fullname] AS [Fullname], 
+    [view_AllOrderDetail].[Email] AS [Email], 
+    [view_AllOrderDetail].[Address_District] AS [Address_District], 
+    [view_AllOrderDetail].[Address_Province] AS [Address_Province], 
+    [view_AllOrderDetail].[AddressDetail] AS [AddressDetail], 
+    [view_AllOrderDetail].[Address] AS [Address], 
+    [view_AllOrderDetail].[Phone] AS [Phone], 
+    [view_AllOrderDetail].[Sum] AS [Sum], 
+    [view_AllOrderDetail].[SoLuongTong] AS [SoLuongTong], 
+    [view_AllOrderDetail].[Payment] AS [Payment], 
+    [view_AllOrderDetail].[id_OrderDetail] AS [id_OrderDetail], 
+    [view_AllOrderDetail].[id_Watches] AS [id_Watches], 
+    [view_AllOrderDetail].[SoLuongSP] AS [SoLuongSP], 
+    [view_AllOrderDetail].[Price] AS [Price], 
+    [view_AllOrderDetail].[TonKho] AS [TonKho], 
+    [view_AllOrderDetail].[id_Discount] AS [id_Discount], 
+    [view_AllOrderDetail].[Value(%)] AS [Value(%)], 
+    [view_AllOrderDetail].[Value(-)] AS [Value(-)], 
+    [view_AllOrderDetail].[Code_Discounts] AS [Code_Discounts]
+    FROM [dbo].[view_AllOrderDetail] AS [view_AllOrderDetail]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="view_Authoriza" EntityType="Self.view_Authoriza" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [view_Authoriza].[id] AS [id], 
@@ -1463,10 +1652,12 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </EntitySet>
           <EntitySet Name="view_CartDetails" EntityType="Self.view_CartDetails" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [view_CartDetails].[id_Watch] AS [id_Watch], 
     [view_CartDetails].[id_Cart] AS [id_Cart], 
-    [view_CartDetails].[Count] AS [Count], 
-    [view_CartDetails].[IsCheck] AS [IsCheck]
+    [view_CartDetails].[id_Watch] AS [id_Watch], 
+    [view_CartDetails].[Name] AS [Name], 
+    [view_CartDetails].[Price] AS [Price], 
+    [view_CartDetails].[SoLuong] AS [SoLuong], 
+    [view_CartDetails].[ThanhTien] AS [ThanhTien]
     FROM [dbo].[view_CartDetails] AS [view_CartDetails]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_Categories" EntityType="Self.view_Categories" store:Type="Views" store:Schema="dbo">
@@ -1482,6 +1673,14 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
     [view_District].[id_Province] AS [id_Province]
     FROM [dbo].[view_District] AS [view_District]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="view_Firm" EntityType="Self.view_Firm" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_Firm].[id] AS [id], 
+    [view_Firm].[Name] AS [Name], 
+    [view_Firm].[Url] AS [Url], 
+    [view_Firm].[Status] AS [Status]
+    FROM [dbo].[view_Firm] AS [view_Firm]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="view_OrderCancel" EntityType="Self.view_OrderCancel" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [view_OrderCancel].[id] AS [id], 
@@ -1491,14 +1690,14 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
     [view_OrderCancel].[Address_District] AS [Address_District], 
     [view_OrderCancel].[AddressDetail] AS [AddressDetail], 
     [view_OrderCancel].[Count] AS [Count], 
-    [view_OrderCancel].[Sum] AS [Sum], 
     [view_OrderCancel].[Ship_fee] AS [Ship_fee], 
     [view_OrderCancel].[id_Discount] AS [id_Discount], 
     [view_OrderCancel].[Payment] AS [Payment], 
     [view_OrderCancel].[Date_Create] AS [Date_Create], 
     [view_OrderCancel].[Date_Check] AS [Date_Check], 
     [view_OrderCancel].[User_Check] AS [User_Check], 
-    [view_OrderCancel].[Status] AS [Status]
+    [view_OrderCancel].[Status] AS [Status], 
+    [view_OrderCancel].[Sum] AS [Sum]
     FROM [dbo].[view_OrderCancel] AS [view_OrderCancel]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_OrderDetail" EntityType="Self.view_OrderDetail" store:Type="Views" store:Schema="dbo">
@@ -1526,14 +1725,14 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
     [view_Orders].[Address_District] AS [Address_District], 
     [view_Orders].[AddressDetail] AS [AddressDetail], 
     [view_Orders].[Count] AS [Count], 
-    [view_Orders].[Sum] AS [Sum], 
     [view_Orders].[Ship_fee] AS [Ship_fee], 
     [view_Orders].[id_Discount] AS [id_Discount], 
     [view_Orders].[Payment] AS [Payment], 
     [view_Orders].[Date_Create] AS [Date_Create], 
     [view_Orders].[Date_Check] AS [Date_Check], 
     [view_Orders].[User_Check] AS [User_Check], 
-    [view_Orders].[Status] AS [Status]
+    [view_Orders].[Status] AS [Status], 
+    [view_Orders].[Sum] AS [Sum]
     FROM [dbo].[view_Orders] AS [view_Orders]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_OrdertoComplete" EntityType="Self.view_OrdertoComplete" store:Type="Views" store:Schema="dbo">
@@ -1545,14 +1744,14 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
     [view_OrdertoComplete].[Address_District] AS [Address_District], 
     [view_OrdertoComplete].[AddressDetail] AS [AddressDetail], 
     [view_OrdertoComplete].[Count] AS [Count], 
-    [view_OrdertoComplete].[Sum] AS [Sum], 
     [view_OrdertoComplete].[Ship_fee] AS [Ship_fee], 
     [view_OrdertoComplete].[id_Discount] AS [id_Discount], 
     [view_OrdertoComplete].[Payment] AS [Payment], 
     [view_OrdertoComplete].[Date_Create] AS [Date_Create], 
     [view_OrdertoComplete].[Date_Check] AS [Date_Check], 
     [view_OrdertoComplete].[User_Check] AS [User_Check], 
-    [view_OrdertoComplete].[Status] AS [Status]
+    [view_OrdertoComplete].[Status] AS [Status], 
+    [view_OrdertoComplete].[Sum] AS [Sum]
     FROM [dbo].[view_OrdertoComplete] AS [view_OrdertoComplete]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_OrdertoConfirm" EntityType="Self.view_OrdertoConfirm" store:Type="Views" store:Schema="dbo">
@@ -1564,14 +1763,14 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
     [view_OrdertoConfirm].[Address_District] AS [Address_District], 
     [view_OrdertoConfirm].[AddressDetail] AS [AddressDetail], 
     [view_OrdertoConfirm].[Count] AS [Count], 
-    [view_OrdertoConfirm].[Sum] AS [Sum], 
     [view_OrdertoConfirm].[Ship_fee] AS [Ship_fee], 
     [view_OrdertoConfirm].[id_Discount] AS [id_Discount], 
     [view_OrdertoConfirm].[Payment] AS [Payment], 
     [view_OrdertoConfirm].[Date_Create] AS [Date_Create], 
     [view_OrdertoConfirm].[Date_Check] AS [Date_Check], 
     [view_OrdertoConfirm].[User_Check] AS [User_Check], 
-    [view_OrdertoConfirm].[Status] AS [Status]
+    [view_OrdertoConfirm].[Status] AS [Status], 
+    [view_OrdertoConfirm].[Sum] AS [Sum]
     FROM [dbo].[view_OrdertoConfirm] AS [view_OrdertoConfirm]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_OrdertoShip" EntityType="Self.view_OrdertoShip" store:Type="Views" store:Schema="dbo">
@@ -1583,14 +1782,14 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
     [view_OrdertoShip].[Address_District] AS [Address_District], 
     [view_OrdertoShip].[AddressDetail] AS [AddressDetail], 
     [view_OrdertoShip].[Count] AS [Count], 
-    [view_OrdertoShip].[Sum] AS [Sum], 
     [view_OrdertoShip].[Ship_fee] AS [Ship_fee], 
     [view_OrdertoShip].[id_Discount] AS [id_Discount], 
     [view_OrdertoShip].[Payment] AS [Payment], 
     [view_OrdertoShip].[Date_Create] AS [Date_Create], 
     [view_OrdertoShip].[Date_Check] AS [Date_Check], 
     [view_OrdertoShip].[User_Check] AS [User_Check], 
-    [view_OrdertoShip].[Status] AS [Status]
+    [view_OrdertoShip].[Status] AS [Status], 
+    [view_OrdertoShip].[Sum] AS [Sum]
     FROM [dbo].[view_OrdertoShip] AS [view_OrdertoShip]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_Province" EntityType="Self.view_Province" store:Type="Views" store:Schema="dbo">
@@ -1615,21 +1814,26 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
     [view_UserSeller].[Bankcard] AS [Bankcard]
     FROM [dbo].[view_UserSeller] AS [view_UserSeller]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="view_Watches" EntityType="Self.view_Watches" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="view_WatchDetails" EntityType="Self.view_WatchDetails" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [view_Watches].[id] AS [id], 
-    [view_Watches].[WatchName] AS [WatchName], 
-    [view_Watches].[Count] AS [Count], 
-    [view_Watches].[Url_Image] AS [Url_Image], 
-    [view_Watches].[Price] AS [Price], 
-    [view_Watches].[Rate] AS [Rate], 
-    [view_Watches].[Information] AS [Information], 
-    [view_Watches].[id_Shop] AS [id_Shop], 
-    [view_Watches].[Date_Create] AS [Date_Create], 
-    [view_Watches].[NameofSex] AS [NameofSex], 
-    [view_Watches].[NameofFirm] AS [NameofFirm], 
-    [view_Watches].[LuotMua] AS [LuotMua]
-    FROM [dbo].[view_Watches] AS [view_Watches]</DefiningQuery>
+    [view_WatchDetails].[id] AS [id], 
+    [view_WatchDetails].[Url_Image] AS [Url_Image], 
+    [view_WatchDetails].[id_Sex] AS [id_Sex], 
+    [view_WatchDetails].[id_Firms] AS [id_Firms], 
+    [view_WatchDetails].[Name] AS [Name], 
+    [view_WatchDetails].[Price] AS [Price], 
+    [view_WatchDetails].[Count] AS [Count], 
+    [view_WatchDetails].[Information] AS [Information], 
+    [view_WatchDetails].[id_Shop] AS [id_Shop], 
+    [view_WatchDetails].[Rate] AS [Rate], 
+    [view_WatchDetails].[Date_Create] AS [Date_Create], 
+    [view_WatchDetails].[Create_By] AS [Create_By], 
+    [view_WatchDetails].[Date_LastEdit] AS [Date_LastEdit], 
+    [view_WatchDetails].[LastEdit_By] AS [LastEdit_By], 
+    [view_WatchDetails].[IsLock] AS [IsLock], 
+    [view_WatchDetails].[IsCheck] AS [IsCheck], 
+    [view_WatchDetails].[IsExist] AS [IsExist]
+    FROM [dbo].[view_WatchDetails] AS [view_WatchDetails]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="BoughtWatches" Association="Self.BoughtWatches">
             <End Role="Watches" EntitySet="Watches" />
@@ -1755,6 +1959,10 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <End Role="Sex" EntitySet="Sex" />
             <End Role="Watches" EntitySet="Watches" />
           </AssociationSet>
+          <AssociationSet Name="FK_Watches_Shops" Association="Self.FK_Watches_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Watches" EntitySet="Watches" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -1793,7 +2001,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
           <Property Name="Ship_fee" Type="Double" />
           <Property Name="id_Discount" Type="Int32" />
           <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -1801,6 +2008,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Date_Check" Type="DateTime" />
           <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
         </ComplexType>
         <ComplexType Name="fn_LoadBillforCancel_Result">
           <Property Name="id" Type="Int32" Nullable="false" />
@@ -1810,7 +2018,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
           <Property Name="Ship_fee" Type="Double" />
           <Property Name="id_Discount" Type="Int32" />
           <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -1818,6 +2025,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Date_Check" Type="DateTime" />
           <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
         </ComplexType>
         <ComplexType Name="fn_LoadBillforShipper_Result">
           <Property Name="id" Type="Int32" Nullable="false" />
@@ -1827,7 +2035,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
           <Property Name="Ship_fee" Type="Double" />
           <Property Name="id_Discount" Type="Int32" />
           <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -1835,6 +2042,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Date_Check" Type="DateTime" />
           <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
         </ComplexType>
         <ComplexType Name="fn_LoadFirm_Result">
           <Property Name="WatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1856,7 +2064,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
         </ComplexType>
         <ComplexType Name="fn_LoadWatchBill_Result">
           <Property Name="ID_Bill" Type="Int32" Nullable="false" />
-          <Property Name="id_Watches" Type="Int32" Nullable="false" />
+          <Property Name="id_Watches" Type="Int32" />
           <Property Name="WatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Double" />
           <Property Name="Count" Type="Int32" />
@@ -2001,8 +2209,8 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Account_Type" Type="Int32" />
-          <Property Name="id_Action" Type="Int32" />
+          <Property Name="id_Account_Type" Type="Int32" Nullable="false" />
+          <Property Name="id_Action" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account_Type" Relationship="Self.FK__Authoriza__id_Ac__398D8EEE" FromRole="Authoriza" ToRole="Account_Type" />
           <NavigationProperty Name="Action" Relationship="Self.FK_Authoriza_Action" FromRole="Authoriza" ToRole="Action" />
         </EntityType>
@@ -2022,7 +2230,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Int32" />
           <Property Name="Sum" Type="Double" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK__Cart__id__5CD6CB2B" FromRole="Carts" ToRole="Accounts" />
@@ -2096,11 +2304,11 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
         </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
-            <PropertyRef Name="id_Order" />
-            <PropertyRef Name="id_Watches" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="id_Order" Type="Int32" Nullable="false" />
-          <Property Name="id_Watches" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Order" Type="Int32" />
+          <Property Name="id_Watches" Type="Int32" />
           <Property Name="WatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Double" />
           <Property Name="Count" Type="Int32" />
@@ -2121,7 +2329,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
           <Property Name="Ship_fee" Type="Double" />
           <Property Name="id_Discount" Type="Int32" />
           <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -2129,6 +2336,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Date_Check" Type="DateTime" Precision="3" />
           <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_Orders_Accounts" FromRole="Orders" ToRole="Accounts" />
           <NavigationProperty Name="Address_District1" Relationship="Self.FK_Orders_Address_District" FromRole="Orders" ToRole="Address_District" />
           <NavigationProperty Name="Address_Province1" Relationship="Self.FK_Orders_Address_Province" FromRole="Orders" ToRole="Address_Province" />
@@ -2192,6 +2400,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Shops" FromRole="Shops" ToRole="Orders" />
           <NavigationProperty Name="Sellers" Relationship="Self.FK_Shops_Sellers" FromRole="Shops" ToRole="Sellers" />
           <NavigationProperty Name="Shop_Seller" Relationship="Self.FK_Shop_Seller_Shops" FromRole="Shops" ToRole="Shop_Seller" />
+          <NavigationProperty Name="Watches" Relationship="Self.FK_Watches_Shops" FromRole="Shops" ToRole="Watches" />
         </EntityType>
         <EntityType Name="TypeDiscounts">
           <Key>
@@ -2230,6 +2439,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <NavigationProperty Name="Image" Relationship="Self.FK_Image_Watches" FromRole="Watches" ToRole="Image" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.BoughtWatches" FromRole="Watches" ToRole="OrderDetails" />
           <NavigationProperty Name="Sex" Relationship="Self.FK_Watches_Sex" FromRole="Watches" ToRole="Sex" />
+          <NavigationProperty Name="Shops" Relationship="Self.FK_Watches_Shops" FromRole="Watches" ToRole="Shops" />
           <NavigationProperty Name="Watches_Categories" Relationship="Self.FK_Watches_Categories_Watches" FromRole="Watches" ToRole="Watches_Categories" />
         </EntityType>
         <EntityType Name="Watches_Categories">
@@ -2296,32 +2506,103 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
+        <EntityType Name="view_AllCartDetails">
+          <Key>
+            <PropertyRef Name="id_Cart" />
+            <PropertyRef Name="id_Watch" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="SoLuong" />
+          </Key>
+          <Property Name="id_Cart" Type="Int32" Nullable="false" />
+          <Property Name="id_Watch" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="ThanhTien" Type="Double" />
+        </EntityType>
+        <EntityType Name="view_AllOrder">
+          <Key>
+            <PropertyRef Name="Fullname" />
+          </Key>
+          <Property Name="id" Type="Int32" />
+          <Property Name="id_Accounts" Type="Int32" />
+          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sum" Type="Double" />
+          <Property Name="Date_Create" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Ship_fee" Type="Double" />
+          <Property Name="id_Shop" Type="Int32" />
+          <Property Name="Value___" Type="Double" />
+          <Property Name="Value___1" Type="Double" />
+          <Property Name="Code_Discounts" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="view_AllOrderDetail">
+          <Key>
+            <PropertyRef Name="Fullname" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="id_OrderDetail" />
+            <PropertyRef Name="TonKho" />
+          </Key>
+          <Property Name="id_Order" Type="Int32" />
+          <Property Name="id_Accounts" Type="Int32" />
+          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Sum" Type="Double" />
+          <Property Name="SoLuongTong" Type="Int32" />
+          <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id_OrderDetail" Type="Int32" Nullable="false" />
+          <Property Name="id_Watches" Type="Int32" />
+          <Property Name="SoLuongSP" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="TonKho" Type="Int32" Nullable="false" />
+          <Property Name="id_Discount" Type="Int32" />
+          <Property Name="Value___" Type="Double" />
+          <Property Name="Value___1" Type="Double" />
+          <Property Name="Code_Discounts" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
         <EntityType Name="view_Authoriza">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="id_Account_Type" />
+            <PropertyRef Name="id_Action" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Account_Type" Type="Int32" />
-          <Property Name="id_Action" Type="Int32" />
+          <Property Name="id_Account_Type" Type="Int32" Nullable="false" />
+          <Property Name="id_Action" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="view_Cart">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Int32" />
           <Property Name="Sum" Type="Double" />
         </EntityType>
         <EntityType Name="view_CartDetails">
           <Key>
-            <PropertyRef Name="id_Watch" />
             <PropertyRef Name="id_Cart" />
-            <PropertyRef Name="Count" />
+            <PropertyRef Name="id_Watch" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="SoLuong" />
           </Key>
-          <Property Name="id_Watch" Type="Int32" Nullable="false" />
           <Property Name="id_Cart" Type="Int32" Nullable="false" />
-          <Property Name="Count" Type="Int32" Nullable="false" />
-          <Property Name="IsCheck" Type="Boolean" />
+          <Property Name="id_Watch" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="ThanhTien" Type="Double" />
         </EntityType>
         <EntityType Name="view_Categories">
           <Key>
@@ -2341,6 +2622,15 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="id_Province" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
         </EntityType>
+        <EntityType Name="view_Firm">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
         <EntityType Name="view_OrderCancel">
           <Key>
             <PropertyRef Name="id" />
@@ -2353,7 +2643,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
           <Property Name="Ship_fee" Type="Double" />
           <Property Name="id_Discount" Type="Int32" />
           <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -2361,13 +2650,13 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Date_Check" Type="DateTime" Precision="3" />
           <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
         </EntityType>
         <EntityType Name="view_OrderDetail">
           <Key>
             <PropertyRef Name="idOrder" />
             <PropertyRef Name="idShop" />
             <PropertyRef Name="UserName" />
-            <PropertyRef Name="id_Watches" />
             <PropertyRef Name="WatchName" />
           </Key>
           <Property Name="idOrder" Type="Int32" Nullable="false" />
@@ -2376,7 +2665,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Date_Create" Type="DateTime" Precision="3" />
           <Property Name="ShopName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="id_Watches" Type="Int32" Nullable="false" />
+          <Property Name="id_Watches" Type="Int32" />
           <Property Name="WatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Count" Type="Int32" />
           <Property Name="Price" Type="Double" />
@@ -2395,7 +2684,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
           <Property Name="Ship_fee" Type="Double" />
           <Property Name="id_Discount" Type="Int32" />
           <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -2403,6 +2691,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Date_Check" Type="DateTime" Precision="3" />
           <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
         </EntityType>
         <EntityType Name="view_OrdertoComplete">
           <Key>
@@ -2416,7 +2705,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
           <Property Name="Ship_fee" Type="Double" />
           <Property Name="id_Discount" Type="Int32" />
           <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -2424,6 +2712,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Date_Check" Type="DateTime" Precision="3" />
           <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
         </EntityType>
         <EntityType Name="view_OrdertoConfirm">
           <Key>
@@ -2437,7 +2726,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
           <Property Name="Ship_fee" Type="Double" />
           <Property Name="id_Discount" Type="Int32" />
           <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -2445,6 +2733,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Date_Check" Type="DateTime" Precision="3" />
           <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
         </EntityType>
         <EntityType Name="view_OrdertoShip">
           <Key>
@@ -2458,7 +2747,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Address_District" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AddressDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Sum" Type="Double" />
           <Property Name="Ship_fee" Type="Double" />
           <Property Name="id_Discount" Type="Int32" />
           <Property Name="Payment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -2466,6 +2754,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Date_Check" Type="DateTime" Precision="3" />
           <Property Name="User_Check" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Sum" Type="Double" />
         </EntityType>
         <EntityType Name="view_Province">
           <Key>
@@ -2496,22 +2785,33 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <Property Name="Identitycard" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
           <Property Name="Bankcard" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
         </EntityType>
-        <EntityType Name="view_Watches">
+        <EntityType Name="view_WatchDetails">
           <Key>
-            <PropertyRef Name="NameofSex" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="id_Firms" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="Information" />
+            <PropertyRef Name="id_Shop" />
           </Key>
-          <Property Name="id" Type="Int32" />
-          <Property Name="WatchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Url_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Double" />
+          <Property Name="id_Sex" Type="Int32" />
+          <Property Name="id_Firms" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Information" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_Shop" Type="Int32" Nullable="false" />
           <Property Name="Rate" Type="Double" />
-          <Property Name="Information" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id_Shop" Type="Int32" />
           <Property Name="Date_Create" Type="DateTime" Precision="3" />
-          <Property Name="NameofSex" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NameofFirm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LuotMua" Type="Int32" />
+          <Property Name="Create_By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_LastEdit" Type="DateTime" Precision="3" />
+          <Property Name="LastEdit_By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsLock" Type="Boolean" />
+          <Property Name="IsCheck" Type="Boolean" />
+          <Property Name="IsExist" Type="Boolean" />
         </EntityType>
         <Association Name="FK__Accounts__id_Acc__3F466844">
           <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="1" />
@@ -2526,7 +2826,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Authoriza__id_Ac__398D8EEE">
-          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="0..1" />
+          <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="1" />
           <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account_Type">
@@ -2610,7 +2910,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Authoriza_Action">
-          <End Role="Action" Type="Self.Action" Multiplicity="0..1" />
+          <End Role="Action" Type="Self.Action" Multiplicity="1" />
           <End Role="Authoriza" Type="Self.Authoriza" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Action">
@@ -2790,7 +3090,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="BoughtWatches">
-          <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="0..1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Watches">
@@ -2802,7 +3102,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetails_Orders">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
@@ -2873,6 +3173,18 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Watches_Shops">
+          <End Role="Shops" Type="Self.Shops" Multiplicity="1" />
+          <End Role="Watches" Type="Self.Watches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shops">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Watches">
+              <PropertyRef Name="id_Shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Watches_Categories_Watches">
           <End Role="Watches" Type="Self.Watches" Multiplicity="1" />
           <End Role="Watches_Categories" Type="Self.Watches_Categories" Multiplicity="*" />
@@ -2914,11 +3226,15 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <EntitySet Name="view_Account" EntityType="Self.view_Account" />
           <EntitySet Name="view_AccountType" EntityType="Self.view_AccountType" />
           <EntitySet Name="view_Action" EntityType="Self.view_Action" />
+          <EntitySet Name="view_AllCartDetails" EntityType="Self.view_AllCartDetails" />
+          <EntitySet Name="view_AllOrder" EntityType="Self.view_AllOrder" />
+          <EntitySet Name="view_AllOrderDetail" EntityType="Self.view_AllOrderDetail" />
           <EntitySet Name="view_Authoriza" EntityType="Self.view_Authoriza" />
           <EntitySet Name="view_Cart" EntityType="Self.view_Cart" />
           <EntitySet Name="view_CartDetails" EntityType="Self.view_CartDetails" />
           <EntitySet Name="view_Categories" EntityType="Self.view_Categories" />
           <EntitySet Name="view_District" EntityType="Self.view_District" />
+          <EntitySet Name="view_Firm" EntityType="Self.view_Firm" />
           <EntitySet Name="view_OrderCancel" EntityType="Self.view_OrderCancel" />
           <EntitySet Name="view_OrderDetail" EntityType="Self.view_OrderDetail" />
           <EntitySet Name="view_Orders" EntityType="Self.view_Orders" />
@@ -2928,7 +3244,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <EntitySet Name="view_Province" EntityType="Self.view_Province" />
           <EntitySet Name="view_Sex" EntityType="Self.view_Sex" />
           <EntitySet Name="view_UserSeller" EntityType="Self.view_UserSeller" />
-          <EntitySet Name="view_Watches" EntityType="Self.view_Watches" />
+          <EntitySet Name="view_WatchDetails" EntityType="Self.view_WatchDetails" />
           <AssociationSet Name="FK__Accounts__id_Acc__3F466844" Association="Self.FK__Accounts__id_Acc__3F466844">
             <End Role="Account_Type" EntitySet="Account_Type" />
             <End Role="Accounts" EntitySet="Accounts" />
@@ -3049,6 +3365,10 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <End Role="Shops" EntitySet="Shops" />
             <End Role="Shop_Seller" EntitySet="Shop_Seller" />
           </AssociationSet>
+          <AssociationSet Name="FK_Watches_Shops" Association="Self.FK_Watches_Shops">
+            <End Role="Shops" EntitySet="Shops" />
+            <End Role="Watches" EntitySet="Watches" />
+          </AssociationSet>
           <AssociationSet Name="FK_Watches_Categories_Watches" Association="Self.FK_Watches_Categories_Watches">
             <End Role="Watches" EntitySet="Watches" />
             <End Role="Watches_Categories" EntitySet="Watches_Categories" />
@@ -3101,6 +3421,9 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="fullname" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_ChangeStatusDiscount">
+            <Parameter Name="Ngay" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="sp_CheckLogin">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="username" Mode="In" Type="String" />
@@ -3114,7 +3437,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="idorder" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ConfirmForCancel">
-            <Parameter Name="idorder" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ConfirmForComplete">
             <Parameter Name="idorder" Mode="In" Type="Int32" />
@@ -3136,6 +3459,10 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <FunctionImport Name="sp_DeleteSex">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DropCartDetails">
+            <Parameter Name="idCart" Mode="In" Type="Int32" />
+            <Parameter Name="idWatch" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GuiMaXacNhan">
             <Parameter Name="email" Mode="In" Type="String" />
@@ -3159,6 +3486,11 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="address_province" Mode="In" Type="String" />
             <Parameter Name="address_district" Mode="In" Type="String" />
             <Parameter Name="address_detail" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_InsertCartDetails">
+            <Parameter Name="idCart" Mode="In" Type="Int32" />
+            <Parameter Name="idWatch" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertDiscount">
             <Parameter Name="code" Mode="In" Type="String" />
@@ -3181,9 +3513,8 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="payment" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertOrderDetails">
-            <Parameter Name="idCart" Mode="In" Type="Int32" />
+            <Parameter Name="idOrder" Mode="In" Type="Int32" />
             <Parameter Name="idWatch" Mode="In" Type="Int32" />
-            <Parameter Name="count" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertSex">
             <Parameter Name="new" Mode="In" Type="String" />
@@ -3217,7 +3548,9 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           </FunctionImport>
           <FunctionImport Name="sp_Logout">
             <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LogOutAcc">
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_RateWatch">
             <Parameter Name="idWatch" Mode="In" Type="Int32" />
@@ -3264,6 +3597,17 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
             <Parameter Name="count" Mode="In" Type="Int32" />
             <Parameter Name="information" Mode="In" Type="String" />
             <Parameter Name="userupdate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpStatus">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SQLAccount_Create">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="namerole" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SQLAccount_KillConnection">
+            <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_SearchWatch_Result">
@@ -3451,6 +3795,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="BeeWatchDBModel.OrderDetails">
               <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_Order" ColumnName="id_Order" />
                 <ScalarProperty Name="id_Watches" ColumnName="id_Watches" />
                 <ScalarProperty Name="WatchName" ColumnName="WatchName" />
@@ -3472,7 +3817,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Address_District" ColumnName="Address_District" />
                 <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
                 <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
                 <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
                 <ScalarProperty Name="Payment" ColumnName="Payment" />
@@ -3480,6 +3824,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
                 <ScalarProperty Name="User_Check" ColumnName="User_Check" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3617,6 +3962,67 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="view_AllCartDetails">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_AllCartDetails">
+              <MappingFragment StoreEntitySet="view_AllCartDetails">
+                <ScalarProperty Name="id_Cart" ColumnName="id_Cart" />
+                <ScalarProperty Name="id_Watch" ColumnName="id_Watch" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_AllOrder">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_AllOrder">
+              <MappingFragment StoreEntitySet="view_AllOrder">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
+                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
+                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
+                <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="Value___" ColumnName="Value(%)" />
+                <ScalarProperty Name="Value___1" ColumnName="Value(-)" />
+                <ScalarProperty Name="Code_Discounts" ColumnName="Code_Discounts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_AllOrderDetail">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_AllOrderDetail">
+              <MappingFragment StoreEntitySet="view_AllOrderDetail">
+                <ScalarProperty Name="id_Order" ColumnName="id_Order" />
+                <ScalarProperty Name="id_Accounts" ColumnName="id_Accounts" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address_District" ColumnName="Address_District" />
+                <ScalarProperty Name="Address_Province" ColumnName="Address_Province" />
+                <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="SoLuongTong" ColumnName="SoLuongTong" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="id_OrderDetail" ColumnName="id_OrderDetail" />
+                <ScalarProperty Name="id_Watches" ColumnName="id_Watches" />
+                <ScalarProperty Name="SoLuongSP" ColumnName="SoLuongSP" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TonKho" ColumnName="TonKho" />
+                <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
+                <ScalarProperty Name="Value___" ColumnName="Value(%)" />
+                <ScalarProperty Name="Value___1" ColumnName="Value(-)" />
+                <ScalarProperty Name="Code_Discounts" ColumnName="Code_Discounts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="view_Authoriza">
             <EntityTypeMapping TypeName="BeeWatchDBModel.view_Authoriza">
               <MappingFragment StoreEntitySet="view_Authoriza">
@@ -3638,10 +4044,12 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <EntitySetMapping Name="view_CartDetails">
             <EntityTypeMapping TypeName="BeeWatchDBModel.view_CartDetails">
               <MappingFragment StoreEntitySet="view_CartDetails">
-                <ScalarProperty Name="id_Watch" ColumnName="id_Watch" />
                 <ScalarProperty Name="id_Cart" ColumnName="id_Cart" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
+                <ScalarProperty Name="id_Watch" ColumnName="id_Watch" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3662,6 +4070,16 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="view_Firm">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Firm">
+              <MappingFragment StoreEntitySet="view_Firm">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="view_OrderCancel">
             <EntityTypeMapping TypeName="BeeWatchDBModel.view_OrderCancel">
               <MappingFragment StoreEntitySet="view_OrderCancel">
@@ -3672,7 +4090,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Address_District" ColumnName="Address_District" />
                 <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
                 <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
                 <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
                 <ScalarProperty Name="Payment" ColumnName="Payment" />
@@ -3680,6 +4097,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
                 <ScalarProperty Name="User_Check" ColumnName="User_Check" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3711,7 +4129,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Address_District" ColumnName="Address_District" />
                 <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
                 <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
                 <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
                 <ScalarProperty Name="Payment" ColumnName="Payment" />
@@ -3719,6 +4136,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
                 <ScalarProperty Name="User_Check" ColumnName="User_Check" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3732,7 +4150,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Address_District" ColumnName="Address_District" />
                 <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
                 <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
                 <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
                 <ScalarProperty Name="Payment" ColumnName="Payment" />
@@ -3740,6 +4157,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
                 <ScalarProperty Name="User_Check" ColumnName="User_Check" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3753,7 +4171,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Address_District" ColumnName="Address_District" />
                 <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
                 <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
                 <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
                 <ScalarProperty Name="Payment" ColumnName="Payment" />
@@ -3761,6 +4178,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
                 <ScalarProperty Name="User_Check" ColumnName="User_Check" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3774,7 +4192,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Address_District" ColumnName="Address_District" />
                 <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
                 <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
                 <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
                 <ScalarProperty Name="Payment" ColumnName="Payment" />
@@ -3782,6 +4199,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
                 <ScalarProperty Name="User_Check" ColumnName="User_Check" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3813,21 +4231,26 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="view_Watches">
-            <EntityTypeMapping TypeName="BeeWatchDBModel.view_Watches">
-              <MappingFragment StoreEntitySet="view_Watches">
+          <EntitySetMapping Name="view_WatchDetails">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_WatchDetails">
+              <MappingFragment StoreEntitySet="view_WatchDetails">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="WatchName" ColumnName="WatchName" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Url_Image" ColumnName="Url_Image" />
+                <ScalarProperty Name="id_Sex" ColumnName="id_Sex" />
+                <ScalarProperty Name="id_Firms" ColumnName="id_Firms" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Information" ColumnName="Information" />
                 <ScalarProperty Name="id_Shop" ColumnName="id_Shop" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
-                <ScalarProperty Name="NameofSex" ColumnName="NameofSex" />
-                <ScalarProperty Name="NameofFirm" ColumnName="NameofFirm" />
-                <ScalarProperty Name="LuotMua" ColumnName="LuotMua" />
+                <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+                <ScalarProperty Name="Date_LastEdit" ColumnName="Date_LastEdit" />
+                <ScalarProperty Name="LastEdit_By" ColumnName="LastEdit_By" />
+                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+                <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
+                <ScalarProperty Name="IsExist" ColumnName="IsExist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3873,7 +4296,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Address_District" ColumnName="Address_District" />
                 <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
                 <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
                 <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
                 <ScalarProperty Name="Payment" ColumnName="Payment" />
@@ -3881,6 +4303,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
                 <ScalarProperty Name="User_Check" ColumnName="User_Check" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3894,7 +4317,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Address_District" ColumnName="Address_District" />
                 <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
                 <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
                 <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
                 <ScalarProperty Name="Payment" ColumnName="Payment" />
@@ -3902,6 +4324,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
                 <ScalarProperty Name="User_Check" ColumnName="User_Check" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3915,7 +4338,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Address_District" ColumnName="Address_District" />
                 <ScalarProperty Name="AddressDetail" ColumnName="AddressDetail" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Sum" ColumnName="Sum" />
                 <ScalarProperty Name="Ship_fee" ColumnName="Ship_fee" />
                 <ScalarProperty Name="id_Discount" ColumnName="id_Discount" />
                 <ScalarProperty Name="Payment" ColumnName="Payment" />
@@ -3923,6 +4345,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
                 <ScalarProperty Name="Date_Check" ColumnName="Date_Check" />
                 <ScalarProperty Name="User_Check" ColumnName="User_Check" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4039,6 +4462,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <FunctionImportMapping FunctionImportName="ChangePassword" FunctionName="BeeWatchDBModel.Store.ChangePassword" />
           <FunctionImportMapping FunctionImportName="sp_AddCartDetail" FunctionName="BeeWatchDBModel.Store.sp_AddCartDetail" />
           <FunctionImportMapping FunctionImportName="sp_ChangeInfo" FunctionName="BeeWatchDBModel.Store.sp_ChangeInfo" />
+          <FunctionImportMapping FunctionImportName="sp_ChangeStatusDiscount" FunctionName="BeeWatchDBModel.Store.sp_ChangeStatusDiscount" />
           <FunctionImportMapping FunctionImportName="sp_CheckLogin" FunctionName="BeeWatchDBModel.Store.sp_CheckLogin" />
           <FunctionImportMapping FunctionImportName="sp_CheckWatch" FunctionName="BeeWatchDBModel.Store.sp_CheckWatch" />
           <FunctionImportMapping FunctionImportName="sp_ConfirmBill" FunctionName="BeeWatchDBModel.Store.sp_ConfirmBill" />
@@ -4049,10 +4473,12 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <FunctionImportMapping FunctionImportName="sp_DeleteCategory" FunctionName="BeeWatchDBModel.Store.sp_DeleteCategory" />
           <FunctionImportMapping FunctionImportName="sp_DeleteFirm" FunctionName="BeeWatchDBModel.Store.sp_DeleteFirm" />
           <FunctionImportMapping FunctionImportName="sp_DeleteSex" FunctionName="BeeWatchDBModel.Store.sp_DeleteSex" />
+          <FunctionImportMapping FunctionImportName="sp_DropCartDetails" FunctionName="BeeWatchDBModel.Store.sp_DropCartDetails" />
           <FunctionImportMapping FunctionImportName="sp_GuiMaXacNhan" FunctionName="BeeWatchDBModel.Store.sp_GuiMaXacNhan" />
           <FunctionImportMapping FunctionImportName="sp_InserCategories" FunctionName="BeeWatchDBModel.Store.sp_InserCategories" />
           <FunctionImportMapping FunctionImportName="sp_InserFirm" FunctionName="BeeWatchDBModel.Store.sp_InserFirm" />
           <FunctionImportMapping FunctionImportName="sp_InsertAccount" FunctionName="BeeWatchDBModel.Store.sp_InsertAccount" />
+          <FunctionImportMapping FunctionImportName="sp_InsertCartDetails" FunctionName="BeeWatchDBModel.Store.sp_InsertCartDetails" />
           <FunctionImportMapping FunctionImportName="sp_InsertDiscount" FunctionName="BeeWatchDBModel.Store.sp_InsertDiscount" />
           <FunctionImportMapping FunctionImportName="sp_InsertNewOrder" FunctionName="BeeWatchDBModel.Store.sp_InsertNewOrder" />
           <FunctionImportMapping FunctionImportName="sp_InsertOrderDetails" FunctionName="BeeWatchDBModel.Store.sp_InsertOrderDetails" />
@@ -4063,6 +4489,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <FunctionImportMapping FunctionImportName="sp_LockAccount" FunctionName="BeeWatchDBModel.Store.sp_LockAccount" />
           <FunctionImportMapping FunctionImportName="sp_LockWatch" FunctionName="BeeWatchDBModel.Store.sp_LockWatch" />
           <FunctionImportMapping FunctionImportName="sp_Logout" FunctionName="BeeWatchDBModel.Store.sp_Logout" />
+          <FunctionImportMapping FunctionImportName="sp_LogOutAcc" FunctionName="BeeWatchDBModel.Store.sp_LogOutAcc" />
           <FunctionImportMapping FunctionImportName="sp_RateWatch" FunctionName="BeeWatchDBModel.Store.sp_RateWatch" />
           <FunctionImportMapping FunctionImportName="sp_SearchWatch" FunctionName="BeeWatchDBModel.Store.sp_SearchWatch">
             <ResultMapping>
@@ -4097,6 +4524,9 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Watches' does not have a prima
           <FunctionImportMapping FunctionImportName="sp_UpdatePhone" FunctionName="BeeWatchDBModel.Store.sp_UpdatePhone" />
           <FunctionImportMapping FunctionImportName="sp_UpdateSex" FunctionName="BeeWatchDBModel.Store.sp_UpdateSex" />
           <FunctionImportMapping FunctionImportName="sp_UpdateWatch" FunctionName="BeeWatchDBModel.Store.sp_UpdateWatch" />
+          <FunctionImportMapping FunctionImportName="sp_UpStatus" FunctionName="BeeWatchDBModel.Store.sp_UpStatus" />
+          <FunctionImportMapping FunctionImportName="SQLAccount_Create" FunctionName="BeeWatchDBModel.Store.SQLAccount_Create" />
+          <FunctionImportMapping FunctionImportName="SQLAccount_KillConnection" FunctionName="BeeWatchDBModel.Store.SQLAccount_KillConnection" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

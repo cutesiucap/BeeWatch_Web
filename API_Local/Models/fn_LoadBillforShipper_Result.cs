@@ -20,7 +20,6 @@ namespace API_Local.Models
         public string Address_District { get; set; }
         public string AddressDetail { get; set; }
         public Nullable<int> Count { get; set; }
-        public Nullable<double> Sum { get; set; }
         public Nullable<double> Ship_fee { get; set; }
         public Nullable<int> id_Discount { get; set; }
         public string Payment { get; set; }
@@ -28,5 +27,6 @@ namespace API_Local.Models
         public Nullable<System.DateTime> Date_Check { get; set; }
         public string User_Check { get; set; }
         public Nullable<int> Status { get; set; }
+        public Nullable<double> Sum { get; set; }
     }
 }

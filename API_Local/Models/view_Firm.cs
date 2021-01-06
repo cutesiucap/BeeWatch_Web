@@ -12,10 +12,11 @@ namespace API_Local.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class view_Authoriza
+    public partial class view_Firm
     {
         public int id { get; set; }
-        public int id_Account_Type { get; set; }
-        public int id_Action { get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
+        public Nullable<bool> Status { get; set; }
     }
 }

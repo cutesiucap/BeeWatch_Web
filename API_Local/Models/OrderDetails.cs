@@ -14,8 +14,9 @@ namespace API_Local.Models
     
     public partial class OrderDetails
     {
-        public int id_Order { get; set; }
-        public int id_Watches { get; set; }
+        public int id { get; set; }
+        public Nullable<int> id_Order { get; set; }
+        public Nullable<int> id_Watches { get; set; }
         public string WatchName { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<int> Count { get; set; }

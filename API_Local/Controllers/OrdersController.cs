@@ -27,11 +27,39 @@ namespace API_Local.Controllers
         [HttpPost]
         public IHttpActionResult UpStatus(int id)
         {
-            var idParam = new SqlParameter("id", SqlDbType.Int);
-            idParam.Value = id;
-            db.Database.ExecuteSqlCommand("EXEC [dbo].[sp_UpStatus] @id", idParam); 
+            Orders orders = db.Orders.Find(id);
+            if(orders.Status < 3)
+            {
+                orders.Status = orders.Status + 1;
+                foreach (var item in db.OrderDetails.Where(x => x.id_Order == id))
+                {
+                    if (item.Status < orders.Status)
+                    {
+                        item.Status = orders.Status;
+                        db.Entry(item).State = EntityState.Modified;
+                    }
+                }
+                db.SaveChanges();
+            }
+            return Ok();            
+        }
+
+        [Route("api/CancelStatus/{id}")]
+        [HttpPost]
+        public IHttpActionResult CancelStatus(int id)
+        {
+            Orders orders = db.Orders.Find(id);
+            orders.Status = 4;
+            foreach (var item in db.OrderDetails.Where(x => x.id_Order == id))
+            {
+                if (item.Status < orders.Status)
+                {
+                    item.Status = orders.Status;
+                    db.Entry(item).State = EntityState.Modified;
+                }
+            }
+            db.SaveChanges();
             return Ok();
-            
         }
 
         // GET: api/Orders/5

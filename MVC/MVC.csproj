@@ -139,7 +139,7 @@
     <Compile Include="Controllers\Cart\CartController.cs" />
     <Compile Include="Controllers\Clients\CartController.cs" />
     <Compile Include="Controllers\Home\HomePageController.cs" />
-    <Compile Include="Controllers\Home\HomeController.cs" />
+    <Compile Include="Controllers\Home\HomeShoppingController.cs" />
     <Compile Include="Controllers\OrderDetail\OrderDetailController.cs" />
     <Compile Include="Controllers\Order\OrderController.cs" />
     <Compile Include="Controllers\Orther\Address_DistrictController.cs" />
@@ -185,6 +185,9 @@
     <Compile Include="Models\Watches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tool\RandomTool.cs" />
+    <Compile Include="ViewModels\AllHomeViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\WatchinHomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\bootstrap.min.css" />
@@ -265,6 +268,7 @@
     <Content Include="dist\css\adminlte.css" />
     <Content Include="dist\css\adminlte.min.css" />
     <Content Include="dist\css\Bee_Style.css" />
+    <Content Include="dist\css\SlideShow.css" />
     <Content Include="dist\img\AdminLTELogo.png" />
     <Content Include="dist\img\avatar.png" />
     <Content Include="dist\img\avatar2.png" />
@@ -2248,9 +2252,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Accounts\Index.cshtml" />
     <Content Include="Views\Accounts\Create.cshtml" />
     <Content Include="Views\Watches\Index.cshtml" />
@@ -2278,6 +2279,9 @@
     <Content Include="Views\HomePage\PageSortByPriceDown.cshtml" />
     <Content Include="Views\HomePage\PageSortByPriceUp.cshtml" />
     <Content Include="Views\HomePage\PageSortByRate.cshtml" />
+    <Content Include="Views\Shared\_LayoutHome.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\HomeShopping\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

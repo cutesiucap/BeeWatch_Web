@@ -1,4 +1,4 @@
-﻿@model MVC.ViewModels.AllHomeViewModel
+﻿
 
 @{
     ViewBag.Title = "Index";
@@ -33,51 +33,45 @@
             <div class="row">
                 <div class="col-2">
                     <div class="text-muted">Giá trị:</div>
-                    <select class="form-control" style="width: fit-content;">
-                        <option class="btn btn-warning">Dưới 500 Nghìn</option>
-                        <option class="btn btn-warning">500 Nghìn - 1 Triệu</option>
-                        <option class="btn btn-warning">1 Triệu - 2 Triệu</option>
-                        <option class="btn btn-warning">2 Triệu - 3 Triệu</option>
-                        <option class="btn btn-warning">3 Triệu trở lên</option>
+                    <select class="form-control" name="valueWatch" style="width: fit-content;">
+                        <option class="btn btn-warning" value="0">Mọi loại Giá</option>
+                        <option class="btn btn-warning" value="1">Dưới 500 Nghìn</option>
+                        <option class="btn btn-warning" value="2">500 Nghìn - 1 Triệu</option>
+                        <option class="btn btn-warning" value="3">1 Triệu - 2 Triệu</option>
+                        <option class="btn btn-warning" value="4">2 Triệu - 3 Triệu</option>
+                        <option class="btn btn-warning" value="5">3 Triệu trở lên</option>
                     </select>
                 </div>
                 <div class="col-2">
                     <div class="text-muted">Hãng Sản xuất:</div>
-                    <select class="form-control" style="width: fit-content;">
-                        <option class="btn btn-warning">Dưới 500 Nghìn</option>
-                        <option class="btn btn-warning">500 Nghìn - 1 Triệu</option>
-                        <option class="btn btn-warning">1 Triệu - 2 Triệu</option>
-                        <option class="btn btn-warning">2 Triệu - 3 Triệu</option>
-                        <option class="btn btn-warning">3 Triệu trở lên</option>
+                    <select class="form-control" name="idFirm" style="width: fit-content;">
+                        <option class="btn btn-warning" value="0">Bất kì Hãng nào</option>
+                        <option class="btn btn-warning" value="id_Firm">Name_Firm</option>
                     </select>
                 </div>
                 <div class="col-2">
                     <div class="text-muted">Loại Đồng hồ:</div>
-                    <select class="form-control" style="width: fit-content;">
-                        <option class="btn btn-warning">Dưới 500 Nghìn</option>
-                        <option class="btn btn-warning">500 Nghìn - 1 Triệu</option>
-                        <option class="btn btn-warning">1 Triệu - 2 Triệu</option>
-                        <option class="btn btn-warning">2 Triệu - 3 Triệu</option>
-                        <option class="btn btn-warning">3 Triệu trở lên</option>
+                    <select class="form-control" name="idCategori" style="width: fit-content;">
+                        <option class="btn btn-warning" value="0">Bất kì Loại nào</option>
+                        <option class="btn btn-warning" value="id_Categori">Name_Categori</option>
                     </select>
                 </div>
                 <div class="col-2">
                     <div class="text-muted">Giới tính:</div>
-                    <select class="form-control" style="width: fit-content;">
-                        <option class="btn btn-warning">Dưới 500 Nghìn</option>
-                        <option class="btn btn-warning">500 Nghìn - 1 Triệu</option>
-                        <option class="btn btn-warning">1 Triệu - 2 Triệu</option>
-                        <option class="btn btn-warning">2 Triệu - 3 Triệu</option>
-                        <option class="btn btn-warning">3 Triệu trở lên</option>
+                    <select class="form-control" name="idSex" style="width: fit-content;">
+                        <option class="btn btn-warning" value="0">Bất kì Phái nào</option>
+                        <option class="btn btn-warning" value="id_Sex">Name_Sex</option>
                     </select>
                 </div>
                 <div class="col-2">
                     <div class="text-muted">Sắp xếp:</div>
-                    <select class="form-control" style="width: fit-content;">
-                        <option class="btn btn-warning">Giảm dần giá</option>
-                        <option class="btn btn-warning">Tăng dần giá</option>
-                        <option class="btn btn-warning">Rate</option>
-                        <option class="btn btn-warning">Giảm giá Hot</option>
+                    <select class="form-control" name="sortBy" style="width: fit-content;">
+                        <option class="btn btn-warning" value="0">Bán chạy nhất</option>
+                        <option class="btn btn-warning" value="1">Rate Đánh giá</option>
+                        <option class="btn btn-warning" value="2">Giảm dần giá</option>
+                        <option class="btn btn-warning" value="3">Tăng dần giá</option>
+                        <option class="btn btn-warning" value="4">Giảm giá Hot</option>
+                        <option class="btn btn-warning" value="5">Mới nhất</option>
                     </select>
                 </div>
                 <div class="col">
@@ -85,13 +79,13 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text" style="border: 0;">
-                                    <a href="#"><i class="fas fa-angle-left"></i></a>
+                                    <a href="#" name="leftPage"><i class="fas fa-angle-left"></i></a>
                                 </div>
                             </div>
-                            <div style="margin: 10px;">1</div>
+                            <input type="text" style="margin: 10px;" name="numPage" value="1">
                             <div class="input-group-prepend">
                                 <div class="input-group-text" style="border: 0;">
-                                    <a href="#"><i class="fas fa-angle-right"></i></a>
+                                    <a href="#" name="rightPage"><i class="fas fa-angle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +128,10 @@
             <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
             <div class="row">
                 <div class="col-10">
-                    <h5>₫ 9.000.000</h5>
+                    <div class="row">
+                        <span style="margin-left: 10px;"><h5> ₫ 8.000.000</h5></span>
+                        <span><h6 class="text-muted" style="text-decoration: line-through;"><i>₫ 9.000.000</i></h6></span>
+                    </div>
                     <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
                     <span>154</span>
                 </div>

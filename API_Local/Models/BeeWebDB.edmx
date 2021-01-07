@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BeeWatchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BeeWatchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account_Type">
           <Key>
             <PropertyRef Name="id" />
@@ -653,8 +653,9 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <PropertyRef Name="Count" />
             <PropertyRef Name="Information" />
             <PropertyRef Name="id_Shop" />
+            <PropertyRef Name="Name_Phai" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Url_Image" Type="nvarchar(max)" />
           <Property Name="id_Sex" Type="int" />
           <Property Name="id_Firms" Type="int" Nullable="false" />
@@ -671,6 +672,10 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
           <Property Name="IsLock" Type="bit" />
           <Property Name="IsCheck" Type="bit" />
           <Property Name="IsExist" Type="bit" />
+          <Property Name="Name_Categories" Type="nvarchar(max)" />
+          <Property Name="Name_Phai" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name_Firms" Type="nvarchar" MaxLength="50" />
+          <Property Name="LuotMua" Type="int" />
         </EntityType>
         <Association Name="BoughtWatches">
           <End Role="Watches" Type="Self.Watches" Multiplicity="0..1" />
@@ -1832,7 +1837,11 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
     [view_WatchDetails].[LastEdit_By] AS [LastEdit_By], 
     [view_WatchDetails].[IsLock] AS [IsLock], 
     [view_WatchDetails].[IsCheck] AS [IsCheck], 
-    [view_WatchDetails].[IsExist] AS [IsExist]
+    [view_WatchDetails].[IsExist] AS [IsExist], 
+    [view_WatchDetails].[Name_Categories] AS [Name_Categories], 
+    [view_WatchDetails].[Name_Phai] AS [Name_Phai], 
+    [view_WatchDetails].[Name_Firms] AS [Name_Firms], 
+    [view_WatchDetails].[LuotMua] AS [LuotMua]
     FROM [dbo].[view_WatchDetails] AS [view_WatchDetails]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="BoughtWatches" Association="Self.BoughtWatches">
@@ -1964,8 +1973,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <End Role="Watches" EntitySet="Watches" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BeeWatchDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2794,6 +2802,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <PropertyRef Name="Count" />
             <PropertyRef Name="Information" />
             <PropertyRef Name="id_Shop" />
+            <PropertyRef Name="Name_Phai" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Url_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -2812,6 +2821,10 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
           <Property Name="IsLock" Type="Boolean" />
           <Property Name="IsCheck" Type="Boolean" />
           <Property Name="IsExist" Type="Boolean" />
+          <Property Name="Name_Categories" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name_Phai" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name_Firms" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LuotMua" Type="Int32" />
         </EntityType>
         <Association Name="FK__Accounts__id_Acc__3F466844">
           <End Role="Account_Type" Type="Self.Account_Type" Multiplicity="1" />
@@ -3374,7 +3387,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <End Role="Watches_Categories" EntitySet="Watches_Categories" />
           </AssociationSet>
           <FunctionImport Name="fn_CheckLockUser" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_CheckLockUser_Result)">
-            <Parameter Name="lock" Mode="In" Type="Boolean" />
+          <Parameter Name="lock" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="fn_LoadBill" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_LoadBill_Result)">
             <Parameter Name="idAccount" Mode="In" Type="Int32" />
@@ -3397,7 +3410,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <Parameter Name="num_next" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="fn_SearchWatch" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_SearchWatch_Result)">
-            <Parameter Name="Name" Mode="In" Type="String" />
+          <Parameter Name="Name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_UserSeller" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_UserSeller_Result)" />
           <FunctionImport Name="fn_WatchMaxDeal" IsComposable="true" ReturnType="Collection(BeeWatchDBModel.fn_WatchMaxDeal_Result)" />
@@ -3422,7 +3435,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <Parameter Name="fullname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_ChangeStatusDiscount">
-            <Parameter Name="Ngay" Mode="In" Type="DateTime" />
+          <Parameter Name="Ngay" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_CheckLogin">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -3434,19 +3447,19 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_ConfirmBill">
-            <Parameter Name="idorder" Mode="In" Type="Int32" />
+          <Parameter Name="idorder" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ConfirmForCancel">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ConfirmForComplete">
-            <Parameter Name="idorder" Mode="In" Type="Int32" />
+          <Parameter Name="idorder" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ConfirmForShip">
-            <Parameter Name="idorder" Mode="In" Type="Int32" />
+          <Parameter Name="idorder" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ConfirmOrder">
-            <Parameter Name="idBill" Mode="In" Type="Int32" />
+          <Parameter Name="idBill" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_DeleteCategory">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -3517,7 +3530,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <Parameter Name="idWatch" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertSex">
-            <Parameter Name="new" Mode="In" Type="String" />
+          <Parameter Name="new" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertTypeDiscount">
             <Parameter Name="min_bill" Mode="In" Type="Double" />
@@ -3547,19 +3560,19 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Logout">
-            <Parameter Name="username" Mode="In" Type="String" />
+          <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_LogOutAcc">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_RateWatch">
-            <Parameter Name="idWatch" Mode="In" Type="Int32" />
+          <Parameter Name="idWatch" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SearchWatch" ReturnType="Collection(BeeWatchDBModel.sp_SearchWatch_Result)">
-            <Parameter Name="name" Mode="In" Type="String" />
+          <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Send">
-            <Parameter Name="Email" Mode="In" Type="String" />
+          <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_ThongKeDoanhThu" ReturnType="Collection(BeeWatchDBModel.sp_ThongKeDoanhThu_Result)">
             <Parameter Name="idShop" Mode="In" Type="Int32" />
@@ -3599,7 +3612,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <Parameter Name="userupdate" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_UpStatus">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SQLAccount_Create">
             <Parameter Name="username" Mode="In" Type="String" />
@@ -3607,7 +3620,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <Parameter Name="namerole" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SQLAccount_KillConnection">
-            <Parameter Name="username" Mode="In" Type="String" />
+          <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_SearchWatch_Result">
@@ -4234,6 +4247,10 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
           <EntitySetMapping Name="view_WatchDetails">
             <EntityTypeMapping TypeName="BeeWatchDBModel.view_WatchDetails">
               <MappingFragment StoreEntitySet="view_WatchDetails">
+                <ScalarProperty Name="LuotMua" ColumnName="LuotMua" />
+                <ScalarProperty Name="Name_Firms" ColumnName="Name_Firms" />
+                <ScalarProperty Name="Name_Phai" ColumnName="Name_Phai" />
+                <ScalarProperty Name="Name_Categories" ColumnName="Name_Categories" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Url_Image" ColumnName="Url_Image" />
                 <ScalarProperty Name="id_Sex" ColumnName="id_Sex" />

@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Top Navigation</title>
+
+    <link href="~/dist/css/SlideShow.css" rel="stylesheet" />
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+
+
+</head>
+<body class="hold-transition layout-top-nav dark-mode">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand-md navbar-light" style="min-width: 1240px;background-color: #FFC107;">
+            <div class="container">
+                <a href="../../index3.html" class="navbar-brand">
+                    <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <span class="brand-text font-weight-light">BEE SHOPPING</span>
+                </a>
+
+                <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+                    <!-- Left navbar links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="index3.html" class="nav-link">Trang Chính</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Gian Hàng</a>
+                        </li>
+                    </ul>
+
+                    <!-- SEARCH FORM -->
+                    <form class="form-inline ml-0 ml-md-3">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control form-control-navbar" name="search" style="background-color: #FFF;" type="search" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right navbar links -->
+                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                    <!-- Cart Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" id="_nutgiohang" href="#">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge badge-info navbar-badge" class="_giohangsoluong">15</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <span class="dropdown-header" style="color: #FFC107;"><b>Giỏ hàng</b></span>
+                            <div class="dropdown-divider"></div>
+                            <div style="max-height: 200px;overflow-y: auto;" class="_giohang">
+                                <div class="row" style="width: 100%; padding: 5px;">
+                                    <div class="col-2" style="margin: auto;">
+                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
+                                    </div>
+                                    <div class="col-2" style="margin: auto;">
+                                        <p class="text-muted" style="text-align: right;">5</p>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 100%; padding: 5px;">
+                                    <div class="col-2" style="margin: auto;">
+                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
+                                    </div>
+                                    <div class="col-2" style="margin: auto;">
+                                        <p class="text-muted" style="text-align: right;">5</p>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 100%; padding: 5px;">
+                                    <div class="col-2" style="margin: auto;">
+                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
+                                    </div>
+                                    <div class="col-2" style="margin: auto;">
+                                        <p class="text-muted" style="text-align: right;">5</p>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 100%; padding: 5px;">
+                                    <div class="col-2" style="margin: auto;">
+                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
+                                    </div>
+                                    <div class="col-2" style="margin: auto;">
+                                        <p class="text-muted" style="text-align: right;">5</p>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 100%; padding: 5px;">
+                                    <div class="col-2" style="margin: auto;">
+                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
+                                    </div>
+                                    <div class="col-2" style="margin: auto;">
+                                        <p class="text-muted" style="text-align: right;">5</p>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                            </div>
+                            <button href="#" class="btn btn-warning dropdown-item dropdown-footer">Đi đến Giỏ hàng</button>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" role="button">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <div style="margin: 5px;">
+                                <span> <img src="../../dist/img/user3-128x128.jpg" class="img-circle elevation-3 img-size-50 mr-3" style="width: 40px;margin-left: 0px;"> </span>
+                                <span>Nguyễn Trung Tín</span>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <button class="btn btn-info" style="width: 90%;margin-left: 13px;margin-right: 13px; margin-top: 5px;">Cá Nhân</button>
+                            <button class="btn btn-outline-warning" style="width: 90%;margin-left: 13px;margin-right: 13px; margin-top: 5px;margin-bottom: 5px;">Đăng xuất</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+
+            <!-- Main content -->
+            <div class="content">
+                <div class="container" style="max-width: 1240px; min-width: 1240px;">
+                @RenderBody()
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
+        <div class='lentop'>
+            <div>
+                <i class="fas fa-chevron-up"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../../plugins/toastr/toastr.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+
+    <script src="../../dist/js/demo.js"></script>
+    <script>
+    $('.stars').each(function(){
+        var rating = $(this).data("rating");
+                var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star"></i>');
+                var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt"></i>' : '';
+                var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star"></i>');
+                $(this).html(fullStar + halfStar + noStar);
+    })
+
+    </script>
+
+    <script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {slideIndex = 1}
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+      setTimeout(showSlides, 5000); // Change image every 2 seconds
+    }
+    </script>
+
+    <script>
+        function themvaogio_funtion(seft){
+
+        }
+
+        $('.addcartbtn').click(function(){
+            var data = {
+                idWatches: this.parentElement.parentElement.parentElement.id,
+            }
+            ThanhCongToast("Đã thêm thành công");
+            $.ajax({
+                url: '../../OrderDetail/Add',
+                type: 'POST',
+                data: data,
+                async: true,
+                dataType: 'JSON',
+                success: function(newcart){
+                    var giohangElement = document.getElementsByClassName('_giohang')[0];
+                    giohangElement.empty();
+                    var giohangsoluong = 0;
+                    $.each(newcart,function(index, item){
+                        giohangElement.append('');
+                        giohangsoluong += item.Count;
+                    })
+                   giohangElement.parentElement.show;
+                }
+            })
+        })
+    </script>
+
+    <script>
+
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+           });
+        function ThanhCongToast(Content) {
+            Toast.fire({
+            icon: 'success',
+            title: Content,
+             });
+        };
+    </script>
+    <script>
+        $(function(){
+        $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) $(".lentop").fadeIn();
+        else $(".lentop").fadeOut();
+        });
+        $(".lentop").click(function () {
+        $("body,html").animate({scrollTop: 0}, "slow");
+        });
+        });
+    </script>
+</body>
+</html>

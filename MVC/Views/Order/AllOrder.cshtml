@@ -939,15 +939,17 @@
                 id: sefl.id,
             }
             $.ajax({
-                url: "../../Order/DeleteById",
+                url: "../../Order/CancelById",
                 type: "POST",
                 data: data,
                 success: function (data) {
                     if (data == "success") {
                         alert("Hủy thành công đơn hàng #" + sefl.id);
+                        loadOrder();
                     }
                     else if (data == "notfound") {
                         alert("Không tìm thấy đơn hàng muốn hủy ? Đã có lỗi sảy ra ư :(");
+                        loadOrder();
                     }
                     else if (data == "fail") {
                         alert("Hủy Không thành công");

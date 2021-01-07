@@ -27,6 +27,13 @@ namespace MVC.Controllers.Order
             return Content("success");
         }
 
+        [HttpPost]
+        public ActionResult CancelById(int id)
+        {
+            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsync("CancelStatus/" + id, null).Result;
+            return Content("success");
+        }
+
         public ActionResult AllOrder()
         {
             return View();

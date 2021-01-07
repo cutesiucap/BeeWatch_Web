@@ -10,15 +10,35 @@ using System.Web.Mvc;
 
 namespace MVC.Controllers.Home
 {
-    public class HomeController : Controller
+    public class HomeShoppingController : Controller
     {
         // GET: Home
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
-            IEnumerable<view_Watch> view_watches;
-            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsync("view_Watches/listwatches/" + id).Result;
-            view_watches = httpResponseMessage.Content.ReadAsAsync<IEnumerable<view_Watch>>().Result;
-            return View(view_watches);
+            ViewModels.AllHomeViewModel allHomeViewModel = new ViewModels.AllHomeViewModel()
+            {
+                homeViewModel = new ViewModels.HomeViewModel()
+                {
+                    search = "",
+                    valueWatch = 0,
+                    idFirm = 0,
+                    idCategori = 0,
+                    idSex = 0,
+                    sortBy = 0,
+                    leftPage = 0,
+                    numPage = 1,
+                    rightPage = 0
+                },
+            };
+
+            IEnumerable<ViewModels.AllHomeViewModel> result = null;
+            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsJsonAsync<ViewModels.AllHomeViewModel>("HomeView/lWatchHome", allHomeViewModel).Result;
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                result = httpResponseMessage.Content.ReadAsAsync<IEnumerable<ViewModels.AllHomeViewModel>>().Result;
+            }          
+
+            return View(allHomeViewModel);
         }
 
         // GET: Login

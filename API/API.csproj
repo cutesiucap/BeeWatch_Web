@@ -167,7 +167,6 @@
     <Compile Include="Controllers\Address_ProvinceController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\FirmsController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SexController.cs" />
     <Compile Include="Controllers\ShopsController.cs" />
     <Compile Include="Controllers\Shop_SellerController.cs" />

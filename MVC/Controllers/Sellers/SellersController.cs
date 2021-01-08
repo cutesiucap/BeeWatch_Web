@@ -165,7 +165,7 @@ namespace MVC.Controllers.Sellers
         {
             return View();
         }
-        [AuthorizeCustom]
+  
         public ActionResult CreateWatches()
         {
 

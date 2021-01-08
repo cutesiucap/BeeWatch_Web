@@ -1,0 +1,362 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Profile</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">User Profile</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- Profile Image -->
+                <div class="card card-warning card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="../../dist/img/user4-128x128.jpg"
+                                 alt="User profile picture">
+                        </div>
+
+                        <h3 class="profile-username text-center" style="color: #FFC107;"><b>Tina Shop</b></h3>
+
+                        <p class="text-muted text-center">Đồng hồ sang trọng</p>
+
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>Đồng Hồ</b> <a class="float-right">1,322</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Khách Hàng</b> <a class="float-right">543</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Đã Bán</b> <a class="float-right">13,287</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Rate Trung Bình <i class="fa fa-star"></i></b> <a class="float-right">13,287</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Rate Tốt Nhất <i class="fa fa-star" style="color: #FFC107;"></i></b> <a class="float-right">13,287</a>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-warning btn-block"><b>Liên Hệ</b></a>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- About Me Box -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Thông Tin Chi Tiết</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <strong><i class="fas fa-user-shield"></i> Chủ</strong>
+
+                        <p class="text-muted">
+                            Huỳnh Thị Thúy Vy <small><em>#VyHuynh2005</em></small>
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Địa Chỉ</strong>
+
+                        <p class="text-muted">Gò Vấp, Thành Phố Hồ Chí Minh</p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-phone"></i> Di động</strong>
+
+                        <p class="text-muted">
+                            <span class="tag tag-danger">0123974534</span>
+                            <span class="tag tag-success">-</span>
+                            <span class="tag tag-info">0458123456</span>
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-envelope"></i> Gmail</strong>
+
+                        <p class="text-muted Gmail">VyHuynh2005@gmail.com</p>
+
+                        <hr>
+
+                        <strong><i class="fab fa-paypal"></i> Paypal</strong>
+
+                        <p class="text-muted">12365.124.125</p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-info"></i> Giới Thiệu</strong>
+
+                        <p class="text-muted">
+
+                        </p>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#sale" data-toggle="tab">Giảm Giá <i class="fas fa-percentage"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="#hot" data-toggle="tab">HOT <i class="fa fa-fire"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="#all" data-toggle="tab">Tất Cả</i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="#feedback" data-toggle="tab">Đánh Giá <i class="fas fa-comments"></i></a></li>
+                            <li class="nav-item" style="visibility: visible;"><a class="nav-link" href="#edit" data-toggle="tab">Chỉnh Sửa <i class="fas fa-user-edit"></i></li>
+                        </ul>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <!-- tab-sale -->
+                            <div class="active tab-pane" id="sale">
+                                <h3>Sản Phẩm SALE Sắp xếp Theo % Sale</h3>
+                            </div>
+                            <!-- /.tab-sale -->
+                            <!-- tab-hot -->
+                            <div class="tab-pane" id="hot">
+                                <h3>Sản Phẩm HOT Sắp xếp theo lượt mua giảm dần (>= 30 lượt)</h3>
+                            </div>
+                            <!-- /.tab-hot -->
+                            <!-- tab-all -->
+                            <div class="tab-pane" id="all">
+                                <h3>Tất Cả Sản Phẩm Shop Kinh Doanh</h3>
+                            </div>
+                            <!-- /.tab-all -->
+                            <!-- tab-edit -->
+                            <div class="tab-pane" id="edit">
+                                <form>
+                                    <div id="Phone">
+                                        <div class="item">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label>Số Điện Thoại <small><em>*</em></small></label>
+                                                    <i id="add" class="fa fa-plus"></i>
+                                                </div>
+                                                <div class="input-group">
+                                                    <input required type="text" class="form-control" placeholder="Enter ...">
+                                                    <div class='input-group-append'>
+                                                        <div class='input-group-text'>
+                                                            <i class='fa fa-phone'></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-warning"><b style="font-size: large;">Thêm Vào Danh Sách Chờ Duyệt</b></button>
+                                </form>
+
+                            </div>
+                            <!-- /.tab-edit -->
+                            <!-- tab-feedback -->
+                            <div class="tab-pane" id="feedback">
+                            </div>
+                            <!-- /.tab-feedback -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- Toastr -->
+<script src="../../plugins/toastr/toastr.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        function countItem() {
+            var items = $("#Phone").children().length;
+            return items;
+        };
+        $("#add").click(function () {
+            var n = countItem();
+            if (n == 3) {
+                alert("Tối Đa Chỉ Được Thêm 3 Số Điện Thoại");
+            } else {
+                n++;
+                $("#Phone").append("<div class='input-group form-group' ><input  required type='text' class='form-control' placeholder='Enter ...''> <div class='input-group-append' id='del'><div class='input-group-text'><i class='fa fa-minus'  style='color: red;'></i></div></div></div>")
+            }
+        });
+    });
+    $(document).on('click', '#del', function () {
+        $(this).parent().remove();
+    })
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#username').keydown(function () {
+
+        })
+        $("#frm-detail").submit(function (e) {
+            if ($("#username").val() == '') {
+                $('#err_login').html('<div class="alert alert-danger">Username chưa nhập</div>');
+                $("#username").focus();
+                return false;
+            }
+            else if ($("#password").val() == '') {
+                $('#err_login').html('<div class="alert alert-danger">Password chưa nhập</div>');
+                $("#password").focus();
+                return false;
+            }
+            else {
+                var form_data_detail = {
+                    username: $("#username").val(),
+                    password: $("#password").val()
+                };
+                $.ajax({
+                    url: '/Home/DangNhap',
+                    type: 'POST',
+                    async: true,
+                    data: form_data_detail,
+                    success: function (msg_login) {
+                        //alert(msg);
+                        if (msg_login == 'false') {
+                            $('#err_login').html('<div class="alert alert-danger">Tên hoặc mật khẩu không chính xác</div>');
+                            $("#password").val("");
+                            $("#password").focus();
+                            return false;
+                        }
+                        else if (msg_login == 'er_block') {
+                            $('#err_login').html('<div class="alert alert-danger">Tài khoản đang bị khóa</div>');
+                        }
+                        else {
+                            $("#login_here").hide();
+                            $(".modal-footer").hide();
+
+                            $('#err_login').html('<div class="alert alert-success"><strong>Đăng nhập thành công</strong><span> Hệ thống tự chuyển sau vài giây ...</span></div>');
+                            setTimeout(
+                                //chuyển đến địa chỉ msg_login của controler gửi qua
+                                function () {
+                                    window.location.href = '' + msg_login + '';
+                                }, 2000);
+                        }
+                    }
+                });
+                return false;
+            }
+        });
+    })
+    //Load wating bar
+    $(document).ajaxStart(function () {
+        $("#waiting").show();
+    }).ajaxStop(function () {
+        $("#waiting").hide();
+    });
+</script>
+<script>
+    $(function () {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        $('.swalDefaultSuccess').click(function () {
+            Toast.fire({
+                icon: 'success',
+                title: ' Thay doi thanh cong'
+            })
+        });
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#frm-login").submit(function (e) {
+            if ($("#username").val() == '') {
+                $('#err_login').html('<div class="alert alert-danger">Username chưa nhập</div>');
+                $("#username").focus();
+                return false;
+            }
+            else if ($("#password").val() == '') {
+                $('#err_login').html('<div class="alert alert-danger">Password chưa nhập</div>');
+                $("#password").focus();
+                return false;
+            }
+            else {
+                var form_data_login = {
+                    username: $("#username").val(),
+                    password: $("#password").val()
+                };
+                $.ajax({
+                    url: '/Home/DangNhap',
+                    type: 'POST',
+                    async: true,
+                    data: form_data_login,
+                    success: function (msg_login) {
+                        //alert(msg);
+                        if (msg_login == 'false') {
+                            $('#err_login').html('<div class="alert alert-danger">Tên hoặc mật khẩu không chính xác</div>');
+                            $("#password").val("");
+                            $("#password").focus();
+                            return false;
+                        }
+                        else if (msg_login == 'er_block') {
+                            $('#err_login').html('<div class="alert alert-danger">Tài khoản đang bị khóa</div>');
+                        }
+                        else {
+                            $("#login_here").hide();
+                            $(".modal-footer").hide();
+
+                            $('#err_login').html('<div class="alert alert-success"><strong>Đăng nhập thành công</strong><span> Hệ thống tự chuyển sau vài giây ...</span></div>');
+                            setTimeout(
+                                //chuyển đến địa chỉ msg_login của controler gửi qua
+                                function () {
+                                    window.location.href = '' + msg_login + '';
+                                }, 2000);
+                        }
+                    }
+                });
+                return false;
+            }
+        });
+    })
+
+
+
+    //Load wating bar
+    $(document).ajaxStart(function () {
+        $("#waiting").show();
+    }).ajaxStop(function () {
+        $("#waiting").hide();
+    });
+</script>

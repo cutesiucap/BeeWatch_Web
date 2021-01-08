@@ -98,11 +98,10 @@ namespace MVC.Controllers.Accounts
         }
 
         [AllowAnonymous]
-        [HttpPost]
-        public ActionResult Logout(Models.Accounts accounts)
+        public ActionResult Logout()
         {
             Session.Abandon();
-            return RedirectToAction("HomeShopping/Index");
+            return Redirect("~/HomeShopping/Index");
         }
 
         public static string GetMD5(string str)

@@ -146,6 +146,7 @@
     <Compile Include="Controllers\Orther\Address_ProvinceController.cs" />
     <Compile Include="Controllers\Sellers\MyProFileController.cs" />
     <Compile Include="Controllers\Sellers\SellersController.cs" />
+    <Compile Include="Controllers\Shop\ShopController.cs" />
     <Compile Include="Controllers\WatchesController.cs" />
     <Compile Include="Controllers\Watches\WatchController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2286,6 +2287,8 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\HomeShopping\Index.cshtml" />
+    <Content Include="Views\Watch\Index.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,90 +1,298 @@
-﻿@model MVC.Models.Accounts
+﻿@model MVC.Controllers.Sellers.SellersController.CreateSellersModel
 
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<h2>Create</h2>
+<!DOCTYPE html>
 
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BEESHOP | Tạo Tài khoảng</title>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Accounts</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <style>
+        ::selection {
+            background: #ddca92;
+            color: rgb(255, 255, 255);
+        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        .modal-dialog {
+            max-width: 600px; /* New width for default modal */
+        }
+    </style>
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition register-page dark-mode">
+    <div class="register-box" style="width: 800px;">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="../../Home/" class="h1"><b style="color: #E0A800">BEE</b>SHOP</a>
             </div>
-        </div>
+            <div class="card-body">
+                <p class="login-box-msg">Tạo mới tài khoảng thương gia cùng với một Gian Hàng</p>
+                <div id="err_login"></div>
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <input type="text" id="Name" name="Name" class="form-control" placeholder="Họ và Tên">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-font"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" required name="Phone" id="Phone" class="form-control" placeholder="Số Điện Thoại">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-phone"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" required id="Email" name="Email" class="form-control" placeholder="Địa chỉ Mail">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" required name="UserName" id="UserName" class="form-control" placeholder="Tài Khoản">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" required name="Password" id="Password" class="form-control" placeholder="Mật Khẩu">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" required name="Confirm_PassWord" id="Confirm_PassWord" class="form-control" placeholder="Nhập Lại Mật Khẩu">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-key"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 style="color: #FFC107;">Một Mã Xác Nhận Sẽ Gửi Cho Bạn Thông Qua Email</h6>
+                    <div class="input-group mb-3">
+                        <input type="text" required id="Code_Value" class="form-control" placeholder="VD: BEake200">
+                        <div class="input-group-prepend swalDefaultSuccess">
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-warning">Gửi Mã</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ Thương gia <small><em>*</em></small></label>
+                        <div class="row" style="width:auto">
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <select name="id_Province" onchange="myfunction()" id="id_Province" class="select2" style="width: 100%;">
+                                        @foreach (var item in Model.address_Provinces)
+                                        {
+                                            <option value="@item.id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <select name="id_District" id="id_District" class="select2" style="width: 100%;">
+                                        @foreach (var item in Model.address_Districts)
+                                        {
+                                            <option value="@item.id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <div class="social-auth-links text-center mt-2 mb-3">
+                    <button id="register" onclick="register_function()" class="btn btn-block btn-warning">
+                        Đăng Kí
+                    </button>
+                </div>
+                <p class="mb-1">
+                    <a href="../../Accounts/Login" class="text-center text-muted">Ấy quên ! Tại hạ có rồi :)</a>
+                </p>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fullname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Fullname, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_Account_Type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.id_Account_Type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.id_Account_Type, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
     </div>
-}
+    <!-- /.register-box -->
+    <!-- SweetAlert2 -->
+    <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- Select2 -->
+    <script src="../../plugins/select2/js/select2.full.min.js"></script>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <script>
+        $(".select2").select2()
+    </script>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <script>
+        var CODE;
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+
+        function register_function() {
+            if ($('#Name').val() == '') {
+                $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Họ và Tên </div>');
+                $('#Name').focus();
+                return false;
+            } else
+                if ($('#Phone').val() == '') {
+                    $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Số điện thoại </div>');
+                    $('#Phone').focus();
+                    return false;
+                } else
+                    if ($('#Email').val() == '') {
+                        $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Email </div>');
+                        $('#Email').focus();
+                        return false;
+                    } else
+                        if ($('#UserName').val() == '') {
+                            $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Tên tài Khoảng </div>');
+                            $('#UserName').focus();
+                            return false;
+                        } else
+                            if ($('#Password').val() == '') {
+                                $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Mật khẩu </div>');
+                                $('#Password').focus();
+                                return false;
+                            } else
+                                if ($('#Password').val() != $('#Confirm_PassWord').val()) {
+                                    $('#err_login').html('<div class="alert alert-danger">Cát hạ nhập Xác nhận Mật khẩu chưa chính xác. Có vẻ Cát hạ đã say rồii :~ </div>');
+                                    $('#Confirm_PassWord').focus();
+                                    $('#Confirm_PassWord').val('');
+                                    return false;
+                                } else
+                                    if ($("#Email").val() == '') {
+                                        $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa điền thông tin địa chỉ GMail</div>');
+                                        $("#Email").focus();
+                                        return false;
+                                    } else
+                                        if ($("#ICard").val() == '') {
+                                            $('#err_login').html('<div class="alert alert-danger">Số chứng minh nhân dân không được phép trống </div>');
+                                            $("#ICard").focus();
+                                            return false;
+                                        } else
+                                            if ($("#Code_Value").val() == CODE && false) {
+                                                $('#err_login').html('<div class="alert alert-danger">Cát hạ nhập Xác nhận Mã Xác thực Mail chưa đúng!</div>');
+                                                $("#Code_Value").val('');
+                                                $("#Code_Value").focus();
+                                                return false;
+                                            } 
+            var data_form = {
+                Fullname: $('#Name').val(),
+                Phone1: $('#Phone').val(),
+                Email: $('#Email').val(),
+                Username: $('#UserName').val(),
+                Password: $('#Password').val(),
+                id_Province: $('#id_Province').val(),
+                id_District: $('#id_District').val(),
+            }
+            $.ajax({
+                url: '../../Accounts/Create',
+                method: 'Post',
+                async: false,
+                data: data_form,
+                success: function (content) {
+                    if (content == "email") {
+                        $('#err_login').html('<div id="err_login"  class="alert alert-warning">Địa chỉ Email đã được Sử dụng!</div>');
+                        $('#Email').focus();
+                    } else if (content == "username") {
+                        $('#err_login').html('<div id="err_login"  class="alert alert-warning">Tên Tài Khoảng đã tồn tại. Cát hạ hãy chọn Một tài khoảng khác!</div>');
+                        $('#UserName').focus();
+                        $('#UserName').val('');
+                    } else if (content == "false") {
+                        $('#err_login').html('<div id="err_login"  class="alert alert-warning">Thất bại!</div>');
+                    } else if (content == "success") {
+                        $('#err_login').html('<div id="err_login" class="alert alert-success"><strong>Tạo mới thành công. </strong><span> Thương gia sẽ được chuyển đến Gian hàng trong vài giây nữa...</span></div>');
+                        setTimeout(
+                            //chuyển đến địa chỉ msg_login của controler gửi qua
+                            function () {
+                                window.location.href = '/Accounts/Login';
+                            }, 2000);
+                    } else {
+                        $('#err_login').html('<div id="err_login" class="alert alert-warning"><strong>Tạo mới không thành công. </strong><span> ' + content + '</span></div>');
+                    }
+                }
+
+            })
+        }
+
+       $(document).ready(function () {
+            $('.swalDefaultSuccess').click(function () {
+                if ($('#Email').val() == '') {
+                    $('#err_login').html('<div class="alert alert-danger">Cát hạ vui nhập Địa chỉ mail và kiểm tra trước khi Tại hạ có thể gửi mã xác nhận</div>');
+                    return false;
+                }
+                else {
+
+                    $('#Email').attr('disabled', 'disabled');
+                    var data = { toGmail: $('#Email').val(), };
+                    $.ajax({
+                        url: '../../Sellers/SendMail',
+                        type: 'Post',
+                        async: true,
+                        data: data,
+                        success: function (msg_login) {
+                            if (msg_login == 'false') {
+                                $('#err_login').html('<div class="alert alert-danger">Đã có lỗi xảy ra trong quá trình gửi xác nhận. Vui lòng kiểm tra đúng địa chỉ mail</div>');
+                                $("#Email").focus();
+                                return false;
+                            }
+                            else {
+                                Session["CODE"] = msg_login;
+                            }
+                        }
+                    });
+                    Toast.fire
+                        ({
+                            icon: 'warning',
+                            title: 'Yêu cầu gửi mã thành công. Mã sẽ được gửi đến mail của Cát hạ trong một vài giây nữa',
+                        });
+                    return true;
+                }
+                return true;
+            });
+        });
+
+    </script>
+</body>
+</html>

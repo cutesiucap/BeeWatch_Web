@@ -16,7 +16,7 @@ namespace MVC.Controllers.Sellers
     public class SellersController : Controller
     {
         // GET: Sellers 
-       
+       [AuthorizeCustom]
         public ActionResult Index()
         {
             return View();
@@ -31,13 +31,14 @@ namespace MVC.Controllers.Sellers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult CreateSeller(Models.Accounts accounts, Models.Sellers sellers, Models.Address address, FormCollection formCollection)
+        public ActionResult CreateSeller(Models.Accounts accounts, Models.Sellers sellers, Models.Phone phone, Models.Address address, FormCollection formCollection)
         {
             accounts.id_Account_Type = 2;
-            accounts.Address = new List<Address>();
-            accounts.Address.Add(address);
             accounts.Password = GetMD5(accounts.Password);
-            var result = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Accounts>("Accounts/Register", accounts).Result;
+            accounts.IsLock = false;
+            accounts.Status = true;
+
+            HttpResponseMessage result = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Accounts>("Accounts", accounts).Result;
 
             if (result.StatusCode == System.Net.HttpStatusCode.BadRequest)
             {
@@ -47,17 +48,41 @@ namespace MVC.Controllers.Sellers
             else
             {
                 Models.Accounts newaccount = result.Content.ReadAsAsync<Models.Accounts>().Result;
+                address.id_Account = newaccount.id;
+                address.id_District = address.id_District.Trim();
+                address.id_Province = address.id_Province.Trim();
+                address.AddressDetail = "Detail";
+                phone.id_Account = newaccount.id;
                 sellers.id = newaccount.id;
 
                 var resultseller = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Sellers>("Sellers", sellers);
                 resultseller.Wait();
 
+                var resultaddress = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Address>("Addresses", address);
+                resultaddress.Wait();
+
+                if (resultaddress.Result.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var x = resultaddress.Result.Content.ReadAsStringAsync().Result;
+                    return Content(result.Content.ReadAsStringAsync().Result);
+                }
+
+                var resultPhone = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Phone>("Phones", phone);
+                resultPhone.Wait();
+
+                if (resultPhone.Result.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var x = resultPhone.Result.Content.ReadAsStringAsync().Result;
+                    return Content(result.Content.ReadAsStringAsync().Result);
+                }
+
                 Shop_Seller shop_Seller = new Shop_Seller();
 
-                if (formCollection["name_Shop"].ToString() == null && int.Parse(formCollection["id_Shop"].ToString()) != 0)
+                if (formCollection["name_Shop"] == null && formCollection["id_Shop"] != null)
                 {
-                    shop_Seller.id_Shop = int.Parse(formCollection["id_Shop"].ToString());
+                    shop_Seller.id_Shop = int.Parse(formCollection["id_Shop"].ToString().Trim());
                     shop_Seller.id_Seller = sellers.id;
+                    shop_Seller.IsCheck = true;
                 }
                 else
                 {
@@ -76,8 +101,8 @@ namespace MVC.Controllers.Sellers
                 var resultshop_seller = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Shop_Seller>("Shop_Seller", shop_Seller);
                 resultshop_seller.Wait();
 
-                Session["Account"] = accounts;
-                return RedirectToAction("Index");
+                Session["Account"] = GlobalVariables.HttpClient.GetAsync("Accounts/"+newaccount.id).Result.Content.ReadAsAsync<Models.Accounts>().Result;
+                return Content("success");
             }
 
 
@@ -92,6 +117,7 @@ namespace MVC.Controllers.Sellers
         [HttpPost]
         public ActionResult LoginSeller(Models.Accounts accounts)
         {
+            accounts.Password = GetMD5(accounts.Password);
             HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Accounts>("Accounts/Login", accounts).Result;
 
             if (httpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -139,7 +165,7 @@ namespace MVC.Controllers.Sellers
         {
             return View();
         }
-
+        [AuthorizeCustom]
         public ActionResult CreateWatches()
         {
 
@@ -247,6 +273,7 @@ namespace MVC.Controllers.Sellers
         [AllowAnonymous]
         public ActionResult Logout()
         {
+
             Session.Abandon();
             return RedirectToAction("LoginSeller");
         }

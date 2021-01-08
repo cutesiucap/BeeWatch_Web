@@ -421,6 +421,24 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_Cart' does not have a primary 
           <Property Name="Sum" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'BeeWatchDB.dbo.view_CartDetailHome' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_CartDetailHome">
+          <Key>
+            <PropertyRef Name="id_Cart" />
+            <PropertyRef Name="id_Watch" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="id_Cart" Type="int" Nullable="false" />
+          <Property Name="id_Watch" Type="int" Nullable="false" />
+          <Property Name="IsCheck" Type="bit" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Url_Image" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'BeeWatchDB.dbo.view_CartDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_CartDetails">
           <Key>
@@ -646,6 +664,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_UserSeller' does not have a pr
 warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_WatchDetails">
           <Key>
+            <PropertyRef Name="Name_Phai" />
             <PropertyRef Name="id" />
             <PropertyRef Name="id_Firms" />
             <PropertyRef Name="Name" />
@@ -653,7 +672,6 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
             <PropertyRef Name="Count" />
             <PropertyRef Name="Information" />
             <PropertyRef Name="id_Shop" />
-            <PropertyRef Name="Name_Phai" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Url_Image" Type="nvarchar(max)" />
@@ -1654,6 +1672,17 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
     [view_Cart].[Count] AS [Count], 
     [view_Cart].[Sum] AS [Sum]
     FROM [dbo].[view_Cart] AS [view_Cart]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_CartDetailHome" EntityType="Self.view_CartDetailHome" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_CartDetailHome].[id_Cart] AS [id_Cart], 
+    [view_CartDetailHome].[id_Watch] AS [id_Watch], 
+    [view_CartDetailHome].[IsCheck] AS [IsCheck], 
+    [view_CartDetailHome].[Count] AS [Count], 
+    [view_CartDetailHome].[Name] AS [Name], 
+    [view_CartDetailHome].[Price] AS [Price], 
+    [view_CartDetailHome].[Url_Image] AS [Url_Image]
+    FROM [dbo].[view_CartDetailHome] AS [view_CartDetailHome]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_CartDetails" EntityType="Self.view_CartDetails" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -3622,6 +3651,7 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
           <FunctionImport Name="SQLAccount_KillConnection">
           <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="view_CartDetailHome" EntityType="BeeWatchDBModel.view_CartDetailHome" />
         </EntityContainer>
         <ComplexType Name="sp_SearchWatch_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -3642,6 +3672,22 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
           <Property Type="Double" Name="Sum" Nullable="true" />
           <Property Type="String" Name="Payment" Nullable="true" MaxLength="20" />
         </ComplexType>
+        <EntityType Name="view_CartDetailHome">
+          <Key>
+            <PropertyRef Name="id_Watch" />
+            <PropertyRef Name="id_Cart" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="id_Watch" Type="Int32" Nullable="false" />
+          <Property Name="id_Cart" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="IsCheck" Type="Boolean" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Url_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4544,6 +4590,19 @@ warning 6002: The table/view 'BeeWatchDB.dbo.view_WatchDetails' does not have a 
           <FunctionImportMapping FunctionImportName="sp_UpStatus" FunctionName="BeeWatchDBModel.Store.sp_UpStatus" />
           <FunctionImportMapping FunctionImportName="SQLAccount_Create" FunctionName="BeeWatchDBModel.Store.SQLAccount_Create" />
           <FunctionImportMapping FunctionImportName="SQLAccount_KillConnection" FunctionName="BeeWatchDBModel.Store.SQLAccount_KillConnection" />
+          <EntitySetMapping Name="view_CartDetailHome">
+            <EntityTypeMapping TypeName="BeeWatchDBModel.view_CartDetailHome">
+              <MappingFragment StoreEntitySet="view_CartDetailHome">
+                <ScalarProperty Name="Url_Image" ColumnName="Url_Image" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsCheck" ColumnName="IsCheck" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="id_Cart" ColumnName="id_Cart" />
+                <ScalarProperty Name="id_Watch" ColumnName="id_Watch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

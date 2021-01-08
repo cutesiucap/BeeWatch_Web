@@ -17,21 +17,62 @@ namespace MVC.Controllers.Accounts
         {
             return View();
         }
+
+        public ActionResult Create()
+        {
+            Sellers.SellersController.CreateSellersModel createSellersModel = new Sellers.SellersController.CreateSellersModel();
+            return View(createSellersModel);
+        }
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Create(Models.Accounts accounts, Models.Address address, FormCollection formCollection)
+        public ActionResult Create(Models.Accounts accounts, Models.Phone phone, Models.Address address, FormCollection formCollection)
         {
             accounts.id_Account_Type = 2;
-            accounts.Address = new List<Address>();
-            accounts.Address.Add(address);
             accounts.Password = GetMD5(accounts.Password);
-            var result = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Accounts>("Accounts/Register", accounts).Result;
-            Session["Account"] = accounts;
-            return RedirectToAction("Index");
+            accounts.IsLock = false;
+            accounts.Status = true;
+
+            HttpResponseMessage result = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Accounts>("Accounts", accounts).Result;
+
+            if (result.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                var x = result.Content.ReadAsStringAsync().Result;
+                return Content(result.Content.ReadAsStringAsync().Result);
+            }
+            else
+            {
+                Models.Accounts newaccount = result.Content.ReadAsAsync<Models.Accounts>().Result;
+                address.id_Account = newaccount.id;
+                address.id_District = address.id_District.Trim();
+                address.id_Province = address.id_Province.Trim();
+                address.AddressDetail = "Detail";
+                phone.id_Account = newaccount.id;
+
+                var resultaddress = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Address>("Addresses", address);
+                resultaddress.Wait();
+
+                if (resultaddress.Result.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var x = resultaddress.Result.Content.ReadAsStringAsync().Result;
+                    return Content(result.Content.ReadAsStringAsync().Result);
+                }
+
+                var resultPhone = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Phone>("Phones", phone);
+                resultPhone.Wait();
+
+                if (resultPhone.Result.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var x = resultPhone.Result.Content.ReadAsStringAsync().Result;
+                    return Content(result.Content.ReadAsStringAsync().Result);
+                }
+
+                Session["Account"] = GlobalVariables.HttpClient.GetAsync("Accounts/" + newaccount.id).Result.Content.ReadAsAsync<Models.Accounts>().Result;
+                return Content("success");
+            }
         }
 
         [AllowAnonymous]
-        public ActionResult LoginSeller()
+        public ActionResult Login()
         {
             return View();
         }
@@ -53,15 +94,15 @@ namespace MVC.Controllers.Accounts
             }
             Models.Accounts result = httpResponseMessage.Content.ReadAsAsync<Models.Accounts>().Result;
             Session["Account"] = result;
-            return Content("../../HomePage");
+            return Content("../../HomeShopping/");
         }
 
         [AllowAnonymous]
         [HttpPost]
         public ActionResult Logout(Models.Accounts accounts)
         {
-            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsync("UpStatus/" + (Session["Account"] as Models.Accounts).id, null).Result;
-            return Content("success");
+            Session.Abandon();
+            return RedirectToAction("HomeShopping/Index");
         }
 
         public static string GetMD5(string str)

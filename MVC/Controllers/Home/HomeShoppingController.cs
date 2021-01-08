@@ -31,13 +31,126 @@ namespace MVC.Controllers.Home
                 },
             };
 
-            IEnumerable<ViewModels.AllHomeViewModel> result = null;
-            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsJsonAsync<ViewModels.AllHomeViewModel>("HomeView/lWatchHome", allHomeViewModel).Result;
-            if (httpResponseMessage.IsSuccessStatusCode)
+            var result = GlobalVariables.HttpClient.PostAsJsonAsync<ViewModels.AllHomeViewModel>("lWatchHome", allHomeViewModel);
+            result.Wait();
+            if (result.Result.IsSuccessStatusCode)
             {
-                result = httpResponseMessage.Content.ReadAsAsync<IEnumerable<ViewModels.AllHomeViewModel>>().Result;
-            }          
+                allHomeViewModel = result.Result.Content.ReadAsAsync<ViewModels.AllHomeViewModel>().Result;
+            }
 
+            try
+            {
+                allHomeViewModel.categories = GlobalVariables.HttpClient.GetAsync("Categories").Result.Content.ReadAsAsync<IEnumerable<Models.Categories>>().Result;
+            }
+            catch
+            {
+                allHomeViewModel.categories = null;
+            }
+            try
+            {
+                allHomeViewModel.firms = GlobalVariables.HttpClient.GetAsync("Firms").Result.Content.ReadAsAsync<IEnumerable<Models.Firms>>().Result;
+            }
+            catch
+            {
+                allHomeViewModel.firms = null;
+            }
+            try
+            {
+                allHomeViewModel.sex = GlobalVariables.HttpClient.GetAsync("Sex").Result.Content.ReadAsAsync<IEnumerable<Models.Sex>>().Result;
+            }
+            catch
+            {
+                allHomeViewModel.sex = null;
+            }
+
+            allHomeViewModel.homeViewModel.lvalue = new List<string>();
+            allHomeViewModel.homeViewModel.lvalue.Add("Mọi loại Giá");
+            allHomeViewModel.homeViewModel.lvalue.Add("Dưới 500 Nghìn");
+            allHomeViewModel.homeViewModel.lvalue.Add("500 Nghìn - 1 Triệu");
+            allHomeViewModel.homeViewModel.lvalue.Add("1 Triệu - 2 Triệu");
+            allHomeViewModel.homeViewModel.lvalue.Add("2 Triệu - 3 Triệu");
+            allHomeViewModel.homeViewModel.lvalue.Add("3 Triệu trở lên");
+
+            allHomeViewModel.homeViewModel.lsortBy = new List<string>();
+            allHomeViewModel.homeViewModel.lsortBy.Add("Bán chạy nhất");
+            allHomeViewModel.homeViewModel.lsortBy.Add("Rate Đánh giá");
+            allHomeViewModel.homeViewModel.lsortBy.Add("Giảm dần giá");
+            allHomeViewModel.homeViewModel.lsortBy.Add("Tăng dần giá");
+            allHomeViewModel.homeViewModel.lsortBy.Add("Giảm giá Hot");
+            allHomeViewModel.homeViewModel.lsortBy.Add("Mới nhất");
+            return View(allHomeViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Index(ViewModels.HomeViewModel homeViewModel)
+        {
+            if (homeViewModel.search != null)
+            {
+                homeViewModel.valueWatch = 0;
+                homeViewModel.idCategori = 0;
+                homeViewModel.idFirm = 0;
+                homeViewModel.idSex = 0;
+                homeViewModel.sortBy = 0;
+                homeViewModel.leftPage = 0;
+                homeViewModel.rightPage = 0;
+                homeViewModel.numPage = 1;
+            }
+            else
+            {
+                homeViewModel.search = "";
+            }
+            ViewModels.AllHomeViewModel allHomeViewModel = new ViewModels.AllHomeViewModel()
+            {
+                homeViewModel = homeViewModel,
+            };
+
+            var result = GlobalVariables.HttpClient.PostAsJsonAsync<ViewModels.AllHomeViewModel>("lWatchHome", allHomeViewModel);
+            result.Wait();
+            if (result.Result.IsSuccessStatusCode)
+            {
+                allHomeViewModel = result.Result.Content.ReadAsAsync<ViewModels.AllHomeViewModel>().Result;
+            }
+
+            try
+            {
+                allHomeViewModel.categories = GlobalVariables.HttpClient.GetAsync("Categories").Result.Content.ReadAsAsync<IEnumerable<Models.Categories>>().Result;
+            }
+            catch
+            {
+                allHomeViewModel.categories = null;
+            }
+            try
+            {
+                allHomeViewModel.firms = GlobalVariables.HttpClient.GetAsync("Firms").Result.Content.ReadAsAsync<IEnumerable<Models.Firms>>().Result;
+            }
+            catch
+            {
+                allHomeViewModel.firms = null;
+            }
+            try
+            {
+                allHomeViewModel.sex = GlobalVariables.HttpClient.GetAsync("Sex").Result.Content.ReadAsAsync<IEnumerable<Models.Sex>>().Result;
+            }
+            catch
+            {
+                allHomeViewModel.sex = null;
+            }
+
+            allHomeViewModel.homeViewModel.lvalue = new List<string>();
+            allHomeViewModel.homeViewModel.lvalue.Add("Mọi loại Giá");
+            allHomeViewModel.homeViewModel.lvalue.Add("Dưới 500 Nghìn");
+            allHomeViewModel.homeViewModel.lvalue.Add("500 Nghìn - 1 Triệu");
+            allHomeViewModel.homeViewModel.lvalue.Add("1 Triệu - 2 Triệu");
+            allHomeViewModel.homeViewModel.lvalue.Add("2 Triệu - 3 Triệu");
+            allHomeViewModel.homeViewModel.lvalue.Add("3 Triệu trở lên");
+
+            allHomeViewModel.homeViewModel.lsortBy = new List<string>();
+            allHomeViewModel.homeViewModel.lsortBy.Add("Bán chạy nhất");
+            allHomeViewModel.homeViewModel.lsortBy.Add("Rate Đánh giá");
+            allHomeViewModel.homeViewModel.lsortBy.Add("Giảm dần giá");
+            allHomeViewModel.homeViewModel.lsortBy.Add("Tăng dần giá");
+            allHomeViewModel.homeViewModel.lsortBy.Add("Giảm giá Hot");
+            allHomeViewModel.homeViewModel.lsortBy.Add("Mới nhất");
             return View(allHomeViewModel);
         }
 

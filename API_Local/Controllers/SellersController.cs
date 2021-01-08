@@ -12,44 +12,44 @@ using API_Local.Models;
 
 namespace API_Local.Controllers
 {
-    public class Shop_SellerController : ApiController
+    public class SellersController : ApiController
     {
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
-        // GET: api/Shop_Seller
-        public IQueryable<Shop_Seller> GetShop_Seller()
+        // GET: api/Sellers
+        public IQueryable<Sellers> GetSellers()
         {
-            return db.Shop_Seller;
+            return db.Sellers;
         }
 
-        // GET: api/Shop_Seller/5
-        [ResponseType(typeof(Shop_Seller))]
-        public IHttpActionResult GetShop_Seller(int id)
+        // GET: api/Sellers/5
+        [ResponseType(typeof(Sellers))]
+        public IHttpActionResult GetSellers(int id)
         {
-            Shop_Seller shop_Seller = db.Shop_Seller.Find(id);
-            if (shop_Seller == null)
+            Sellers sellers = db.Sellers.Find(id);
+            if (sellers == null)
             {
                 return NotFound();
             }
 
-            return Ok(shop_Seller);
+            return Ok(sellers);
         }
 
-        // PUT: api/Shop_Seller/5
+        // PUT: api/Sellers/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutShop_Seller(int id, Shop_Seller shop_Seller)
+        public IHttpActionResult PutSellers(int id, Sellers sellers)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != shop_Seller.id_Shop)
+            if (id != sellers.id)
             {
                 return BadRequest();
             }
 
-            db.Entry(shop_Seller).State = EntityState.Modified;
+            db.Entry(sellers).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace API_Local.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!Shop_SellerExists(id))
+                if (!SellersExists(id))
                 {
                     return NotFound();
                 }
@@ -70,21 +70,16 @@ namespace API_Local.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Shop_Seller
-        [ResponseType(typeof(Shop_Seller))]
-        public IHttpActionResult PostShop_Seller(Shop_Seller shop_Seller)
+        // POST: api/Sellers
+        [ResponseType(typeof(Sellers))]
+        public IHttpActionResult PostSellers(Sellers sellers)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (db.Shops.Where(x => x.id == shop_Seller.id_Shop).Count() == 0)
-            {
-                return BadRequest("ID  Shop không đúng");
-            }
-
-            db.Shop_Seller.Add(shop_Seller);
+            db.Sellers.Add(sellers);
 
             try
             {
@@ -92,7 +87,7 @@ namespace API_Local.Controllers
             }
             catch (DbUpdateException)
             {
-                if (Shop_SellerExists(shop_Seller.id_Shop))
+                if (SellersExists(sellers.id))
                 {
                     return Conflict();
                 }
@@ -102,23 +97,23 @@ namespace API_Local.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = shop_Seller.id_Shop }, shop_Seller);
+            return CreatedAtRoute("DefaultApi", new { id = sellers.id }, sellers);
         }
 
-        // DELETE: api/Shop_Seller/5
-        [ResponseType(typeof(Shop_Seller))]
-        public IHttpActionResult DeleteShop_Seller(int id)
+        // DELETE: api/Sellers/5
+        [ResponseType(typeof(Sellers))]
+        public IHttpActionResult DeleteSellers(int id)
         {
-            Shop_Seller shop_Seller = db.Shop_Seller.Find(id);
-            if (shop_Seller == null)
+            Sellers sellers = db.Sellers.Find(id);
+            if (sellers == null)
             {
                 return NotFound();
             }
 
-            db.Shop_Seller.Remove(shop_Seller);
+            db.Sellers.Remove(sellers);
             db.SaveChanges();
 
-            return Ok(shop_Seller);
+            return Ok(sellers);
         }
 
         protected override void Dispose(bool disposing)
@@ -130,9 +125,9 @@ namespace API_Local.Controllers
             base.Dispose(disposing);
         }
 
-        private bool Shop_SellerExists(int id)
+        private bool SellersExists(int id)
         {
-            return db.Shop_Seller.Count(e => e.id_Shop == id) > 0;
+            return db.Sellers.Count(e => e.id == id) > 0;
         }
     }
 }

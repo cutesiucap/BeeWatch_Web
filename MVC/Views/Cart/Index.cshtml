@@ -1,113 +1,487 @@
-﻿@model MVC.Models.Carts
-
+﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Navbar_Admin.cshtml";
-    <head>
-        <!-- Google Font: Source Sans Pro -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-        <!-- DataTables -->
-        <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-        <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-    </head>
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">GIỎ HÀNG</h3>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-        <div id="example2_wrapper" class="dataTable dt-bootstrap4">
-            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                <div class="col-sm-12">
-                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                        <thead>
-                            <tr role="row">
-                                <th class="sorting_asc text-center" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending">Check</th>
-                                <th class="sorting text-center" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Tên Sản Phẩm</th>
-                                <th class="sorting text-center" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Đơn giá</th>
-                                <th class="sorting text-center" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Số lượng</th>
-                                <th class="sorting text-center" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.WatchesinCarts)
-                            {
-                                <tr>
-                                    <td class="text-center">
-                                        @Html.CheckBox("templateId", new { value = item.Check, @checked = true })
-                                    </td>
-                                    <td class="text-center">
-                                        @Html.DisplayFor(modelItem => item.Watches.Name)
-                                    </td>
-                                    <td class="text-center">
-                                        @Html.DisplayFor(modelItem => item.Watches.Price)
-                                    </td>
-                                    <td class="text-center">
-                                        @Html.DisplayFor(modelItem => item.Count)
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="item" href="#"><i class="fas fa-chevron-circle-up" style="color:yellow"> </i></a>
-                                        <a class="item" href="#"><i class="fas fa-info-circle" style="color:limegreen"> </i></a>
-                                        <a class="item" href="#"><i class="fas fa-minus-circle" style="color:red"></i></a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                    Count: @Html.DisplayFor(model => model.Count)
-                    Sum: @Html.DisplayFor(model => model.Sum)
+
+@section Css {
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+}
+
+<section class="content-header">
+    <div class="container-fluid" style="max-width: 1240px; min-width: 1240px;">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Giỏ Hàng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Giỏ Hàng</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content" style="max-width: 1240px; min-width: 1240px; margin: auto;">
+    <div class="row">
+        <div class="col-3">
+            <div class="card card-outline card-warning">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div style="margin: 5px;">
+                            <span> <img src="../../dist/img/user3-128x128.jpg" class="img-circle elevation-3 img-size-50 mr-3" style="width: 40px;margin-left: 0px;"> </span>
+                            <span>Nguyễn Trung Tín</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Thông tin Tài khoảng
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="margin-left: 20px;">
+                                    <li class="nav-item">
+                                        <a href="../index.html" class="nav-link">
+                                            <i class="fas fa-file-invoice nav-icon"></i>
+                                            <p>Thay đổi thông tin</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../index2.html" class="nav-link">
+                                            <i class="fas fa-key nav-icon"></i>
+                                            <p>Thay đổi mật khẩu</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="gallery.html" class="nav-link">
+                                    <i class="nav-icon fas fa-shipping-fast"></i>
+                                    <p>
+                                        Quản lí Đơn Hàng
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="gallery.html" class="nav-link">
+                                    <i class="nav-icon fas fa-shopping-cart"></i>
+                                    <p>
+                                        Giỏ Hàng
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="gallery.html" class="nav-link" style="color: #FFC107;">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Đăng xuất
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
-        <!-- /.card-body -->
+        <div class="col-9">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Main content -->
+                        <div class="invoice p-3 mb-3">
+                            <!-- title row -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        <i class="fab fa-forumbee" style="color: #FFC107;"></i><b style="color: #FFC107;"> BEE</b>WATCH Cart.
+                                    </h4>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- info row -->
+                            <div class="row invoice-info">
+                                <div class="col-sm-4 invoice-col">
+                                    <address>
+                                        <strong>Nguyễn Trung Tín #Cutesiucap</strong><br>
+                                        Quận 9, Thành Phố Hồ Chí Minh<br>
+                                        Điện thoại: 0945918317<br>
+                                        Email: info@almasaeedstudio.com
+                                    </address>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                            <!-- Table row -->
+                            <div class="row">
+                                <div class="col-12 table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr style="color: #FFC107;">
+                                                <th style="vertical-align:middle; display: table-cell;">
+                                                    <div class="icheck-warning d-inline">
+                                                        <input type="checkbox" id="checkboxPrimary">
+                                                        <label for="checkboxPrimary">
+                                                        </label>
+                                                    </div>
+                                                </th>
+                                                <th style="vertical-align:middle; display: table-cell;" width=80px></th>
+                                                <th style="vertical-align:middle; display: table-cell; text-align: center;" width=20%>Tên</th>
+                                                <th style="vertical-align:middle; display: table-cell; text-align: center;">Đơn giá<small></small></th>
+                                                <th style="vertical-align:middle; display: table-cell; text-align: center;">Số lượng</th>
+                                                <th style="vertical-align:middle; display: table-cell; text-align: center;">Thành tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="vertical-align:middle; display: table-cell;">
+                                                    <div class="icheck-warning d-inline">
+                                                        <input class="checkCart" type="checkbox" id="checkbox1">
+                                                        <label for="checkbox1">
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell;">
+                                                    <img src="https://scontent-xsp1-2.xx.fbcdn.net/v/t1.0-9/127632091_2894104784247746_4814614739632157377_o.jpg?_nc_cat=104&ccb=2&_nc_sid=09cbfe&_nc_ohc=14lm-B1Gg5UAX8vr3LE&_nc_ht=scontent-xsp1-2.xx&oh=9915bafbdf5169eb006762c1f06ae5eb&oe=6005783F" style="height: 120px;">
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">Hoa hậu Đồng Hồ</td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">40000000</td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">
+                                                    <div class="input-group" style="width: 130px; margin:auto">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text btn btn-warning _tru">
+                                                                <i class="fa fa-minus"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control _count" placeholder="SL" style="text-align: center; background-color: #454D55;" value="2">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text btn btn-warning _cong">
+                                                                <i class="fa fa-plus"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="vertical-align:middle; display: table-cell;">
+                                                    <div class="icheck-warning d-inline">
+                                                        <input class="checkCart" type="checkbox" id="checkbox2">
+                                                        <label for="checkbox2">
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell;">
+                                                    <img src="https://scontent-xsp1-2.xx.fbcdn.net/v/t1.0-9/127632091_2894104784247746_4814614739632157377_o.jpg?_nc_cat=104&ccb=2&_nc_sid=09cbfe&_nc_ohc=14lm-B1Gg5UAX8vr3LE&_nc_ht=scontent-xsp1-2.xx&oh=9915bafbdf5169eb006762c1f06ae5eb&oe=6005783F" style="height: 120px;">
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">Hoa hậu Đồng Hồ</td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">4.000.000</td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">
+                                                    <div class="input-group" style="width: 130px; margin:auto">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text btn btn-warning _tru">
+                                                                <i class="fa fa-minus"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control _cout" placeholder="SL" style="text-align: center; background-color: #454D55;" value="2">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text btn btn-warning _cong">
+                                                                <i class="fa fa-plus"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">8.000.000</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="vertical-align:middle; display: table-cell;">
+                                                    <div class="icheck-warning d-inline">
+                                                        <input class="checkCart" type="checkbox" id="checkbox3">
+                                                        <label for="checkbox3">
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell;">
+                                                    <img src="https://scontent-xsp1-2.xx.fbcdn.net/v/t1.0-9/127632091_2894104784247746_4814614739632157377_o.jpg?_nc_cat=104&ccb=2&_nc_sid=09cbfe&_nc_ohc=14lm-B1Gg5UAX8vr3LE&_nc_ht=scontent-xsp1-2.xx&oh=9915bafbdf5169eb006762c1f06ae5eb&oe=6005783F" style="height: 120px;">
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">Hoa hậu Đồng Hồ</td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;" class="_giadongho">4.000.000</td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">
+                                                    <div class="input-group" style="width: 130px; margin:auto">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text btn btn-warning _tru">
+                                                                <i class="fa fa-minus"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control _count" placeholder="SL" style="text-align: center; background-color: #454D55;" value="2">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text btn btn-warning _cong">
+                                                                <i class="fa fa-plus"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">8.000.000</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="vertical-align:middle; display: table-cell;">
+                                                    <div class="icheck-warning d-inline">
+                                                        <input class="checkCart" type="checkbox" id="checkbox4">
+                                                        <label for="checkbox4">
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell;">
+                                                    <img src="https://scontent-xsp1-2.xx.fbcdn.net/v/t1.0-9/127632091_2894104784247746_4814614739632157377_o.jpg?_nc_cat=104&ccb=2&_nc_sid=09cbfe&_nc_ohc=14lm-B1Gg5UAX8vr3LE&_nc_ht=scontent-xsp1-2.xx&oh=9915bafbdf5169eb006762c1f06ae5eb&oe=6005783F" style="height: 120px;">
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">Hoa hậu Đồng Hồ</td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">4.000.000</td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">
+                                                    <div class="input-group" style="width: 130px; margin:auto">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text btn btn-warning _tru">
+                                                                <i class="fa fa-minus"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control _count" placeholder="SL" style="text-align: center; background-color: #454D55;" value="2">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text btn btn-warning _cong">
+                                                                <i class="fa fa-plus"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align:middle; display: table-cell; text-align: center;">8.000.000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+
+                            <div class="row">
+                                <!-- accepted payments column -->
+                                <div class="col-6">
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-6">
+                                    <p class="lead">TỔNG</p>
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <th style="width:50%">Số lượng:</th>
+                                                <td class="_soluong">15</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tạm tính:</th>
+                                                <td class="_tamtinh">50.000.000</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                            <!-- this row will not appear when printing -->
+                            <div class="row no-print">
+                                <div class="col-12">
+                                    <a href="../../Order/Index" class="btn btn-warning float-right" style="margin-right: 5px;">
+                                        <i class="fas fa-..."></i> Đặt Hàng
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.invoice -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
     </div>
+</section>
 
 
-    <!--end body template-->
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="../../plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
 
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="../../plugins/jszip/jszip.min.js"></script>
-    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
-    <!-- Page specific script -->
+<script src="../../dist/js/demo.js"></script>
+<script>
+    $('.stars').each(function () {
+        var rating = $(this).data("rating");
+        var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star"></i>');
+        var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt"></i>' : '';
+        var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star"></i>');
+        $(this).html(fullStar + halfStar + noStar);
+    })
 
-    <script>
-        $(function () {
-            $("#example1").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+</script>
+
+<script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 5000); // Change image every 2 seconds
+    }
+</script>
+
+<script>
+    function themvaogio_funtion(seft) {
+
+    }
+
+    $('.addcartbtn').click(function () {
+        var data = {
+            idWatches: this.parentElement.parentElement.parentElement.id,
+        }
+        ThanhCongToast("Đã thêm thành công");
+        $.ajax({
+            url: '../../OrderDetail/Add',
+            type: 'POST',
+            data: data,
+            async: true,
+            dataType: 'JSON',
+            success: function (newcart) {
+                var giohangElement = document.getElementsByClassName('_giohang')[0];
+                giohangElement.empty();
+                var giohangsoluong = 0;
+                $.each(newcart, function (index, item) {
+                    giohangElement.append('');
+                    giohangsoluong += item.Count;
+                })
+                giohangElement.parentElement.show;
+            }
+        })
+    })
+</script>
+
+<script>
+
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    function ThanhCongToast(Content) {
+        Toast.fire({
+            icon: 'success',
+            title: Content,
         });
-    </script>
+    };
+</script>
+<script>
+    $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) $(".lentop").fadeIn();
+            else $(".lentop").fadeOut();
+        });
+        $(".lentop").click(function () {
+            $("body,html").animate({ scrollTop: 0 }, "slow");
+        });
+    });
+</script>
+
+<script>
+    $('#checkboxPrimary').click(function () {
+        var seft = this;
+        var s = document.getElementsByClassName('checkCart');
+        $.each(s, function (index, item) {
+            item.checked = seft.checked;
+        })
+        tinhtongtien();
+    });
+
+    $('.checkCart').change(function () {
+        tinhtongtien(this);
+    });
+
+    $('._tru').click(function () {
+        var countElement = this.parentElement.parentElement.children[1];
+        var count = parseInt(countElement.value);
+        if (count <= 1) {
+        }
+        else {
+            countElement.value = (count - 1);
+        }
+        tinhtongtien();
+    });
+
+    $('._cong').click(function () {
+        var countElement = this.parentElement.parentElement.children[1];
+        var count = parseInt(countElement.value);
+        countElement.value = (count + 1);
+        tinhtongtien();
+    });
+
+</script>
+<script>
+    function tinhtongtien() {
+        thanhtien();
+        tinhsoluong();
+        var cart = document.getElementsByClassName('checkCart');
+        var sl = 0;
+        $.each(cart, function (index, item) {
+            if (item.checked) {
+                sl += parseInt($(item.parentElement.parentElement.parentElement.children[5]).text());
+            }
+        });
+        $('._tamtinh').html(sl);
+    };
+
+    function tinhsoluong() {
+        var l = document.getElementsByClassName('checkCart');
+        var sl = 0;
+        $.each(l, function (index, item) {
+            if (item.checked) {
+                sl += parseInt(item.parentElement.parentElement.parentElement.children[4].children[0].children[1].value);
+            }
+        });
+        $('._soluong').html(sl);
+    }
+
+    function thanhtien() {
+        var l = document.getElementsByClassName('checkCart');
+        $.each(l, function (index, item) {
+            var g = parseInt($(item.parentElement.parentElement.parentElement.children[3]).text());
+            var s = parseInt(item.parentElement.parentElement.parentElement.children[4].children[0].children[1].value);
+            $(item.parentElement.parentElement.parentElement.children[5]).html((g * s));
+        });
+    };
+
+    window.onload = tinhtongtien();
+</script>

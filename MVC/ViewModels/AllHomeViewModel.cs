@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 
 namespace MVC.ViewModels
@@ -9,9 +10,9 @@ namespace MVC.ViewModels
     {
         public IEnumerable<Models.view_WatchDetails> view_WatchDetails { get; set; }
         public ViewModels.HomeViewModel homeViewModel { get; set; }
-        public Models.Firms firms { get; set; }
-        public Models.Categories categories { get; set; }
-        public Models.Sex sex { get; set; }        
+        public IEnumerable<Models.Firms> firms { get; set; }
+        public IEnumerable<Models.Categories> categories { get; set; }
+        public IEnumerable<Models.Sex> sex { get; set; }        
         public Models.Carts carts { get; set; }
     }
     public class ViewCartIntro

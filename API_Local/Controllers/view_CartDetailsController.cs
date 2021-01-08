@@ -12,44 +12,38 @@ using API_Local.Models;
 
 namespace API_Local.Controllers
 {
-    public class Shop_SellerController : ApiController
+    public class view_CartDetailsController : ApiController
     {
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
-        // GET: api/Shop_Seller
-        public IQueryable<Shop_Seller> GetShop_Seller()
+        // GET: api/view_CartDetails/5
+        [ResponseType(typeof(view_CartDetails))]
+        public IHttpActionResult Getview_CartDetails(int id)
         {
-            return db.Shop_Seller;
-        }
-
-        // GET: api/Shop_Seller/5
-        [ResponseType(typeof(Shop_Seller))]
-        public IHttpActionResult GetShop_Seller(int id)
-        {
-            Shop_Seller shop_Seller = db.Shop_Seller.Find(id);
-            if (shop_Seller == null)
+            view_CartDetails view_CartDetails = db.view_CartDetails.Find(id);
+            if (view_CartDetails == null)
             {
                 return NotFound();
             }
 
-            return Ok(shop_Seller);
+            return Ok(view_CartDetails);
         }
 
-        // PUT: api/Shop_Seller/5
+        // PUT: api/view_CartDetails/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutShop_Seller(int id, Shop_Seller shop_Seller)
+        public IHttpActionResult Putview_CartDetails(int id, view_CartDetails view_CartDetails)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != shop_Seller.id_Shop)
+            if (id != view_CartDetails.id_Cart)
             {
                 return BadRequest();
             }
 
-            db.Entry(shop_Seller).State = EntityState.Modified;
+            db.Entry(view_CartDetails).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +51,7 @@ namespace API_Local.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!Shop_SellerExists(id))
+                if (!view_CartDetailsExists(id))
                 {
                     return NotFound();
                 }
@@ -70,21 +64,16 @@ namespace API_Local.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Shop_Seller
-        [ResponseType(typeof(Shop_Seller))]
-        public IHttpActionResult PostShop_Seller(Shop_Seller shop_Seller)
+        // POST: api/view_CartDetails
+        [ResponseType(typeof(view_CartDetails))]
+        public IHttpActionResult Postview_CartDetails(view_CartDetails view_CartDetails)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (db.Shops.Where(x => x.id == shop_Seller.id_Shop).Count() == 0)
-            {
-                return BadRequest("ID  Shop không đúng");
-            }
-
-            db.Shop_Seller.Add(shop_Seller);
+            db.view_CartDetails.Add(view_CartDetails);
 
             try
             {
@@ -92,7 +81,7 @@ namespace API_Local.Controllers
             }
             catch (DbUpdateException)
             {
-                if (Shop_SellerExists(shop_Seller.id_Shop))
+                if (view_CartDetailsExists(view_CartDetails.id_Cart))
                 {
                     return Conflict();
                 }
@@ -102,23 +91,23 @@ namespace API_Local.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = shop_Seller.id_Shop }, shop_Seller);
+            return CreatedAtRoute("DefaultApi", new { id = view_CartDetails.id_Cart }, view_CartDetails);
         }
 
-        // DELETE: api/Shop_Seller/5
-        [ResponseType(typeof(Shop_Seller))]
-        public IHttpActionResult DeleteShop_Seller(int id)
+        // DELETE: api/view_CartDetails/5
+        [ResponseType(typeof(view_CartDetails))]
+        public IHttpActionResult Deleteview_CartDetails(int id)
         {
-            Shop_Seller shop_Seller = db.Shop_Seller.Find(id);
-            if (shop_Seller == null)
+            view_CartDetails view_CartDetails = db.view_CartDetails.Find(id);
+            if (view_CartDetails == null)
             {
                 return NotFound();
             }
 
-            db.Shop_Seller.Remove(shop_Seller);
+            db.view_CartDetails.Remove(view_CartDetails);
             db.SaveChanges();
 
-            return Ok(shop_Seller);
+            return Ok(view_CartDetails);
         }
 
         protected override void Dispose(bool disposing)
@@ -130,9 +119,9 @@ namespace API_Local.Controllers
             base.Dispose(disposing);
         }
 
-        private bool Shop_SellerExists(int id)
+        private bool view_CartDetailsExists(int id)
         {
-            return db.Shop_Seller.Count(e => e.id_Shop == id) > 0;
+            return db.view_CartDetails.Count(e => e.id_Cart == id) > 0;
         }
     }
 }

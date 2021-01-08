@@ -24,7 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-
+    @RenderSection("Css", required: false)
 
 </head>
 <body class="hold-transition layout-top-nav dark-mode">
@@ -33,7 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand-md navbar-light" style="min-width: 1240px;background-color: #FFC107;">
             <div class="container">
-                <a href="../../index3.html" class="navbar-brand">
+                <a href="../../HomeShopping/Index" class="navbar-brand">
                     <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                     <span class="brand-text font-weight-light">BEE SHOPPING</span>
                 </a>
@@ -46,10 +46,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Left navbar links -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="index3.html" class="nav-link">Trang Chính</a>
+                            <a href="../../HomeShopping/Index" class="nav-link">Trang Chính</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Gian Hàng</a>
+                            <a href="../../Sellers/Index" class="nav-link">Gian Hàng</a>
                         </li>
                     </ul>
 
@@ -234,36 +234,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </script>
 
     <script>
-        function themvaogio_funtion(seft){
-
-        }
-
-        $('.addcartbtn').click(function(){
-            var data = {
-                idWatches: this.parentElement.parentElement.parentElement.id,
-            }
-            ThanhCongToast("Đã thêm thành công");
-            $.ajax({
-                url: '../../OrderDetail/Add',
-                type: 'POST',
-                data: data,
-                async: true,
-                dataType: 'JSON',
-                success: function(newcart){
-                    var giohangElement = document.getElementsByClassName('_giohang')[0];
-                    giohangElement.empty();
-                    var giohangsoluong = 0;
-                    $.each(newcart,function(index, item){
-                        giohangElement.append('');
-                        giohangsoluong += item.Count;
-                    })
-                   giohangElement.parentElement.show;
-                }
-            })
-        })
-    </script>
-
-    <script>
 
         var Toast = Swal.mixin({
             toast: true,
@@ -288,6 +258,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
         $("body,html").animate({scrollTop: 0}, "slow");
         });
         });
+    </script>
+    <script>
+        function updatecart() {
+                    $.each(Session["cart"], function (index, item) {
+                        $('._giohang').append('<div class="row" style="width: 100%; padding: 5px;"><div class= "col-2" style = "margin: auto;"><img src="'
+                            + item.UrlImage + '" class="img-size-50 mr-3" style="width: 40px;"></div ><div class="col-8" style="margin: auto;"><p class="text-muted" style="margin-left: 5px;">'
+                            + item.Name + '</p ></div><div class="col-2" style="margin: auto;"><p class="text-muted" style="text-align: right;">'
+                            + item.Count + '</p ></div ></div > ');
+                    });
+                };
     </script>
 </body>
 </html>

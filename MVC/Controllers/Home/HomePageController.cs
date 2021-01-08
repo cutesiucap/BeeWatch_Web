@@ -8,7 +8,6 @@ namespace MVC.Controllers
     public class HomePageController : Controller
     {
         // GET: HomePage
-
         public ActionResult Page(int id)
         {
             IEnumerable<view_Watch> view_watch;

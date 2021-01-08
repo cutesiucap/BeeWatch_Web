@@ -164,6 +164,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\Account_TypeController.cs" />
+    <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\Address_DistrictController.cs" />
     <Compile Include="Controllers\Address_ProvinceController.cs" />
     <Compile Include="Controllers\CartDetailsController.cs" />
@@ -174,12 +175,15 @@
     <Compile Include="Controllers\HomeViewController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\PhonesController.cs" />
+    <Compile Include="Controllers\SellersController.cs" />
     <Compile Include="Controllers\SexController.cs" />
     <Compile Include="Controllers\ShopsController.cs" />
     <Compile Include="Controllers\Shop_SellerController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\view_AllOrderController.cs" />
     <Compile Include="Controllers\view_AllOrderDetailController.cs" />
+    <Compile Include="Controllers\view_CartDetailsController.cs" />
     <Compile Include="Controllers\view_WatchesController.cs" />
     <Compile Include="Controllers\WatchesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -333,6 +337,9 @@
       <DependentUpon>BeeWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_Cart.cs">
+      <DependentUpon>BeeWebDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_CartDetailHome.cs">
       <DependentUpon>BeeWebDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_CartDetails.cs">

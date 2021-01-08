@@ -5,28 +5,43 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace API_Local.Controllers
 {
     public class HomeViewController : ApiController
     {
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
-
-        [Route("api/HomeView/lWatchHome")]
+        [Route("api/lWatchHome")]
         [HttpPost]
-        public IQueryable<Models.view_WatchDetails> lWatchHome(ViewModels.HomeViewModel homeViewModel)
+        [ResponseType(typeof(ViewModels.AllHomeViewModel))]
+        public IHttpActionResult lWatchHome(ViewModels.AllHomeViewModel allHomeViewModel)
         {
+            ViewModels.HomeViewModel homeViewModel = allHomeViewModel.homeViewModel;
+
             IQueryable<Models.view_WatchDetails> result;
 
             if (homeViewModel.search != "")
             {
-                result = db.view_WatchDetails.Where(x => x.Name.IndexOf(homeViewModel.search) >= 0||x.id.ToString().IndexOf(homeViewModel.search)>=0);
+                result = db.view_WatchDetails.Where(x => x.Name.IndexOf(homeViewModel.search) >= 0 || x.id.ToString().IndexOf(homeViewModel.search) >= 0);
             }
             else
             {
                 result = db.view_WatchDetails;
             }
-            
+
+            foreach(var item in result)
+            {
+                if (item.Url_Image == null)
+                {
+                    Image temp = db.Image.Where(x => x.id_Watches == item.id).FirstOrDefault();
+                    if(temp != null)
+                    {
+                        item.Url_Image = temp.Url_Image;
+                    }
+                }
+            }
+
             //Lọc theo giá
             switch (homeViewModel.valueWatch)
             {
@@ -88,7 +103,9 @@ namespace API_Local.Controllers
                     break;
             }
 
-            return result.Skip(((homeViewModel.numPage - 1) * 40)).Take(40);
+            allHomeViewModel.view_WatchDetails = result.Skip(((homeViewModel.numPage - 1) * 40)).Take(40);
+
+            return Ok(allHomeViewModel);
         }
     }
 }

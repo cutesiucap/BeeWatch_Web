@@ -85,6 +85,14 @@ namespace API_Local.Controllers
                 return BadRequest("Username đã có");
             }
 
+            if (db.Accounts.Where(x => x.Email == accounts.Email).FirstOrDefault() != null)
+            {
+                return BadRequest("Gmail đã được sử dụng");
+            }    
+
+            accounts.Address = null;
+            accounts.Phone = null;
+            accounts.Sellers = null;
             db.Accounts.Add(accounts);
             db.SaveChanges();
 
@@ -153,7 +161,7 @@ namespace API_Local.Controllers
                     id = item.id,
                     id_Account_Type = item.id_Account_Type,
                     id_Action = item.id_Action,
-                    Action = { id = item.id_Action, Name = db.view_Action.Where(x => x.id == item.id_Action).FirstOrDefault().Name }
+                    Action = new Models.Action() { id = item.id_Action, Name = db.view_Action.Where(x => x.id == item.id_Action).FirstOrDefault().Name }
                 });
             };
 
@@ -176,59 +184,7 @@ namespace API_Local.Controllers
             }
             return Ok(new_accounts);
         }
-        [Route("api/Accounts/Register")]
-        [HttpPost]
-        [ResponseType(typeof(view_Account))]
-        public HttpResponseMessage Register(Accounts accounts)
-        {
-            int id = 0;
-            try
-            {
-               //Using PROCEDURE in DB
 
-                var usernameParam = new SqlParameter("username", SqlDbType.NVarChar, 50);
-                usernameParam.Value = accounts.Username;
-
-                var passwordParam = new SqlParameter("password", SqlDbType.NVarChar, 50);
-                passwordParam.Value = accounts.Password;
-
-                var avtParam = new SqlParameter("avt", SqlDbType.NVarChar, -1);
-                avtParam.Value = (accounts.Url_Image_Avatar == null ? "" : accounts.Url_Image_Avatar);
-
-                var emailParam = new SqlParameter("email", SqlDbType.NVarChar, 50);
-                emailParam.Value = accounts.Email;
-
-                var fullnameParam = new SqlParameter("fullname", SqlDbType.NVarChar, 50);
-                fullnameParam.Value = accounts.Fullname;
-
-                var sexParam = new SqlParameter("sex", SqlDbType.NVarChar, 10);
-                sexParam.Value = (accounts.Sex == null ? "" : accounts.Sex);
-
-                var address_provinceParam = new SqlParameter("address_province", SqlDbType.NChar, 10);
-                address_provinceParam.Value = accounts.Address.FirstOrDefault().id_Province;
-
-                var address_districtParam = new SqlParameter("address_district", SqlDbType.NChar, 10);
-                address_districtParam.Value = accounts.Address.FirstOrDefault().id_District;
-
-                var address_detailParam = new SqlParameter("address_detail", SqlDbType.NVarChar, -1);
-                address_detailParam.Value = (accounts.Address.FirstOrDefault().AddressDetail == null ? "" : accounts.Address.FirstOrDefault().AddressDetail);
-
-                id = db.Database.ExecuteSqlCommand("EXEC [dbo].[sp_InsertAccount] @username, @password, @avt, @email, @fullname, @sex, @address_province, @address_district, @address_detail",
-                                                                      usernameParam, passwordParam, avtParam, emailParam, fullnameParam, sexParam, address_provinceParam, address_districtParam, address_detailParam);
-            }
-            catch(Exception e)
-            {                
-                return Request.CreateResponse(HttpStatusCode.BadRequest,e.Message);
-            }
-
-            view_Account result = db.view_Account.Where(x => x.id == id).FirstOrDefault();
-           
-            if (result == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-            return Request.CreateResponse(HttpStatusCode.OK,result);
-        }
         [HttpPost]
         public IHttpActionResult Logout(int id)
         {

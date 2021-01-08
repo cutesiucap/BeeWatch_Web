@@ -1,0 +1,141 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BEESHOP | Log in</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+    <style>
+        ::selection {
+            background: #ddca92;
+            color: rgb(255, 255, 255);
+        }
+
+        .modal-dialog {
+            max-width: 600px; /* New width for default modal */
+        }
+    </style>
+</head>
+<body class="hold-transition login-page dark-mode accent-warning">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="../../HomeShopping" class="h1"><b style="color: #E0A800">BEE</b>SHOP</a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Đăng nhập trước đã ^^</p>
+                <div id="err_login"></div>
+                <div class="input-group mb-3" id="username_group">
+                    <input type="text" id="username" class="form-control" placeholder="Tài Khoản">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3" id="password_group">
+                    <input type="password" id="password" class="form-control" placeholder="Mật Khẩu">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-auth-links text-center mt-2 mb-3">
+                    <button id="login" class=" btn btn-block btn-warning">
+                        Đăng Nhập
+                    </button>
+                </div>
+                <p class="mb-1">
+                    <a class="text-muted" href="../../Sellers/ForgotPassword">Tèo ! Quên mật khẩu mất rồi :(</a>
+                </p>
+                <p class="mb-0">
+                    <a class="text-muted" href="../../Accounts/Create">Tạo mới một tài khoản</a>
+                </p>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#login").click(function (e) {
+                if ($("#username").val() == '') {
+                    $('#err_login').html('<div id="err_login" class="alert alert-danger">Username chưa nhập thương gia ơi </div>');
+                    $("#username").focus();
+                    return false;
+                }
+                else if ($("#password").val() == '') {
+                    $('#err_login').html('<div id="err_login" class="alert alert-danger">Password chưa nhập thương gia ơi</div>');
+                    $("#password").focus();
+                    return false;
+                }
+                else {
+                    var form_data_login = {
+                        Username: $("#username").val(),
+                        Password: $("#password").val()
+                    };
+                    $.ajax({
+                        url: '../../Accounts/Login',
+                        type: 'POST',
+                        async: true,
+                        data: form_data_login,
+                        success: function (msg_login) {
+                            //alert(msg);
+                            if (msg_login == 'false') {
+                                $('#err_login').html('<div id="err_login" class="alert alert-danger">Tài khoản hoặc mật khẩu chưa đúng nha thương gia</div>');
+                                $("#password").val("");
+                                $("#password").focus();
+                                return false;
+                            }
+                            else if (msg_login == 'IsLock') {
+                                $('#err_login').html('<div id="err_login" class="alert alert-danger">Không xong rồi tài khoản thương gia đã bị khóa :( </div>');
+                            }
+                            else {
+                                $('#username_group').hide;
+                                $('#password_group').hide;
+                                $('#err_login').html('<div id="err_login" class="alert alert-success"><strong>Đăng nhập thành công</strong><span> Thương gia sẽ được chuyển đến Gian hàng trong vài giây nữaa...</span></div>');
+                                setTimeout(
+                                    //chuyển đến địa chỉ msg_login của controler gửi qua
+                                    function () {
+                                        window.location.href = '' + msg_login + '';
+                                    }, 2000);
+                            }
+                        }
+                    });
+                    return false;
+                }
+            });
+        })
+        //Load wating bar
+        $(document).ajaxStart(function () {
+            $("#waiting").show();
+        }).ajaxStop(function () {
+            $("#waiting").hide();
+        });
+    </script>
+</body>
+</html>

@@ -346,7 +346,7 @@
                                                     } 
             var data_form = {
                 Fullname: $('#Name').val(),
-                Phone: $('#Phone').val(),
+                Phone1: $('#Phone').val(),
                 Email: $('#Email').val(),
                 Username: $('#UserName').val(),
                 Password: $('#Password').val(),
@@ -383,13 +383,15 @@
                         $('#name_Shop').val('');
                     } else if (content == "false") {
                         $('#err_login').html('<div id="err_login"  class="alert alert-warning">Thất bại!</div>');
-                    } else {
+                    } else if (content == "success") {
                         $('#err_login').html('<div id="err_login" class="alert alert-success"><strong>Tạo mới thành công. </strong><span> Thương gia sẽ được chuyển đến Gian hàng trong vài giây nữa...</span></div>');
                         setTimeout(
                             //chuyển đến địa chỉ msg_login của controler gửi qua
                             function () {
-                                window.location.href = '' + msg_login + '';
+                                window.location.href = '/Sellers/LoginSeller';
                             }, 2000);
+                    } else {
+                        $('#err_login').html('<div id="err_login" class="alert alert-warning"><strong>Tạo mới không thành công. </strong><span> ' + content + '</span></div>');
                     }
                 }
 

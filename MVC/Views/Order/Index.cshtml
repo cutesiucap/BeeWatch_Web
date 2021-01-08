@@ -1,0 +1,352 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@section Css {
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+}
+
+<section class="content-header">
+    <div class="container-fluid" style="max-width: 1240px; min-width: 1240px;">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Đặt đơn</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Đặt đơn</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content" style="max-width: 1240px; min-width: 1240px; margin: auto;">
+    <div class="row">
+        <div class="col-3">
+            <div class="card card-outline card-warning">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div style="margin: 5px;">
+                            <span> <img src="../../dist/img/user3-128x128.jpg" class="img-circle elevation-3 img-size-50 mr-3" style="width: 40px;margin-left: 0px;"> </span>
+                            <span>Nguyễn Trung Tín</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Thông tin Tài khoảng
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="margin-left: 20px;">
+                                    <li class="nav-item">
+                                        <a href="../index.html" class="nav-link">
+                                            <i class="fas fa-file-invoice nav-icon"></i>
+                                            <p>Thay đổi thông tin</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../index2.html" class="nav-link">
+                                            <i class="fas fa-key nav-icon"></i>
+                                            <p>Thay đổi mật khẩu</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="gallery.html" class="nav-link">
+                                    <i class="nav-icon fas fa-shipping-fast"></i>
+                                    <p>
+                                        Quản lí Đơn Hàng
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="gallery.html" class="nav-link">
+                                    <i class="nav-icon fas fa-shopping-cart"></i>
+                                    <p>
+                                        Giỏ Hàng
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="gallery.html" class="nav-link" style="color: #FFC107;">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Đăng xuất
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="card card-outline card-warning">
+                        <div class="card-body">
+                            <h5 style="color: #FFC107;"><i class="fa fa-map-marked-alt"></i> Thông tin Nhận Hàng</h5>
+                            <h6 class="text-muted" style="margin-right: 20px;"><b>Nguyễn Trung Tín</b><b> (0945 918 317 - trungtinbee@gmail.com) </b>Quận 9, Tp.HCM</h6>
+                            <a href="#" style="margin: auto;">Thay đổi</a>
+                        </div>
+                    </div>
+
+                    <!--Các đơn hàng-->
+                    <div class="card card-warning" id="id_Order">
+                        <div class="card-header">
+                            <span style="display: inline-flex;">
+                                <img class="img-circle elevation-2 _avtShop" src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=k2pEMHrNQw0AX-CT5oZ&_nc_ht=scontent-sin6-2.xx&oh=612a8a0a291360d394ca22981e16a30c&oe=6015BA49" alt="" style="width: 30px; margin-right: 10px;">
+                                <h6 style="margin: auto;"><b class="_TenShop">Bee Shop</b></h6>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="text-muted">Sản phẩm</p>
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    <p class="text-muted">Đơn giá</p>
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    <p class="text-muted">Số lượng</p>
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    <p class="text-muted">Thành tiền</p>
+                                </div>
+                            </div>
+
+                            <!--Sản phẩm-->
+                            <div class="row" style="margin: 10px auto;">
+                                <div class="col-6">
+                                    <span style="display: inline-flex;">
+                                        <img class="img-circle elevation-2" src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=k2pEMHrNQw0AX-CT5oZ&_nc_ht=scontent-sin6-2.xx&oh=612a8a0a291360d394ca22981e16a30c&oe=6015BA49" alt="" style="width: 30px; margin-right: 10px;">
+                                        <h6 style="margin: auto;">Hoa hậu đồng hồ</h6>
+                                    </span>
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    20000000
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    2
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    40000000
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin: 10px auto;">
+                                <div class="col-6">
+                                    <span style="display: inline-flex;">
+                                        <img class="img-circle elevation-2" src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=k2pEMHrNQw0AX-CT5oZ&_nc_ht=scontent-sin6-2.xx&oh=612a8a0a291360d394ca22981e16a30c&oe=6015BA49" alt="" style="width: 30px; margin-right: 10px;">
+                                        <h6 style="margin: auto;">Hoa hậu đồng hồ</h6>
+                                    </span>
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    20000000
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    2
+                                </div>
+                                <div class="col" style="text-align: center;">
+                                    40000000
+                                </div>
+                            </div>
+                            <!--Sản phẩm-->
+                            <hr>
+                            <!--Mã giảm giá-->
+                            <div class="row">
+                                <div class="col-sm-6" style="border: 1px dotted #777B7F; padding: 10px;">
+                                    <div class="row">
+                                        <div class="col" style="min-width: 200px; max-width: 210px;">
+                                            <input type="text" class="form-control _discountCode" style="text-align: center;width: 200px;" placeholder="CODE Giảm giá" value="">
+                                        </div>
+                                        <div class="col" style="text-align: left;margin: auto;">
+                                            <h6 class="text-muted _discountDetail" style="margin: auto;">Mã giảm giá 10% dành cho Hóa đơn trên 10.000.000</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6" style="border: 1px dotted #777B7F;">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <p style="vertical-align: middle; text-align: center;">Vận chuyển: </p>
+                                        </div>
+                                        <div class="col-5">
+                                            <h6 class="text-muted" style="margin: auto;"><b>BEE'S SHIPPER</b></h6>
+                                            <p style="margin: auto;" class="text-muted">Giao hàng tiết kiệm</p>
+                                            <p style="margin: auto;" class="text-muted"><i>"Đơn hàng sẽ đến trong 1-2 ngày từ khi Xác nhận đơn"</i></p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p style="text-align: center;">15.000</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Mã giảm giá-->
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-6">
+                                </div>
+                                <div class="col-4">
+                                    <p style="text-align: right;"><b>Giảm giá: </b></p>
+                                    <p style="text-align: right;color: #FFC107;" class="_tongsp"><b>Tổng giá trị đơn hàng (3 Sản phẩm): </b></p>
+                                </div>
+                                <div class="col-2">
+                                    <p style="text-align: center"><b id="_GiamgiaDon_id">500000</b></p>
+                                    <p style="text-align: center;color: #FFC107;"><b class="_tonggiatri">90000000</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Các đơn hàng-->
+
+                    <div class="card card-outline card-warning">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="row" style="height: 80px;">
+                                        <div class="col-6" style="border: 1px dotted black;">
+                                            <p style="text-align: center;">Thanh Toán MOMO</p>
+                                        </div>
+                                        <div class="col-6" style="border: 1px dotted black ;">
+                                            <p style="text-align: center;">Thanh Toán BEE Point</p>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="height: 80px;">
+                                        <div class="col-6" style="border: 1px dotted black ;">
+                                            <p style="text-align: center;">Thanh Toán ATM</p>
+                                        </div>
+                                        <div class="col-6" style="border: 1px dotted black ;">
+                                            <p style="text-align: center;">Thanh Toán Trực tiếp</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <p style="text-align: right;">Tích Lũy (Bee-Point): </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p style="text-align: center;" class="_beepointvalue">200.000</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <p style="text-align: right;">Số lượng đơn: </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p style="text-align: center;" id="_Soluongdon">20</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h5 style="text-align: right; color: #FFC107;"><b>Thanh toán:</b> </h5>
+                                        </div>
+                                        <div class="col-4">
+                                            <h5 style="text-align: center; color: #FFC107;"><b id="_thanhtoan">18.000.000</b></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <input type="button" onclick="datdon()" class="btn btn-warning float-right" value="Đặt Đơn" style="width: 200px;">
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+        </div>
+    </div>
+</section>
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="../../plugins/toastr/toastr.min.js"></script>
+
+<script src="../../dist/js/demo.js"></script>
+
+<script>
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    function ThanhCongToast(Content) {
+        Toast.fire({
+            icon: 'success',
+            title: Content,
+        });
+    };
+</script>
+<script>
+    $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) $(".lentop").fadeIn();
+            else $(".lentop").fadeOut();
+        });
+        $(".lentop").click(function () {
+            $("body,html").animate({ scrollTop: 0 }, "slow");
+        });
+    });
+</script>
+
+<script>
+    function CheckCODE(sefl) {
+        var data = {
+            CODE: sefl.value,
+            id_Order: sefl.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id,
+        };
+        $(sefl.parentElement.parentElement.children[1].children[0]).html(data.CODE);
+    };
+
+    $('._discountCode').change(function () {
+        CheckCODE(this);
+    })
+
+    function Sodon() {
+        var sl = document.getElementsByClassName('_TenShop').length;
+        $('#_Soluongdon').html(sl);
+    }
+
+    function Thanhtoan() {
+        var l = document.getElementsByClassName('_tonggiatri');
+        var sl = 0;
+        $.each(l, function (index, item) {
+            sl += parseInt($(item).text());
+        });
+        $('#_thanhtoan').html(sl);
+    }
+
+    window.onload = function () {
+        Sodon();
+        Thanhtoan();
+    };
+
+    function datdon() {
+        var result = confirm("Xác nhận đặt Đơn ?");
+        if (result) {
+            ThanhCongToast("Đặt đơn Thành công");
+        }
+    }
+</script>

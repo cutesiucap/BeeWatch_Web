@@ -74,6 +74,7 @@ namespace API_Local.Models
         public virtual DbSet<view_Sex> view_Sex { get; set; }
         public virtual DbSet<view_UserSeller> view_UserSeller { get; set; }
         public virtual DbSet<view_WatchDetails> view_WatchDetails { get; set; }
+        public virtual DbSet<view_CartDetailHome> view_CartDetailHome { get; set; }
     
         [DbFunction("BeeWatchDBEntities", "fn_CheckLockUser")]
         public virtual IQueryable<fn_CheckLockUser_Result> fn_CheckLockUser(Nullable<bool> @lock)

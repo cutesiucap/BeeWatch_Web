@@ -19,11 +19,11 @@ namespace API_Local.ViewModels
     }
     public class AllHomeViewModel
     {
-        public IEnumerable<Models.view_WatchDetails> view_WatchDetails { get; set; }
+        public IQueryable<Models.view_WatchDetails> view_WatchDetails { get; set; }
         public ViewModels.HomeViewModel homeViewModel { get; set; }
-        public Models.Firms firms { get; set; }
-        public Models.Categories categories { get; set; }
-        public Models.Sex sex { get; set; }
+        public IQueryable<Models.Firms> firms { get; set; }
+        public IQueryable<Models.Categories> categories { get; set; }
+        public IQueryable<Models.Sex> sex { get; set; }
         public Models.Carts carts { get; set; }
     }
     public class ViewCartIntro

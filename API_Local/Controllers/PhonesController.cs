@@ -12,44 +12,44 @@ using API_Local.Models;
 
 namespace API_Local.Controllers
 {
-    public class ShopsController : ApiController
+    public class PhonesController : ApiController
     {
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
 
-        // GET: api/Shops
-        public IQueryable<Shops> GetShops()
+        // GET: api/Phones
+        public IQueryable<Phone> GetPhone()
         {
-            return db.Shops;
+            return db.Phone;
         }
 
-        // GET: api/Shops/5
-        [ResponseType(typeof(Shops))]
-        public IHttpActionResult GetShops(int id)
+        // GET: api/Phones/5
+        [ResponseType(typeof(Phone))]
+        public IHttpActionResult GetPhone(int id)
         {
-            Shops shops = db.Shops.Find(id);
-            if (shops == null)
+            Phone phone = db.Phone.Find(id);
+            if (phone == null)
             {
                 return NotFound();
             }
 
-            return Ok(shops);
+            return Ok(phone);
         }
 
-        // PUT: api/Shops/5
+        // PUT: api/Phones/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutShops(int id, Shops shops)
+        public IHttpActionResult PutPhone(int id, Phone phone)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != shops.id)
+            if (id != phone.id)
             {
                 return BadRequest();
             }
 
-            db.Entry(shops).State = EntityState.Modified;
+            db.Entry(phone).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace API_Local.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ShopsExists(id))
+                if (!PhoneExists(id))
                 {
                     return NotFound();
                 }
@@ -70,40 +70,38 @@ namespace API_Local.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Shops
-        [ResponseType(typeof(Shops))]
-        public IHttpActionResult PostShops(Shops shops)
+        // POST: api/Phones
+        [ResponseType(typeof(Phone))]
+        public IHttpActionResult PostPhone(Phone phone)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (db.Shops.Where(x => x.Name == shops.Name).Count() > 0)
+            if (phone.Phone1.Length > 10)
             {
-                return BadRequest("Shop tên này đã được tạo!!");
+                return BadRequest("Số điện thoại không được vượt quá 10 số");
             }
-
-            db.Shops.Add(shops);
+            db.Phone.Add(phone);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = shops.id }, shops);
+            return CreatedAtRoute("DefaultApi", new { id = phone.id }, phone);
         }
 
-        // DELETE: api/Shops/5
-        [ResponseType(typeof(Shops))]
-        public IHttpActionResult DeleteShops(int id)
+        // DELETE: api/Phones/5
+        [ResponseType(typeof(Phone))]
+        public IHttpActionResult DeletePhone(int id)
         {
-            Shops shops = db.Shops.Find(id);
-            if (shops == null)
+            Phone phone = db.Phone.Find(id);
+            if (phone == null)
             {
                 return NotFound();
             }
 
-            db.Shops.Remove(shops);
+            db.Phone.Remove(phone);
             db.SaveChanges();
 
-            return Ok(shops);
+            return Ok(phone);
         }
 
         protected override void Dispose(bool disposing)
@@ -115,9 +113,9 @@ namespace API_Local.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ShopsExists(int id)
+        private bool PhoneExists(int id)
         {
-            return db.Shops.Count(e => e.id == id) > 0;
+            return db.Phone.Count(e => e.id == id) > 0;
         }
     }
 }

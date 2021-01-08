@@ -24,6 +24,14 @@ namespace API_Local.Controllers
             return db.CartDetails;
         }
 
+        [Route("api/GetbyIdAccount/{id}")]
+        [HttpGet]
+        // GET: api/view_CartDetails
+        public IQueryable<view_CartDetailHome> GetbyIdAccount(int id)
+        {
+            return db.view_CartDetailHome.Where(x => x.id_Cart == id);
+        }
+
         // GET: api/CartDetails/5
         [ResponseType(typeof(CartDetails))]
         public IHttpActionResult GetCartDetails(int id)
@@ -87,6 +95,8 @@ namespace API_Local.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Route("api/CartDetails/Add")]
+        [HttpPost]
         // POST: api/CartDetails
         [ResponseType(typeof(CartDetails))]
         public IHttpActionResult PostCartDetails(CartDetails cartDetails)
@@ -96,25 +106,20 @@ namespace API_Local.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.CartDetails.Add(cartDetails);
-
-            try
+            CartDetails cartDetails1 = db.CartDetails.Where(x => x.id_Watch == cartDetails.id_Watch && x.id_Cart == cartDetails.id_Cart).FirstOrDefault();
+            if(cartDetails1 != null)
             {
+                cartDetails1.Count += cartDetails.Count;
+                db.Entry(cartDetails1).State = EntityState.Modified;
                 db.SaveChanges();
+                return BadRequest();
             }
-            catch (DbUpdateException)
+            else
             {
-                if (CartDetailsExists(cartDetails.id_Watch))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                db.CartDetails.Add(cartDetails);
+                db.SaveChanges();
+                return Ok();
             }
-
-            return CreatedAtRoute("DefaultApi", new { id = cartDetails.id_Watch }, cartDetails);
         }
 
         // DELETE: api/CartDetails/5

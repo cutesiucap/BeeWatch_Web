@@ -24,5 +24,9 @@ namespace MVC.Models
         public Nullable<bool> IsLock { get; set; }
         public Nullable<bool> IsCheck { get; set; }
         public Nullable<bool> IsExist { get; set; }
+        public string Name_Categories { get; set; }
+        public string Name_Phai { get; set; }
+        public string Name_Firms { get; set; }
+        public Nullable<int> LuotMua { get; set; }
     }
 }

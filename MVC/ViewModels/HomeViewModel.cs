@@ -16,5 +16,7 @@ namespace MVC.ViewModels
         public int numPage { get; set; }
         public int leftPage { get; set; }
         public int rightPage { get; set; }
+        public List<string> lvalue { get; set; }
+        public List<string> lsortBy { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MVC.Models
 {
-    public class view_WatchDetailHome
+    public class view_CartDetailHome
     {
         public int id_Watch { get; set; }
         public int id_Cart { get; set; }

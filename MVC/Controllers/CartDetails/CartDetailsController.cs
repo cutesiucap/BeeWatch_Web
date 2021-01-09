@@ -39,5 +39,19 @@ namespace MVC.Controllers.CartDetails
             return Content("fail");
            
         }
+
+        [HttpGet]
+        public ActionResult Show()
+        {
+            if (Session["Account"] == null)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+
+            IEnumerable<Models.view_CartDetailHome> CartDetails;
+            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsync("GetbyIdAccount/" + (Session["Account"] as Models.Accounts).id).Result;
+            CartDetails = httpResponseMessage.Content.ReadAsAsync<IEnumerable<Models.view_CartDetailHome>>().Result;
+            return Json(CartDetails, JsonRequestBehavior.AllowGet);
+        }
     }
 }

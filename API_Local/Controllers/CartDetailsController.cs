@@ -29,7 +29,17 @@ namespace API_Local.Controllers
         // GET: api/view_CartDetails
         public IQueryable<view_CartDetailHome> GetbyIdAccount(int id)
         {
-            return db.view_CartDetailHome.Where(x => x.id_Cart == id);
+            IQueryable<view_CartDetailHome> view_CartDetailHomes = db.view_CartDetailHome.Where(x => x.id_Cart == id);
+            foreach(view_CartDetailHome view_CartDetailHome in view_CartDetailHomes)
+            {
+                Image image = db.Image.Where(x => x.id_Watches == view_CartDetailHome.id_Watch).FirstOrDefault();
+                if (image != null)
+                {
+                    view_CartDetailHome.Url_Image = image.Url_Image;
+                }
+                
+            }
+            return view_CartDetailHomes;
         }
 
         // GET: api/CartDetails/5

@@ -94,7 +94,7 @@ namespace MVC.Controllers.Sellers
                     var resultshop = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Shops>("Shops", shops);
                     resultshop.Wait();
 
-                    shop_Seller.id_Shop = shops.id;
+                    shop_Seller.id_Shop = resultshop.Result.Content.ReadAsAsync<Models.Shops>().Result.id;
                     shop_Seller.id_Seller = sellers.id;
                 }
 
@@ -257,7 +257,7 @@ namespace MVC.Controllers.Sellers
                         Image image = new Image
                         {
                             id_Watches = int.Parse(Session["id_newWatch"].ToString()),
-                            Url_Image = path,
+                            Url_Image = "../../Source/Watch/Image/" + fileName1,
                         };
                         var result = GlobalVariables.HttpClient.PostAsJsonAsync<Models.Image>("Images", image);
                     }

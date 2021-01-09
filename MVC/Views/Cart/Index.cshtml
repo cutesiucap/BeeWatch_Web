@@ -144,7 +144,7 @@
                                                 <th style="vertical-align:middle; display: table-cell; text-align: center;">Thành tiền</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="_cartDetail">
                                             <tr>
                                                 <td style="vertical-align:middle; display: table-cell;">
                                                     <div class="icheck-warning d-inline">
@@ -326,68 +326,6 @@
 <!-- AdminLTE for demo purposes -->
 
 <script src="../../dist/js/demo.js"></script>
-<script>
-    $('.stars').each(function () {
-        var rating = $(this).data("rating");
-        var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star"></i>');
-        var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt"></i>' : '';
-        var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star"></i>');
-        $(this).html(fullStar + halfStar + noStar);
-    })
-
-</script>
-
-<script>
-    var slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("dot");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) { slideIndex = 1 }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-        setTimeout(showSlides, 5000); // Change image every 2 seconds
-    }
-</script>
-
-<script>
-    function themvaogio_funtion(seft) {
-
-    }
-
-    $('.addcartbtn').click(function () {
-        var data = {
-            idWatches: this.parentElement.parentElement.parentElement.id,
-        }
-        ThanhCongToast("Đã thêm thành công");
-        $.ajax({
-            url: '../../OrderDetail/Add',
-            type: 'POST',
-            data: data,
-            async: true,
-            dataType: 'JSON',
-            success: function (newcart) {
-                var giohangElement = document.getElementsByClassName('_giohang')[0];
-                giohangElement.empty();
-                var giohangsoluong = 0;
-                $.each(newcart, function (index, item) {
-                    giohangElement.append('');
-                    giohangsoluong += item.Count;
-                })
-                giohangElement.parentElement.show;
-            }
-        })
-    })
-</script>
 
 <script>
 
@@ -404,6 +342,7 @@
         });
     };
 </script>
+
 <script>
     $(function () {
         $(window).scroll(function () {
@@ -414,6 +353,43 @@
             $("body,html").animate({ scrollTop: 0 }, "slow");
         });
     });
+</script>
+
+<script>
+    function getcart() {
+        $.ajax({
+            url: '../../CartDetails/Show',
+            type: 'GET',
+            async: false,
+            dataType: 'JSON',
+            success: function (newcart) {
+                $('._cartDetail').empty();
+                $.each(newcart, function (index, item) {
+                    if (item.IsCheck == true) {
+                        $('._cartDetail').append('<tr><td style = "vertical-align:middle; display: table-cell;" ><div class="icheck-warning d-inline"><input onchange="CheckCartChange()" class="checkCart" type="checkbox" id="'
+                            + item.id_Watch + '" checked><label for="' + item.id_Watch + '"></label></div></td><td style="vertical-align:middle; display: table-cell;"><img src="'
+                            + item.Url_Image + '" style="height: 120px; "></td><td style="vertical-align:middle; display: table-cell; text-align: center;">'
+                            + item.Name + '</td ><td style="vertical-align:middle; display: table-cell; text-align: center;">'
+                            + item.Price + '</td><td style="vertical-align:middle; display: table-cell; text-align: center;"><div class="input-group" style="width: 130px; margin:auto"><div class="input-group-prepend"><span onclick="truclick(this)" class="input-group-text btn btn-warning _tru"><i class="fa fa-minus"></i></span></div><input type="text" class="form-control _count" placeholder="SL" style="text-align: center; background-color: #454D55;" value="'
+                            + item.Count + '"><div class="input-group-prepend"><span onclick="congclick(this)" class="input-group-text btn btn-warning _cong"><i class="fa fa-plus"></i></span></div></div></td><td style="vertical-align:middle; display: table-cell; text-align: center;"></td></tr>');
+                    }
+                    else {
+                        $('._cartDetail').append('<tr><td style = "vertical-align:middle; display: table-cell;" ><div class="icheck-warning d-inline"><input class="checkCart" type="checkbox" id="'
+                            + item.id_Watch + '"><label for="' + item.id_Watch + '"></label></div></td><td style="vertical-align:middle; display: table-cell;"><img src="'
+                            + item.Url_Image + '" style="height: 120px; "></td><td style="vertical-align:middle; display: table-cell; text-align: center;">'
+                            + item.Name + '</td ><td style="vertical-align:middle; display: table-cell; text-align: center;">'
+                            + item.Price + '</td><td style="vertical-align:middle; display: table-cell; text-align: center;"><div class="input-group" style="width: 130px; margin:auto"><div class="input-group-prepend"><span onclick="truclick(this)" class="input-group-text btn btn-warning _tru"><i class="fa fa-minus"></i></span></div><input type="text" class="form-control _count" placeholder="SL" style="text-align: center; background-color: #454D55;" value="'
+                            + item.Count + '"><div class="input-group-prepend"><span onclick="congclick(this)" class="input-group-text btn btn-warning _cong"><i class="fa fa-plus"></i></span></div></div></td><td style="vertical-align:middle; display: table-cell; text-align: center;"></td></tr>');
+                    }
+
+                });
+            }
+        });
+        tinhtongtien();
+    };
+    window.onload = function () {
+        getcart();
+    };
 </script>
 
 <script>
@@ -429,6 +405,28 @@
     $('.checkCart').change(function () {
         tinhtongtien(this);
     });
+
+    function CheckCartChange() {
+        tinhtongtien(this);
+    };
+
+    function truclick(self) {
+        var countElement = self.parentElement.parentElement.children[1];
+        var count = parseInt(countElement.value);
+        if (count <= 1) {
+        }
+        else {
+            countElement.value = (count - 1);
+        }
+        tinhtongtien();
+    };
+
+    function congclick(self) {
+        var countElement = self.parentElement.parentElement.children[1];
+        var count = parseInt(countElement.value);
+        countElement.value = (count + 1);
+        tinhtongtien();
+    };
 
     $('._tru').click(function () {
         var countElement = this.parentElement.parentElement.children[1];
@@ -482,6 +480,4 @@
             $(item.parentElement.parentElement.parentElement.children[5]).html((g * s));
         });
     };
-
-    window.onload = tinhtongtien();
 </script>

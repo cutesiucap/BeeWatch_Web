@@ -40,9 +40,9 @@ namespace MVC.Controllers.Clients
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
 
-            IEnumerable<Models.view_WatchDetailHome> CartDetails;
+            IEnumerable<Models.view_CartDetailHome> CartDetails;
             HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsync("GetbyIdAccount/" + (Session["Account"] as Models.Accounts).id).Result;
-            CartDetails = httpResponseMessage.Content.ReadAsAsync<IEnumerable<Models.view_WatchDetailHome>>().Result;
+            CartDetails = httpResponseMessage.Content.ReadAsAsync<IEnumerable<Models.view_CartDetailHome>>().Result;
             return Json(CartDetails, JsonRequestBehavior.AllowGet);
         }
     }

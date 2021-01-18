@@ -20,7 +20,7 @@ namespace API_Local.Controllers
         // GET: api/view_Watches
         public IQueryable<view_WatchDetails> GetView_Watches()
         {
-            return db.view_WatchDetails;
+            return db.view_WatchDetails.AsNoTracking();
         }
 
 

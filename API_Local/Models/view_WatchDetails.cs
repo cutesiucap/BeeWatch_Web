@@ -14,15 +14,16 @@ namespace API_Local.Models
     
     public partial class view_WatchDetails
     {
-        public int id { get; set; }
+        public Nullable<long> NID { get; set; }
+        public Nullable<int> id { get; set; }
         public string Url_Image { get; set; }
         public Nullable<int> id_Sex { get; set; }
-        public int id_Firms { get; set; }
+        public Nullable<int> id_Firms { get; set; }
         public string Name { get; set; }
-        public double Price { get; set; }
-        public int Count { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<int> Count { get; set; }
         public string Information { get; set; }
-        public int id_Shop { get; set; }
+        public Nullable<int> id_Shop { get; set; }
         public Nullable<double> Rate { get; set; }
         public Nullable<System.DateTime> Date_Create { get; set; }
         public string Create_By { get; set; }

@@ -83,7 +83,13 @@ namespace API_Local.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            ///////
+            Watches watches = db.Watches.Find(image.id_Watches);
+            if(watches.Url_Image == null || watches.Url_Image == "")
+            {
+                watches.Url_Image = image.Url_Image;
+                db.Entry(watches).State = EntityState.Modified;
+            }
             db.Image.Add(image);
             db.SaveChanges();
 

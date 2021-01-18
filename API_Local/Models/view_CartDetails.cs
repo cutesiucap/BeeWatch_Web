@@ -19,6 +19,9 @@ namespace API_Local.Models
         public string Name { get; set; }
         public double Price { get; set; }
         public int SoLuong { get; set; }
-        public Nullable<double> ThanhTien { get; set; }
+        public int id_Shop { get; set; }
+        public string ShopName { get; set; }
+        public string UrlAvatar { get; set; }
+        public Nullable<bool> IsCheck { get; set; }
     }
 }

@@ -17,8 +17,29 @@ namespace MVC.Controllers.Order
         // GET: Order
         public ActionResult Index()
         {
-            return View();
+            if (Session["Account"] == null)
+            {
+                return RedirectToAction("../../Accounts/Login");
+            }
+            int id = (Session["Account"] as Models.Accounts).id;
+            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsync("Orders/ShowOrder/" + id).Result;
+            Models.Accounts accounts = httpResponseMessage.Content.ReadAsAsync<Models.Accounts>().Result;
+            return View(accounts);
         }
+
+        //Order/EnterOrder
+        [HttpPost]
+        public ActionResult EnterOrder(IEnumerable<Models.Discounts> listCode)
+        {
+            int id = (Session["Account"] as Models.Accounts).id;
+            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsJsonAsync<IEnumerable<Models.Discounts>>("Orders/EnterOrder/" + id, listCode).Result;
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                Models.Accounts accounts = httpResponseMessage.Content.ReadAsAsync<Models.Accounts>().Result;
+            }
+            return Content("success");
+        }
+
 
         [HttpPost]
         public ActionResult UpStatus(int id)

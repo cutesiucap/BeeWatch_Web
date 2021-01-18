@@ -1,4 +1,6 @@
-﻿
+﻿@model MVC.Models.Accounts
+
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
@@ -36,8 +38,8 @@
                 <div class="card-header">
                     <div class="card-title">
                         <div style="margin: 5px;">
-                            <span> <img src="../../dist/img/user3-128x128.jpg" class="img-circle elevation-3 img-size-50 mr-3" style="width: 40px;margin-left: 0px;"> </span>
-                            <span>Nguyễn Trung Tín</span>
+                            <span> <img src="@Model.Url_Image_Avatar" class="img-circle elevation-3 img-size-50 mr-3" style="width: 40px;margin-left: 0px;"> </span>
+                            <span> @Model.Fullname </span>
                         </div>
                     </div>
                 </div>
@@ -103,138 +105,150 @@
                     <div class="card card-outline card-warning">
                         <div class="card-body">
                             <h5 style="color: #FFC107;"><i class="fa fa-map-marked-alt"></i> Thông tin Nhận Hàng</h5>
-                            <h6 class="text-muted" style="margin-right: 20px;"><b>Nguyễn Trung Tín</b><b> (0945 918 317 - trungtinbee@gmail.com) </b>Quận 9, Tp.HCM</h6>
+                            <h6 class="text-muted" style="margin-right: 20px;"><b>@Model.Fullname</b><b> (@Model.Phone.FirstOrDefault().Phone1 - @Model.Email) </b>@Model.Address.FirstOrDefault().Address_District.Name, @Model.Address.FirstOrDefault().Address_Province.Name</h6>
                             <a href="#" style="margin: auto;">Thay đổi</a>
                         </div>
                     </div>
 
-                    <!--Các đơn hàng-->
-                    <div class="card card-warning" id="id_Order">
-                        <div class="card-header">
-                            <span style="display: inline-flex;">
-                                <img class="img-circle elevation-2 _avtShop" src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=k2pEMHrNQw0AX-CT5oZ&_nc_ht=scontent-sin6-2.xx&oh=612a8a0a291360d394ca22981e16a30c&oe=6015BA49" alt="" style="width: 30px; margin-right: 10px;">
-                                <h6 style="margin: auto;"><b class="_TenShop">Bee Shop</b></h6>
-                            </span>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <p class="text-muted">Sản phẩm</p>
-                                </div>
-                                <div class="col" style="text-align: center;">
-                                    <p class="text-muted">Đơn giá</p>
-                                </div>
-                                <div class="col" style="text-align: center;">
-                                    <p class="text-muted">Số lượng</p>
-                                </div>
-                                <div class="col" style="text-align: center;">
-                                    <p class="text-muted">Thành tiền</p>
-                                </div>
-                            </div>
-
-                            <!--Sản phẩm-->
-                            <div class="row" style="margin: 10px auto;">
-                                <div class="col-6">
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model.Orders)
+                        {
+                            <!--Các đơn hàng-->
+                            <div class="card card-warning" id="id_Order">
+                                <div class="card-header">
                                     <span style="display: inline-flex;">
-                                        <img class="img-circle elevation-2" src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=k2pEMHrNQw0AX-CT5oZ&_nc_ht=scontent-sin6-2.xx&oh=612a8a0a291360d394ca22981e16a30c&oe=6015BA49" alt="" style="width: 30px; margin-right: 10px;">
-                                        <h6 style="margin: auto;">Hoa hậu đồng hồ</h6>
+                                        <img class="img-circle elevation-2 _avtShop" src="@item.Shops.UrlAvatar" alt="" style="width: 30px; margin-right: 10px;">
+                                        <h6 style="margin: auto;"><b class="_TenShop">@item.Shops.Name</b></h6>
                                     </span>
                                 </div>
-                                <div class="col" style="text-align: center;">
-                                    20000000
-                                </div>
-                                <div class="col" style="text-align: center;">
-                                    2
-                                </div>
-                                <div class="col" style="text-align: center;">
-                                    40000000
-                                </div>
-                            </div>
-
-                            <div class="row" style="margin: 10px auto;">
-                                <div class="col-6">
-                                    <span style="display: inline-flex;">
-                                        <img class="img-circle elevation-2" src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=k2pEMHrNQw0AX-CT5oZ&_nc_ht=scontent-sin6-2.xx&oh=612a8a0a291360d394ca22981e16a30c&oe=6015BA49" alt="" style="width: 30px; margin-right: 10px;">
-                                        <h6 style="margin: auto;">Hoa hậu đồng hồ</h6>
-                                    </span>
-                                </div>
-                                <div class="col" style="text-align: center;">
-                                    20000000
-                                </div>
-                                <div class="col" style="text-align: center;">
-                                    2
-                                </div>
-                                <div class="col" style="text-align: center;">
-                                    40000000
-                                </div>
-                            </div>
-                            <!--Sản phẩm-->
-                            <hr>
-                            <!--Mã giảm giá-->
-                            <div class="row">
-                                <div class="col-sm-6" style="border: 1px dotted #777B7F; padding: 10px;">
+                                <div class="card-body">
                                     <div class="row">
-                                        <div class="col" style="min-width: 200px; max-width: 210px;">
-                                            <input type="text" class="form-control _discountCode" style="text-align: center;width: 200px;" placeholder="CODE Giảm giá" value="">
+                                        <div class="col-6">
+                                            <p class="text-muted">Sản phẩm</p>
                                         </div>
-                                        <div class="col" style="text-align: left;margin: auto;">
-                                            <h6 class="text-muted _discountDetail" style="margin: auto;">Mã giảm giá 10% dành cho Hóa đơn trên 10.000.000</h6>
+                                        <div class="col" style="text-align: center;">
+                                            <p class="text-muted">Đơn giá</p>
+                                        </div>
+                                        <div class="col" style="text-align: center;">
+                                            <p class="text-muted">Số lượng</p>
+                                        </div>
+                                        <div class="col" style="text-align: center;">
+                                            <p class="text-muted">Thành tiền</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-6" style="border: 1px dotted #777B7F;">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <p style="vertical-align: middle; text-align: center;">Vận chuyển: </p>
+
+                                    <!--Sản phẩm-->
+                                    @foreach (var orderdetail in item.OrderDetails)
+                                    {
+                                        <div class="row" style="margin: 10px auto;">
+                                            <div class="col-6">
+                                                <span style="display: inline-flex;">
+                                                    <img class="img-circle elevation-2" src="@orderdetail.Watches.Url_Image" alt="" style="width: 30px; margin-right: 10px;">
+                                                    <h6 style="margin: auto;">@orderdetail.WatchName</h6>
+                                                </span>
+                                            </div>
+                                            <div class="col" style="text-align: center;">
+                                                @orderdetail.Price
+                                            </div>
+                                            <div class="col" style="text-align: center;">
+                                                @orderdetail.Count
+                                            </div>
+                                            <div class="col" style="text-align: center;">
+                                                @(orderdetail.Price*orderdetail.Count)
+                                            </div>
                                         </div>
-                                        <div class="col-5">
-                                            <h6 class="text-muted" style="margin: auto;"><b>BEE'S SHIPPER</b></h6>
-                                            <p style="margin: auto;" class="text-muted">Giao hàng tiết kiệm</p>
-                                            <p style="margin: auto;" class="text-muted"><i>"Đơn hàng sẽ đến trong 1-2 ngày từ khi Xác nhận đơn"</i></p>
+                                    }
+                                    <!--Sản phẩm-->
+                                    <hr>
+                                    <!--Mã giảm giá-->
+                                    <div class="row">
+                                        <div class="col-sm-6" style="border: 1px dotted #777B7F; padding: 10px;border-radius: 10px;">
+                                            <div class="row">
+                                                <div class="col" style="min-width: 200px; max-width: 210px;">
+                                                    <input type="text" class="form-control _discountCode" id="_giamgiaCODE_@item.id_Shop" onchange="enterCODE(this)" style="text-align: center;width: 200px;" placeholder="CODE Giảm giá" value="">
+                                                </div>
+                                                <div class="col" style="text-align: left;margin: auto;">
+                                                    <h6 class="text-muted _discountDetail" style="margin: auto;"></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="border: 1px dotted #777B7F;border-radius: 10px;">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <p style="vertical-align: middle; text-align: center;">Vận chuyển: </p>
+                                                </div>
+                                                <div class="col-5">
+                                                    <h6 class="text-muted" style="margin: auto;"><b>BEE'S SHIPPER</b></h6>
+                                                    <p style="margin: auto;" class="text-muted">Giao hàng tiết kiệm</p>
+                                                    <p style="margin: auto;" class="text-muted"><i>"Đơn hàng sẽ đến trong 1-2 ngày từ khi Xác nhận đơn"</i></p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <p style="text-align: center;">@item.Ship_fee</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Mã giảm giá-->
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-6">
                                         </div>
                                         <div class="col-4">
-                                            <p style="text-align: center;">15.000</p>
+                                            <p style="text-align: right;" class="_tongsp"><b>Tổng giá trị đơn hàng (@item.Count Sản phẩm): </b></p>
+                                            <p style="text-align: right;"><b>Giảm giá: </b></p>
+                                            <p style="text-align: right;color: #FFC107;"><b>Thành tiền: </b></p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p style="text-align: center;"><b id="_tonggiatri_@item.id_Shop" class="_tonggiatri">@item.Sum</b></p>
+                                            <p style="text-align: center"><b id="_giamgia_@item.id_Shop">0</b></p>
+                                            <p style="text-align: center;color: #FFC107;"><b id="_thanhtien_@item.id_Shop" class="_thanhtien">0</b></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!--Mã giảm giá-->
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="col-6">
-                                </div>
-                                <div class="col-4">
-                                    <p style="text-align: right;"><b>Giảm giá: </b></p>
-                                    <p style="text-align: right;color: #FFC107;" class="_tongsp"><b>Tổng giá trị đơn hàng (3 Sản phẩm): </b></p>
-                                </div>
-                                <div class="col-2">
-                                    <p style="text-align: center"><b id="_GiamgiaDon_id">500000</b></p>
-                                    <p style="text-align: center;color: #FFC107;"><b class="_tonggiatri">90000000</b></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Các đơn hàng-->
+                        }
+                    }
 
                     <div class="card card-outline card-warning">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="row" style="height: 80px;">
-                                        <div class="col-6" style="border: 1px dotted black;">
-                                            <p style="text-align: center;">Thanh Toán MOMO</p>
+                                <div class="col-6" style="border-right: 2px dotted #FFC107;border-radius: 10px;padding: 10px;">
+                                    <div class="row">
+                                        <div class="col-6" style="padding-bottom: 10px;">
+                                            <div class="icheck-bootstrap" style="text-align: center;">
+                                                <input type="radio" value="momo" id="momo" name="_payMethod" disabled>
+                                                <label for="momo">Ví MOMO</label>
+                                            </div>
+                                            <div style="background-image: url('https://cdn.tgdd.vn/2020/08/content/Vi%CC%81-MOMO-1200x900(1)-800x450.jpg');background-size: cover;width: 158px;height: 100px;margin: auto;border-radius: 8px;">
+                                            </div>
                                         </div>
-                                        <div class="col-6" style="border: 1px dotted black ;">
-                                            <p style="text-align: center;">Thanh Toán BEE Point</p>
+                                        <div class="col-6" style="padding-bottom: 10px;">
+                                            <div class="icheck-bootstrap" style="text-align: center;">
+                                                <input type="radio" value="beepoint" id="beepoint" name="_payMethod">
+                                                <label for="beepoint">Ví Bee-Point</label>
+                                            </div>
+                                            <div style="background-image: url('https://www.busit.co.nz/assets/Busit/beecard-images/bee-card__ResizedImageWzMwMCwxODld.png');background-size: cover;width: 158px;height: 100px;margin: auto;border-radius: 8px;">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row" style="height: 80px;">
-                                        <div class="col-6" style="border: 1px dotted black ;">
-                                            <p style="text-align: center;">Thanh Toán ATM</p>
+                                    <div class="row">
+                                        <div class="col-6" style="padding-bottom: 10px;">
+                                            <div class="icheck-bootstrap" style="text-align: center;">
+                                                <input type="radio" value="atm" id="atm" name="_payMethod" disabled>
+                                                <label for="atm">Thẻ Ngân Hàng</label>
+                                            </div>
+                                            <div style="background-image: url('https://vietjet.asia/assets/uploads/2017/06/L%E1%BB%A3i-%C3%ADch-t%E1%BB%AB-vi%E1%BB%87c-s%E1%BB%AD-d%E1%BB%A5ng-visa-card.png');background-size: cover;width: 158px;height: 100px;margin: auto;border-radius: 8px;">
+                                            </div>
                                         </div>
-                                        <div class="col-6" style="border: 1px dotted black ;">
-                                            <p style="text-align: center;">Thanh Toán Trực tiếp</p>
+                                        <div class="col-6" style="padding-bottom: 10px;">
+                                            <div class="icheck-bootstrap" style="text-align: center;">
+                                                <input type="radio" value="direct" id="direct" name="_payMethod" checked>
+                                                <label for="direct">Khi Nhận Hàng</label>
+                                            </div>
+                                            <div style="background-image: url('https://ingiaphat.com.vn/wp-content/uploads/2019/06/tructiep.jpg');background-size: cover;background-position: center;background-repeat: no-repeat;width: 158px;height: 100px;margin: auto;border-radius: 8px;">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +258,7 @@
                                             <p style="text-align: right;">Tích Lũy (Bee-Point): </p>
                                         </div>
                                         <div class="col-4">
-                                            <p style="text-align: center;" class="_beepointvalue">200.000</p>
+                                            <p style="text-align: center;" class="_beepointvalue">@Model.Point</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -312,41 +326,221 @@
 </script>
 
 <script>
-    function CheckCODE(sefl) {
+    function enterCODE(self) {
+        var id = self.id.substring(13);
+        var id_giamgia = '#_giamgia_' + id;
         var data = {
-            CODE: sefl.value,
-            id_Order: sefl.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id,
+            CODE: self.value,
+            Sum: $("#_tonggiatri_" + id).text(),
         };
-        $(sefl.parentElement.parentElement.children[1].children[0]).html(data.CODE);
-    };
+        $.ajax({
+            url: '../../Discounts/EnterCODE',
+            method: "POST",
+            data: data,
+            async: false,
+            dataType: 'JSON',
+            success: function (result) {
+                if (result.Status == false) {
+                    $(self.parentElement.parentElement.children[1].children[0]).html('<p style="color:red">' + result.Detail + '</p>');
+                    $(self).focus();
+                    $(id_giamgia).html(0);
+                    tamtinhdongia();
+                }
+                else {
+                    $(self.parentElement.parentElement.children[1].children[0]).html(result.Detail);                    
+                    $(id_giamgia).html(result.Value___);
+                    tamtinhdongia();
+                };
+            },
+        });
 
-    $('._discountCode').change(function () {
-        CheckCODE(this);
-    })
+    };
 
     function Sodon() {
         var sl = document.getElementsByClassName('_TenShop').length;
         $('#_Soluongdon').html(sl);
     }
 
-    function Thanhtoan() {
+    function Thanhtien() {
         var l = document.getElementsByClassName('_tonggiatri');
+        $.each(l, function (index, item) {
+            var id = item.id.substring(12);
+            var id_giamgia = '#_giamgia_' + id;
+            var sl = parseFloat($(item).text()) - parseFloat($(id_giamgia).text());
+            $('#_thanhtien_' + id).html(sl);
+        });
+    }
+
+    function Thanhtoan() {
+        var l = document.getElementsByClassName('_thanhtien');
         var sl = 0;
         $.each(l, function (index, item) {
-            sl += parseInt($(item).text());
+            sl += parseFloat($(item).text());
         });
         $('#_thanhtoan').html(sl);
     }
 
-    window.onload = function () {
-        Sodon();
-        Thanhtoan();
-    };
-
     function datdon() {
         var result = confirm("Xác nhận đặt Đơn ?");
         if (result) {
-            ThanhCongToast("Đặt đơn Thành công");
+            var lCODE = document.getElementsByClassName('_discountCode');
+            var listCODE = [];
+            $.each(lCODE, function (index, item) {
+                listCODE.push({
+                    id: item.id.substring(13),
+                    Code: item.value,
+                    Detail: $('input[name=_payMethod]:checked').val(),
+                });
+            });
+
+            var data = {
+                listCode: listCODE,
+            };
+
+            $.ajax({
+                url: '../../Order/EnterOrder',
+                method: 'POST',
+                data: data,
+                async: false,
+                success: function (result) {
+                    if (result == 'success') {
+                        ThanhCongToast("Đặt đơn Thành công");
+                    }
+                }
+            })
         }
     }
+
+    function Checkbeepoint() {
+        if (parseFloat($('#_thanhtoan').text()) > parseFloat($('._beepointvalue').text())) {
+            $('#beepoint').prop("disabled", true);
+            $('#beepoint').prop("checked", false);
+            $('#direct').prop("checked", true)
+        }
+        else {
+            $('#beepoint').prop("disabled", false);
+        };
+    }
+
+    function tamtinhdongia() {
+        Thanhtien();
+        Sodon();
+        Thanhtoan();
+        Checkbeepoint();
+    }
+
+    window.onload = function () {
+        tamtinhdongia();
+    };
 </script>
+
+
+
+<!--Các đơn hàng-->
+<!--<div class="card card-warning" id="id_Order">
+    <div class="card-header">
+        <span style="display: inline-flex;">
+            <img class="img-circle elevation-2 _avtShop" src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=k2pEMHrNQw0AX-CT5oZ&_nc_ht=scontent-sin6-2.xx&oh=612a8a0a291360d394ca22981e16a30c&oe=6015BA49" alt="" style="width: 30px; margin-right: 10px;">
+            <h6 style="margin: auto;"><b class="_TenShop">Bee Shop</b></h6>
+        </span>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <p class="text-muted">Sản phẩm</p>
+            </div>
+            <div class="col" style="text-align: center;">
+                <p class="text-muted">Đơn giá</p>
+            </div>
+            <div class="col" style="text-align: center;">
+                <p class="text-muted">Số lượng</p>
+            </div>
+            <div class="col" style="text-align: center;">
+                <p class="text-muted">Thành tiền</p>
+            </div>
+        </div>-->
+
+        <!--Sản phẩm-->
+        <!--<div class="row" style="margin: 10px auto;">
+            <div class="col-6">
+                <span style="display: inline-flex;">
+                    <img class="img-circle elevation-2" src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=k2pEMHrNQw0AX-CT5oZ&_nc_ht=scontent-sin6-2.xx&oh=612a8a0a291360d394ca22981e16a30c&oe=6015BA49" alt="" style="width: 30px; margin-right: 10px;">
+                    <h6 style="margin: auto;">Hoa hậu đồng hồ</h6>
+                </span>
+            </div>
+            <div class="col" style="text-align: center;">
+                20000000
+            </div>
+            <div class="col" style="text-align: center;">
+                2
+            </div>
+            <div class="col" style="text-align: center;">
+                40000000
+            </div>
+        </div>
+
+        <div class="row" style="margin: 10px auto;">
+            <div class="col-6">
+                <span style="display: inline-flex;">
+                    <img class="img-circle elevation-2" src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=k2pEMHrNQw0AX-CT5oZ&_nc_ht=scontent-sin6-2.xx&oh=612a8a0a291360d394ca22981e16a30c&oe=6015BA49" alt="" style="width: 30px; margin-right: 10px;">
+                    <h6 style="margin: auto;">Hoa hậu đồng hồ</h6>
+                </span>
+            </div>
+            <div class="col" style="text-align: center;">
+                20000000
+            </div>
+            <div class="col" style="text-align: center;">
+                2
+            </div>
+            <div class="col" style="text-align: center;">
+                40000000
+            </div>
+        </div>-->
+        <!--Sản phẩm-->
+        <!--<hr>-->
+        <!--Mã giảm giá-->
+        <!--<div class="row">
+            <div class="col-sm-6" style="border: 1px dotted #777B7F; padding: 10px;">
+                <div class="row">
+                    <div class="col" style="min-width: 200px; max-width: 210px;">
+                        <input type="text" class="form-control _discountCode" style="text-align: center;width: 200px;" placeholder="CODE Giảm giá" value="">
+                    </div>
+                    <div class="col" style="text-align: left;margin: auto;">
+                        <h6 class="text-muted _discountDetail" style="margin: auto;">Mã giảm giá 10% dành cho Hóa đơn trên 10.000.000</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" style="border: 1px dotted #777B7F;">
+                <div class="row">
+                    <div class="col-3">
+                        <p style="vertical-align: middle; text-align: center;">Vận chuyển: </p>
+                    </div>
+                    <div class="col-5">
+                        <h6 class="text-muted" style="margin: auto;"><b>BEE'S SHIPPER</b></h6>
+                        <p style="margin: auto;" class="text-muted">Giao hàng tiết kiệm</p>
+                        <p style="margin: auto;" class="text-muted"><i>"Đơn hàng sẽ đến trong 1-2 ngày từ khi Xác nhận đơn"</i></p>
+                    </div>
+                    <div class="col-4">
+                        <p style="text-align: center;">15.000</p>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <!--Mã giảm giá-->
+    <!--</div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-6">
+            </div>
+            <div class="col-4">
+                <p style="text-align: right;"><b>Giảm giá: </b></p>
+                <p style="text-align: right;color: #FFC107;" class="_tongsp"><b>Tổng giá trị đơn hàng (3 Sản phẩm): </b></p>
+            </div>
+            <div class="col-2">
+                <p style="text-align: center"><b id="_GiamgiaDon_id">500000</b></p>
+                <p style="text-align: center;color: #FFC107;"><b class="_tonggiatri">90000000</b></p>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!--Các đơn hàng-->

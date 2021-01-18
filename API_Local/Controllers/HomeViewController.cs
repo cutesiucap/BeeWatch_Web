@@ -17,17 +17,33 @@ namespace API_Local.Controllers
         [ResponseType(typeof(ViewModels.AllHomeViewModel))]
         public IHttpActionResult lWatchHome(ViewModels.AllHomeViewModel allHomeViewModel)
         {
+            allHomeViewModel = new ViewModels.AllHomeViewModel()
+            {
+                homeViewModel = new ViewModels.HomeViewModel()
+                {
+                    search = "",
+                    valueWatch = 0,
+                    idFirm = 0,
+                    idCategori = 0,
+                    idSex = 0,
+                    sortBy = 0,
+                    leftPage = 0,
+                    numPage = 1,
+                    rightPage = 0
+                },
+            };
+
             ViewModels.HomeViewModel homeViewModel = allHomeViewModel.homeViewModel;
 
             IQueryable<Models.view_WatchDetails> result;
 
             if (homeViewModel.search != "")
             {
-                result = db.view_WatchDetails.Where(x => x.Name.IndexOf(homeViewModel.search) >= 0 || x.id.ToString().IndexOf(homeViewModel.search) >= 0);
+                result = db.view_WatchDetails.AsNoTracking().Where(x => x.Name.IndexOf(homeViewModel.search) >= 0 || x.id.ToString().IndexOf(homeViewModel.search) >= 0);
             }
             else
             {
-                result = db.view_WatchDetails;
+                result = db.view_WatchDetails.AsNoTracking();
             }
 
             foreach(var item in result)

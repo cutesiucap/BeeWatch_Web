@@ -28,6 +28,7 @@ namespace API_Local.Models
         public Nullable<System.DateTime> DateFrom { get; set; }
         public Nullable<System.DateTime> DateTo { get; set; }
         public Nullable<bool> Status { get; set; }
+        public string Detail { get; set; }
     
         public virtual TypeDiscounts TypeDiscounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -12,12 +12,12 @@ namespace API_Local.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class view_AllCartDetails
+    public partial class sysdiagrams
     {
-        public int id_Cart { get; set; }
-        public int id_Watch { get; set; }
-        public string Name { get; set; }
-        public double Price { get; set; }
-        public int SoLuong { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

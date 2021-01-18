@@ -40,6 +40,29 @@ namespace MVC.Controllers.CartDetails
            
         }
 
+        [HttpPost]
+        public ActionResult Change(Models.CartDetails cartDetails)
+        {
+            if (Session["Account"] == null)
+            {
+                return Content("login");
+            }
+            cartDetails.id_Cart = (Session["Account"] as Models.Accounts).id;
+            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsJsonAsync<Models.CartDetails>("CartDetails/Change", cartDetails).Result;
+            
+            if (httpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return Content("notfound");
+            }
+            if (httpResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                cartDetails = httpResponseMessage.Content.ReadAsAsync<Models.CartDetails>().Result;
+                return Json(cartDetails, JsonRequestBehavior.AllowGet);
+            }
+            return Content("fail");
+
+        }
+
         [HttpGet]
         public ActionResult Show()
         {

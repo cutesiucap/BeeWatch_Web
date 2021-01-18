@@ -9,7 +9,7 @@ namespace MVC.Controllers.Watches
     public class WatchController : Controller
     {
         // GET: Watch
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
             return View();
         }

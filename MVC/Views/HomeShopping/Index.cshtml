@@ -268,7 +268,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 }
                             </div>
                             <div class="card-body">
-                                <a href="../../Watch/Index"><h5 style=""><b>@item.Name</b></h5></a>
+                                <a href="../../Watch/Index/@item.id"><h5 style=""><b>@item.Name</b></h5></a>
                                 <div class="row">
                                     <div class="col-10">
                                         <div class="row">
@@ -452,8 +452,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         $('._giohang').empty();
                         $.each(newcart, function (index, item) {
                             $('._giohang').append('<div class="row" style="width: 100%; padding: 5px;"><div class= "col-2" style = "margin: auto;"><img src="'
-                                + item.Url_Image + '" class="img-size-50 mr-3" style="width: 40px;"></div ><div class="col-8" style="margin: auto;"><p class="text-muted" style="margin-left: 5px;">'
-                                + item.Name + '</p ></div><div class="col-2" style="margin: auto;"><p class="text-muted" style="text-align: right;">'
+                                + item.Url_Image + '" class="img-size-50 mr-3" style="width: 40px;"></div ><div class="col-8" style="margin: auto;"><p class="text-muted" style="margin-left: 5px; "><a href="../../Watch/Index/'
+                                + item.id_Watch + '">'
+                                + item.Name + '</a></p ></div><div class="col-2" style="margin: auto;"><p class="text-muted" style="text-align: right;">'
                                 + item.Count + '</p ></div ></div > ');
                         });
                         $('._giohang').parentElement.show;

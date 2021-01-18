@@ -29,6 +29,7 @@ namespace API_Local.Models
         public string Address { get; set; }
         public Nullable<double> Point { get; set; }
         public Nullable<bool> Status { get; set; }
+        public string UrlAvatar { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hot_Trend> Hot_Trend { get; set; }

@@ -138,6 +138,7 @@
     <Compile Include="Controllers\AuthorizeCustom.cs" />
     <Compile Include="Controllers\CartDetails\CartDetailsController.cs" />
     <Compile Include="Controllers\Clients\CartController.cs" />
+    <Compile Include="Controllers\Discounts\DiscountsController.cs" />
     <Compile Include="Controllers\Home\HomePageController.cs" />
     <Compile Include="Controllers\Home\HomeShoppingController.cs" />
     <Compile Include="Controllers\OrderDetail\OrderDetailController.cs" />
@@ -2297,6 +2298,7 @@
     <Folder Include="Views\Address_District\" />
     <Folder Include="Views\Address_Province\" />
     <Folder Include="Views\CartDetails\" />
+    <Folder Include="Views\Discounts\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\OrderDetail\" />
   </ItemGroup>

@@ -109,7 +109,7 @@ namespace API_Local.Controllers
         [HttpPost]
         // POST: api/CartDetails
         [ResponseType(typeof(CartDetails))]
-        public IHttpActionResult PostCartDetails(CartDetails cartDetails)
+        public IHttpActionResult Add(CartDetails cartDetails)
         {
             if (!ModelState.IsValid)
             {
@@ -129,6 +129,50 @@ namespace API_Local.Controllers
                 db.CartDetails.Add(cartDetails);
                 db.SaveChanges();
                 return Ok();
+            }
+        }
+
+        [Route("api/CartDetails/Change")]
+        [HttpPost]
+        // POST: api/CartDetails
+        [ResponseType(typeof(CartDetails))]
+        public IHttpActionResult Change(CartDetails cartDetails)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            CartDetails cartDetails1 = db.CartDetails.Where(x => x.id_Watch == cartDetails.id_Watch && x.id_Cart == cartDetails.id_Cart).FirstOrDefault();
+            if (cartDetails1 != null)
+            {
+                //Chỉnh Check
+                if (cartDetails.IsCheck != null)
+                {
+                    cartDetails1.IsCheck = cartDetails.IsCheck;
+                    db.SaveChanges();
+                    return Ok(cartDetails1);
+                }
+                else
+                {
+                    //CHỉnh Số lượng
+                    cartDetails1.Count = cartDetails.Count;
+                    if (cartDetails1.Count == 0)
+                    {
+                        db.CartDetails.Remove(cartDetails1);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        db.Entry(cartDetails1).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    return Ok(cartDetails1);
+                }
+            }
+            else
+            {
+                return NotFound();
             }
         }
 

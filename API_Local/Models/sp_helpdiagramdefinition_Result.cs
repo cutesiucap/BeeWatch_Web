@@ -10,14 +10,10 @@
 namespace API_Local.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class view_AllCartDetails
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int id_Cart { get; set; }
-        public int id_Watch { get; set; }
-        public string Name { get; set; }
-        public double Price { get; set; }
-        public int SoLuong { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

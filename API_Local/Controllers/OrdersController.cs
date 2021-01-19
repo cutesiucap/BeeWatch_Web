@@ -279,10 +279,8 @@ namespace API_Local.Controllers
 
             foreach (var item in accounts.Phone)
             {
-                item.Accounts = null;
                 newaccount.Phone.Add(item);
             }
-
             foreach (var item in accounts.Address)
             {
 
@@ -305,7 +303,6 @@ namespace API_Local.Controllers
                     AddressDetail = item.AddressDetail,
                 });
             }
-
             string paymethod = "";
             switch (discounts.FirstOrDefault().Detail.Trim())
             {
@@ -335,7 +332,52 @@ namespace API_Local.Controllers
                 order.id_Shop = view_CartDetails.id_Shop;
                 order.id_Accounts = id;
 
-                /*Models.Shops shops = db.Shops.Find(order.id_Shop);
+                int SL = 0;
+                double Tong = 0;
+                foreach (var Watch in cartdetail)
+                {                   
+                    SL += Watch.SoLuong;
+                    Tong += Watch.SoLuong * Watch.Price;
+                }
+                order.Ship_fee = 15000;
+                order.Count = SL;
+                order.Sum = Tong + order.Ship_fee;
+                order.Address_District = accounts.Address.FirstOrDefault().id_District;
+                order.Address_Province = accounts.Address.FirstOrDefault().id_Province;
+                order.Status = 0;
+                order.Date_Create = DateTime.Now;
+                Models.Discounts dis = discounts.Where(y => y.id == order.id_Shop).FirstOrDefault();
+                if (dis != null)
+                {
+                    Models.Discounts discount = db.Discounts.Where(x => x.Code == dis.Code).FirstOrDefault();
+                    if (discount != null)
+                    {
+                        order.id_Discount = discount.id;
+                    }
+                };
+                foreach (var Watch in cartdetail)
+                {
+                    order.OrderDetails.Add( new OrderDetails()
+                    {
+                        id_Watches = Watch.id_Watch,
+                        WatchName = Watch.Name,
+                        Price = Watch.Price,
+                        Count = Watch.SoLuong,
+                        Status = 0,
+                    });
+                };
+                db.Orders.Add(order);
+            }
+            db.SaveChanges();
+
+
+
+
+
+            return newaccount;
+
+
+            /*Models.Shops shops = db.Shops.Find(order.id_Shop);
                 Models.Sellers sellers = db.Sellers.Find(shops.id_Master);
                 Models.Accounts sellAccount = db.Accounts.Find(sellers.id);
                 order.Shops = new Shops()
@@ -362,79 +404,45 @@ namespace API_Local.Controllers
                         Phone1 = phone.Phone1,
                     });
                 };*/
+            /*order.OrderDetails.Add(new OrderDetails()
+                   {
+                       id_Watches = Watch.id_Watch,
+                       WatchName = Watch.Name,
+                       Price = Watch.Price,
+                       Count = Watch.SoLuong,
+                       Watches = new Watches()
+                       {
+                           id = Watch.id_Watch,
+                           Name = Watch.Name,
+                           Url_Image = db.Watches.Find(Watch.id_Watch).Url_Image,
+                       },
+                   });*/
 
 
-                int SL = 0;
-                double Tong = 0;
-                foreach (var Watch in cartdetail)
+                /*order.Discounts = new Discounts()
                 {
-                    /*order.OrderDetails.Add(new OrderDetails()
-                    {
-                        id_Watches = Watch.id_Watch,
-                        WatchName = Watch.Name,
-                        Price = Watch.Price,
-                        Count = Watch.SoLuong,
-                        Watches = new Watches()
-                        {
-                            id = Watch.id_Watch,
-                            Name = Watch.Name,
-                            Url_Image = db.Watches.Find(Watch.id_Watch).Url_Image,
-                        },
-                    });*/
-                    SL += Watch.SoLuong;
-                    Tong += Watch.SoLuong * Watch.Price;
-                }
-                order.Ship_fee = 15000;
-                order.Count = SL;
-                order.Sum = Tong + order.Ship_fee;
-                order.Address_District = accounts.Address.FirstOrDefault().id_District;
-                order.Address_Province = accounts.Address.FirstOrDefault().id_Province;
-                order.Status = 0;
-                Models.Discounts dis = discounts.Where(y => y.id == order.id_Shop).FirstOrDefault();
-                if (dis != null)
-                {
-                    Models.Discounts discount = db.Discounts.Where(x => x.Code == dis.Code).FirstOrDefault();
-                    if (discount != null)
-                    {
-                        order.id_Discount = discount.id;
-                        /*order.Discounts = new Discounts()
-                        {
-                            id = discount.id,
-                            Code = discount.Code,
-                            Detail = discount.Detail,
-                        };
-                        double? Value = order.Sum - (order.Sum * discount.Value___) / 100 - discount.Value___1;
-                        if (Value > discount.TypeDiscounts.Max_Discount)
-                        {
-                            Value = discount.TypeDiscounts.Max_Discount;
-                        }
-                        order.Discounts.Value___ = Value;*/
-                    }
+                    id = discount.id,
+                    Code = discount.Code,
+                    Detail = discount.Detail,
                 };
+                double? Value = order.Sum - (order.Sum * discount.Value___) / 100 - discount.Value___1;
+                if (Value > discount.TypeDiscounts.Max_Discount)
+                {
+                    Value = discount.TypeDiscounts.Max_Discount;
+                }
+                order.Discounts.Value___ = Value;*/
+
                 //order.Shops = db.Shops.Find(order.id_Shop);
                 //order.Accounts = null;
                 //order.Address_District1 = null;
                 //order.Address_Province1 = null;
                 ///order.Discounts = null;
-                db.OrderDetails.Add(new OrderDetails());
-
-                /*foreach (var Watch in cartdetail)
+                /*db.OrderDetails.Add(new OrderDetails()
                 {
-                    order.OrderDetails.Add( new OrderDetails()
-                    {
-                        id_Watches = Watch.id_Watch,
-                        WatchName = Watch.Name,
-                        Price = Watch.Price,
-                        Count = Watch.SoLuong
-                    });
-                }*/
-
-            }
-            db.SaveChanges();
-
-            return newaccount;
+                    id_Order = 18,
+                });*/
         }
-         
+
 
     }
 }

@@ -71,8 +71,9 @@ namespace API_Local.Controllers
                     Rate = item.Rate,
                 });
             };
-            
 
+            watchDetailViewModel.Gianhangcungban = db.view_WatchDetails.Where(x => x.id_Shop == shops.id).OrderBy(x => x.LuotMua).Skip(0).Take(20);
+            watchDetailViewModel.Sanphamtuongtu = db.view_WatchDetails.Where(x => x.id_Firms == watchDetailViewModel.watch.id || x.Name_Categories.IndexOf(db.view_WatchDetails.Where(y => y.id == watchDetailViewModel.watch.id).FirstOrDefault().Name_Categories) >= 0).OrderBy(x => x.LuotMua).Skip(0).Take(20);
 
             return Ok(watchDetailViewModel);
         }

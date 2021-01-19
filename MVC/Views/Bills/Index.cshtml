@@ -1,0 +1,319 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<section class="content"  style="padding: 20px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="callout callout-warning">
+                    <h5><i class="fas fa-info"></i> Đặt đơn <b style="background-color: #218838;">THÀNH CÔNG</b>:</h5>
+                    Cát hạ vừa mới đạt hàng thành công :). Hãy theo dõi đơn hàng <a href="#" style="color: #FFC107;"> tại đây</a>
+                </div>
+
+
+                <!-- Main content -->
+                <div class="invoice p-3 mb-3">
+                    <!-- title row -->
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>
+                                <i class="fab fa-forumbee" style="color: #FFC107;"></i><b style="color: #FFC107;"> BEE</b>WATCH Shopping.
+                                <small class="float-right">Ngày Xuất: 2/10/2014</small>
+                            </h4>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- info row -->
+                    <div class="row invoice-info">
+                        <div class="col-sm-4 invoice-col">
+                            Khách Hàng
+                            <address>
+                                <strong>Nguyễn Trung Tín #Cutesiucap</strong><br>
+                                Quận 9, Thành Phố Hồ Chí Minh<br>
+                                Điện thoại: 0945918317<br>
+                                Email: info@almasaeedstudio.com
+                            </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                            Gian Hàng
+                            <address>
+                                <strong>Bee Shop</strong><br>
+                                Hà Đông, Hà Nội<br>
+                                Liên Hệ: 0945918317<br>
+                                Email: john.doe@example.com
+                            </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                            <b>Mã Shop #47</b><br>
+                            <br>
+                            <b>Order ID:</b> #17<br>
+                            <b>Ngày tạo:</b> 2/22/2014<br>
+                            <b>Tình trạng:</b> Chờ Duyệt
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                    <!-- Table row -->
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr style="color: #FFC107;">
+                                        <th>Mã #</th>
+                                        <th>Đồng Hồ</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Call of Duty</td>
+                                        <td>455-981-221</td>
+                                        <td>El snort testosterone trophy driving gloves handsome</td>
+                                        <td>$64.50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Need for Speed IV</td>
+                                        <td>247-925-726</td>
+                                        <td>Wes Anderson umami biodiesel</td>
+                                        <td>$50.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Monsters DVD</td>
+                                        <td>735-845-642</td>
+                                        <td>Terry Richardson helvetica tousled street art master</td>
+                                        <td>$10.70</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Grown Ups Blue Ray</td>
+                                        <td>422-568-642</td>
+                                        <td>Tousled lomo letterpress</td>
+                                        <td>$25.99</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-6">
+                            <p class="lead">Chi tiết:</p>
+                            <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                                Order của Cát đã được yêu cầu và gửi đến Gian Hàng.
+                                Gian Hàng sẽ phản hồi đến Cát Hạ trong thời gian sớm nhất
+                            </p>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-6">
+                            <p class="lead">THANH TOÁN</p>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th style="width:50%">Giá trị:</th>
+                                        <td>4.500.000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Giảm giá(RTCR20%)</th>
+                                        <td>50.000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Vận chuyển:</th>
+                                        <td>15.000</td>
+                                    </tr>
+                                    <tr style="color: #FFC107;">
+                                        <th>Phải thanh toán:</th>
+                                        <td>13.050.000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phương thức thanh toán:</th>
+                                        <td>Bee Point</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                    <!-- this row will not appear when printing -->
+                    <div class="row no-print">
+                        <div class="col-12">
+                            <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> In </a>
+                            <button type="button" class="btn btn-success float-right">
+                                <i class="far fa-credit-card"></i>
+                                Quay lại trang chủ
+                            </button>
+                            <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <i class="fas fa-download"></i> Lưu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.invoice -->
+                <!-- Main content -->
+                <div class="invoice p-3 mb-3">
+                    <!-- title row -->
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>
+                                <i class="fab fa-forumbee" style="color: #FFC107;"></i><b style="color: #FFC107;"> BEE</b>WATCH Shopping.
+                                <small class="float-right">Ngày Xuất: 2/10/2014</small>
+                            </h4>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- info row -->
+                    <div class="row invoice-info">
+                        <div class="col-sm-4 invoice-col">
+                            Khách Hàng
+                            <address>
+                                <strong>Nguyễn Trung Tín #Cutesiucap</strong><br>
+                                Quận 9, Thành Phố Hồ Chí Minh<br>
+                                Điện thoại: 0945918317<br>
+                                Email: info@almasaeedstudio.com
+                            </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                            Gian Hàng
+                            <address>
+                                <strong>Bee Shop</strong><br>
+                                Hà Đông, Hà Nội<br>
+                                Liên Hệ: 0945918317<br>
+                                Email: john.doe@example.com
+                            </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                            <b>Mã Shop #47</b><br>
+                            <br>
+                            <b>Order ID:</b> #17<br>
+                            <b>Ngày tạo:</b> 2/22/2014<br>
+                            <b>Tình trạng:</b> Chờ Duyệt
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                    <!-- Table row -->
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr style="color: #FFC107;">
+                                        <th>Mã #</th>
+                                        <th>Đồng Hồ</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Call of Duty</td>
+                                        <td>455-981-221</td>
+                                        <td>El snort testosterone trophy driving gloves handsome</td>
+                                        <td>$64.50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Need for Speed IV</td>
+                                        <td>247-925-726</td>
+                                        <td>Wes Anderson umami biodiesel</td>
+                                        <td>$50.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Monsters DVD</td>
+                                        <td>735-845-642</td>
+                                        <td>Terry Richardson helvetica tousled street art master</td>
+                                        <td>$10.70</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Grown Ups Blue Ray</td>
+                                        <td>422-568-642</td>
+                                        <td>Tousled lomo letterpress</td>
+                                        <td>$25.99</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-6">
+                            <p class="lead">Chi tiết:</p>
+                            <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                                Order của Cát đã được yêu cầu và gửi đến Gian Hàng.
+                                Gian Hàng sẽ phản hồi đến Cát Hạ trong thời gian sớm nhất
+                            </p>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-6">
+                            <p class="lead">THANH TOÁN</p>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th style="width:50%">Giá trị:</th>
+                                        <td>4.500.000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Giảm giá(RTCR20%)</th>
+                                        <td>50.000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Vận chuyển:</th>
+                                        <td>15.000</td>
+                                    </tr>
+                                    <tr style="color: #FFC107;">
+                                        <th>Phải thanh toán:</th>
+                                        <td>13.050.000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phương thức thanh toán:</th>
+                                        <td>Bee Point</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                    <!-- this row will not appear when printing -->
+                    <div class="row no-print">
+                        <div class="col-12">
+                            <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> In </a>
+                            <button type="button" class="btn btn-success float-right">
+                                <i class="far fa-credit-card"></i>
+                                Quay lại trang chủ
+                            </button>
+                            <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <i class="fas fa-download"></i> Lưu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.invoice -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+

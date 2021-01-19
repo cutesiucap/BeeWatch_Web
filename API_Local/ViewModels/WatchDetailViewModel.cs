@@ -10,8 +10,8 @@ namespace API_Local.ViewModels
         public Watch watch { get; set; }
         public Shop shop { get; set; }
         public ICollection<Danhgia> danhgias { get; set; }
-        public ICollection<Models.view_WatchDetails> Gianhangcungban { get; set; }
-        public ICollection<Models.view_WatchDetails> Sanphamtuongtu { get; set; }
+        public IEnumerable<Models.view_WatchDetails> Gianhangcungban { get; set; }
+        public IEnumerable<Models.view_WatchDetails> Sanphamtuongtu { get; set; }
     }
 
     public class Watch

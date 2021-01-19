@@ -332,7 +332,7 @@ namespace API_Local.Controllers
                 view_CartDetails view_CartDetails = cartdetail.FirstOrDefault();
                 order.id_Shop = view_CartDetails.id_Shop;
                 order.id_Accounts = id;
-                
+
                 /*Models.Shops shops = db.Shops.Find(order.id_Shop);
                 Models.Sellers sellers = db.Sellers.Find(shops.id_Master);
                 Models.Accounts sellAccount = db.Accounts.Find(sellers.id);
@@ -407,16 +407,16 @@ namespace API_Local.Controllers
                             Value = discount.TypeDiscounts.Max_Discount;
                         }
                         order.Discounts.Value___ = Value;*/
-                    }                    
+                    }
                 };
-                order.Shops = db.Shops.Find(order.id_Shop);
-                order.Accounts = null;
-                order.Address_District1 = null;
-                order.Address_Province1 = null;
-                order.Discounts = null;
-                db.Orders.Add(order);
-                db.SaveChanges();
-                foreach (var Watch in cartdetail)
+                //order.Shops = db.Shops.Find(order.id_Shop);
+                //order.Accounts = null;
+                //order.Address_District1 = null;
+                //order.Address_Province1 = null;
+                ///order.Discounts = null;
+                db.OrderDetails.Add(new OrderDetails());
+
+                /*foreach (var Watch in cartdetail)
                 {
                     order.OrderDetails.Add( new OrderDetails()
                     {
@@ -425,10 +425,11 @@ namespace API_Local.Controllers
                         Price = Watch.Price,
                         Count = Watch.SoLuong
                     });
-                }
-               
+                }*/
+
             }
-            
+            db.SaveChanges();
+
             return newaccount;
         }
          

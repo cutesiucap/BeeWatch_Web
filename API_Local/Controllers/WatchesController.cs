@@ -26,13 +26,54 @@ namespace API_Local.Controllers
         [ResponseType(typeof(Watches))]
         public IHttpActionResult GetWatches(int id)
         {
-            Watches watches = db.Watches.Find(id);
+            Models.view_WatchDetails watches = db.view_WatchDetails.Where(x => x.id == id).FirstOrDefault();
             if (watches == null)
             {
                 return NotFound();
             }
+            ViewModels.WatchDetailViewModel watchDetailViewModel = new ViewModels.WatchDetailViewModel();
+            watchDetailViewModel.watch = new ViewModels.Watch();
+            watchDetailViewModel.watch.id = watches.id;
+            watchDetailViewModel.watch.Name = watches.Name;
+            watchDetailViewModel.watch.Price = watches.Price;
+            watchDetailViewModel.watch.Rate = watches.Rate;
+            watchDetailViewModel.watch.Luotmua = watches.LuotMua;
+            watchDetailViewModel.watch.Count = watches.Count;
+            watchDetailViewModel.watch.Luotdanhgia = db.OrderDetails.Where(x => x.Rate != null && x.Status == 3).Count();
+            watchDetailViewModel.watch.Detail = db.Watches.Find(id).Information;
 
-            return Ok(watches);
+            Models.Shops shops = db.Shops.Find(watches.id_Shop);
+            watchDetailViewModel.shop = new ViewModels.Shop()
+            {
+                id = shops.id,
+                Name = shops.Name,
+                UrlAvatar = shops.UrlAvatar,
+                Rate = db.view_WatchDetails.Where(x => x.id_Shop == shops.id && x.Rate != null).Average(x => x.Rate),
+                Luotdanhgia = db.OrderDetails.Where(x => x.Rate != null && x.Status == 3).Count(),
+                Daban = db.OrderDetails.Where(x => x.Status == 3).Sum(x => x.Count),
+                Dangkinhdoanh = shops.Watches.Where(x => x.IsLock == false).Count(),
+                Thoigiantao = shops.Sellers.Accounts.Date_Create,
+                Khachhang = db.Orders.Where(x => x.Status != 4).GroupBy(x=>x.id_Accounts).Count(),
+                BestRate = db.view_WatchDetails.Where(x => x.id_Shop == shops.id).Max(x=>x.Rate),
+                Master_Name = shops.Sellers.Accounts.Fullname,
+                id_Master = shops.Sellers.id,
+                Phone = shops.Sellers.Accounts.Phone.FirstOrDefault().Phone1,
+                Gmail = shops.Sellers.Accounts.Email,
+            };
+
+            foreach(var item in db.OrderDetails.Where(x=>x.id_Watches == id && x.Rate != null))
+            {
+                watchDetailViewModel.danhgias.Add(new ViewModels.Danhgia()
+                {
+                    id_Account = item.Orders.id_Accounts,
+                    id_Watch = item.id_Watches,
+                    Rate = item.Rate,
+                });
+            };
+            
+
+
+            return Ok(watchDetailViewModel);
         }
 
         [Route("api/GetListWatch/{id}")]
@@ -129,5 +170,6 @@ namespace API_Local.Controllers
             fn_SearchWatch_Result watches = db.fn_SearchWatch(name).FirstOrDefault();
             return db.view_WatchDetails;
         }
+
     }
 }

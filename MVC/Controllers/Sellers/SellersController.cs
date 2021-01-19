@@ -13,14 +13,18 @@ using System.Web.Mvc;
 
 namespace MVC.Controllers.Sellers
 {
+
     public class SellersController : Controller
+    
     {
         // GET: Sellers 
        [AuthorizeCustom]
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index(int id)
+        //{
+            //HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsJsonAsync<ViewModels.SellerViewModels>("sellercard/" + id).Result;
+            //ViewModels.SellerViewModels result = httpResponseMessage.Content.ReadAsAsync<ViewModels.SellerViewModels>().Result;
+            //return View(result);
+        //}
 
         [AllowAnonymous]
         public ActionResult CreateSeller()

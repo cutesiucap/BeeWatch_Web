@@ -29,8 +29,8 @@ namespace MVC.Controllers.Home
                     numPage = 1,
                     rightPage = 0
                 },
-            };
-
+            };       
+            
             var result = GlobalVariables.HttpClient.PostAsJsonAsync<ViewModels.AllHomeViewModel>("lWatchHome", allHomeViewModel);
             result.Wait();
             if (result.Result.IsSuccessStatusCode)

@@ -277,10 +277,8 @@ namespace API_Local.Controllers
 
             foreach (var item in accounts.Phone)
             {
-                item.Accounts = null;
                 newaccount.Phone.Add(item);
             }
-
             foreach (var item in accounts.Address)
             {
 
@@ -303,7 +301,6 @@ namespace API_Local.Controllers
                     AddressDetail = item.AddressDetail,
                 });
             }
-
             string paymethod = "";
             switch (discounts.FirstOrDefault().Detail.Trim())
             {
@@ -414,9 +411,11 @@ namespace API_Local.Controllers
                 //order.Address_District1 = null;
                 //order.Address_Province1 = null;
                 ///order.Discounts = null;
-                db.OrderDetails.Add(new OrderDetails());
-
-                /*foreach (var Watch in cartdetail)
+                /*db.OrderDetails.Add(new OrderDetails()
+                {
+                    id_Order = 18,
+                });*/
+                foreach (var Watch in cartdetail)
                 {
                     order.OrderDetails.Add( new OrderDetails()
                     {
@@ -425,8 +424,19 @@ namespace API_Local.Controllers
                         Price = Watch.Price,
                         Count = Watch.SoLuong
                     });
-                }*/
-
+                };
+                
+                /*var strexcute = "";
+                if (order.id_Discount == null)
+                {
+                    strexcute = "execute sp_InsertNewOrder " + order.id_Shop + ", " + order.id_Accounts + ", '" + order.Address_Province + "', '" + order.Address_District + "', '" + order.AddressDetail + "', " + order.Count + ", " + order.Sum + ", " + order.Ship_fee + ", null, '" + order.Payment + "'";
+                }
+                else
+                {
+                    strexcute = "execute sp_InsertNewOrder " + order.id_Shop + ", " + order.id_Accounts + ", '" + order.Address_Province + "', '" + order.Address_District + "', '" + order.AddressDetail + "', " + order.Count + ", " + order.Sum + ", " + order.Ship_fee + ", " + order.id_Discount + ", '" + order.Payment + "'";
+                }
+                db.Database.ExecuteSqlCommand(strexcute);*/
+                db.Orders.Add(order);
             }
             db.SaveChanges();
 

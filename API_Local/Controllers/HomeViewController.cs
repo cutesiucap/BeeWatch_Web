@@ -17,22 +17,6 @@ namespace API_Local.Controllers
         [ResponseType(typeof(ViewModels.AllHomeViewModel))]
         public IHttpActionResult lWatchHome(ViewModels.AllHomeViewModel allHomeViewModel)
         {
-            allHomeViewModel = new ViewModels.AllHomeViewModel()
-            {
-                homeViewModel = new ViewModels.HomeViewModel()
-                {
-                    search = "",
-                    valueWatch = 0,
-                    idFirm = 0,
-                    idCategori = 0,
-                    idSex = 0,
-                    sortBy = 0,
-                    leftPage = 0,
-                    numPage = 1,
-                    rightPage = 0
-                },
-            };
-
             ViewModels.HomeViewModel homeViewModel = allHomeViewModel.homeViewModel;
 
             IQueryable<Models.view_WatchDetails> result;

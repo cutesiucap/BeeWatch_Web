@@ -92,10 +92,15 @@ namespace API_Local.Controllers
 
             accounts.Address = null;
             accounts.Phone = null;
-            accounts.Sellers = null;
+            accounts.Sellers = null;            
             db.Accounts.Add(accounts);
             db.SaveChanges();
-
+            Models.Carts carts = new Carts()
+            {
+                id = accounts.id,
+            };
+            db.Carts.Add(carts);
+            db.SaveChanges();
             return CreatedAtRoute("DefaultApi", new { id = accounts.id }, accounts);
         }
 
@@ -133,7 +138,7 @@ namespace API_Local.Controllers
         [ResponseType(typeof(Accounts))]
         public IHttpActionResult Login(Accounts accounts)
         {
-            view_Account result = db.view_Account.Where(x => x.Username == accounts.Username && x.Password == accounts.Password).FirstOrDefault();
+            var result = db.Accounts.Where(x => x.Username == accounts.Username && x.Password == accounts.Password).FirstOrDefault();
             if (result == null)
             {
                 return NotFound();
@@ -161,7 +166,7 @@ namespace API_Local.Controllers
                     id = item.id,
                     id_Account_Type = item.id_Account_Type,
                     id_Action = item.id_Action,
-                    Action = new Models.Action() { id = item.id_Action, Name = db.view_Action.Where(x => x.id == item.id_Action).FirstOrDefault().Name }
+                    Action = new Models.Action() { id = item.id_Action, Name = db.Action.Where(x => x.id == item.id_Action).FirstOrDefault().Name }
                 });
             };
 

@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>BEESHOP | Tạo Tài khoảng</title>
+    <title>BEESHOP | Tạo Tài khoản</title>
 
     <style>
         ::selection {
@@ -42,7 +42,7 @@
                 <a href="../../Home/" class="h1"><b style="color: #E0A800">BEE</b>SHOP</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Tạo mới tài khoảng thương gia cùng với một Gian Hàng</p>
+                <p class="login-box-msg">Tạo mới tài khoản thương gia cùng với một Gian Hàng</p>
                 <div id="err_login"></div>
                     <div class="row">
                         <div class="col-md-6">
@@ -142,7 +142,7 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" required name="BankCard" id="BankCard" class="form-control" placeholder="Tài Khoảng Ngân Hàng">
+                                <input type="text" required name="BankCard" id="BankCard" class="form-control" placeholder="Tài Khoản Ngân Hàng">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-user"></span>
@@ -299,7 +299,7 @@
                         return false;
                     } else
                         if ($('#UserName').val() == '') {
-                            $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Tên tài Khoảng </div>');
+                            $('#err_login').html('<div class="alert alert-danger">Cát hạ chưa nhập Tên tài Khoản </div>');
                             $('#UserName').focus();
                             return false;
                         } else
@@ -370,7 +370,7 @@
                         $('#err_login').html('<div id="err_login"  class="alert alert-warning">Địa chỉ Email đã được Sử dụng!</div>');
                         $('#Email').focus();
                     } else if (content == "username") {
-                        $('#err_login').html('<div id="err_login"  class="alert alert-warning">Tên Tài Khoảng đã tồn tại. Cát hạ hãy chọn Một tài khoảng khác!</div>');
+                        $('#err_login').html('<div id="err_login"  class="alert alert-warning">Tên Tài Khoản đã tồn tại. Cát hạ hãy chọn Một tài khoản khác!</div>');
                         $('#UserName').focus();
                         $('#UserName').val('');
                     } else if (content == "shop_id") {

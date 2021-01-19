@@ -136,6 +136,7 @@
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\TestController.cs" />
     <Compile Include="Controllers\AuthorizeCustom.cs" />
+    <Compile Include="Controllers\Bills\BillsController.cs" />
     <Compile Include="Controllers\CartDetails\CartDetailsController.cs" />
     <Compile Include="Controllers\Clients\CartController.cs" />
     <Compile Include="Controllers\Discounts\DiscountsController.cs" />
@@ -2289,8 +2290,9 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\HomeShopping\Index.cshtml" />
-    <Content Include="Views\Watch\Index.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Bills\Index.cshtml" />
+    <Content Include="Views\Watch\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

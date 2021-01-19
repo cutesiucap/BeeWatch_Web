@@ -71,12 +71,6 @@ img {
     }
 }
 
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-    .text {
-        font-size: 11px
-    }
-}
 .lentop {
     display: none;
     bottom: 40px;

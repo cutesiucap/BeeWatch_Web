@@ -1,251 +1,753 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    Layout = null;
 }
 
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Top Navigation</title>
 
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Sản Phẩm</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Trang chính</a></li>
-                    <li class="breadcrumb-item active">Sản phẩm</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+    <style>
+.lentop {
+    display: none;
+    bottom: 40px;
+    right: 40px;
+    cursor: pointer;
+    position: fixed;
+    z-index: 1000;
+}
 
-<!-- Main content -->
-<section class="content">
+.lentop div {
+    background: #FFC107;
+    border: 2px solid #fff;
+    border-radius: 50px;
+    padding: 11px 12.5px;
+    box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.3)
+}
 
-    <!-- Default box -->
-    <div class="card card-solid">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12 col-sm-6">
-                    <h3 class="d-inline-block d-sm-none">Hoa hậu Đồng hồ</h3>
-                    <div class="col-12">
-                        <img src="../../dist/img/prod-1.jpg" class="product-image" alt="Product Image">
-                    </div>
-                    <div class="col-12 product-image-thumbs">
-                        <div class="product-image-thumb active"><img src="../../dist/img/prod-1.jpg" alt="Product Image"></div>
-                        <div class="product-image-thumb"><img src="../../dist/img/prod-2.jpg" alt="Product Image"></div>
-                        <div class="product-image-thumb"><img src="../../dist/img/prod-3.jpg" alt="Product Image"></div>
-                        <div class="product-image-thumb"><img src="../../dist/img/prod-4.jpg" alt="Product Image"></div>
-                        <div class="product-image-thumb"><img src="../../dist/img/prod-5.jpg" alt="Product Image"></div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6">
-                    <h3 class="my-3" style="color: #E0A800;"><b>HOA HẬU ĐỒNG HỒ</b></h3>
-                    <div style="display: flex; justify-content:space-around;max-width: 450px;">
-                        <div>
-                            <h5><b>4875</b> Lượt Mua </h5>
-                        </div>
-                        <h5>|</h5>
-                        <div>
-                            <h5><b>4.5</b> Đánh giá </h5>
-                        </div>
-                        <h5>|</h5>
-                        <div>
-                            <h5><b>500</b> Lượt Đánh giá</h5>
-                        </div>
-                    </div>
-                    <div class="bg py-2 px-3 mt-4">
-                        <h5 class="mb-0">
-                            <b>Khuyến Mãi <b style="background-color: #E0A800;">30%</b></b>
-                        </h5>
-                        <h5 class="mt-0">
-                            <small>Áp dụng khuyến mãi khi mua trong ngày 12/12 Giảm giá shock lên đến 30%</small>
-                        </h5>
-                    </div>
+.lentop img {
+    width: 16px;
+    height: 16px;
+}
+    </style>
+</head>
+<body class="hold-transition layout-top-nav dark-mode">
+    <div class="wrapper">
 
-                    <div class="bg-gray py-2 px-3 mt-4">
-                        <h2 class="mb-0">
-                            <b>$80.00</b>
-                        </h2>
-                        <h4 class="mt-0">
-                            <small>Giá gốc: $80.00 </small>
-                        </h4>
-                    </div>
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand-md navbar-light" style="min-width: 1240px;background-color: #FFC107;">
+            <div class="container">
+                <a href="../../HomeShopping/Index" class="navbar-brand">
+                    <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <span class="brand-text font-weight-light">BEE SHOPPING</span>
+                </a>
 
-                    <div class="row">
-                        <div class="col-2">
-                            <h4 class="mt-3">Kho <small></small></h4>
-                            <span class="text" style="font-size: larger;">47</span>
-                        </div>
-                        <div class="col">
-                            <h4 class="mt-3">Size <small></small></h4>
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
-                                    <span class="text">S</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b2" autocomplete="off">
-                                    <span class="text">M</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b3" autocomplete="off">
-                                    <span class="text">L</span>
-                                </label>
-                                <label class="btn btn-default text-center">
-                                    <input type="radio" name="color_option" id="color_option_b4" autocomplete="off">
-                                    <span class="text">XL</span>
-                                </label>
+                <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+                    <!-- Left navbar links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="../../HomeShopping/Index" class="nav-link">Trang Chính</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../Sellers/Index" class="nav-link">Gian Hàng</a>
+                        </li>
+                    </ul>
+
+                    <!-- SEARCH FORM -->
+                    <form class="form-inline ml-0 ml-md-3">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control form-control-navbar" name="search" style="background-color: #FFF;" type="search" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="mt-4">
-                        <div class="btn btn-warning btn-lg btn-flat">
-                            <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                            Thêm vào giỏ hàng
-                        </div>
-                    </div>
+                    </form>
                 </div>
-            </div>
-            <h3 class="my-3" style="color: #E0A800;"><b>Chi tiết sản phẩm</b></h3>
-            <p>chi tiết Sản phẩm ở đây</p>
-        </div>
-        <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
 
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <div class="row" style="max-width: 200px;">
-                        <div class="col-4">
-                            <img class="img-circle elevation-2" src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=CqmRS_qXDs4AX8CpWmo&_nc_ht=scontent.fsgn5-5.fna&oh=c7a3afc9fff468cdadd4d52784cf0dd4&oe=6011C5C9" style="width: 50px;">
+                <!-- Right navbar links -->
+                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                    <!-- Cart Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" id="_nutgiohang" href="#">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge badge-info navbar-badge" class="_giohangsoluong">15</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <span class="dropdown-header" style="color: #FFC107;"><b>Giỏ hàng</b></span>
+                            <div class="dropdown-divider"></div>
+                            <div style="max-height: 200px;overflow-y: auto;" class="_giohang">
+                                <div class="row" style="width: 100%; padding: 5px;">
+                                    <div class="col-2" style="margin: auto;">
+                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
+                                    </div>
+                                    <div class="col-2" style="margin: auto;">
+                                        <p class="text-muted" style="text-align: right;">5</p>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 100%; padding: 5px;">
+                                    <div class="col-2" style="margin: auto;">
+                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
+                                    </div>
+                                    <div class="col-2" style="margin: auto;">
+                                        <p class="text-muted" style="text-align: right;">5</p>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 100%; padding: 5px;">
+                                    <div class="col-2" style="margin: auto;">
+                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
+                                    </div>
+                                    <div class="col-2" style="margin: auto;">
+                                        <p class="text-muted" style="text-align: right;">5</p>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 100%; padding: 5px;">
+                                    <div class="col-2" style="margin: auto;">
+                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
+                                    </div>
+                                    <div class="col-2" style="margin: auto;">
+                                        <p class="text-muted" style="text-align: right;">5</p>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 100%; padding: 5px;">
+                                    <div class="col-2" style="margin: auto;">
+                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
+                                    </div>
+                                    <div class="col-2" style="margin: auto;">
+                                        <p class="text-muted" style="text-align: right;">5</p>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                            </div>
+                            <button href="#" class="btn btn-warning dropdown-item dropdown-footer">Đi đến Giỏ hàng</button>
                         </div>
-                        <div class="col">
-                            <b>Bee Shop</b>
-                            <div class="btn btn-info">
-                                Gian Hàng
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" role="button">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <div style="margin: 5px;">
+                                <span> <img src="../../dist/img/user3-128x128.jpg" class="img-circle elevation-3 img-size-50 mr-3" style="width: 40px;margin-left: 0px;"> </span>
+                                <span>Nguyễn Trung Tín</span>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <button class="btn btn-info" style="width: 90%;margin-left: 13px;margin-right: 13px; margin-top: 5px;">Cá Nhân</button>
+                            <button class="btn btn-outline-warning" style="width: 90%;margin-left: 13px;margin-right: 13px; margin-top: 5px;margin-bottom: 5px;">Đăng xuất</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+
+            <!-- Main content -->
+            <div class="content">
+                <div class="container" style="max-width: 1280px; min-width: 1280px;">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <h1>Sản Phẩm</h1>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-sm-right">
+                                        <li class="breadcrumb-item"><a href="#">Trang chính</a></li>
+                                        <li class="breadcrumb-item active">Sản phẩm</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div><!-- /.container-fluid -->
+                    </section>
+
+                    <!-- Main content -->
+                    <section class="content">
+
+                        <!-- Default box -->
+                        <div class="card card-solid">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <h3 class="d-inline-block d-sm-none">Hoa hậu Đồng hồ</h3>
+                                        <div class="col-12">
+                                            <img src="../../dist/img/prod-1.jpg" class="product-image" alt="Product Image">
+                                        </div>
+                                        <div class="col-12 product-image-thumbs">
+                                            <div class="product-image-thumb active"><img src="../../dist/img/prod-1.jpg" alt="Product Image"></div>
+                                            <div class="product-image-thumb"><img src="../../dist/img/prod-2.jpg" alt="Product Image"></div>
+                                            <div class="product-image-thumb"><img src="../../dist/img/prod-3.jpg" alt="Product Image"></div>
+                                            <div class="product-image-thumb"><img src="../../dist/img/prod-4.jpg" alt="Product Image"></div>
+                                            <div class="product-image-thumb"><img src="../../dist/img/prod-5.jpg" alt="Product Image"></div>
+                                            <div class="product-image-thumb"><img src="../../dist/img/prod-5.jpg" alt="Product Image"></div>
+                                            <div class="product-image-thumb"><img src="../../dist/img/prod-5.jpg" alt="Product Image"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <h3 class="my-3" style="color: #E0A800;"><b>HOA HẬU ĐỒNG HỒ</b></h3>
+                                        <div style="display: flex; justify-content:space-around;max-width: 450px;">
+                                            <div>
+                                                <h5><b>4875</b> Lượt Mua </h5>
+                                            </div>
+                                            <h5>|</h5>
+                                            <div>
+                                                <h5><b>4.5</b> Đánh giá </h5>
+                                            </div>
+                                            <h5>|</h5>
+                                            <div>
+                                                <h5><b>500</b> Lượt Đánh giá</h5>
+                                            </div>
+                                        </div>
+                                        <div class="bg py-2 px-3 mt-4">
+                                            <h5 class="mb-0">
+                                                <b>Khuyến Mãi <b style="background-color: #E0A800;">30%</b></b>
+                                            </h5>
+                                            <h5 class="mt-0">
+                                                <small>Áp dụng khuyến mãi khi mua trong ngày 12/12 Giảm giá shock lên đến 30%</small>
+                                            </h5>
+                                        </div>
+
+                                        <div class="bg-gray py-2 px-3 mt-4">
+                                            <h2 class="mb-0">
+                                                <b>$80.00</b>
+                                            </h2>
+                                            <h4 class="mt-0">
+                                                <small>Giá gốc: $80.00 </small>
+                                            </h4>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <h4 class="mt-3">Kho <small></small></h4>
+                                                <span class="text" style="font-size: larger;">47</span>
+                                            </div>
+                                            <div class="col">
+                                                <h4 class="mt-3">Size <small></small></h4>
+                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                    <label class="btn btn-default text-center">
+                                                        <input type="radio" name="color_option" id="color_option_b1" autocomplete="off">
+                                                        <span class="text">S</span>
+                                                    </label>
+                                                    <label class="btn btn-default text-center">
+                                                        <input type="radio" name="color_option" id="color_option_b2" autocomplete="off">
+                                                        <span class="text">M</span>
+                                                    </label>
+                                                    <label class="btn btn-default text-center">
+                                                        <input type="radio" name="color_option" id="color_option_b3" autocomplete="off">
+                                                        <span class="text">L</span>
+                                                    </label>
+                                                    <label class="btn btn-default text-center">
+                                                        <input type="radio" name="color_option" id="color_option_b4" autocomplete="off">
+                                                        <span class="text">XL</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4">
+                                            <div class="btn btn-warning btn-lg btn-flat">
+                                                <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                                                Thêm vào giỏ hàng
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="my-3" style="color: #E0A800;"><b>Chi tiết sản phẩm</b></h3>
+                                <p>chi tiết Sản phẩm ở đây</p>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="row" style="max-width: 200px;">
+                                            <div class="col-4">
+                                                <img class="img-circle elevation-2" src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=CqmRS_qXDs4AX8CpWmo&_nc_ht=scontent.fsgn5-5.fna&oh=c7a3afc9fff468cdadd4d52784cf0dd4&oe=6011C5C9" style="width: 50px;">
+                                            </div>
+                                            <div class="col">
+                                                <b>Bee Shop</b>
+                                                <div class="btn btn-info">
+                                                    Gian Hàng
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            4.5 Đánh giá
+                                        </div>
+                                        <div class="row">
+                                            4500 Lượt đánh giá
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            458 Đanh Kinh Doanh
+                                        </div>
+                                        <div class="row">
+                                            480 Đã Bán
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            Tham gia từ 12/12/2020
+                                        </div>
+                                        <div class="row">
+                                            480 Khách Hàng
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 product-share">
+                                    <a href="#" class="text-gray">
+                                        <i class="fab fa-facebook-square fa-2x"></i>
+                                    </a>
+                                    <a href="#" class="text-gray">
+                                        <i class="fab fa-twitter-square fa-2x"></i>
+                                    </a>
+                                    <a href="#" class="text-gray">
+                                        <i class="fas fa-envelope-square fa-2x"></i>
+                                    </a>
+                                    <a href="#" class="text-gray">
+                                        <i class="fas fa-rss-square fa-2x"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
-                <div class="col">
-                    <div class="row">
-                        4.5 Đánh giá
-                    </div>
-                    <div class="row">
-                        4500 Lượt đánh giá
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="row">
-                        458 Đanh Kinh Doanh
-                    </div>
-                    <div class="row">
-                        480 Đã Bán
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="row">
-                        Tham gia từ 12/12/2020
-                    </div>
-                    <div class="row">
-                        480 Khách Hàng
-                    </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div>
+                                    <h5>
+                                        <b style="color: #E0A800;">Đánh giá</b>
+                                    </h5>
+                                </div>
+                                <div>
+                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
+                                    <span> 4.5 / 120 Đánh giá</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-cell">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 60px;">
+                                                <img class="img-circle elevation-2" src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=CqmRS_qXDs4AX8CpWmo&_nc_ht=scontent.fsgn5-5.fna&oh=c7a3afc9fff468cdadd4d52784cf0dd4&oe=6011C5C9" style="width: 50px;">
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <b>Bee Shop</b>
+                                                </div>
+                                                <div>
+                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
+                                                </div>
+                                                <div>
+                                                    Bình luận
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60px;">
+                                                <img class="img-circle elevation-2" src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=CqmRS_qXDs4AX8CpWmo&_nc_ht=scontent.fsgn5-5.fna&oh=c7a3afc9fff468cdadd4d52784cf0dd4&oe=6011C5C9" style="width: 50px;">
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <b>Bee Shop</b>
+                                                </div>
+                                                <div>
+                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
+                                                </div>
+                                                <div>
+                                                    Bình luận dfghjkl
+                                                    ;sdfghjklsdfghjklsadfghjkl;awesdfghoplesdfuhopaesrdfyghjosdfgh  rtyghjokl ertyuiopl drfthuopl[;' ertyhuopl;  sedrftyghjokl drftyhujok sedrftyhjk']
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                Gian Hàng này cũng Bán
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
+                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
+                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
+                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <h5>₫ 9.000.000</h5>
+                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
+                                                    <span>154</span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
+                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
+                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
+                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <h5>₫ 9.000.000</h5>
+                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
+                                                    <span>154</span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
+                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
+                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
+                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <h5>₫ 9.000.000</h5>
+                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
+                                                    <span>154</span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
+                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
+                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
+                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <h5>₫ 9.000.000</h5>
+                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
+                                                    <span>154</span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                Đồng hồ tương tự
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
+                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
+                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
+                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <h5>₫ 9.000.000</h5>
+                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
+                                                    <span>154</span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
+                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
+                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
+                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <h5>₫ 9.000.000</h5>
+                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
+                                                    <span>154</span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
+                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
+                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
+                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <h5>₫ 9.000.000</h5>
+                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
+                                                    <span>154</span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+                    <!-- /.content -->
                 </div>
             </div>
-
-            <div class="mt-4 product-share">
-                <a href="#" class="text-gray">
-                    <i class="fab fa-facebook-square fa-2x"></i>
-                </a>
-                <a href="#" class="text-gray">
-                    <i class="fab fa-twitter-square fa-2x"></i>
-                </a>
-                <a href="#" class="text-gray">
-                    <i class="fas fa-envelope-square fa-2x"></i>
-                </a>
-                <a href="#" class="text-gray">
-                    <i class="fas fa-rss-square fa-2x"></i>
-                </a>
-            </div>
+            <!-- /.content -->
         </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
+        <div class='lentop'>
             <div>
-                <h5>
-                    <b style="color: #E0A800;">Đánh giá</b>
-                </h5>
-            </div>
-            <div>
-                <span>*****</span>
-                <span> 4.5* / 120 Đánh giá</span>
+                <i class="fas fa-chevron-up"></i>
             </div>
         </div>
-        <div class="card-body">
-            <table class="table table-cell">
-                <tbody>
-                    <tr>
-                        <td style="width: 60px;">
-                            <img class="img-circle elevation-2" src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=CqmRS_qXDs4AX8CpWmo&_nc_ht=scontent.fsgn5-5.fna&oh=c7a3afc9fff468cdadd4d52784cf0dd4&oe=6011C5C9" style="width: 50px;">
-                        </td>
-                        <td>
-                            <div>
-                                <b>Bee Shop</b>
-                            </div>
-                            <div>
-                                4 sao
-                            </div>
-                            <div>
-                                Bình luận
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 60px;">
-                            <img class="img-circle elevation-2" src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=CqmRS_qXDs4AX8CpWmo&_nc_ht=scontent.fsgn5-5.fna&oh=c7a3afc9fff468cdadd4d52784cf0dd4&oe=6011C5C9" style="width: 50px;">
-                        </td>
-                        <td>
-                            <div>
-                                <b>Bee Shop</b>
-                            </div>
-                            <div>
-                                4 sao
-                            </div>
-                            <div>
-                                Bình luận dfghjkl
-                                ;sdfghjklsdfghjklsadfghjkl;awesdfghoplesdfuhopaesrdfyghjosdfgh  rtyghjokl ertyuiopl drfthuopl[;' ertyhuopl;  sedrftyghjokl drftyhujok sedrftyhjk']
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../../plugins/toastr/toastr.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
 
-    <div class="card">
-        <div class="card-header">
-            Gian Hàng này cũng Bán
-        </div>
-        <div class="card-body">
-        </div>
-    </div>
+    <script src="../../dist/js/demo.js"></script>
+    <script>
+        $('.stars').each(function () {
+            var rating = $(this).data("rating");
+            var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star"></i>');
+            var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt"></i>' : '';
+            var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star"></i>');
+            $(this).html(fullStar + halfStar + noStar);
+        })
 
-    <div class="card">
-        <div class="card-header">
-            Đồng hồ tương tự
-        </div>
-        <div class="card-body">
-        </div>
-    </div>
+    </script>
 
-</section>
+    <script>
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 5000); // Change image every 2 seconds
+        }
+    </script>
+
+    <script>
+
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        function ThanhCongToast(Content) {
+            Toast.fire({
+                icon: 'success',
+                title: Content,
+            });
+        };
+    </script>
+    <script>
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) $(".lentop").fadeIn();
+                else $(".lentop").fadeOut();
+            });
+            $(".lentop").click(function () {
+                $("body,html").animate({ scrollTop: 0 }, "slow");
+            });
+        });
+    </script>
+    <script>
+        function themvaogio_funtion(seft) {
+            var data = {
+                id_Watch: seft.id,
+            }
+            $.ajax({
+                url: '../../CartDetails/Add',
+                type: 'POST',
+                data: data,
+                async: false,
+                success: function (content) {
+                    if (content == "login") {
+                        window.location.href = '/Accounts/Login';
+                        return;
+                    };
+
+                    if (content == "addnew") {
+                        ThanhCongToast("Đã thêm thành công");
+                    };
+
+                    if (content == "addold") {
+                        ThanhCongToast("Update Thành công sản phẩm trong giỏ");
+                    };
+                    updatecart();
+                }
+            });
+        };
+
+
+        $('select').change(function () {
+            $('#numPage').val(1);
+            document.getElementById("_mainform").submit();
+        });
+
+        function _leftPage() {
+            var x = parseInt($('#numPage').val());
+            if (x > 1) {
+                x = x - 1;
+                $('#numPage').val(x);
+                document.getElementById("_mainform").submit();
+            }
+
+        };
+
+        function _rightPage() {
+            var x = parseInt($('#numPage').val());
+            x = x + 1;
+            $('#numPage').val(x);
+            document.getElementById("_mainform").submit();
+        };
+    </script>
+    <script>
+        function updatecart() {
+            $.ajax({
+                url: '../../Cart/Show',
+                type: 'GET',
+                async: false,
+                dataType: 'JSON',
+                success: function (newcart) {
+                    $('._giohang').empty();
+                    $.each(newcart, function (index, item) {
+                        $('._giohang').append('<div class="row" style="width: 100%; padding: 5px;"><div class= "col-2" style = "margin: auto;"><img src="'
+                            + item.Url_Image + '" class="img-size-50 mr-3" style="width: 40px;"></div ><div class="col-8" style="margin: auto;"><p class="text-muted" style="margin-left: 5px; "><a href="../../Watch/Index/'
+                            + item.id_Watch + '">'
+                            + item.Name + '</a></p ></div><div class="col-2" style="margin: auto;"><p class="text-muted" style="text-align: right;">'
+                            + item.Count + '</p ></div ></div > ');
+                    });
+                    $('._giohang').parentElement.show;
+                }
+            });
+        };
+        window.onload = function () {
+            $('._giohang').empty();
+            updatecart();
+        };
+    </script>
+    <script>
+        $('.stars').each(function () {
+            var rating = $(this).data("rating");
+            var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star"></i>');
+            var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt"></i>' : '';
+            var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star"></i>');
+            $(this).html(fullStar + halfStar + noStar);
+        })
+
+    </script>
+</body>
+</html>
 

@@ -7,7 +7,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Top Navigation</title>
+
+    <link href="~/dist/css/SlideShow.css" rel="stylesheet" />
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
@@ -18,6 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+
     @RenderSection("Css", required: false)
 
 </head>
@@ -157,7 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Main content -->
             <div class="content">
                 <div class="container" style="max-width: 1240px; min-width: 1240px;">
-                @RenderBody()
+                    @RenderBody()
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -188,5 +194,146 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- SweetAlert2 -->
+    <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../../plugins/toastr/toastr.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+
+    <script src="../../dist/js/demo.js"></script>
+    <script>
+        $('.stars').each(function () {
+            var rating = $(this).data("rating");
+            var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star"></i>');
+            var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt"></i>' : '';
+            var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star"></i>');
+            $(this).html(fullStar + halfStar + noStar);
+        })
+
+    </script>
+
+    <script>
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 5000); // Change image every 2 seconds
+        }
+    </script>
+
+    <script>
+
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        function ThanhCongToast(Content) {
+            Toast.fire({
+                icon: 'success',
+                title: Content,
+            });
+        };
+    </script>
+    <script>
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) $(".lentop").fadeIn();
+                else $(".lentop").fadeOut();
+            });
+            $(".lentop").click(function () {
+                $("body,html").animate({ scrollTop: 0 }, "slow");
+            });
+        });
+    </script>
+    <script>
+        function themvaogio_funtion(seft) {
+            var data = {
+                id_Watch: seft.id,
+            }
+            $.ajax({
+                url: '../../CartDetails/Add',
+                type: 'POST',
+                data: data,
+                async: false,
+                success: function (content) {
+                    if (content == "login") {
+                        window.location.href = '/Accounts/Login';
+                        return;
+                    };
+
+                    if (content == "addnew") {
+                        ThanhCongToast("Đã thêm thành công");
+                    };
+
+                    if (content == "addold") {
+                        ThanhCongToast("Update Thành công sản phẩm trong giỏ");
+                    };
+                    updatecart();
+                }
+            });
+        };
+
+
+        $('select').change(function () {
+            $('#numPage').val(1);
+            document.getElementById("_mainform").submit();
+        });
+
+        function _leftPage() {
+            var x = parseInt($('#numPage').val());
+            if (x > 1) {
+                x = x - 1;
+                $('#numPage').val(x);
+                document.getElementById("_mainform").submit();
+            }
+
+        };
+
+        function _rightPage() {
+            var x = parseInt($('#numPage').val());
+            x = x + 1;
+            $('#numPage').val(x);
+            document.getElementById("_mainform").submit();
+        };
+    </script>
+    <script>
+        function updatecart() {
+            $.ajax({
+                url: '../../Cart/Show',
+                type: 'GET',
+                async: false,
+                dataType: 'JSON',
+                success: function (newcart) {
+                    $('._giohang').empty();
+                    $.each(newcart, function (index, item) {
+                        $('._giohang').append('<div class="row" style="width: 100%; padding: 5px;"><div class= "col-2" style = "margin: auto;"><img src="'
+                            + item.Url_Image + '" class="img-size-50 mr-3" style="width: 40px;"></div ><div class="col-8" style="margin: auto;"><p class="text-muted" style="margin-left: 5px; "><a href="../../Watch/Index/'
+                            + item.id_Watch + '">'
+                            + item.Name + '</a></p ></div><div class="col-2" style="margin: auto;"><p class="text-muted" style="text-align: right;">'
+                            + item.Count + '</p ></div ></div > ');
+                    });
+                    $('._giohang').parentElement.show;
+                }
+            });
+        };
+        window.onload = function () {
+            $('._giohang').empty();
+            updatecart();
+        };
+    </script>
 </body>
 </html>

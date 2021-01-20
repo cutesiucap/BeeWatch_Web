@@ -22,6 +22,8 @@ namespace API_Local.Controllers
         {
             return db.view_Orders;
         }
+        [Route("api/count_order")]
+        [HttpGet]
 
         [Route("api/UpStatus/{id}")]
         [HttpPost]

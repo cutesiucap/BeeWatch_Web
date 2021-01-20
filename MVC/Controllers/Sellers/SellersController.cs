@@ -13,13 +13,23 @@ using System.Web.Mvc;
 
 namespace MVC.Controllers.Sellers
 {
+
     public class SellersController : Controller
+    
     {
         // GET: Sellers 
        [AuthorizeCustom]
         public ActionResult Index()
         {
-            return View();
+            int id_Shop = (Session["Account"] as Models.Accounts).Sellers.Shop_Seller.FirstOrDefault().id_Shop;
+            if (Session["Account"] == null)
+            {
+                return RedirectToAction("../../Accounts/Login");
+            }
+            int id = (Session["Account"] as Models.Accounts).id;
+            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsync("SellerViewModels/" + id).Result;
+            ViewModels.SellerViewModel sellerviewmodel = httpResponseMessage.Content.ReadAsAsync<ViewModels.SellerViewModel>().Result;
+            return View(sellerviewmodel);
         }
 
         [AllowAnonymous]

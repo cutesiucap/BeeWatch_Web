@@ -1,8 +1,6 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout_Sallers.cshtml";
-}
+﻿@model  MVC.ViewModels.SellerViewModel
+@{ ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout_Sallers.cshtml"; }
 <!-- Default box -->
 <div class="card">
     <div class="card-header">
@@ -24,7 +22,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner" style="width:300px">
-                            <h3>150</h3>
+                            <h3>@Model.Sum_New_Order</h3>
 
                             <p>New Orders</p>
                         </div>
@@ -39,9 +37,9 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner" style="width:300px">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <h3>@Model.Average_Rate ★ </h3>
 
-                            <p>Bounce Rate</p>
+                            <p>Average Rate</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -54,7 +52,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner" style="width:300px">
-                            <h3>44</h3>
+                            <h3>@Model.Sum_Customer</h3>
 
                             <p>User Registrations</p>
                         </div>
@@ -69,9 +67,11 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner" style="width:300px">
-                            <h3>65</h3>
+                            <h3>@Model.Sum_Watches</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>
+                                Number of watches
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -90,8 +90,7 @@
     <!-- /.card-footer-->
 </div>
 <!-- /.card -->
-
-<div class="card card-warning">
+<!--<div class="card card-warning">
     <div class="card-header">
         <h3 class="card-title">Pie Chart</h3>
 
@@ -107,8 +106,28 @@
     <div class="card-body" style="display: block;">
         <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
         <canvas id="pieChart" style="min-height: 500px; height: 500px; max-height: 500px; max-width: 100%; display: block; width: 425px;" width="425" height="250" class="chartjs-render-monitor"></canvas>
+    </div>-->
+<!-- /.card-body -->
+<!--</div>-->
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Area Chart</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
     </div>
-    <!-- /.card-body -->
+    <div class="box-body">
+        <div class="chart">
+            <canvas id="areaChart" style="height: 288px; width: 685px;" height="360" width="856"></canvas>
+        </div>
+    </div>
+    <!-- /.box-body -->
 </div>
 
 <script src="../../plugins/chart.js/Chart.min.js"></script>
@@ -132,10 +151,10 @@
             ]
         }
         //-------------
-        //- PIE CHART -
+        //- area CHART -
         //-------------
         // Get context with jQuery - using jQuery's .get() method.
-        var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+        var areaChartCanvas = $('#pieChart').get(0).getContext('2d')
         var pieOptions = {
             maintainAspectRatio: false,
             responsive: true,

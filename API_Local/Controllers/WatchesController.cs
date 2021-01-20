@@ -15,6 +15,7 @@ namespace API_Local.Controllers
     public class WatchesController : ApiController
     {
         private BeeWatchDBEntities db = new BeeWatchDBEntities();
+        
 
         // GET: api/Watches
         public IQueryable<view_WatchDetails> GetWatches()
@@ -184,5 +185,13 @@ namespace API_Local.Controllers
             return db.view_WatchDetails;
         }
 
+
+        [Route("api/Watches/Count_Watch")]
+        [HttpGet]
+        public int Count_Watch()
+        {
+            int Count_watch = db.view_WatchDetails.Count();
+            return Count_watch;
+        }
     }
 }

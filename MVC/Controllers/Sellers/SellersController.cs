@@ -19,12 +19,10 @@ namespace MVC.Controllers.Sellers
     {
         // GET: Sellers 
        [AuthorizeCustom]
-        //public ActionResult Index(int id)
-        //{
-            //HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsJsonAsync<ViewModels.SellerViewModels>("sellercard/" + id).Result;
-            //ViewModels.SellerViewModels result = httpResponseMessage.Content.ReadAsAsync<ViewModels.SellerViewModels>().Result;
-            //return View(result);
-        //}
+        public ActionResult Index()
+        { 
+            return View();
+        }
 
         [AllowAnonymous]
         public ActionResult CreateSeller()

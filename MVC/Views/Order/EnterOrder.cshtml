@@ -1,0 +1,185 @@
+﻿@model MVC.Models.Accounts
+
+@{
+    ViewBag.Title = "Bill_SuccessOrder";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Invoice</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="../../Shopping/Index">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Hóa đơn</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="callout callout-warning">
+                    <h5><i class="fas fa-info"></i> Đặt đơn <b style="background-color: #218838;">THÀNH CÔNG</b>:</h5>
+                    Cát hạ vừa mới đạt hàng thành công :). Hãy theo dõi đơn hàng <a href="../../Order/Detail" style="color: #FFC107;"> tại đây</a>
+                </div>
+
+                @if (Model.Orders != null)
+                {
+                    foreach (var order in Model.Orders)
+                    {
+                        <!-- Main content -->
+                        <div class="invoice p-3 mb-3">
+                            <!-- title row -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        <i class="fab fa-forumbee" style="color: #FFC107;"></i><b style="color: #FFC107;"> BEE</b>WATCH Shopping.
+                                        <small class="float-right">Ngày Xuất: @DateTime.Now.Date</small>
+                                    </h4>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- info row -->
+                            <div class="row invoice-info">
+                                <div class="col-sm-4 invoice-col">
+                                    Khách Hàng
+                                    <address>
+                                        <strong>@Model.Fullname #@Model.id</strong><br>
+                                        @order.Address_District1.Name, @order.Address_Province1.Name<br>
+                                        Điện thoại: @Model.Phone<br>
+                                        Email: @Model.Email
+                                    </address>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4 invoice-col">
+                                    Gian Hàng
+                                    <address>
+                                        <strong>@order.Shops.Name</strong><br>
+                                        @order.Shops.Address<br>
+                                        Liên Hệ: @order.Shops.Sellers.Accounts.Phone<br>
+                                        Email: @order.Shops.Sellers.Accounts.Email
+                                    </address>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4 invoice-col">
+                                    <b>Mã Shop #@order.Shops.id</b><br>
+                                    <br>
+                                    <b>Order ID:</b> #@order.id<br>
+                                    <b>Ngày tạo:</b> @order.Date_Create<br>
+                                    @if (order.Status == 0)
+                                    {<b>Tình trạng: Đang chờ duyệt</b>}
+                                    @if (order.Status == 1)
+                                    {<b>Tình trạng: Đang chờ Lấy hàng</b>}
+                                    @if (order.Status == 2)
+                                    {<b>Tình trạng: Đang Giao</b>}
+                                    @if (order.Status == 3)
+                                    {<b>Tình trạng: Đã Giao (Hoàn Thành)</b>}
+                                    @if (order.Status == 4)
+                                    {<b>Tình trạng: Đã hủy</b>}
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                            <!-- Table row -->
+                            <div class="row">
+                                <div class="col-12 table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr style="color: #FFC107;">
+                                                <th>Mã #</th>
+                                                <th>Đồng Hồ</th>
+                                                <th>Đơn giá</th>
+                                                <th>Số lượng</th>
+                                                <th>Thành tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var orderdetail in order.OrderDetails)
+                                            {
+                                                <tr>
+                                                    <td>@orderdetail.id</td>
+                                                    <td>@orderdetail.WatchName</td>
+                                                    <td>@Html.FormatValue(orderdetail.Price, "{0:#,###,##0}")</td>
+                                                    <td>@orderdetail.Count</td>
+                                                    <td>@Html.FormatValue((orderdetail.Count*orderdetail.Price), "{0:#,###,##0}")</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+
+                            <div class="row">
+                                <!-- accepted payments column -->
+                                <div class="col-6">
+                                    <p class="lead">Chi tiết:</p>
+                                    <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                                        Order của Cát đã được yêu cầu và gửi đến Gian Hàng.
+                                        Gian Hàng sẽ phản hồi đến Cát Hạ trong thời gian sớm nhất
+                                    </p>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-6">
+                                    <p class="lead">THANH TOÁN</p>
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <th style="width:50%">Giá trị:</th>
+                                                <td>@Html.FormatValue(order.OrderDetails.Sum(x=>x.Price), "{0:#,###,##0}")</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Giảm giá(RTCR20%)</th>
+                                                <td>@if (order.Discounts != null) { @Html.FormatValue((order.OrderDetails.Sum(x => x.Price) - order.OrderDetails.Sum(x => x.Price) * order.Discounts.Value___ + order.Discounts.Value___1), "{0:#,###,##0}")}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Vận chuyển:</th>
+                                                <td>@Html.FormatValue(order.Ship_fee, "{0:#,###,##0}")</td>
+                                            </tr>
+                                            <tr style="color: #FFC107;">
+                                                <th>Phải thanh toán:</th>
+                                                <td>@Html.FormatValue(order.Sum, "{0:#,###,##0}")</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Phương thức thanh toán:</th>
+                                                <td>@order.Payment</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                            <!-- this row will not appear when printing -->
+                            <div class="row no-print">
+                                <div class="col-12">
+                                    <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> In </a>
+                                    <button type="button" class="btn btn-success float-right">
+                                        <i class="far fa-credit-card"></i>
+                                        Quay lại trang chủ
+                                    </button>
+                                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                        <i class="fas fa-download"></i> Lưu
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.invoice -->
+                    }
+                }
+
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->

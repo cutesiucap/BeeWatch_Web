@@ -11,6 +11,7 @@ namespace MVC.Controllers.Bills
         // GET: Bills
         public ActionResult Index()
         {
+
             return View();
         }
     }

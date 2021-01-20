@@ -300,20 +300,15 @@
 <script src="../../dist/js/demo.js"></script>
 
 <script>
-    var Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000
-    });
-    function ThanhCongToast(Content) {
-        Toast.fire({
-            icon: 'success',
-            title: Content,
-        });
+
+
+    window.onload = function () {
+        alert("hello");
+        $('._giohang').empty();
+        updatecart();
+        tamtinhdongia();
     };
-</script>
-<script>
+
     $(function () {
         $(window).scroll(function () {
             if ($(this).scrollTop() > 100) $(".lentop").fadeIn();
@@ -384,20 +379,37 @@
         var result = confirm("Xác nhận đặt Đơn ?");
         if (result) {
             var lCODE = document.getElementsByClassName('_discountCode');
-            var listCODE = [];
+            var listCODE = "";
+            var listID = "";
+            var payment = $('input[name=_payMethod]:checked').val();
             $.each(lCODE, function (index, item) {
-                listCODE.push({
+                @*listCODE.push({
                     id: item.id.substring(13),
                     Code: item.value,
                     Detail: $('input[name=_payMethod]:checked').val(),
-                });
+                });*@
+                listCODE = listCODE + item.value + " ";
+                listID = listID + item.id.substring(13) + " ";
             });
 
             var data = {
                 listCode: listCODE,
             };
 
-            $.ajax({
+            var input1 = $("<input>")
+                .attr("type", "hidden")
+                .attr("name", "listCode").val(listCODE);
+            var input2 = $("<input>")
+                .attr("type", "hidden")
+                .attr("name", "listID").val(listID);
+            var input3 = $("<input>")
+                .attr("type", "hidden")
+                .attr("name", "payment").val(payment);
+            $('#form1').append(input1);
+            $('#form1').append(input2);
+            $('#form1').append(input3);
+            $('#form1').submit();
+           @* $.ajax({
                 url: '../../Order/EnterOrder',
                 method: 'POST',
                 data: data,
@@ -407,7 +419,7 @@
                         ThanhCongToast("Đặt đơn Thành công");
                     }
                 }
-            })
+            })*@
         }
     }
 
@@ -420,21 +432,20 @@
         else {
             $('#beepoint').prop("disabled", false);
         };
-    }
+    };
 
     function tamtinhdongia() {
         Thanhtien();
         Sodon();
         Thanhtoan();
         Checkbeepoint();
-    }
-
-    window.onload = function () {
-        tamtinhdongia();
     };
+
 </script>
 
+<form id="form1" method="post" action="EnterOrder">
 
+</form>
 
 <!--Các đơn hàng-->
 <!--<div class="card card-warning" id="id_Order">

@@ -27,17 +27,37 @@ namespace MVC.Controllers.Order
             return View(accounts);
         }
 
+        public ActionResult EnterOrder()
+        {
+            return View();
+        }
+
         //Order/EnterOrder
         [HttpPost]
-        public ActionResult EnterOrder(IEnumerable<Models.Discounts> listCode)
+        public ActionResult EnterOrder(string listCode, string listID, string payment)
         {
+            List<string> Codes = listCode.Split(' ').ToList();
+            List<string> IDs = listID.Split(' ').ToList();
+
+            List<Models.Discounts> discounts = new List<Models.Discounts>();
+            for(int i = 0; i < Codes.Count() - 1; i++)
+            {
+                discounts.Add(new Models.Discounts()
+                {
+                    Code = Codes[i],
+                    id = int.Parse(IDs[i]),
+                    Detail = payment
+                });
+            }
+            var x = discounts.AsEnumerable();
             int id = (Session["Account"] as Models.Accounts).id;
-            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsJsonAsync<IEnumerable<Models.Discounts>>("Orders/EnterOrder/" + id, listCode).Result;
+            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.PostAsJsonAsync<IEnumerable<Models.Discounts>>("Orders/EnterOrder/" + id, discounts.AsEnumerable()).Result;
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 Models.Accounts accounts = httpResponseMessage.Content.ReadAsAsync<Models.Accounts>().Result;
+                return View(accounts);
             }
-            return Content("success");
+            return Content("Giao dịch thất bại");
         }
 
 

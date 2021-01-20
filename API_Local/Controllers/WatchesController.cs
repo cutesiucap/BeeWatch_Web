@@ -23,7 +23,7 @@ namespace API_Local.Controllers
         }
 
         // GET: api/Watches/5
-        [ResponseType(typeof(Watches))]
+        [ResponseType(typeof(ViewModels.WatchDetailViewModel))]
         public IHttpActionResult GetWatches(int id)
         {
             Models.view_WatchDetails watches = db.view_WatchDetails.Where(x => x.id == id).FirstOrDefault();
@@ -37,31 +37,43 @@ namespace API_Local.Controllers
             watchDetailViewModel.watch.Name = watches.Name;
             watchDetailViewModel.watch.Price = watches.Price;
             watchDetailViewModel.watch.Rate = watches.Rate;
-            watchDetailViewModel.watch.Luotmua = watches.LuotMua;
+            watchDetailViewModel.watch.Luotmua = watches.LuotMua ?? 0;
             watchDetailViewModel.watch.Count = watches.Count;
             watchDetailViewModel.watch.Luotdanhgia = db.OrderDetails.Where(x => x.Rate != null && x.Status == 3).Count();
-            watchDetailViewModel.watch.Detail = db.Watches.Find(id).Information;
+            watchDetailViewModel.watch.Detail = db.Watches.Find(id).Information ?? "Chưa có Thông tin gì về sản phẩm này";
+            watchDetailViewModel.watch.Url_Image = watches.Url_Image ?? "https://cdn.shopify.com/s/files/1/1081/2826/products/anicorn-redundant-watch-moma-04_960x.jpg?v=1581349580";
 
             Models.Shops shops = db.Shops.Find(watches.id_Shop);
             watchDetailViewModel.shop = new ViewModels.Shop()
             {
-                id = shops.id,
+                id = shops.id ,
                 Name = shops.Name,
                 UrlAvatar = shops.UrlAvatar,
-                Rate = db.view_WatchDetails.Where(x => x.id_Shop == shops.id && x.Rate != null).Average(x => x.Rate),
-                Luotdanhgia = db.OrderDetails.Where(x => x.Rate != null && x.Status == 3).Count(),
-                Daban = db.OrderDetails.Where(x => x.Status == 3).Sum(x => x.Count),
+                Rate = db.view_WatchDetails.AsNoTracking().Where(x => x.id_Shop == shops.id && x.Rate != null).Average(x => x.Rate) ?? 0,
+                Luotdanhgia = db.OrderDetails.AsNoTracking().Where(x => x.Rate != null && x.Status == 3).Count(),
+                Daban = db.OrderDetails.AsNoTracking().Where(x => x.Status == 3).Sum(x => x.Count) ?? 0,
                 Dangkinhdoanh = shops.Watches.Where(x => x.IsLock == false).Count(),
                 Thoigiantao = shops.Sellers.Accounts.Date_Create,
-                Khachhang = db.Orders.Where(x => x.Status != 4).GroupBy(x=>x.id_Accounts).Count(),
-                BestRate = db.view_WatchDetails.Where(x => x.id_Shop == shops.id).Max(x=>x.Rate),
+                Khachhang = db.Orders.AsNoTracking().Where(x => x.Status != 4).GroupBy(x=>x.id_Accounts).Count(),
+                BestRate = db.view_WatchDetails.AsNoTracking().Where(x => x.id_Shop == shops.id).Max(x=>x.Rate) ?? 0,
                 Master_Name = shops.Sellers.Accounts.Fullname,
                 id_Master = shops.Sellers.id,
-                Phone = shops.Sellers.Accounts.Phone.FirstOrDefault().Phone1,
-                Gmail = shops.Sellers.Accounts.Email,
+                Phone = shops.Sellers.Accounts.Phone.FirstOrDefault().Phone1 ?? "-",
+                Gmail = shops.Sellers.Accounts.Email ?? "-",
             };
 
-            foreach(var item in db.OrderDetails.Where(x=>x.id_Watches == id && x.Rate != null))
+            var image = db.Image.Where(x => x.id_Watches == id);
+            watchDetailViewModel.Images = new List<Image>();
+            foreach(var i in image)
+            {
+                Models.Image newimage = new Image();
+                newimage.id = i.id;
+                newimage.id_Watches = i.id_Watches;
+                newimage.Url_Image = i.Url_Image;
+                watchDetailViewModel.Images.Add(newimage);
+            };
+            watchDetailViewModel.danhgias = new List<ViewModels.Danhgia>();
+            foreach(var item in db.OrderDetails.AsNoTracking().Where(x=>x.id_Watches == id && x.Rate != null))
             {
                 watchDetailViewModel.danhgias.Add(new ViewModels.Danhgia()
                 {
@@ -71,8 +83,8 @@ namespace API_Local.Controllers
                 });
             };
 
-            watchDetailViewModel.Gianhangcungban = db.view_WatchDetails.Where(x => x.id_Shop == shops.id).OrderBy(x => x.LuotMua).Skip(0).Take(20);
-            watchDetailViewModel.Sanphamtuongtu = db.view_WatchDetails.Where(x => x.id_Firms == watchDetailViewModel.watch.id || x.Name_Categories.IndexOf(db.view_WatchDetails.Where(y => y.id == watchDetailViewModel.watch.id).FirstOrDefault().Name_Categories) >= 0).OrderBy(x => x.LuotMua).Skip(0).Take(20);
+            watchDetailViewModel.Gianhangcungban = db.view_WatchDetails.AsNoTracking().Where(x => x.id_Shop == shops.id).OrderBy(x => x.LuotMua).Skip(0).Take(20);
+            watchDetailViewModel.Sanphamtuongtu = db.view_WatchDetails.AsNoTracking().Where(x => (x.id_Firms == watches.id_Firms || x.Name_Categories.IndexOf(watches.Name_Categories) >= 0 || x.id_Sex == watches.id_Sex) && x.id_Shop != watches.id_Shop).OrderBy(x => x.LuotMua).Skip(0).Take(20);
 
             return Ok(watchDetailViewModel);
         }

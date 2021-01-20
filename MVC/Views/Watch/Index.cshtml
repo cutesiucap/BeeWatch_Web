@@ -1,4 +1,5 @@
-﻿
+﻿@model MVC.ViewModels.WatchDetailViewModel
+
 @{
     Layout = null;
 }
@@ -25,27 +26,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Toastr -->
     <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
     <style>
-.lentop {
-    display: none;
-    bottom: 40px;
-    right: 40px;
-    cursor: pointer;
-    position: fixed;
-    z-index: 1000;
-}
+        .lentop {
+            display: none;
+            bottom: 40px;
+            right: 40px;
+            cursor: pointer;
+            position: fixed;
+            z-index: 1000;
+        }
 
-.lentop div {
-    background: #FFC107;
-    border: 2px solid #fff;
-    border-radius: 50px;
-    padding: 11px 12.5px;
-    box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.3)
-}
+            .lentop div {
+                background: #FFC107;
+                border: 2px solid #fff;
+                border-radius: 50px;
+                padding: 11px 12.5px;
+                box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.3)
+            }
 
-.lentop img {
-    width: 16px;
-    height: 16px;
-}
+            .lentop img {
+                width: 16px;
+                height: 16px;
+            }
     </style>
 </head>
 <body class="hold-transition layout-top-nav dark-mode">
@@ -99,64 +100,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <span class="dropdown-header" style="color: #FFC107;"><b>Giỏ hàng</b></span>
                             <div class="dropdown-divider"></div>
                             <div style="max-height: 200px;overflow-y: auto;" class="_giohang">
-                                <div class="row" style="width: 100%; padding: 5px;">
-                                    <div class="col-2" style="margin: auto;">
-                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
-                                    </div>
-                                    <div class="col-8" style="margin: auto;">
-                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
-                                    </div>
-                                    <div class="col-2" style="margin: auto;">
-                                        <p class="text-muted" style="text-align: right;">5</p>
-                                    </div>
-                                </div>
-                                <div class="row" style="width: 100%; padding: 5px;">
-                                    <div class="col-2" style="margin: auto;">
-                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
-                                    </div>
-                                    <div class="col-8" style="margin: auto;">
-                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
-                                    </div>
-                                    <div class="col-2" style="margin: auto;">
-                                        <p class="text-muted" style="text-align: right;">5</p>
-                                    </div>
-                                </div>
-                                <div class="row" style="width: 100%; padding: 5px;">
-                                    <div class="col-2" style="margin: auto;">
-                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
-                                    </div>
-                                    <div class="col-8" style="margin: auto;">
-                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
-                                    </div>
-                                    <div class="col-2" style="margin: auto;">
-                                        <p class="text-muted" style="text-align: right;">5</p>
-                                    </div>
-                                </div>
-                                <div class="row" style="width: 100%; padding: 5px;">
-                                    <div class="col-2" style="margin: auto;">
-                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
-                                    </div>
-                                    <div class="col-8" style="margin: auto;">
-                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
-                                    </div>
-                                    <div class="col-2" style="margin: auto;">
-                                        <p class="text-muted" style="text-align: right;">5</p>
-                                    </div>
-                                </div>
-                                <div class="row" style="width: 100%; padding: 5px;">
-                                    <div class="col-2" style="margin: auto;">
-                                        <img src="../../dist/img/user3-128x128.jpg" class="img-size-50 mr-3" style="width: 40px;">
-                                    </div>
-                                    <div class="col-8" style="margin: auto;">
-                                        <p class="text-muted" style="margin-left: 5px;">Hoa hậu đồng hồ</p>
-                                    </div>
-                                    <div class="col-2" style="margin: auto;">
-                                        <p class="text-muted" style="text-align: right;">5</p>
-                                    </div>
-                                </div>
-                                <div class="dropdown-divider"></div>
+
                             </div>
-                            <button href="#" class="btn btn-warning dropdown-item dropdown-footer">Đi đến Giỏ hàng</button>
+                            <a class="btn btn-warning dropdown-item dropdown-footer" href="../../Cart/Index">Đi đến Giỏ hàng</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -170,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                             <div class="dropdown-divider"></div>
                             <button class="btn btn-info" style="width: 90%;margin-left: 13px;margin-right: 13px; margin-top: 5px;">Cá Nhân</button>
-                            <button class="btn btn-outline-warning" style="width: 90%;margin-left: 13px;margin-right: 13px; margin-top: 5px;margin-bottom: 5px;">Đăng xuất</button>
+                            <a button class="btn btn-outline-warning" href="../../Accounts/Logout" style="width: 90%;margin-left: 13px;margin-right: 13px; margin-top: 5px;margin-bottom: 5px;">Đăng xuất</a>
                         </div>
                     </li>
                 </ul>
@@ -193,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </div>
                                 <div class="col-sm-6">
                                     <ol class="breadcrumb float-sm-right">
-                                        <li class="breadcrumb-item"><a href="#">Trang chính</a></li>
+                                        <li class="breadcrumb-item"><a href="../../HomeShopping/Index">Trang chính</a></li>
                                         <li class="breadcrumb-item active">Sản phẩm</li>
                                     </ol>
                                 </div>
@@ -209,33 +155,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 col-sm-6">
-                                        <h3 class="d-inline-block d-sm-none">Hoa hậu Đồng hồ</h3>
+                                        <h3 class="d-inline-block d-sm-none">@Model.watch.Name</h3>
                                         <div class="col-12">
-                                            <img src="../../dist/img/prod-1.jpg" class="product-image" alt="Product Image">
+                                            <img src="@Model.watch.Url_Image" class="product-image" alt="Product Image">
                                         </div>
                                         <div class="col-12 product-image-thumbs">
-                                            <div class="product-image-thumb active"><img src="../../dist/img/prod-1.jpg" alt="Product Image"></div>
-                                            <div class="product-image-thumb"><img src="../../dist/img/prod-2.jpg" alt="Product Image"></div>
-                                            <div class="product-image-thumb"><img src="../../dist/img/prod-3.jpg" alt="Product Image"></div>
-                                            <div class="product-image-thumb"><img src="../../dist/img/prod-4.jpg" alt="Product Image"></div>
-                                            <div class="product-image-thumb"><img src="../../dist/img/prod-5.jpg" alt="Product Image"></div>
-                                            <div class="product-image-thumb"><img src="../../dist/img/prod-5.jpg" alt="Product Image"></div>
-                                            <div class="product-image-thumb"><img src="../../dist/img/prod-5.jpg" alt="Product Image"></div>
+                                            <div class="product-image-thumb active"><img src="@Model.watch.Url_Image" alt="Product Image"></div>
+                                            @if (Model.Images != null)
+                                            {
+                                                foreach (var item in Model.Images)
+                                                {
+                                                    <div class="product-image-thumb"><img src="@item.Url_Image" alt="Product Image"></div>
+                                                }
+                                            }
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <h3 class="my-3" style="color: #E0A800;"><b>HOA HẬU ĐỒNG HỒ</b></h3>
+                                        <h3 class="my-3" style="color: #E0A800;"><b>@Model.watch.Name</b></h3>
                                         <div style="display: flex; justify-content:space-around;max-width: 450px;">
                                             <div>
-                                                <h5><b>4875</b> Lượt Mua </h5>
+                                                <h5><b>@Model.watch.Luotmua</b> Lượt Mua </h5>
                                             </div>
                                             <h5>|</h5>
                                             <div>
-                                                <h5><b>4.5</b> Đánh giá </h5>
+                                                <h5><b>@Model.watch.Rate</b> Đánh giá </h5>
                                             </div>
                                             <h5>|</h5>
                                             <div>
-                                                <h5><b>500</b> Lượt Đánh giá</h5>
+                                                <h5><b>@Model.watch.Luotdanhgia</b> Lượt Đánh giá</h5>
                                             </div>
                                         </div>
                                         <div class="bg py-2 px-3 mt-4">
@@ -249,17 +196,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                         <div class="bg-gray py-2 px-3 mt-4">
                                             <h2 class="mb-0">
-                                                <b>$80.00</b>
+                                                <b>₫ @Html.FormatValue(Model.watch.Price, "{0:#,###,##0}")</b>
                                             </h2>
                                             <h4 class="mt-0">
-                                                <small>Giá gốc: $80.00 </small>
+                                                <small>Giá gốc: ₫ @Html.FormatValue(Model.watch.Price, "{0:#,###,##0}") </small>
                                             </h4>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-2">
                                                 <h4 class="mt-3">Kho <small></small></h4>
-                                                <span class="text" style="font-size: larger;">47</span>
+                                                <span class="text" style="font-size: larger;">@Model.watch.Count</span>
                                             </div>
                                             <div class="col">
                                                 <h4 class="mt-3">Size <small></small></h4>
@@ -285,15 +232,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </div>
 
                                         <div class="mt-4">
-                                            <div class="btn btn-warning btn-lg btn-flat">
+                                            <button onclick="themvaogio_funtion(this)" id="@Model.watch.id" class="btn btn-warning btn-lg btn-flat">
                                                 <i class="fas fa-cart-plus fa-lg mr-2"></i>
                                                 Thêm vào giỏ hàng
-                                            </div>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                                 <h3 class="my-3" style="color: #E0A800;"><b>Chi tiết sản phẩm</b></h3>
-                                <p>chi tiết Sản phẩm ở đây</p>
+                                <pre style="color:white;font-size:16px">@Model.watch.Detail</pre>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -305,10 +252,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="col">
                                         <div class="row" style="max-width: 200px;">
                                             <div class="col-4">
-                                                <img class="img-circle elevation-2" src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=CqmRS_qXDs4AX8CpWmo&_nc_ht=scontent.fsgn5-5.fna&oh=c7a3afc9fff468cdadd4d52784cf0dd4&oe=6011C5C9" style="width: 50px;">
+                                                <img class="img-circle elevation-2" src="@Model.shop.UrlAvatar" style="width: 50px;">
                                             </div>
                                             <div class="col">
-                                                <b>Bee Shop</b>
+                                                <b>@Model.shop.Name</b>
                                                 <div class="btn btn-info">
                                                     Gian Hàng
                                                 </div>
@@ -318,26 +265,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </div>
                                     <div class="col">
                                         <div class="row">
-                                            4.5 Đánh giá
+                                            @Model.shop.Rate Đánh giá
                                         </div>
                                         <div class="row">
-                                            4500 Lượt đánh giá
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="row">
-                                            458 Đanh Kinh Doanh
-                                        </div>
-                                        <div class="row">
-                                            480 Đã Bán
+                                            @Model.shop.Luotdanhgia Lượt đánh giá
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="row">
-                                            Tham gia từ 12/12/2020
+                                            @Model.shop.Dangkinhdoanh Đanh Kinh Doanh
                                         </div>
                                         <div class="row">
-                                            480 Khách Hàng
+                                            @Model.shop.Daban Đã Bán
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            Tham gia từ @Model.shop.Thoigiantao
+                                        </div>
+                                        <div class="row">
+                                            @Model.shop.Khachhang Khách Hàng
                                         </div>
                                     </div>
                                 </div>
@@ -367,200 +314,112 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </h5>
                                 </div>
                                 <div>
-                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
-                                    <span> 4.5 / 120 Đánh giá</span>
+                                    <span class="stars" style="color: #FFC107;" data-rating="@Model.watch.Rate" data-num-stars="5"></span>
+                                    <span> @Model.watch.Rate / @Model.watch.Luotdanhgia Đánh giá</span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <table class="table table-cell">
                                     <tbody>
-                                        <tr>
-                                            <td style="width: 60px;">
-                                                <img class="img-circle elevation-2" src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=CqmRS_qXDs4AX8CpWmo&_nc_ht=scontent.fsgn5-5.fna&oh=c7a3afc9fff468cdadd4d52784cf0dd4&oe=6011C5C9" style="width: 50px;">
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <b>Bee Shop</b>
-                                                </div>
-                                                <div>
-                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
-                                                </div>
-                                                <div>
-                                                    Bình luận
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 60px;">
-                                                <img class="img-circle elevation-2" src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.0-9/133922219_2916809551977269_4941951420019022316_o.jpg?_nc_cat=108&ccb=2&_nc_sid=09cbfe&_nc_ohc=CqmRS_qXDs4AX8CpWmo&_nc_ht=scontent.fsgn5-5.fna&oh=c7a3afc9fff468cdadd4d52784cf0dd4&oe=6011C5C9" style="width: 50px;">
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <b>Bee Shop</b>
-                                                </div>
-                                                <div>
-                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
-                                                </div>
-                                                <div>
-                                                    Bình luận dfghjkl
-                                                    ;sdfghjklsdfghjklsadfghjkl;awesdfghoplesdfuhopaesrdfyghjosdfgh  rtyghjokl ertyuiopl drfthuopl[;' ertyhuopl;  sedrftyghjokl drftyhujok sedrftyhjk']
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @if (Model.danhgias != null)
+                                        {
+                                            foreach (var cmt in Model.danhgias)
+                                            {
+                                                <tr>
+                                                    <td style="width: 60px;">
+                                                        <img class="img-circle elevation-2" src="@cmt.UrlAvatar_Account" style="width: 50px;">
+                                                    </td>
+                                                    <td>
+                                                        <div>
+                                                            <b>@cmt.Name_Account</b>
+                                                        </div>
+                                                        <div>
+                                                            <span class="stars" style="color: #FFC107;" data-rating="@cmt.Rate" data-num-stars="5"></span>
+                                                        </div>
+                                                        <div>
+                                                            @cmt.Detail
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
-                        <div class="card">
+                        <div class="card card-warning">
                             <div class="card-header">
                                 Gian Hàng này cũng Bán
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
-                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
-                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
-                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <h5>₫ 9.000.000</h5>
-                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
-                                                    <span>154</span>
+                                    @if (Model.Gianhangcungban != null)
+                                    {
+                                        foreach (var w in Model.Gianhangcungban)
+                                        {
+                                            <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
+                                                <div class="card-img-top" alt="" style="height: 300px;background-image: url('@w.Url_Image');background-size: 100%;background-repeat: no-repeat;">
+                                                    @if (w.LuotMua == 0)
+                                                    {
+                                                        <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
+                                                    }
+                                                    @*<div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>*@
                                                 </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
-                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
-                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
-                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <h5>₫ 9.000.000</h5>
-                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
-                                                    <span>154</span>
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+                                                <div class="card-body">
+                                                    <a href="../../Watch/Index/@w.id"><h5 style=""><b>@w.Name</b></h5></a>
+                                                    <div class="row">
+                                                        <div class="col-10">
+                                                            <h5>₫ @Html.FormatValue(w.Price, "{0:#,###,##0}")</h5>
+                                                            <span class="stars" style="color: #FFC107;" data-rating="@w.Rate" data-num-stars="5"></span>
+                                                            <span>@w.LuotMua</span>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
-                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
-                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
-                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <h5>₫ 9.000.000</h5>
-                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
-                                                    <span>154</span>
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
-                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
-                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
-                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <h5>₫ 9.000.000</h5>
-                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
-                                                    <span>154</span>
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
 
-                        <div class="card">
+                        <div class="card card-warning">
                             <div class="card-header">
                                 Đồng hồ tương tự
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
-                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
-                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
-                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <h5>₫ 9.000.000</h5>
-                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
-                                                    <span>154</span>
+                                    @if (Model.Sanphamtuongtu != null)
+                                    {
+                                        foreach (var w in Model.Sanphamtuongtu)
+                                        {
+                                            <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
+                                                <div class="card-img-top" alt="" style="height: 300px;background-image: url('@w.Url_Image');background-size: 100%;background-repeat: no-repeat;">
+                                                    @if (w.LuotMua == 0)
+                                                    {
+                                                        <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
+                                                    }
+                                                    @*<div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>*@
                                                 </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
-                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
-                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
-                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <h5>₫ 9.000.000</h5>
-                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
-                                                    <span>154</span>
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+                                                <div class="card-body">
+                                                    <a href="../../Watch/Index/@w.id"><h5 style=""><b>@w.Name</b></h5></a>
+                                                    <div class="row">
+                                                        <div class="col-10">
+                                                            <h5>₫ @Html.FormatValue(w.Price, "{0:#,###,##0}")</h5>
+                                                            <span class="stars" style="color: #FFC107;" data-rating="@w.Rate" data-num-stars="5"></span>
+                                                            <span>@w.LuotMua</span>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
-                                        <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
-                                            <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
-                                            <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <h5>₫ 9.000.000</h5>
-                                                    <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
-                                                    <span>154</span>
-                                                </div>
-                                                <div class="col-2">
-                                                    <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -751,3 +610,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </body>
 </html>
 
+
+
+@*
+
+<div class="card" style="width: 300px;margin: 5px;" onmouseover="style.border='1px solid #FFC107'" onmouseout="style.border='0px solid #4c4c4c'">
+    <div class="card-img-top" alt="" style="height: 300px;background-image: url('https://cdn.tgdd.vn/Products/Images/7077/117880/apple-watch-3-phien-ban-38-mm-thumb-part2-600x600.png');background-size: 100%;background-repeat: no-repeat;">
+        <div class="float-right" style="background-color: #FFC107;padding: 6px;vertical-align: middle;width: fit-content;"><b>new</b></div>
+        <div style="background-color: red;padding: 6px;vertical-align: middle;width: fit-content;"><b>30%</b></div>
+    </div>
+    <div class="card-body">
+        <h5 style=""><b>Hoa hậu đồng hồ</b></h5>
+        <div class="row">
+            <div class="col-10">
+                <h5>₫ 9.000.000</h5>
+                <span class="stars" style="color: #FFC107;" data-rating="4.5" data-num-stars="5"></span>
+                <span>154</span>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-outline-warning float-right"><i class="fas fa-shopping-cart"></i></button>
+            </div>
+        </div>
+    </div>
+</div>*@

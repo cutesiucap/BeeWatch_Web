@@ -263,7 +263,8 @@ namespace API_Local.Controllers
         //Orders/EnterOrder
         [Route("api/Orders/EnterOrder/{id}")]
         [HttpPost]
-        public Models.Accounts EnterOrder(IEnumerable<Models.Discounts> discounts, int id)
+        [ResponseType(typeof(Models.Accounts))]
+        public IHttpActionResult EnterOrder(IEnumerable<Models.Discounts> discounts, int id)
         {
             Accounts accounts = db.Accounts.Find(id);
             Accounts newaccount = new Accounts()
@@ -277,7 +278,12 @@ namespace API_Local.Controllers
 
             foreach (var item in accounts.Phone)
             {
-                newaccount.Phone.Add(item);
+                newaccount.Phone.Add(new Phone()
+                {
+                    id = item.id,
+                    Phone1 = item.Phone1,
+                    id_Account = item.id_Account
+                });
             }
             foreach (var item in accounts.Address)
             {
@@ -322,6 +328,7 @@ namespace API_Local.Controllers
                     break;
             }
             var lWatchs = db.view_CartDetails.Where(x => x.id_Cart == id && x.IsCheck == true).GroupBy(x => x.id_Shop);
+            List<Models.Orders> orders = new List<Orders>();
             foreach (var cartdetail in lWatchs)
             {
                 Models.Orders order = new Orders();
@@ -363,84 +370,81 @@ namespace API_Local.Controllers
                         Count = Watch.SoLuong,
                         Status = 0,
                     });
+                    db.CartDetails.Remove(db.CartDetails.Where(x => x.id_Cart == id && x.id_Watch == Watch.id_Watch).FirstOrDefault());
                 };
                 db.Orders.Add(order);
+                orders.Add(order);
             }
             db.SaveChanges();
 
-
-
-
-
-            return newaccount;
-
-
-            /*Models.Shops shops = db.Shops.Find(order.id_Shop);
-                Models.Sellers sellers = db.Sellers.Find(shops.id_Master);
-                Models.Accounts sellAccount = db.Accounts.Find(sellers.id);
-                order.Shops = new Shops()
+            foreach(var o in orders)
+            {
+                Models.Shops shop = db.Shops.Find(o.id_Shop);
+                Models.Orders order = new Orders()
                 {
-                    id = shops.id,
-                    Name = shops.Name,
-                    UrlAvatar = shops.UrlAvatar,
-                    Address = shops.Address,
-                    Sellers = new Sellers()
+                    id = o.id,
+                    id_Accounts = o.id_Accounts,
+                    id_Discount = o.id_Discount,
+                    id_Shop = o.id_Shop,
+                    Count = o.Count,
+                    Date_Check = o.Date_Check,
+                    Date_Create = o.Date_Create,
+                    Address_District = o.Address_District,
+                    Address_Province = o.Address_Province,
+                    Ship_fee = o.Ship_fee,
+                    Sum = o.Sum,
+                    Status = o.Status,
+                    Payment = o.Payment,
+                    User_Check = o.User_Check,
+                    Shops = new Shops()
                     {
-                        id = sellers.id,
-                        Accounts = new Accounts()
+                        id = shop.id,
+                        id_Master = shop.id_Master,
+                        Address = shop.Address,
+                        Name = shop.Name,
+                        UrlAvatar = shop.UrlAvatar,
+                        Point = shop.Point,
+                        Sellers = new Sellers()
                         {
-                            id = sellAccount.id,
-                            Email = sellAccount.Email,
+                            id = shop.Sellers.id,
+                            Accounts = new Accounts()
+                            {
+                                id = shop.Sellers.Accounts.id,
+                                Fullname = shop.Sellers.Accounts.Fullname,
+                                Email = shop.Sellers.Accounts.Email,
+                            }
                         }
-                    }
-                };
-                foreach(var phone in sellAccount.Phone)
-                {
-                    order.Shops.Sellers.Accounts.Phone.Add(new Phone()
+                    },
+                    Address_District1 = new Address_District()
                     {
-                        id = phone.id,
-                        Phone1 = phone.Phone1,
-                    });
-                };*/
-            /*order.OrderDetails.Add(new OrderDetails()
-                   {
-                       id_Watches = Watch.id_Watch,
-                       WatchName = Watch.Name,
-                       Price = Watch.Price,
-                       Count = Watch.SoLuong,
-                       Watches = new Watches()
-                       {
-                           id = Watch.id_Watch,
-                           Name = Watch.Name,
-                           Url_Image = db.Watches.Find(Watch.id_Watch).Url_Image,
-                       },
-                   });*/
-
-
-                /*order.Discounts = new Discounts()
-                {
-                    id = discount.id,
-                    Code = discount.Code,
-                    Detail = discount.Detail,
+                        id = o.Address_District1.id,
+                        Name = o.Address_District1.Name,
+                        id_Province = o.Address_District1.id_Province
+                    },
+                    Address_Province1 = new Address_Province()
+                    {
+                        id = o.Address_Province1.id,
+                        Name = o.Address_Province1.Name,
+                    },
                 };
-                double? Value = order.Sum - (order.Sum * discount.Value___) / 100 - discount.Value___1;
-                if (Value > discount.TypeDiscounts.Max_Discount)
+
+                foreach(var od in o.OrderDetails)
                 {
-                    Value = discount.TypeDiscounts.Max_Discount;
+                    order.OrderDetails.Add(new OrderDetails()
+                    {
+                        id = od.id,
+                        WatchName = od.WatchName,
+                        id_Order = od.id_Order,
+                        id_Watches = od.id_Watches,
+                        Price = od.Price,
+                        Count = od.Count,
+                        Status = od.Status,                        
+                    });
                 }
-                order.Discounts.Value___ = Value;*/
+                newaccount.Orders.Add(order);
+            }
 
-                //order.Shops = db.Shops.Find(order.id_Shop);
-                //order.Accounts = null;
-                //order.Address_District1 = null;
-                //order.Address_Province1 = null;
-                ///order.Discounts = null;
-                /*db.OrderDetails.Add(new OrderDetails()
-                {
-                    id_Order = 18,
-                });*/
+            return Ok(newaccount);           
         }
-
-
     }
 }

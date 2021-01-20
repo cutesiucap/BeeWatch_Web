@@ -27,7 +27,7 @@ namespace API_Local.Controllers
         // GET: api/view_AllOrderDetail
         public IQueryable<view_AllOrderDetail> Getview_AllOrderDetail(int id)
         {
-            return db.view_AllOrderDetail.Where(x=>x.id_Order == id);
+            return db.view_AllOrderDetail.AsNoTracking().Where(x=>x.id_Order == id);
         }
 
         // GET: api/view_AllOrderDetail/5

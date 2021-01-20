@@ -30,14 +30,18 @@ namespace API_Local.Controllers
                 result = db.view_WatchDetails.AsNoTracking();
             }
 
-            foreach(var item in result)
+            foreach (var item in result)
             {
                 if (item.Url_Image == null)
                 {
                     Image temp = db.Image.Where(x => x.id_Watches == item.id).FirstOrDefault();
                     if(temp != null)
                     {
-                        item.Url_Image = temp.Url_Image;
+                        item.Url_Image = temp.Url_Image ?? "https://cdn.shopify.com/s/files/1/1081/2826/products/anicorn-redundant-watch-moma-04_960x.jpg?v=1581349580";
+                    }
+                    else
+                    {
+                        item.Url_Image = "https://cdn.shopify.com/s/files/1/1081/2826/products/anicorn-redundant-watch-moma-04_960x.jpg?v=1581349580";
                     }
                 }
             }

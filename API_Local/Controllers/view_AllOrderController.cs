@@ -21,7 +21,7 @@ namespace API_Local.Controllers
         [HttpGet]
         public IQueryable<view_AllOrder> Getview_AllOrder(int id)
         {
-            return db.view_AllOrder.Where(x => x.id_Shop == id).OrderBy(x => x.Date_Create);
+            return db.view_AllOrder.AsNoTracking().Where(x => x.id_Shop == id).OrderBy(x => x.Date_Create);
         }
 
         // GET: api/view_AllOrder/5

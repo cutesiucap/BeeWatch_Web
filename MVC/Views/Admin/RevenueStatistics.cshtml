@@ -1,0 +1,576 @@
+﻿
+@{
+    ViewBag.Title = "RevenueStatistics";
+    Layout = "~/Views/Shared/_Navbar_Admin.cshtml";
+}
+
+<section>
+    <div class="row" style="margin: 10px;">
+        <div class="col">
+            <!-- Bar chart -->
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="far fa-chart-bar"></i>
+                        BIỂU ĐỒ DOANH THU TOÀN WEB
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body" style="background-color: #F8DAAA;">
+                    <div id="bar-chart" style="height: 600px;"></div>
+                </div>
+                <!-- /.card-body-->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <div class="row" style="margin: 10px;">
+        <div class="col">
+            <!-- DONUT CHART -->
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">THỊ PHẦN GIAN HÀNG NĂM 2020</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body" style="background-color: #AADDC6;">
+                    <canvas id="thi_phan_gianhang" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;"></canvas>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+        </div>
+        <div class="col">
+            <!-- DONUT CHART -->
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">THỊ PHẦN GIỚI TÍNH NĂM 2020</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body" style="background-color: #FFC2B9;">
+                    <canvas id="thi_phan_gioitinh" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;"></canvas>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <div class="col">
+            <!-- DONUT CHART -->
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">THỊ PHẦN HÃNG SẢN XUẤT NĂM 2020</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body" style="background-color: #AAE3F1;">
+                    <canvas id="thi_phan_hangsx" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;"></canvas>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <div class="col">
+            <!-- DONUT CHART -->
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">THỊ PHẦN THANH TOÁN NĂM 2020</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body" style="background-color: #B2BFB8;">
+                    <canvas id="thi_phan_phuongthucthanhtoan" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;"></canvas>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
+
+@section JS
+{
+    <script>
+        $(function () {
+
+            /*
+            * BAR CHART
+            * ---------
+            */
+
+            var bar_data = {
+                data: [[1, 10], [2, 8], [3, 4], [4, 13], [5, 17], [6, 9], [7, 20], [8, 40], [9, 100], [10, 30], [11, 20], [12, 56]],
+                bars: { show: true }
+            }
+            $.plot('#bar-chart', [bar_data], {
+                grid: {
+                    borderWidth: 1,
+                    borderColor: '#f3f3f3',
+                    tickColor: '#f3f3f3'
+                },
+                series: {
+                    bars: {
+                        show: true, barWidth: 0.5, align: 'center',
+                    },
+                },
+                colors: ['#3c8dbc'],
+                xaxis: {
+                    ticks: [[1, 'Tháng 1'], [2, 'Tháng 2'], [3, 'Tháng 3'], [4, 'Tháng 4'], [5, 'Tháng 5'], [6, 'Tháng 6'], [7, 'Tháng 7'], [8, 'Tháng 8'], [9, 'Tháng 9'], [10, 'Tháng 10'], [11, 'Tháng 11'], [12, 'Tháng 12']]
+                }
+            })
+            /* END BAR CHART */
+
+
+
+            /*
+                * Custom Label formatter
+                * ----------------------
+                */
+            function labelFormatter(label, series) {
+                return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+                    + label
+                    + '<br>'
+                    + Math.round(series.percent) + '%</div>'
+            }
+        });
+    </script>
+    <script>
+        $(function () {
+
+            //-------------
+            //- DONUT CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var thi_phan_gianhangCanvas = $('#thi_phan_gianhang').get(0).getContext('2d')
+            var donutData = {
+                labels: [
+                    'Shop A',
+                    'Shop B',
+                    'Shop C',
+                    'Shop D',
+                    'Shop E',
+                    'Khác',
+                ],
+                datasets: [
+                    {
+                        data: [700, 500, 400, 600, 300, 100],
+                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                    }
+                ]
+            }
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var thi_phan_gianhang = new Chart(thi_phan_gianhangCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            })
+
+            //-------------
+            //- PIE CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieData = donutData;
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var pieChart = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            })
+
+            //-------------
+            //- BAR CHART -
+            //-------------
+            var barChartCanvas = $('#barChart').get(0).getContext('2d')
+            var barChartData = $.extend(true, {}, areaChartData)
+            var temp0 = areaChartData.datasets[0]
+            var temp1 = areaChartData.datasets[1]
+            barChartData.datasets[0] = temp1
+            barChartData.datasets[1] = temp0
+
+            var barChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                datasetFill: false
+            }
+
+            var barChart = new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barChartData,
+                options: barChartOptions
+            })
+
+            //---------------------
+            //- STACKED BAR CHART -
+            //---------------------
+            var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+            var stackedBarChartData = $.extend(true, {}, barChartData)
+
+            var stackedBarChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+
+            var stackedBarChart = new Chart(stackedBarChartCanvas, {
+                type: 'bar',
+                data: stackedBarChartData,
+                options: stackedBarChartOptions
+            })
+        })
+
+        $(function () {
+
+            //-------------
+            //- DONUT CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var thi_phan_gioitinhCanvas = $('#thi_phan_gioitinh').get(0).getContext('2d')
+            var donutData = {
+                labels: [
+                    'Nam',
+                    'Nữ',
+                    'UniSex',
+                ],
+                datasets: [
+                    {
+                        data: [700, 500, 400],
+                        backgroundColor: ['#f56954', '#00a65a', '#f39c12'],
+                    }
+                ]
+            }
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var thi_phan_gioitinh = new Chart(thi_phan_gioitinhCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            })
+
+            //-------------
+            //- PIE CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieData = donutData;
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var pieChart = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            })
+
+            //-------------
+            //- BAR CHART -
+            //-------------
+            var barChartCanvas = $('#barChart').get(0).getContext('2d')
+            var barChartData = $.extend(true, {}, areaChartData)
+            var temp0 = areaChartData.datasets[0]
+            var temp1 = areaChartData.datasets[1]
+            barChartData.datasets[0] = temp1
+            barChartData.datasets[1] = temp0
+
+            var barChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                datasetFill: false
+            }
+
+            var barChart = new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barChartData,
+                options: barChartOptions
+            })
+
+            //---------------------
+            //- STACKED BAR CHART -
+            //---------------------
+            var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+            var stackedBarChartData = $.extend(true, {}, barChartData)
+
+            var stackedBarChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+
+            var stackedBarChart = new Chart(stackedBarChartCanvas, {
+                type: 'bar',
+                data: stackedBarChartData,
+                options: stackedBarChartOptions
+            })
+        })
+
+        $(function () {
+
+            //-------------
+            //- DONUT CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var thi_phan_hangsxCanvas = $('#thi_phan_hangsx').get(0).getContext('2d')
+            var donutData = {
+                labels: [
+                    'Hãng A',
+                    'Hãng B',
+                    'Hãng C',
+                    'Hãng D',
+                    'Hãng E',
+                    'Khác',
+                ],
+                datasets: [
+                    {
+                        data: [700, 500, 400, 600, 300, 100],
+                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                    }
+                ]
+            }
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var thi_phan_hangsx = new Chart(thi_phan_hangsxCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            })
+
+            //-------------
+            //- PIE CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieData = donutData;
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var pieChart = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            })
+
+            //-------------
+            //- BAR CHART -
+            //-------------
+            var barChartCanvas = $('#barChart').get(0).getContext('2d')
+            var barChartData = $.extend(true, {}, areaChartData)
+            var temp0 = areaChartData.datasets[0]
+            var temp1 = areaChartData.datasets[1]
+            barChartData.datasets[0] = temp1
+            barChartData.datasets[1] = temp0
+
+            var barChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                datasetFill: false
+            }
+
+            var barChart = new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barChartData,
+                options: barChartOptions
+            })
+
+            //---------------------
+            //- STACKED BAR CHART -
+            //---------------------
+            var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+            var stackedBarChartData = $.extend(true, {}, barChartData)
+
+            var stackedBarChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+
+            var stackedBarChart = new Chart(stackedBarChartCanvas, {
+                type: 'bar',
+                data: stackedBarChartData,
+                options: stackedBarChartOptions
+            })
+        })
+
+        $(function () {
+
+            //-------------
+            //- DONUT CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var thi_phan_phuongthucthanhtoanCanvas = $('#thi_phan_phuongthucthanhtoan').get(0).getContext('2d')
+            var donutData = {
+                labels: [
+                    'Khi nhận hàng',
+                    'MOMO',
+                    'PAYPAL',
+                    'Khác',
+                ],
+                datasets: [
+                    {
+                        data: [700, 500, 400, 600],
+                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef'],
+                    }
+                ]
+            }
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var thi_phan_phuongthucthanhtoan = new Chart(thi_phan_phuongthucthanhtoanCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            })
+
+            //-------------
+            //- PIE CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieData = donutData;
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var pieChart = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            })
+
+            //-------------
+            //- BAR CHART -
+            //-------------
+            var barChartCanvas = $('#barChart').get(0).getContext('2d')
+            var barChartData = $.extend(true, {}, areaChartData)
+            var temp0 = areaChartData.datasets[0]
+            var temp1 = areaChartData.datasets[1]
+            barChartData.datasets[0] = temp1
+            barChartData.datasets[1] = temp0
+
+            var barChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                datasetFill: false
+            }
+
+            var barChart = new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barChartData,
+                options: barChartOptions
+            })
+
+            //---------------------
+            //- STACKED BAR CHART -
+            //---------------------
+            var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+            var stackedBarChartData = $.extend(true, {}, barChartData)
+
+            var stackedBarChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+
+            var stackedBarChart = new Chart(stackedBarChartCanvas, {
+                type: 'bar',
+                data: stackedBarChartData,
+                options: stackedBarChartOptions
+            })
+        })
+    </script>
+}
+
+

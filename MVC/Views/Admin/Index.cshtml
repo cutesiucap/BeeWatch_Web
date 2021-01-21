@@ -3,183 +3,235 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Navbar_Admin.cshtml";
-    <head>
-        <!-- Google Font: Source Sans Pro -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-        <!-- DataTables -->
-        <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-        <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-    </head>
 }
 
-<!--body template-->
+<section>
+    <div class="row" style="margin: 10px;">
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner" style="width:300px">
+                    <h3>158</h3>
 
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">THỐNG KÊ DỮ LIỆU</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="Index">Home</a></li>
-                    <li class="breadcrumb-item active">Thống kê</li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
+                    <p>SẢN PHẨM CHỜ DUYỆT</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">Chuyển <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner" style="width:300px">
+                    <h3>45</h3>
 
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Người dùng</h3>
+                    <p>NGƯỜI DÙNG MỚI</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">Chuyển <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+                <div class="inner" style="width:300px">
+                    <h3>45</h3>
+
+                    <p>GIAN HÀNG MỚI</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">Chuyển <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+                <div class="inner" style="width:300px">
+                    <h3>140</h3>
+
+                    <p>
+                        ĐƠN HÀNG MỚI
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">Chuyển <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
     </div>
-    <div class="card-body">
-        <table id="example2" class="table table-bordered table-hover dataTable dtr-inline direct-chat-yellow" role="grid" aria-describedby="example2_info">
-            <thead>
-                <tr role="row" class="text-center" style="background-color: #FFC107">
-                    <th class="sorting" style="color: black" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">@Html.DisplayNameFor(model => model.Email)</th>
-                    <th class="sorting" style="color: black" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">@Html.DisplayNameFor(model => model.Address)</th>
-                    <th class="sorting_asc" style="color: black" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column descending" aria-sort="ascending">@Html.DisplayNameFor(model => model.Point)</th>
-                    <th class="sorting" style="color: black" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"> @Html.DisplayNameFor(model => model.Account_Type)</th>
-                    <th class="sorting" style="color: black" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"> @Html.DisplayNameFor(model => model.Fullname)</th>
-                    <th tabindex="0"  style="color: black" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style=""> Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Point)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Account_Type.Name)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Fullname)
-                        </td>
-                        <td class="text-center">
-                            <a class="item" href="#"><i class="fas fa-chevron-circle-up" style="color:yellow"> </i></a>
-                            <a class="item" href="#"><i class="fas fa-info-circle" style="color:limegreen"> </i></a>
-                            <a class="item" href="#"><i class="fas fa-minus-circle" style="color:red"></i></a>                                                  
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+</section>
+
+<section>
+    <div class="row" style="margin: 10px;">
+        <div class="col">
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="far fa-chart-bar"></i>
+                        SẢN PHẨM CHỜ DUYỆT
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 100px; text-align: center;">Tên</th>
+                                <th style="width: 80px; text-align: center;">Gian Hàng</th>
+                                <th style="width: 80px; text-align: center;">Hãng</th>
+                                <th style="width: 200px; text-align: center;">Mục lục</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td>Apple Mi3</td>
+                                <td>Bee Shop</td>
+                                <td>Apple</td>
+                                <td>Dây đeo 20cm</td>
+                                <td style="text-align: center;"><span class="badge badge-warning" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Duyệt</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td>Apple Mi3</td>
+                                <td>Bee Shop</td>
+                                <td>Apple</td>
+                                <td>Dây đeo 20cm</td>
+                                <td style="text-align: center;"><span class="badge badge-warning" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Duyệt</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td>Apple Mi3</td>
+                                <td>Bee Shop</td>
+                                <td>Apple</td>
+                                <td>Dây đeo 20cm</td>
+                                <td style="text-align: center;"><span class="badge badge-warning" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Duyệt</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td>Apple Mi3</td>
+                                <td>Bee Shop</td>
+                                <td>Apple</td>
+                                <td>Dây đeo 20cm</td>
+                                <td style="text-align: center;"><span class="badge badge-warning" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Duyệt</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="text-align: center;"># Mã</th>
+                                <th style="text-align: center;">Tên</th>
+                                <th style="text-align: center;">Gian Hàng</th>
+                                <th style="text-align: center;">Hãng</th>
+                                <th style="text-align: center;">Mục lục</th>
+                                <th style="text-align: center;">Duyệt</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
     </div>
-</div>
+    <div class="row" style="margin: 10px;">
+        <div class="col">
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="far fa-chart-bar"></i>
+                        MÃ GIẢM GIÁ CHỜ DUYỆT
+                    </h3>
 
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="DiscountTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 100px; text-align: center;">CODE</th>
+                                <th style="width: 80px; text-align: center;">Bill Giới Hạn</th>
+                                <th style="width: 80px; text-align: center;">Giới Hạn</th>
+                                <th style="width: 80px; text-align: center;">Giá trị</th>
+                                <th style="width: 200px; text-align: center;">Chi Tiết</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td style="text-align: center;">CODEABD</td>
+                                <td style="text-align: center;">100.000</td>
+                                <td style="text-align: center;">50.000</td>
+                                <td style="text-align: center;">40%</td>
+                                <td>Giảm giá nhân dịp tết đến xuân về</td>
+                                <td style="text-align: center;"><span class="badge badge-warning" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Duyệt</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 100px; text-align: center;">CODE</th>
+                                <th style="width: 80px; text-align: center;">Bill Giới Hạn</th>
+                                <th style="width: 80px; text-align: center;">Giới Hạn</th>
+                                <th style="width: 80px; text-align: center;">Giá trị</th>
+                                <th style="width: 200px; text-align: center;">Chi Tiết</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
 
-<!--end body template-->
-
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../../plugins/jszip/jszip.min.js"></script>
-<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<!-- Page specific script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
-
-<h2>Index</h2>
-<p>
-    <a href="@Url.Action("Create","Accounts")" class="btn btn-default"> <i class="fa fa-plus"></i> Create New </a>
-</p>
-<table class="table table-striped">
-    <thead class="table table-heading">
-        <tr>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Point)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Account_Type.Name)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Fullname)
-            </th>
-            <th class="text-center">Action</th>
-        </tr>
-    </thead>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.Point)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.Account_Type.Name)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.Fullname)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
-            </td>
-        </tr>
-    }
-
-</table>
+@section JS
+{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+            $("#DiscountTable").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#DiscountTable_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+}

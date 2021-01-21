@@ -1,0 +1,287 @@
+﻿
+@{
+    ViewBag.Title = "DiscountManager";
+    Layout = "~/Views/Shared/_Navbar_Admin.cshtml";
+}
+
+<section>
+    <div class="row" style="margin: 10px;">
+        <div class="col">
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="far fa-chart-bar"></i>
+                        MÃ GIẢM GIÁ CHỜ DUYỆT
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="All" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 100px; text-align: center;">CODE</th>
+                                <th style="width: 80px; text-align: center;">Bill Giới Hạn</th>
+                                <th style="width: 80px; text-align: center;">Giới Hạn</th>
+                                <th style="width: 80px; text-align: center;">Giá trị</th>
+                                <th style="width: 200px; text-align: center;">Chi Tiết</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td style="text-align: center;">CODEABD</td>
+                                <td style="text-align: center;">100.000</td>
+                                <td style="text-align: center;">50.000</td>
+                                <td style="text-align: center;">40%</td>
+                                <td>Giảm giá nhân dịp tết đến xuân về</td>
+                                <td style="text-align: center;"><span class="badge badge-warning" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Duyệt</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 100px; text-align: center;">CODE</th>
+                                <th style="width: 80px; text-align: center;">Bill Giới Hạn</th>
+                                <th style="width: 80px; text-align: center;">Giới Hạn</th>
+                                <th style="width: 80px; text-align: center;">Giá trị</th>
+                                <th style="width: 200px; text-align: center;">Chi Tiết</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <div class="row" style="margin: 10px;">
+        <div class="col-3">
+            <div class="card card-warning">
+                <div class="card-header">
+                    GIẢM GIÁ
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <h6><b class="text-muted">ID: </b></h6>
+                        <input class="form-control" type="text" name="" id="">
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <h6><b class="text-muted">Thông tin</b></h6>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <input class="form-control" type="number" placeholder="Giá trị bill áp dụng" name="" id="">
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" type="number" placeholder="Giảm giá tối đa" name="" id="">
+                        </div>
+                        <div class="col">
+                            <input class="form-control" placeholder="Mã CODE" type="text" name="" id="">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-3">
+                            <input class="form-control" placeholder="-%" type="number" min="5" max="70" name="" id="">
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" placeholder="-đ" type="number" min="10000" max="1000000" name="" id="">
+                        </div>
+                        <div class="col">
+                            <input type="text" style="text-align: center;" class="form-control" id="reservationtime_tatca">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <h6><b class="text-muted">Chi Tiết</b></h6>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <textarea class="form-control" style="width: 100%;" placeholder="Chi tiết" name="" id="" cols="60" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="form-control btn btn-outline-warning">Lưu</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="far fa-chart-bar"></i>
+                        MÃ GIẢM GIÁ
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="Firm" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 80px; text-align: center;">CODE</th>
+                                <th style="width: 80px; text-align: center;">Giới Hạn Bill</th>
+                                <th style="width: 80px; text-align: center;">Giới Hạn</th>
+                                <th style="width: 20px; text-align: center;">Giá trị</th>
+                                <th style="width: 20px; text-align: center;">Trạng thái</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td style="text-align: center;">Bee</td>
+                                <td style="text-align: center;">Home.Bee.mail.com</td>
+                                <td style="text-align: center;">48</td>
+                                <td style="text-align: center;">48</td>
+                                <td style="text-align: center; color:#7FFB9E;">Đang hoạt động</td>
+                                <td style="text-align: center;"><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Khóa</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 80px; text-align: center;">CODE</th>
+                                <th style="width: 80px; text-align: center;">Giới Hạn Bill</th>
+                                <th style="width: 80px; text-align: center;">Giới Hạn</th>
+                                <th style="width: 20px; text-align: center;">Giá trị</th>
+                                <th style="width: 20px; text-align: center;">Trạng thái</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
+
+@section JS
+{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select class="form-control" name="select_search" style="width: 100%;"><option value=""></option></select>')
+                            .appendTo($(column.footer()))
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append($('<option value="' + d + '">' + d + '</option>'))
+                        });
+                    });
+                },
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+            $("#All").DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select class="form-control" name="select_search" style="width: 100%;"><option value=""></option></select>')
+                            .appendTo($(column.footer()))
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append($('<option value="' + d + '">' + d + '</option>'))
+                        });
+                    });
+                },
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#All_wrapper .col-md-6:eq(0)');
+            $("#Firm").DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select class="form-control" name="select_search" style="width: 100%;"><option value=""></option></select>')
+                            .appendTo($(column.footer()))
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append($('<option value="' + d + '">' + d + '</option>'))
+                        });
+                    });
+                },
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#Firm_wrapper .col-md-6:eq(0)');
+
+            $("#Categories").DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select class="form-control" name="select_search" style="width: 100%;"><option value=""></option></select>')
+                            .appendTo($(column.footer()))
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append($('<option value="' + d + '">' + d + '</option>'))
+                        });
+                    });
+                },
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#Categories_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+}
+
+

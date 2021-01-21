@@ -9,10 +9,10 @@ namespace MVC.ViewModels
     {
         public Watch watch { get; set; }
         public Shop shop { get; set; }
-        public ICollection<Danhgia> danhgias { get; set; }
+        public List<Danhgia> danhgias { get; set; }
         public IEnumerable<Models.view_WatchDetails> Gianhangcungban { get; set; }
         public IEnumerable<Models.view_WatchDetails> Sanphamtuongtu { get; set; }
-        public ICollection<Models.Image> Images { get; set; }
+        public List<Models.Image> Images { get; set; }
     }
 
     public class Watch

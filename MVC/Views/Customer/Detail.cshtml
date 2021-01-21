@@ -1,0 +1,455 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid" style="max-width: 1240px; min-width: 1240px;">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Giỏ Hàng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Giỏ Hàng</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content" style="max-width: 1240px; min-width: 1240px; margin: auto;">
+    <div class="row">
+        <div class="col-3">
+            <div class="card card-outline card-warning">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div style="margin: 5px;">
+                            <span> <img src="../../dist/img/user3-128x128.jpg" class="img-circle elevation-3 img-size-50 mr-3" style="width: 40px;margin-left: 0px;"> </span>
+                            <span>Nguyễn Trung Tín</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Thông tin Tài khoảng
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="margin-left: 20px;">
+                                    <li class="nav-item">
+                                        <a href="../../Customer/Detail" class="nav-link">
+                                            <i class="fas fa-file-invoice nav-icon"></i>
+                                            <p>Chi tiết</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="fas fa-file-invoice nav-icon"></i>
+                                            <p>Thay đổi Thông tin</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="fas fa-key nav-icon"></i>
+                                            <p>Thay đổi mật khẩu</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="gallery.html" class="nav-link">
+                                    <i class="nav-icon fas fa-shipping-fast"></i>
+                                    <p>
+                                        Quản lí Đơn Hàng
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../Cart/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-shopping-cart"></i>
+                                    <p>
+                                        Giỏ Hàng
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="gallery.html" class="nav-link" style="color: #FFC107;">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Đăng xuất
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        THÔNG TIN CHI TIẾT
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6" style="border-right: 2px dotted #FFC107;border-radius: 10px;">
+                                <div class="row">
+                                    <div class="col" style="text-align: center;">
+                                        <input hidden type="file" name="" id="">
+                                        <img onclick="" src="../../dist/img/user3-128x128.jpg" class="img-circle elevation-3 img-size-50 mr-3" style="width: 100px;margin:auto">
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px;">
+                                    <div class="col-5">
+                                        <h6 style="text-align: right;"><b class="text-muted">Tên : </b></h6>
+                                    </div>
+                                    <div class="col">
+                                        <h6>Nguyễn Trung Tín</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <h6 style="text-align: right;"><b class="text-muted">Địa chỉ Mail : </b></h6>
+                                    </div>
+                                    <div class="col">
+                                        <h6>trungtin27132000@Gmail.com</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <h6 style="text-align: right;"><b class="text-muted">Số Điện thoại : </b></h6>
+                                    </div>
+                                    <div class="col">
+                                        <h6>0945 *** 317</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <h6 style="text-align: right;"><b class="text-muted">Địa chỉ : </b></h6>
+                                    </div>
+                                    <div class="col">
+                                        <h6>Trần Văn Thời, Cà Mau</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <h6 style="text-align: right;"><b class="text-muted">Số CMND : </b></h6>
+                                    </div>
+                                    <div class="col">
+                                        <h6>3819***147</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <h6 style="text-align: right;"><b class="text-muted">PayPal : </b></h6>
+                                    </div>
+                                    <div class="col">
+                                        <h6>HEDGAD4537</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <h6 style="text-align: right;"><b class="text-muted">Tham gia từ : </b></h6>
+                                    </div>
+                                    <div class="col">
+                                        <h6>27/09/2000</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col-4">
+                                        <b class="text-muted">Bee Point : </b>
+                                    </div>
+                                    <div class="col">
+                                        9.000.000
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col-4">
+                                        <b class="text-muted">Đã mua : </b>
+                                    </div>
+                                    <div class="col">
+                                        45 Đơn hàng
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col-4">
+                                        <b class="text-muted">Đã tiêu tổng : </b>
+                                    </div>
+                                    <div class="col">
+                                        45.000.000 đ
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- Donut chart -->
+                        <div class="card card-warning card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="far fa-chart-bar"></i>
+                                    HÃNG ƯA THÍCH
+                                </h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="donut-chart" style="height: 500px;"></div>
+                            </div>
+                            <!-- /.card-body-->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <div class="col">
+                        <!-- PIE CHART -->
+                        <div class="card card-warning card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="far fa-chart-bar"></i>
+                                    XU HƯỚNG
+                                </h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="pieChart" style="min-height: 500px; height: 500px; max-height: 500px; max-width: 100%;"></canvas>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <!-- BAR CHART -->
+                        <div class="card card-warning card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="far fa-chart-bar"></i>
+                                    ĐƠN HÀNG
+                                </h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart">
+                                    <canvas id="barChart" style="min-height: 600px; height: 600px; max-height: 600px; max-width: 100%;"></canvas>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+
+
+@section JS
+{
+    <!-- ChartJS -->
+    <script src="../../plugins/chart.js/Chart.min.js"></script>
+    <!-- FLOT CHARTS -->
+    <script src="../../plugins/flot/jquery.flot.js"></script>
+    <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+    <script src="../../plugins/flot/plugins/jquery.flot.resize.js"></script>
+    <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+    <script src="../../plugins/flot/plugins/jquery.flot.pie.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            /*
+             * DONUT CHART
+             * -----------
+             */
+
+            var donutData = [
+                {
+                    label: 'Hãng 1',
+                    data: 30,
+                    color: '#FFC107'
+                },
+                {
+                    label: 'Hãng 2',
+                    data: 20,
+                    color: '#037F60'
+                },
+                {
+                    label: 'Hãng 3',
+                    data: 50,
+                    color: '#001F7C'
+                },
+                {
+                    label: 'Khác',
+                    data: 15,
+                    color: '#FF07C1'
+                }
+            ]
+            $.plot('#donut-chart', donutData, {
+                series: {
+                    pie: {
+                        show: true,
+                        radius: 1,
+                        innerRadius: 0.5,
+                        label: {
+                            show: true,
+                            radius: 2 / 3,
+                            formatter: labelFormatter,
+                            threshold: 0.1
+                        }
+
+                    }
+                },
+                legend: {
+                    show: false
+                }
+            })
+            /*
+             * END DONUT CHART
+             */
+
+            //-------------
+            //- PIE CHART -
+            //-------------
+            var donutData = {
+                labels: [
+                    'Hãng 1',
+                    'Hãng 2',
+                    'Hãng 3',
+                    'Hãng 4',
+                    'Hãng 5',
+                    'Khác',
+                ],
+                datasets: [
+                    {
+                        data: [700, 500, 400, 600, 300, 100],
+                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                    }
+                ]
+            }
+            // Get context with jQuery - using jQuery's .get() method.
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieData = donutData;
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var pieChart = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            })
+
+        })
+
+        //-------------
+        //- BAR CHART -
+        //-------------
+
+        var areaChartData = {
+            labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+            datasets: [
+                {
+                    label: 'Tổng Đơn',
+                    backgroundColor: '#FF07C1',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(60,141,188,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: [28, 48, 40, 19, 86, 27, 100, 48, 40, 19, 86, 27]
+                },
+                {
+                    label: 'Đã giao',
+                    backgroundColor: '#FFC107',
+                    borderColor: 'rgba(210, 214, 222, 1)',
+                    pointRadius: false,
+                    pointColor: 'rgba(210, 214, 222, 1)',
+                    pointStrokeColor: '#c1c7d1',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                    data: [65, 59, 80, 81, 56, 55, 40, 80, 81, 56, 55, 40]
+                },
+            ]
+        }
+        var barChartCanvas = $('#barChart').get(0).getContext('2d')
+        var barChartData = $.extend(true, {}, areaChartData)
+        var temp0 = areaChartData.datasets[0]
+        var temp1 = areaChartData.datasets[1]
+        barChartData.datasets[0] = temp1
+        barChartData.datasets[1] = temp0
+
+        var barChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            datasetFill: false
+        }
+
+        var barChart = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: barChartData,
+            options: barChartOptions
+        })
+
+        /*
+         * Custom Label formatter
+         * ----------------------
+         */
+        function labelFormatter(label, series) {
+            return '<div style="font-size:16px; text-align:center; padding:2px; color: #FFF; font-weight: 600;">'
+                + label
+                + '<br>'
+                + Math.round(series.percent) + '%</div>'
+        }
+    </script>
+}

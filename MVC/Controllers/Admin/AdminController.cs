@@ -13,10 +13,42 @@ namespace MVC.Controllers.Admin
         // GET: Admin
         public ActionResult Index()
         {
-            IEnumerable<Models.Accounts> accounts;
-            HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsync("Accounts").Result;
-            accounts = httpResponseMessage.Content.ReadAsAsync<IEnumerable<Models.Accounts>>().Result;
-            return View(accounts);
+            return View();
+        }
+
+        public ActionResult ShopManager()
+        {
+            return View();
+        }
+
+        public ActionResult WatchManager()
+        {
+            return View();
+        }
+
+        public ActionResult AccountManager()
+        {
+            return View();
+        }
+        
+        public ActionResult DiscountManager()
+        {
+            return View();
+        }
+
+        public ActionResult RevenueStatistics()
+        {
+            return View();
+        }
+
+        public ActionResult CustomerStatistics()
+        {
+            return View();
+        }
+
+        public ActionResult WatchStatistics()
+        {
+            return View();
         }
     }
 }

@@ -54,7 +54,7 @@
                                     <address>
                                         <strong>@Model.Fullname #@Model.id</strong><br>
                                         @order.Address_District1.Name, @order.Address_Province1.Name<br>
-                                        Điện thoại: @Model.Phone<br>
+                                        Điện thoại: @Model.Phone.FirstOrDefault().Phone1<br>
                                         Email: @Model.Email
                                     </address>
                                 </div>
@@ -64,7 +64,7 @@
                                     <address>
                                         <strong>@order.Shops.Name</strong><br>
                                         @order.Shops.Address<br>
-                                        Liên Hệ: @order.Shops.Sellers.Accounts.Phone<br>
+                                        Liên Hệ: @order.Shops.Sellers.Accounts.Phone.FirstOrDefault().Phone1<br>
                                         Email: @order.Shops.Sellers.Accounts.Email
                                     </address>
                                 </div>

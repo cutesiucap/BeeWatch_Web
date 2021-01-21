@@ -20,7 +20,6 @@ namespace MVC.Controllers.Watches
             }
             return View(watchDetailViewModel);
         }
-
         public ActionResult Detail()
         {
             return View();

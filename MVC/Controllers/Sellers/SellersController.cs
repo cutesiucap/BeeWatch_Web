@@ -28,6 +28,7 @@ namespace MVC.Controllers.Sellers
             }
             int id = (Session["Account"] as Models.Accounts).id;
             HttpResponseMessage httpResponseMessage = GlobalVariables.HttpClient.GetAsync("SellerViewModels/" + id).Result;
+            
             ViewModels.SellerViewModel sellerviewmodel = httpResponseMessage.Content.ReadAsAsync<ViewModels.SellerViewModel>().Result;
             return View(sellerviewmodel);
         }

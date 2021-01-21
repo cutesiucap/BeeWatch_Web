@@ -139,6 +139,7 @@
     <Compile Include="Controllers\Bills\BillsController.cs" />
     <Compile Include="Controllers\CartDetails\CartDetailsController.cs" />
     <Compile Include="Controllers\Clients\CartController.cs" />
+    <Compile Include="Controllers\Customer\CustomerController.cs" />
     <Compile Include="Controllers\Discounts\DiscountsController.cs" />
     <Compile Include="Controllers\Home\HomePageController.cs" />
     <Compile Include="Controllers\Home\HomeShoppingController.cs" />
@@ -192,6 +193,8 @@
     <Compile Include="Tool\RandomTool.cs" />
     <Compile Include="ViewModels\AllHomeViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\SellerViewModel.cs" />
+    <Compile Include="ViewModels\WatchDetailViewModel.cs" />
     <Compile Include="ViewModels\WatchinHomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2293,6 +2296,14 @@
     <Content Include="Views\Bills\Index.cshtml" />
     <Content Include="Views\Watch\Index.cshtml" />
     <Content Include="Views\Order\EnterOrder.cshtml" />
+    <Content Include="Views\Admin\ShopManager.cshtml" />
+    <Content Include="Views\Admin\WatchManager.cshtml" />
+    <Content Include="Views\Admin\AccountManager.cshtml" />
+    <Content Include="Views\Admin\DiscountManager.cshtml" />
+    <Content Include="Views\Admin\RevenueStatistics.cshtml" />
+    <Content Include="Views\Admin\CustomerStatistics.cshtml" />
+    <Content Include="Views\Admin\WatchStatistics.cshtml" />
+    <Content Include="Views\Customer\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

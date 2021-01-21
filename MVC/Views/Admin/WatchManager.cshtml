@@ -1,0 +1,458 @@
+﻿
+@{
+    ViewBag.Title = "WatchManager";
+    Layout = "~/Views/Shared/_Navbar_Admin.cshtml";
+}
+
+<section>
+    <div class="row" style="margin: 10px;">
+        <div class="col">
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="far fa-chart-bar"></i>
+                        SẢN PHẨM CHỜ DUYỆT
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 100px; text-align: center;">Tên</th>
+                                <th style="width: 80px; text-align: center;">Gian Hàng</th>
+                                <th style="width: 80px; text-align: center;">Hãng</th>
+                                <th style="width: 200px; text-align: center;">Mục lục</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td>Apple Mi3</td>
+                                <td>Bee Shop</td>
+                                <td>Apple</td>
+                                <td>Dây đeo 20cm</td>
+                                <td style="text-align: center;"><span class="badge badge-warning" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Duyệt</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td>Apple Mi3</td>
+                                <td>Bee Shop</td>
+                                <td>Apple</td>
+                                <td>Dây đeo 20cm</td>
+                                <td style="text-align: center;"><span class="badge badge-warning" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Duyệt</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td>Apple Mi3</td>
+                                <td>Bee Shop</td>
+                                <td>Apple</td>
+                                <td>Dây đeo 20cm</td>
+                                <td style="text-align: center;"><span class="badge badge-warning" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Duyệt</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td>Apple Mi3</td>
+                                <td>Bee Shop</td>
+                                <td>Apple</td>
+                                <td>Dây đeo 20cm</td>
+                                <td style="text-align: center;"><span class="badge badge-warning" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Duyệt</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="text-align: center;"># Mã</th>
+                                <th style="text-align: center;">Tên</th>
+                                <th style="text-align: center;">Gian Hàng</th>
+                                <th style="text-align: center;">Hãng</th>
+                                <th style="text-align: center;">Mục lục</th>
+                                <th style="text-align: center;">Duyệt</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <div class="row" style="margin: 10px;">
+        <div class="col">
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="far fa-chart-bar"></i>
+                        TẤT CẢ SẢN PHẨM
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="All" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 80px; text-align: center;">Tên</th>
+                                <th style="width: 80px; text-align: center;">Gian Hàng</th>
+                                <th style="width: 80px; text-align: center;">Hãng</th>
+                                <th style="width: 20px; text-align: center;">Trạng Thái</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td style="text-align: center;">Bee Watch 3</td>
+                                <td style="text-align: center;">Bee Shop</td>
+                                <td style="text-align: center;">Bee</td>
+                                <td style="text-align: center; color:#7FFB9E;">Đang hoạt động</td>
+                                <td style="text-align: center;"><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Khóa</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td style="text-align: center;">Bee Watch 2</td>
+                                <td style="text-align: center;">Bee Team</td>
+                                <td style="text-align: center;">Bee</td>
+                                <td style="text-align: center; color: #EFA5AC;">Khóa</td>
+                                <td style="text-align: center;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Mở Khóa</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 80px; text-align: center;">Tên</th>
+                                <th style="width: 80px; text-align: center;">Gian Hàng</th>
+                                <th style="width: 80px; text-align: center;">Hãng</th>
+                                <th style="width: 20px; text-align: center;">Trạng Thái</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <div class="row" style="margin: 10px;">
+        <div class="col-3">
+            <div class="card card-warning">
+                <div class="card-header">
+                    THÔNG TIN HÃNG
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span><h6><b class="text-muted">ID: </b></h6></span>
+                            <span><input placeholder="#" class="form-control" type="text" name="" id=""></span>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col">
+                            <span><h6><b class="text-muted">Tên Hãng: </b></h6></span>
+                            <span><input placeholder="Hãng X" class="form-control" type="text" name="" id=""></span>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col">
+                            <span><h6><b class="text-muted">Url Link Trang Chủ: </b></h6></span>
+                            <span><input placeholder="http://abc.com" class="form-control" type="text" name="" id=""></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-outline-warning float-right" type="button" value="">Lưu</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="far fa-chart-bar"></i>
+                        HÃNG
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="Firm" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 80px; text-align: center;">Tên</th>
+                                <th style="width: 80px; text-align: center;">Url Link Home</th>
+                                <th style="width: 80px; text-align: center;">Sản phẩm</th>
+                                <th style="width: 20px; text-align: center;">Trạng Thái</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td style="text-align: center;">Bee</td>
+                                <td style="text-align: center;">Home.Bee.mail.com</td>
+                                <td style="text-align: center;">48</td>
+                                <td style="text-align: center; color:#7FFB9E;">Đang hoạt động</td>
+                                <td style="text-align: center;"><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Khóa</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td style="text-align: center;">Bee 2</td>
+                                <td style="text-align: center;">Bdeam.jsggdn.com</td>
+                                <td style="text-align: center;">60</td>
+                                <td style="text-align: center; color: #EFA5AC;">Khóa</td>
+                                <td style="text-align: center;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Mở Khóa</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 80px; text-align: center;">Tên</th>
+                                <th style="width: 80px; text-align: center;">Url Link Home</th>
+                                <th style="width: 80px; text-align: center;">Sản phẩm</th>
+                                <th style="width: 20px; text-align: center;">Trạng Thái</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <div class="row" style="margin: 10px;">
+        <div class="col-3">
+            <div class="card card-warning">
+                <div class="card-header">
+                    THÔNG TIN MỤC LỤC
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span><h6><b class="text-muted">ID: </b></h6></span>
+                            <span><input placeholder="#" class="form-control" type="text" name="" id=""></span>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col">
+                            <span><h6><b class="text-muted">Tên Mục Lục: </b></h6></span>
+                            <span><input placeholder="Hãng X" class="form-control" type="text" name="" id=""></span>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col">
+                            <span><h6><b class="text-muted">Chi tiết: </b></h6></span>
+                            <span><input placeholder="http://abc.com" class="form-control" type="text" name="" id=""></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-outline-warning float-right" type="button" value="">Lưu</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="far fa-chart-bar"></i>
+                        MỤC LỤC
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="Categories" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 80px; text-align: center;">Tên</th>
+                                <th style="width: 80px; text-align: center;">Chi tiết</th>
+                                <th style="width: 80px; text-align: center;">Sản phẩm</th>
+                                <th style="width: 20px; text-align: center;">Trạng Thái</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td style="text-align: center;">Bee</td>
+                                <td style="text-align: center;">Home.Bee.mail.com</td>
+                                <td style="text-align: center;">48</td>
+                                <td style="text-align: center; color:#7FFB9E;">Đang hoạt động</td>
+                                <td style="text-align: center;"><span class="badge badge-danger" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Khóa</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">18</td>
+                                <td style="text-align: center;">Bee 2</td>
+                                <td style="text-align: center;">Bdeam.jsggdn.com</td>
+                                <td style="text-align: center;">60</td>
+                                <td style="text-align: center; color: #EFA5AC;">Khóa</td>
+                                <td style="text-align: center;"><span class="badge badge-success" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Mở Khóa</span> | <span class="badge badge-info" style="cursor: pointer;font-size: 12px;" id="" onclick="chitietfunction(this.id)">Ctiết</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="width: 20px; text-align: center;">Mã</th>
+                                <th style="width: 80px; text-align: center;">Tên</th>
+                                <th style="width: 80px; text-align: center;">Chi tiết</th>
+                                <th style="width: 80px; text-align: center;">Sản phẩm</th>
+                                <th style="width: 20px; text-align: center;">Trạng Thái</th>
+                                <th style="width: 20px; text-align: center;">TT</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
+
+@section JS
+{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select class="form-control" name="select_search" style="width: 100%;"><option value=""></option></select>')
+                            .appendTo($(column.footer()))
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append($('<option value="' + d + '">' + d + '</option>'))
+                        });
+                    });
+                },
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+            $("#All").DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select class="form-control" name="select_search" style="width: 100%;"><option value=""></option></select>')
+                            .appendTo($(column.footer()))
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append($('<option value="' + d + '">' + d + '</option>'))
+                        });
+                    });
+                },
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#All_wrapper .col-md-6:eq(0)');
+            $("#Firm").DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select class="form-control" name="select_search" style="width: 100%;"><option value=""></option></select>')
+                            .appendTo($(column.footer()))
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append($('<option value="' + d + '">' + d + '</option>'))
+                        });
+                    });
+                },
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#Firm_wrapper .col-md-6:eq(0)');
+
+            $("#Categories").DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select class="form-control" name="select_search" style="width: 100%;"><option value=""></option></select>')
+                            .appendTo($(column.footer()))
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append($('<option value="' + d + '">' + d + '</option>'))
+                        });
+                    });
+                },
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#Categories_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+}
+
